@@ -307,7 +307,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{{('template/vendor/jquery/jquery.min.js')}}"></script>
   <script src="{{('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
+  <script src="{{ ('template/assets/js/bootstrap.js')}}"></script>
   <script src="{{ ('template/assets/js/isotope.min.js')}}"></script>
   <script src="{{ ('template/assets/js/owl-carousel.js')}}"></script>
   <script src="{{ ('template/assets/js/lightbox.js')}}"></script>
