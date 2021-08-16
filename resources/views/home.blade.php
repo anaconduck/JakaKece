@@ -10,6 +10,7 @@
 
   <title>JAKA KECE</title>
 
+  <!-- tes -->
   <!-- Bootstrap core CSS -->
   <link href="{{ ('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
