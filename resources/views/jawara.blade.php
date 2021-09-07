@@ -58,41 +58,41 @@
           <div class="row">
             <div class="col-md-4">
               <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
-                  href="#list-events" role="tab" aria-controls="home">Pendaftaran Event</a>
+                <a class="list-group-item list-group-item-action active" id="list-events-list" data-toggle="list"
+                  href="#list-events" role="tab" aria-controls="events">Pendaftaran Event</a>
+                <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list"
+                  href="#list-home" role="tab" aria-controls="home">Event Mendatang</a>
                 <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
-                  href="#list-home" role="tab" aria-controls="profile">Event Mendatang</a>
+                  href="#list-profile" role="tab" aria-controls="profile">Event Terlaksana</a>
                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                  href="#list-profile" role="tab" aria-controls="messages">Event Terlaksana</a>
-                <a class="list-group-item list-group-item-action" id="list-events-list" data-toggle="list"
-                  href="#list-messages" role="tab" aria-controls="events">Prestasi Mahasiswa</a>
+                  href="#list-messages" role="tab" aria-controls="messages">Prestasi Mahasiswa</a>
               </div>
             </div>
             <div class="col-md-8 ">
               <div class="tab-content m-3" style="color: white;" id="nav-tabContent">
-                <div class="tab-pane fade show active scrol" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <div class="tab-pane fade show scrol" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
 
                   <ol>
                     <hr>
                     <li class="p-1">
-                      ISCC (Information System Case Competition)<br>
-                      <cek><a href="https://jadwalevent.web.id/iscc-information-system-case-competition">Cek persyaratan...</a>
+                      Lomba AAA<br>
+                      <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li>
                     <li class="p-1">
-                      ELCOMFEST 2021<br>
-                      <cek><a href="https://jadwalevent.web.id/elcomfest-2021">Cek persyaratan...</a>
+                      Lomba BBB<br>
+                      <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba Pekan Usaha – Ruang UMKM Festival<br>
-                      <cek><a href="https://jadwalevent.web.id/lomba-pekan-usaha-ruang-umkm-festival">Cek persyaratan...</a>
+                      Lomba CCC<br>
+                      <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      LOGRAK NASIONAL 2021 POLINEMA<br>
-                      <cek><a href="https://jadwalevent.web.id/lograk-nasional-2021-polinema">Cek persyaratan...</a>
+                      Lomba DDD<br>
+                      <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li>
@@ -103,23 +103,23 @@
                   <ol>
                     <hr>
                     <li class="p-1">
-                      HIMATITAN GREAT EVENT 2020<br>
+                      Lomba AAA<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li>
                     <li class="p-1">
-                      ESPRIEX Business Model Competition ASEAN 2017<br>
+                      Lomba BBB<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Aquaculture Society And Paper Competition (ASPECT)<br>
+                      Lomba CCC<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Medical Fiesta 2014 UB Malang<br>
+                      Lomba DDD<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
@@ -153,7 +153,7 @@
                     </li>
                   </ol>
                 </div>
-                <div class="tab-pane fade show" id="list-events" role="tabpanel" aria-labelledby="list-events-list">
+                <div class="tab-pane fade show active" id="list-events" role="tabpanel" aria-labelledby="list-events-list">
 
 
                   <div class="container">
