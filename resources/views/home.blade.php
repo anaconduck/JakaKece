@@ -92,50 +92,6 @@
       </div>
     </div>
   </section>
-  <section class="features">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-lg-4 col-12">
-          <div class="features-post second-features">
-            <div class="features-content">
-              <div class="content-show">
-                <h4><i class="fa fa-book"></i>Statistik Anggota</h4>
-              </div>
-              <div class="content-hide">
-
-                <p>Anggota Aplikasi Jaka Kece :{{11}}</p>
-                <p>Jumlah Dokumen Terintegrasi :{{11}}</p>
-                <p>Jenis Dokumen Terintegrasi :{{11}}</p>
-                <p class="hidden-sm">Anggota Aplikasi Jaka Kece :{{11}}</p>
-                <p class="hidden-sm">Jumlah Dokumen Terintegrasi :{{11}}</p>
-                <p class="hidden-sm">Jenis Dokumen Terintegrasi :{{11}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-12">
-          <div class="features-post third-features">
-            <div class="features-content">
-              <div class="content-show">
-                <h4><i class="fa fa-book"></i>Statistik Pengunjung</h4>
-              </div>
-              <div class="content-hide">
-
-                <p>Jumlah Pengunjung Hari Ini :{{11}}</p>
-                <p>Jumlah Pengunjung Kemarin :{{11}}</p>
-                <p>Jumlah Pengunjung Total :{{11}}</p>
-                <p class="hidden-sm">Jumlah Pengunjung Hari Ini :{{11}}</p>
-                <p class="hidden-sm">Jumlah Pengunjung Kemarin :{{11}}</p>
-                <p class="hidden-sm">Jumlah Pengunjung Total :{{11}}</p>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <footer>
     <div class="container">
