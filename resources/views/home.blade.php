@@ -8,7 +8,7 @@
   <meta name="author" content="">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-  <title>JAKA KECES</title>
+  <title>JAKA KECE</title>
 
   <!-- tes -->
   <!-- Bootstrap core CSS -->
