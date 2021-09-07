@@ -59,13 +59,13 @@
             <div class="col-md-4">
               <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
-                  href="#list-home" role="tab" aria-controls="home">Event Mendatang</a>
+                  href="#list-home" role="tab" aria-controls="home">Pendaftaran Event</a>
                 <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
                   href="#list-profile" role="tab" aria-controls="profile">Event Terlaksana</a>
                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                  href="#list-messages" role="tab" aria-controls="messages">Prestasi Mahasiswa</a>
+                  href="#list-messages" role="tab" aria-controls="messages">Event Mendatang</a>
                 <a class="list-group-item list-group-item-action" id="list-events-list" data-toggle="list"
-                  href="#list-events" role="tab" aria-controls="events">Pendaftaran Event</a>
+                  href="#list-events" role="tab" aria-controls="events">Prestasi Mahasiswa</a>
               </div>
             </div>
             <div class="col-md-8 ">
