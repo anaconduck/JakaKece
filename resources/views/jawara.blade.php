@@ -59,13 +59,13 @@
             <div class="col-md-4">
               <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
-                  href="#list-home" role="tab" aria-controls="home">Pendaftaran Event</a>
+                  href="#list-events" role="tab" aria-controls="home">Pendaftaran Event</a>
                 <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
-                  href="#list-profile" role="tab" aria-controls="profile">Event Terlaksana</a>
+                  href="#list-home" role="tab" aria-controls="profile">Event Mendatang</a>
                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                  href="#list-messages" role="tab" aria-controls="messages">Event Mendatang</a>
+                  href="#list-profile" role="tab" aria-controls="messages">Event Terlaksana</a>
                 <a class="list-group-item list-group-item-action" id="list-events-list" data-toggle="list"
-                  href="#list-events" role="tab" aria-controls="events">Prestasi Mahasiswa</a>
+                  href="#list-messages" role="tab" aria-controls="events">Prestasi Mahasiswa</a>
               </div>
             </div>
             <div class="col-md-8 ">
@@ -75,24 +75,24 @@
                   <ol>
                     <hr>
                     <li class="p-1">
-                      Lomba AAA<br>
-                      <cek><a href="#">Cek persyaratan...</a>
+                      ISCC (Information System Case Competition)<br>
+                      <cek><a href="https://jadwalevent.web.id/iscc-information-system-case-competition">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li>
                     <li class="p-1">
-                      Lomba BBB<br>
-                      <cek><a href="#">Cek persyaratan...</a>
+                      ELCOMFEST 2021<br>
+                      <cek><a href="https://jadwalevent.web.id/elcomfest-2021">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba CCC<br>
-                      <cek><a href="#">Cek persyaratan...</a>
+                      Lomba Pekan Usaha – Ruang UMKM Festival<br>
+                      <cek><a href="https://jadwalevent.web.id/lomba-pekan-usaha-ruang-umkm-festival">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba DDD<br>
-                      <cek><a href="#">Cek persyaratan...</a>
+                      LOGRAK NASIONAL 2021 POLINEMA<br>
+                      <cek><a href="https://jadwalevent.web.id/lograk-nasional-2021-polinema">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li>
@@ -103,23 +103,23 @@
                   <ol>
                     <hr>
                     <li class="p-1">
-                      Lomba AAA<br>
+                      HIMATITAN GREAT EVENT 2020<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li>
                     <li class="p-1">
-                      Lomba BBB<br>
+                      ESPRIEX Business Model Competition ASEAN 2017<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba CCC<br>
+                      Aquaculture Society And Paper Competition (ASPECT)<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba DDD<br>
+                      Medical Fiesta 2014 UB Malang<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
