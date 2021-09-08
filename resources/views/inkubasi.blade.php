@@ -174,8 +174,10 @@
                             <h4>Ketentuan</h4>
 
                             <ol style="color: aliceblue; ">
-                              <li>Tes IELTS ini memuat {...} soal</li>
-                              <li>Waktu pengerjaan adalah ... Menit</li>
+                                <li>Listening Terdiri Dari 4 Sesi Dengan Total 40 Soal Dan Waktu Pengerjaan 30 Menit</li>
+                                <li>Reading Terdiri Dari 3 Sesi Dengan Total 40 Soal Dan Waktu Pengerjaan 60  Menit</li>
+                                <li>Writing Terdiri Dari 2 Soal Dengan Waktu Pengerjaan 60 Menit</li>
+                                <li>Speanking Terdiri dari 3 Sesi Selama 11-14 Menit. Peserta Tes Akan Diminta Untuk Berbicara Dengan Native Speaker Secara Langsung. Peserta Akan Ditanya Beberapa Pertanyaan Tentang Dirinya Sendiri Dan Sebuah Topik.</li>
                             </ol>
                           </div>
 
