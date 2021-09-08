@@ -12,13 +12,13 @@
   <title>JAKA KECE</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="{{ ('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="{{ ('template/assets/css/fontawesome.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/templatemo-grad-school.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/owl.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/lightbox.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/templatemo-grad-school.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
 </head>
 
 <body>
@@ -44,14 +44,12 @@
   <section class="section why-us" data-section="section2">
     <div class="container">
       <div class="row">
-        
+
         <div class="col-md-12">
           <div class="section-heading">
-            <br>
-            <br>
           </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 anot">
           <div id='tabs'>
             <ul>
               <li><a href='#tabs-1'>TOEFL</a></li>
@@ -79,11 +77,10 @@
                               <div class="form-group">
                                 <h4>Pilih Materi :</h4>
                                 <select class="form-control" id="exampleFormControlSelect1">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
+                                  <option>Listening</option>
+                                  <option>Structure</option>
+                                  <option>Reading</option>
+                                  <option>Writing</option>
                                 </select>
                                 <br>
                                 <!-- Temp anchor for replacing php form action -->
@@ -93,22 +90,26 @@
                             </div>
                             <div class="tab-pane fade" id="list-profile1" role="tabpanel" aria-labelledby="list-profile-list">
                               <h4>Ketentuan</h4>
-                              
+
                               <ol style="color: aliceblue; ">
-                                <li>Practice memuat {...} soal</li>
-                                <li>Waktu pengerjaan adalah ... Menit</li>
+                                <li>Sesi Listening Terdriri dari 50 Soal Dengan Waktu Pengerjaan 35 Menit</li>
+                                <li>Sesi Reading Terdiri dari 50 Soal Dengan Waktu Pengerjaan 55 Menit</li>
+                                <li>Pengerjaan Sesi Structure Adalah 40 Menit</li>
+                                <li>Pengerjaan Sesi Writing Adalah 40 Menit</li>
                               </ol>
-                            
+
                             </div>
                             <div class="tab-pane fade" id="list-messages1" role="tabpanel" aria-labelledby="list-messages-list">
                               <h4>Ketentuan</h4>
-                              
+
                               <ol style="color: aliceblue; ">
-                                <li>Tes TOEFL ini memuat {...} soal</li>
-                                <li>Waktu pengerjaan adalah ... Menit</li>
+                                <li>Sesi Listening Terdriri dari 50 Soal Dengan Waktu Pengerjaan 35 Menit</li>
+                                <li>Sesi Reading Terdiri dari 50 Soal Dengan Waktu Pengerjaan 55 Menit</li>
+                                <li>Pengerjaan Sesi Structure Adalah 40 Menit</li>
+                                <li>Pengerjaan Sesi Writing Adalah 40 Menit</li>
                               </ol>
                             </div>
-                            
+
                           </div>
                         </div>
                     <!--
@@ -119,7 +120,7 @@
                       aspek yaitu Listening Comprehension, Structure and Written
                       Expression, Reading Comprehension, dan Test of Written English (TWE).</p>
                     <div class="form-group">
-                       Temp anchor for replacing php form action 
+                       Temp anchor for replacing php form action
                       <button type="submit" class="btn btn-primary mb-2"><a href="inkubasi_inside1.html"
                           style="color: white;">Pilih</a></button>
                     </div>-->
@@ -144,14 +145,13 @@
                         <div class="tab-content m-3" id="nav-tabContent">
                           <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                             <div class="form-group">
-                              
+
                               <h4>Pilih Materi :</h4>
                               <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option>Listening</option>
+                                <option>Reading</option>
+                                <option>Writing</option>
+                                <option>Speaking</option>
                               </select>
                               <br>
                               <!-- Temp anchor for replacing php form action -->
@@ -161,22 +161,24 @@
                           </div>
                           <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
                             <h4>Ketentuan</h4>
-                            
+
                             <ol style="color: aliceblue; ">
-                              <li>Practice memuat {...} soal</li>
-                              <li>Waktu pengerjaan adalah ... Menit</li>
+                              <li>Listening Terdiri Dari 4 Sesi Dengan Total 40 Soal Dan Waktu Pengerjaan 30 Menit</li>
+                              <li>Reading Terdiri Dari 3 Sesi Dengan Total 40 Soal Dan Waktu Pengerjaan 60  Menit</li>
+                              <li>Writing Terdiri Dari 2 Soal Dengan Waktu Pengerjaan 60 Menit</li>
+                              <li>Speanking Terdiri dari 3 Sesi Selama 11-14 Menit. Peserta Tes Akan Diminta Untuk Berbicara Dengan Native Speaker Secara Langsung. Peserta Akan Ditanya Beberapa Pertanyaan Tentang Dirinya Sendiri Dan Sebuah Topik.</li>
                             </ol>
-                          
+
                           </div>
                           <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
                             <h4>Ketentuan</h4>
-                            
+
                             <ol style="color: aliceblue; ">
                               <li>Tes IELTS ini memuat {...} soal</li>
                               <li>Waktu pengerjaan adalah ... Menit</li>
                             </ol>
                           </div>
-                          
+
                         </div>
                       </div>
                   <!--
@@ -187,7 +189,7 @@
                     aspek yaitu Listening Comprehension, Structure and Written
                     Expression, Reading Comprehension, dan Test of Written English (TWE).</p>
                   <div class="form-group">
-                     Temp anchor for replacing php form action 
+                     Temp anchor for replacing php form action
                     <button type="submit" class="btn btn-primary mb-2"><a href="inkubasi_inside1.html"
                         style="color: white;">Pilih</a></button>
                   </div>-->
@@ -246,7 +248,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>  
+                  </div>
               </article>
             </section>
           </div>
@@ -414,16 +416,15 @@
 </style>
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="{{('template/vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 
-  <script src="{{ ('template/assets/js/isotope.min.js')}}"></script>
-  <script src="{{ ('template/assets/js/owl-carousel.js')}}"></script>
-  <script src="{{ ('template/assets/js/lightbox.js')}}"></script>
-  <script src="{{ ('template/assets/js/tabs.js')}}"></script>
-  <script src="{{ ('template/assets/js/video.js')}}"></script>
-  <script src="{{ ('template/assets/js/slick-slider.js')}}"></script>
-  <script src="{{ ('template/assets/js/custom.js')}}"></script>
+  <script src="{{ asset('assets/js/isotope.min.js')}}"></script>
+  <script src="{{ asset('assets/js/owl-carousel.js')}}"></script>
+  <script src="{{ asset('assets/js/lightbox.js')}}"></script>
+  <script src="{{ asset('assets/js/tabs.js')}}"></script>
+  <script src="{{ asset('assets/js/video.js')}}"></script>
+  <script src="{{ asset('assets/js/slick-slider.js')}}"></script>
+  <script src="{{ asset('assets/js/custom.js')}}"></script>
   <script>
     //according to loftblog tut
     $('.nav li:first').addClass('active');
@@ -475,8 +476,8 @@
       checkSection();
     });
   </script>
-  
-  
+
+
   <style>
     :root {
       --backgroundColor: rgba(246, 241, 209);
@@ -505,7 +506,7 @@
       outline: none;
       border: 0;
       vertical-align: middle;
-      
+
       text-decoration: none;
       font-size: 1.5rem;
       color: var(--colorShadeA);
@@ -568,7 +569,7 @@
   </script>
 
   <!-- Bootstrap JS -->
-  <script src="{{('template/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 
   <!-- Custom JS -->
   <script src="includes/js/script.js"></script>

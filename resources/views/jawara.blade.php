@@ -12,13 +12,13 @@
   <title>JAKA KECE</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="{{ ('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="{{ ('template/assets/css/fontawesome.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/templatemo-grad-school.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/owl.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/lightbox.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/templatemo-grad-school.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
 
 </head>
 
@@ -54,7 +54,7 @@
 
           </div>
         </div>
-        <div class="col-md-12 ">
+        <div class="col-md-12 anot">
           <div class="row">
             <div class="col-md-4">
               <div class="list-group" id="list-tab" role="tablist">
@@ -75,23 +75,23 @@
                   <ol>
                     <hr>
                     <li class="p-1">
-                      Lomba AAA<br>
+                      Joints Competition<br>
                       <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li>
                     <li class="p-1">
-                      Lomba BBB<br>
+                      ARKAVIDIA<br>
                       <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba CCC<br>
+                      The 5th World Invention Innovation Contest Korea<br>
                       <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba DDD<br>
+                      International Invention & Innovative Competition Series 1 Malaysia<br>
                       <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
@@ -99,27 +99,27 @@
                   </ol>
                 </div>
                 <div class="tab-pane fade scrol" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                  
+
                   <ol>
                     <hr>
                     <li class="p-1">
-                      Lomba AAA<br>
+                      Joints Competition UGM<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li>
                     <li class="p-1">
-                      Lomba BBB<br>
+                      ARKAVIDIA ITB<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba CCC<br>
+                        The 5th World Invention Innovation Contest Korea<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba DDD<br>
+                        International Invention & Innovative Competition Series 1 Malaysia<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
@@ -127,26 +127,60 @@
                   </ol>
                 </div>
                 <div class="tab-pane fade scrol" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                  
+
                   <ol>
                     <hr>
                     <li class="p-1">
-                      Bidang AAA<br>
+                        Juara 1 - Joints Competition 2020 UGM<br>
                       <cek><a href="#"> Cek prestasi mahasiswa...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Bidang BBB<br>
+                        Juara 3  - Hackavidia - ARKAVIDIA 2020 ITB<br>
                       <cek><a href="#"> Cek prestasi mahasiswa...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Bidang CCC<br>
+                        Gold Medal  - The 5th World Invention Innovation Contest Korea<br>
                       <cek><a href="#"> Cek prestasi mahasiswa...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Bidang DDD<br>
+                        Gold Medal  - International Invention & Innovative Competition Series 1 Malaysia<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li><li class="p-1">
+                        Gold Medal  - International Student Affairs Invention, Inovation & Design Competition Utm<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li><li class="p-1">
+                        Most Favourite Gamein Indigo Game Startuo Incubation's Gamejam Roadshow - Indigo Game Startup Incubation's Game Jam Roadshow<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li>
+                    <li class="p-1">
+                        Juara 1 Bisnis Model - Kompetisi 4c Virtuality National Competition<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li>
+                    <li class="p-1">
+                        Juara 1 Video Infografis - Kompetisi 4c Virtuality National Competition<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li>
+                    <li class="p-1">
+                        Juara 3 Video Infografis - Kompetisi 4c Virtuality National Competition <br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li>
+                    <li class="p-1">
+                        Juara 2 Video Musik Kolaborasi - Kompetisi 4c Virtuality National Competition<br>
                       <cek><a href="#"> Cek prestasi mahasiswa...</a>
                       </cek>
                       <hr>
@@ -162,10 +196,46 @@
                     <form action="">
                       <div class="scrol">
                     <ul class="list-group" id="myList">
-                      <li class="list-group-item" style="color: black;"><input type="radio" id="lomba1" name="lomba-selected" value="lomba1"><label for="lomba1" class="pl-3">Lomba AAA</label></li>
-                      <li class="list-group-item" style="color: black;"><input type="radio" id="lomba2" name="lomba-selected" value="lomba2"><label for="lomba2" class="pl-3">Lomba BBB</label></li>
-                      <li class="list-group-item" style="color: black;"><input type="radio" id="lomba3" name="lomba-selected" value="lomba3"><label for="lomba3" class="pl-3">Lomba CCC</label></li>
-                      <li class="list-group-item" style="color: black;"><input type="radio" id="lomba4" name="lomba-selected" value="lomba4"><label for="lomba4" class="pl-3">Lomba DDD</label></li>
+                      <li class="list-group-item" style="color: black;">
+                        <div class="row">
+                            <div class="col-1">
+                                <input type="radio" id="lomba1" name="lomba-selected" value="lomba1">
+                            </div>
+                            <div class="col-11">
+                                <label for="lomba1" class="">Joints Competition (2020) UGM</label>
+                            </div>
+                        </div>
+                        </li>
+                      <li class="list-group-item" style="color: black;">
+                        <div class="row">
+                            <div class="col-1">
+                                <input type="radio" id="lomba2" name="lomba-selected" value="lomba2">
+                            </div>
+                            <div class="col-11">
+                                <label for="lomba2" class="">ARKAVIDIA (2020) ITB</label>
+                            </div>
+                        </div>
+                        </li>
+                      <li class="list-group-item" style="color: black;">
+                        <div class="row">
+                            <div class="col-1">
+                                <input type="radio" id="lomba3" name="lomba-selected" value="lomba3">
+                            </div>
+                            <div class="col-11">
+                                <label for="lomba3" class="">The (5th) World Invention Innovation Contest Korea</label>
+                            </div>
+                        </div>
+                        </li>
+                      <li class="list-group-item" style="color: black;">
+                        <div class="row">
+                            <div class="col-1">
+                                <input type="radio" id="lomba4" name="lomba-selected" value="lomba4">
+                            </div>
+                            <div class="col-11">
+                                <label for="lomba4" class="">International Invention & Innovative Competition Series 1 Malaysia</label>
+                            </div>
+                        </div>
+                        </li>
                     </ul>
                   </div>
                   </form>
@@ -180,7 +250,7 @@
             </div>
           </div>
         </div>
-        
+
 
       </div>
     </div>
@@ -188,6 +258,7 @@
   </section>
 
   <style>
+    
     tr {
       border-top: 1px solid white;
       border-bottom: 1px solid white;
@@ -305,16 +376,16 @@
   </footer>
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="{{('template/vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{ ('template/assets/js/bootstrap.js')}}"></script>
-  <script src="{{ ('template/assets/js/isotope.min.js')}}"></script>
-  <script src="{{ ('template/assets/js/owl-carousel.js')}}"></script>
-  <script src="{{ ('template/assets/js/lightbox.js')}}"></script>
-  <script src="{{ ('template/assets/js/tabs.js')}}"></script>
-  <script src="{{ ('template/assets/js/video.js')}}"></script>
-  <script src="{{ ('template/assets/js/slick-slider.js')}}"></script>
-  <script src="{{ ('template/assets/js/custom.js')}}"></script>
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ asset('assets/js/bootstrap.js')}}"></script>
+  <script src="{{ asset('assets/js/isotope.min.js')}}"></script>
+  <script src="{{ asset('assets/js/owl-carousel.js')}}"></script>
+  <script src="{{ asset('assets/js/lightbox.js')}}"></script>
+  <script src="{{ asset('assets/js/tabs.js')}}"></script>
+  <script src="{{ asset('assets/js/video.js')}}"></script>
+  <script src="{{ asset('assets/js/slick-slider.js')}}"></script>
+  <script src="{{ asset('assets/js/custom.js')}}"></script>
   <script>
     //according to loftblog tut
     $('.nav li:first').addClass('active');

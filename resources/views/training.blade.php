@@ -12,13 +12,13 @@
   <title>JAKA KECE</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="{{ ('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="{{ ('template/assets/css/fontawesome.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/templatemo-grad-school.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/owl.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/lightbox.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/templatemo-grad-school.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
 
 </head>
 
@@ -54,7 +54,7 @@
 
           </div>
         </div>
-        <div class="col-md-12 ">
+        <div class="col-md-12 anot">
           <div class="row">
             <div class="col-md-4">
               <div class="list-group" id="list-tab" role="tablist">
@@ -75,23 +75,23 @@
                   <ol>
                     <hr>
                     <li class="p-1">
-                      Lomba AAA<br>
+                        2D/3D Graphic Design Internship - Young Leaders Program<br>
                       <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li>
                     <li class="p-1">
-                      Lomba BBB<br>
+                        2D Artist - IT Total Solution<br>
                       <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba CCC<br>
+                        3D Animator - Assemble EDU<br>
                       <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba DDD<br>
+                        Front End Developer - BliBLi.com<br>
                       <cek><a href="#">Cek persyaratan...</a>
                       </cek>
                       <hr>
@@ -99,27 +99,27 @@
                   </ol>
                 </div>
                 <div class="tab-pane fade scrol" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                  
+
                   <ol>
                     <hr>
                     <li class="p-1">
-                      Lomba AAA<br>
+                        2D/3D Graphic Design Internship - Young Leaders Program<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li>
                     <li class="p-1">
-                      Lomba BBB<br>
+                        2D Artist - IT Total Solution<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba CCC<br>
+                        3D Animator - Assemble EDU<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Lomba DDD<br>
+                        Front End Developer - BliBLi.com<br>
                       <cek><a href="#">Cek pelaksanaan...</a>
                       </cek>
                       <hr>
@@ -127,26 +127,26 @@
                   </ol>
                 </div>
                 <div class="tab-pane fade scrol" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                  
+
                   <ol>
                     <hr>
                     <li class="p-1">
-                      Bidang AAA<br>
+                        2D/3D Graphic Design Internship - Young Leaders Program<br>
                       <cek><a href="#"> Cek prestasi mahasiswa...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Bidang BBB<br>
+                        2D Artist - IT Total Solution<br>
                       <cek><a href="#"> Cek prestasi mahasiswa...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Bidang CCC<br>
+                        3D Animator - Assemble EDU<br>
                       <cek><a href="#"> Cek prestasi mahasiswa...</a>
                       </cek>
                       <hr>
                     </li><li class="p-1">
-                      Bidang DDD<br>
+                        Front End Developer - BliBLi.com<br>
                       <cek><a href="#"> Cek prestasi mahasiswa...</a>
                       </cek>
                       <hr>
@@ -162,10 +162,46 @@
                     <form action="">
                       <div class="scrol">
                     <ul class="list-group" id="myList">
-                      <li class="list-group-item" style="color: black;"><input type="radio" id="lomba1" name="lomba-selected" value="lomba1"><label for="lomba1" class="pl-3">Lomba AAA</label></li>
-                      <li class="list-group-item" style="color: black;"><input type="radio" id="lomba2" name="lomba-selected" value="lomba2"><label for="lomba2" class="pl-3">Lomba BBB</label></li>
-                      <li class="list-group-item" style="color: black;"><input type="radio" id="lomba3" name="lomba-selected" value="lomba3"><label for="lomba3" class="pl-3">Lomba CCC</label></li>
-                      <li class="list-group-item" style="color: black;"><input type="radio" id="lomba4" name="lomba-selected" value="lomba4"><label for="lomba4" class="pl-3">Lomba DDD</label></li>
+                      <li class="list-group-item" style="color: black;">
+                        <div class="row">
+                            <div class="col-1">
+                                <input type="radio" id="lomba1" name="lomba-selected" value="lomba1">
+                            </div>
+                            <div class="col-11">
+                                <label for="lomba1" class="">2D/3D Graphic Design Internship - Young Leaders Program</label>
+                            </div>
+                        </div>
+                        </li>
+                      <li class="list-group-item" style="color: black;">
+                        <div class="row">
+                            <div class="col-1">
+                                <input type="radio" id="lomba2" name="lomba-selected" value="lomba2">
+                            </div>
+                            <div class="col-11">
+                                <label for="lomba2" class="">2D Artist - IT Total Solution</label>
+                            </div>
+                        </div>
+                        </li>
+                      <li class="list-group-item" style="color: black;">
+                        <div class="row">
+                            <div class="col-1">
+                                <input type="radio" id="lomba3" name="lomba-selected" value="lomba3">
+                            </div>
+                            <div class="col-11">
+                                <label for="lomba3" class="">3D Animator - Assemble EDU</label>
+                            </div>
+                        </div>
+                        </li>
+                      <li class="list-group-item" style="color: black;">
+                        <div class="row">
+                            <div class="col-1">
+                                <input type="radio" id="lomba4" name="lomba-selected" value="lomba4">
+                            </div>
+                            <div class="col-11">
+                                <label for="lomba4" class="">Front End Developer - BliBLi.com</label>
+                            </div>
+                        </div>
+                        </li>
                     </ul>
                   </div>
                   </form>
@@ -180,7 +216,7 @@
             </div>
           </div>
         </div>
-        
+
 
       </div>
     </div>
@@ -305,16 +341,16 @@
   </footer>
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="{{('template/vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{ ('template/assets/js/bootstrap.js')}}"></script>
-  <script src="{{ ('template/assets/js/isotope.min.js')}}"></script>
-  <script src="{{ ('template/assets/js/owl-carousel.js')}}"></script>
-  <script src="{{ ('template/assets/js/lightbox.js')}}"></script>
-  <script src="{{ ('template/assets/js/tabs.js')}}"></script>
-  <script src="{{ ('template/assets/js/video.js')}}"></script>
-  <script src="{{ ('template/assets/js/slick-slider.js')}}"></script>
-  <script src="{{ ('template/assets/js/custom.js')}}"></script>
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ asset('assets/js/bootstrap.js')}}"></script>
+  <script src="{{ asset('assets/js/isotope.min.js')}}"></script>
+  <script src="{{ asset('assets/js/owl-carousel.js')}}"></script>
+  <script src="{{ asset('assets/js/lightbox.js')}}"></script>
+  <script src="{{ asset('assets/js/tabs.js')}}"></script>
+  <script src="{{ asset('assets/js/video.js')}}"></script>
+  <script src="{{ asset('assets/js/slick-slider.js')}}"></script>
+  <script src="{{ asset('assets/js/custom.js')}}"></script>
   <script>
     //according to loftblog tut
     $('.nav li:first').addClass('active');

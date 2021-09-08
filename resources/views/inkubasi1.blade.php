@@ -12,13 +12,13 @@
   <title>JAKA KECE</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="{{ ('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="{{ ('template/assets/css/fontawesome.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/templatemo-grad-school.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/owl.css') }}">
-  <link rel="stylesheet" href="{{ ('template/assets/css/lightbox.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/templatemo-grad-school.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
 
           </div>
         </div>
-        <div class="col-md-12 ">
+        <div class="col-md-12 anot">
           <div class="row">
             <div class="col-md-4">
               <div class="list-group" id="list-tab" role="tablist">
@@ -46,7 +46,7 @@
             <div class="col-md-8 ">
               <div class="tab-content m-3" style="color: white;" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                  
+
                   <table style="width: 100%;" >
                     <tr>
                       <td>Nama</td>
@@ -67,8 +67,8 @@
                   </table>
                 </div>
                 <div class="tab-pane fade scrol" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                <h2>Riwayat tes</h2>  
-                
+                <h2>Riwayat tes</h2>
+
 <br><br>
 <br><br>
 <br><br>
@@ -78,14 +78,14 @@
                 </div>
                 <div class="tab-pane fade scrol" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
                   <h2>Notif</h2>
-                  
+
 <br><br>
 <br><br>
 <br><br>
 <br><br>
 <br><br>
                 </div>
-                
+
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@
 
       </div>
     </div>
-    
+
 <br>
   </section>
 
@@ -109,7 +109,7 @@
     tr{
       border-top: 1px solid white;
       border-bottom: 1px solid white;
-      
+
     }
     tr>td{
       padding:0.49em
@@ -144,7 +144,7 @@
       outline: none;
       border: 0;
       vertical-align: middle;
-      
+
       text-decoration: none;
       font-size: 1.5rem;
       color: var(--colorShadeA);
@@ -198,7 +198,7 @@
       box-shadow: 0 0 0 2px var(--colorShadeB), 0 0.25em 0 0 var(--colorShadeB);
 
     }
-    
+
   </style>
 
   <footer>
@@ -215,16 +215,16 @@
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="{{('template/vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-  <script src="{{ ('template/assets/js/isotope.min.js')}}"></script>
-  <script src="{{ ('template/assets/js/owl-carousel.js')}}"></script>
-  <script src="{{ ('template/assets/js/lightbox.js')}}"></script>
-  <script src="{{ ('template/assets/js/tabs.js')}}"></script>
-  <script src="{{ ('template/assets/js/video.js')}}"></script>
-  <script src="{{ ('template/assets/js/slick-slider.js')}}"></script>
-  <script src="{{ ('template/assets/js/custom.js')}}"></script>
+  <script src="{{ asset('assets/js/isotope.min.js')}}"></script>
+  <script src="{{ asset('assets/js/owl-carousel.js')}}"></script>
+  <script src="{{ asset('assets/js/lightbox.js')}}"></script>
+  <script src="{{ asset('assets/js/tabs.js')}}"></script>
+  <script src="{{ asset('assets/js/video.js')}}"></script>
+  <script src="{{ asset('assets/js/slick-slider.js')}}"></script>
+  <script src="{{ asset('assets/js/custom.js')}}"></script>
   <script>
     //according to loftblog tut
     $('.nav li:first').addClass('active');
