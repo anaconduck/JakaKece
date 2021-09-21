@@ -1,7 +1,8 @@
 <?php
+namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,9 +37,18 @@ Route::get('/exchange', function () {
 Route::get('/training', function () {
     return view('training');
 });
+Route::get('/details', function () {
+    return view('details');
+});
+Route::get('/detailspe/{id}', [PassController::class,'passpe']);
 
+Route::get('/detailspm/{id}', [PassController::class,'passpm']);
+Route::get('/detailsem/{id}', [PassController::class,'passem']);
+
+Route::get('/detailset/{id}', [PassController::class,'passet']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
