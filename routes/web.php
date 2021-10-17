@@ -1,5 +1,7 @@
 <?php
+namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inkubasi;
 use App\Http\Controllers\Home;
@@ -8,7 +10,6 @@ use App\Models\Examination;
 use App\Models\Mahasiswa;
 use App\Models\Practice;
 use Illuminate\Support\Facades\Auth;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,12 +21,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/test',function(){
-    return view('try',[
-        'title' => "test",
-        'nama' => 'test'
-    ]);
-});
 Route::get('/home', [Home::class, 'home'])->name('home');
 
 Route::get('/guest',[Home::class,'home'])->name('login');
@@ -64,10 +59,19 @@ Route::get('/exchange', function () {
 Route::get('/training', function () {
     return view('training');
 });
+Route::get('/details', function () {
+    return view('details');
+});
+Route::get('/detailspe/{id}', [PassController::class,'passpe']);
 
+Route::get('/detailspm/{id}', [PassController::class,'passpm']);
+Route::get('/detailsem/{id}', [PassController::class,'passem']);
+
+Route::get('/detailset/{id}', [PassController::class,'passet']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
 
 Route::fallback(function(){
     return redirect('home');
