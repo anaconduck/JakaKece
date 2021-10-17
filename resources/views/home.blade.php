@@ -1,46 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
-  <title>JAKA KECE</title>
-
-  <!-- tes -->
-  <!-- Bootstrap core CSS -->
-  <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
-  <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/templatemo-grad-school.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
-</head>
-
-<body>
-  <!--header-->
-  <header class="main-header clearfix" role="header">
-    <div class="logo">
-      <a href="#"><em>JAKA</em> KECE</a>
-    </div>
-    <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
-    <nav id="menu" class="main-nav" role="navigation">
-      <ul class="main-menu">
-        <li class="selected"><a href="{{ ('home') }}">Home</a></li>
-        <li><a href="{{ ('inkubasi') }}" class="external">Inkubasi Digital Bahasa</a></li>
-        <li><a href="{{ ('jawara') }}" class="external">Jawara Center</a></li>
-        <li><a href="{{ ('exchange') }}" class="external">Student Exchange</a></li>
-        <li><a href="{{ ('training') }}" class="external">On The Job Training</a></li>
-      </ul>
-    </nav>
-  </header>
-
-
-  <section class="section coming-soon" data-section="section3">
+@section('slot')
+<section class="section coming-soon" data-section="section3">
     <div class="container">
       <div class="row">
         <div class="col-md-7 col-xs-12">
@@ -60,13 +21,20 @@
         <div class="col-md-5">
           <div class="right-content">
             <div class="top-content">
-              <h3>Selamat Datang</h3>
-            </div>
-            <form id="contact" action="" method="get">
+                <h3>Selamat Datang</h3>
+                <div class="row role-chose justify-content-center">
+                  <div class="col-md-4 act">Mahasiswa</div>
+                  <div class="col-md-4">Dosen</div>
+                  <div class="col-md-4">Admin</div>
+                </div>
+              </div>
+            <form id="contact" action="" method="post">
+                @csrf
+                <input type="text" name="status" id="status" class="d-none" required>
               <div class="row">
                 <div class="col-md-12">
                   <fieldset>
-                    <input name="username" type="text" class="form-control" id="username" placeholder="Your Username"
+                    <input name="name" type="text" class="form-control" id="username" placeholder="Your Username"
                       required="">
                   </fieldset>
                 </div>
@@ -93,81 +61,18 @@
       </div>
     </div>
   </section>
-
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <p><i class="fa fa-copyright"></i> Copyright 2021 by Wahyu & Ziyad
-
-            | Design: <a href="https://https://mziyadam.github.io/JAKA/" rel="sponsored" target="_parent">JAKA</a></p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <!-- Bootstrap core JavaScript -->
-  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-
-  <script src="{{ asset('assets/js/isotope.min.js')}}"></script>
-  <script src="{{ asset('assets/js/owl-carousel.js')}}"></script>
-  <script src="{{ asset('assets/js/lightbox.js')}}"></script>
-  <script src="{{ asset('assets/js/tabs.js')}}"></script>
-  <script src="{{ asset('assets/js/video.js')}}"></script>
-  <script src="{{ asset('assets/js/slick-slider.js')}}"></script>
-  <script src="{{ asset('assets/js/custom.js')}}"></script>
-  <script>
-    //according to loftblog tut
-    $('.nav li:first').addClass('active');
-
-    var showSection = function showSection(section, isAnimate) {
-      var
-        direction = section.replace(/#/, ''),
-        reqSection = $('.section').filter('[data-section="' + direction + '"]'),
-        reqSectionPos = reqSection.offset().top - 0;
-
-      if (isAnimate) {
-        $('body, html').animate({
-            scrollTop: reqSectionPos
-          },
-          800);
-      } else {
-        $('body, html').scrollTop(reqSectionPos);
-      }
-
-    };
-
-    var checkSection = function checkSection() {
-      $('.section').each(function () {
-        var
-          $this = $(this),
-          topEdge = $this.offset().top - 80,
-          bottomEdge = topEdge + $this.height(),
-          wScroll = $(window).scrollTop();
-        if (topEdge < wScroll && bottomEdge > wScroll) {
-          var
-            currentId = $this.data('section'),
-            reqLink = $('a').filter('[href*=\\#' + currentId + ']');
-          reqLink.closest('li').addClass('active').
-          siblings().removeClass('active');
-        }
+@stop
+@section('script')
+<script>
+    let roleU = $('#status');
+    roleU[0].value = "MAHASISWA"
+    let role = $('.role-chose');
+    $('.role-chose div').click(function (){
+      $.each(role.children(),function (ind, val){
+        $(val).removeClass('act');
       });
-    };
-
-    $('.main-menu, .scroll-to-section').on('click', 'a', function (e) {
-      if ($(e.target).hasClass('external')) {
-        return;
-      }
-      e.preventDefault();
-      $('#menu').removeClass('active');
-      showSection($(this).attr('href'), true);
+      $(this).addClass('act');
+      roleU[0].value = this.innerText
     });
-
-    $(window).scroll(function () {
-      checkSection();
-    });
-  </script>
-</body>
-
-</html>
+</script>
+@stop

@@ -1,0 +1,20 @@
+21-10-04 8:02:51.8796310 pid:9325 tid:11 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+21-10-04 8:02:57.4800589 pid:9325 tid:11 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+21-10-04 8:03:09.8047362 pid:9325 tid:11 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+21-10-04 8:03:15.4021864 pid:9325 tid:11 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+21-10-04 8:03:27.9868554 pid:9325 tid:11 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+21-10-04 8:03:45.5303344 pid:9325 tid:11 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+21-10-04 8:03:50.5477408 pid:9325 tid:11 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQ
