@@ -11,16 +11,22 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-
-$sql = "SELECT * FROM event_terlaksana where id=$id";
+$today=date("Y-m-d");
+$sql = "SELECT * FROM event where id=$id";
 $result = $conn->query($sql);
 $nama ="";
 $deskripsi="";
+$tanggal_pendaftaran_mulai = "";
+$tanggal_pendaftaran_selesai = "";
+$tanggal_event = "";
 if ($result->num_rows > 0) {
   // output data of each row
-  while($row = $result->fetch_assoc()) {
-    $nama= $row["nama"];
-    $deskripsi=$row["deskripsi"];
+  while ($row = $result->fetch_assoc()) {
+    $nama = $row["nama_event"];
+    $deskripsi = $row["deskripsi"];
+    $tanggal_pendaftaran_mulai = $row["tanggal_pendaftaran_mulai"];
+    $tanggal_pendaftaran_selesai = $row["tanggal_pendaftaran_selesai"];
+    $tanggal_event = $row["tanggal_event"];
   }
 } else {
   echo "0 results";
@@ -91,7 +97,10 @@ if ($result->num_rows > 0) {
               </h1>
               <br>
               <h6>
-                <?php echo $deskripsi; ?>
+                <?php echo $deskripsi . '<br>';
+                echo 'tanggal_pendaftaran_mulai : '.$tanggal_pendaftaran_mulai . '<br>';
+                echo 'tanggal_pendaftaran_selesai : '.$tanggal_pendaftaran_selesai . '<br>';
+                echo 'tanggal_event : '.$tanggal_event . '<br>'; ?>
               </h6>
             </div>
           </div>

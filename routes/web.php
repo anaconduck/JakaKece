@@ -45,6 +45,7 @@ Route::get('/detailspe/{id}', [PassController::class,'passpe']);
 Route::get('/detailspm/{id}', [PassController::class,'passpm']);
 Route::get('/detailsem/{id}', [PassController::class,'passem']);
 
+Route::get('/daftar/{id}', [PassController::class,'passdaftar']);
 Route::get('/detailset/{id}', [PassController::class,'passet']);
 Route::get('/dashboard', function () {
     return view('dashboard');

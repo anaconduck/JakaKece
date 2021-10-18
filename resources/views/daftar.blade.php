@@ -98,11 +98,24 @@ if ($result->num_rows > 0) {
               </h1>
               <br>
               <h6>
-                <?php echo $deskripsi . '<br>';
-                echo 'tanggal_pendaftaran_mulai : '.$tanggal_pendaftaran_mulai . '<br>';
-                echo 'tanggal_pendaftaran_selesai : '.$tanggal_pendaftaran_selesai . '<br>';
-                echo 'tanggal_event : '.$tanggal_event . '<br>';
-                ?>
+                <div id="container">
+                  <form action="" method="get" id="form">
+                    <div id="inpcontainer">
+
+                      Name: <input class="m-2 p-1" type="text" name="Name"><br>
+                      NIM: <input class="m-2 p-1" type="text" name="Nim"><br>
+
+                    </div>
+
+                    <button id="tambah" type="button">+</button>
+
+                    <div class="p-3">
+                      <button class="btn btn-info" type="submit" value="Submit">Daftar</button>
+                    </div>
+
+                  </form>
+
+                </div>
               </h6>
             </div>
           </div>
@@ -114,7 +127,20 @@ if ($result->num_rows > 0) {
     </div>
     <br><br>
   </section>
+  <script>
+    let container = $('#inpcontainer'); //container dari semua inputan
+    let tambah = $('#tambah'); //tombol tambah inputan
+    let index = 2; //increment name input
+    function tambahInput(type, name) {
+      return name + "<input class='m-2 p-1' type='" + type + "' name='" + name + index + "'/><br>";
+    } //fungsi untuk nambah input, tinggal modifikasi sesuai style sama kebutuhan
 
+    tambah.click(function() {
+      container.append(tambahInput('text', 'Name'))
+      container.append(tambahInput('text', 'Nim'))
+      index++;
+    }) //nambahin listener ke tombol tambah
+  </script>
   <style>
     tr {
       border-top: 1px solid white;

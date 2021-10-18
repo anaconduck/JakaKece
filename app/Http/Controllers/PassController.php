@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 class PassController extends Controller
 {
     //
+    public function passdaftar($id)
+    {
+       return view('daftar',['id'=>$id]);
+ 
+}
     public function passpe($id)
     {
        return view('detailspe',['id'=>$id]);
