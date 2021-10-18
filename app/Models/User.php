@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
+        'instansi'
     ];
 
     /**
@@ -40,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getUser($credential){
+        return self::where('status',$credential['status'])
+            ->where('name',$credential['name'])
+            ->first();
+    }
+
+    
 }

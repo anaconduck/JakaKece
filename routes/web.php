@@ -3,6 +3,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Inkubasi;
+use App\Http\Controllers\Home;
+use App\Http\Controllers\User;
+use App\Models\Examination;
+use App\Models\Mahasiswa;
+use App\Models\Practice;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,17 +21,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/home', [Home::class, 'home'])->name('home');
 
-Route::get('/inkubasi', function () {
-    return view('inkubasi');
-});
+Route::get('/guest',[Home::class,'home'])->name('login');
 
-Route::get('/inkubasi1', function () {
-    return view('inkubasi1');
-});
+Route::post('/home',[Home::class, 'login']);
+
+Route::post('/guest', [Home::class,'login']);
+
+Route::get('/report/{id}',[User::class, 'report']);
+
+Route::post('/submit/{id}',[Inkubasi::class, 'submit']);
+
+Route::get('/inkubasi', [Inkubasi::class,'index']);
+
+Route::get('/user', [User::class,'index'])->name('user');
+
+Route::get('/latihan/{type}',[Inkubasi::class,'mulaiLatihan'])
+    ->where('type','[A-Za-z]+');
+
+Route::get('/latihan/{type}/{kategori}/{id}',[Inkubasi::class,'latihanSoal'])
+    ->where('type','[A-Za-z]+')
+    ->where('kategori','[A-Za-z]+');
+
+Route::post('/latihan/{type}/{kategori}/{id}',[Inkubasi::class,'jawab']);
+
+Route::get('/{kategori}/{materi}/{target}',[Inkubasi::class,'materi']);
 
 Route::get('/jawara', function () {
     return view('jawara');
@@ -51,5 +73,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
 
+Route::fallback(function(){
+    return redirect('home');
+});
