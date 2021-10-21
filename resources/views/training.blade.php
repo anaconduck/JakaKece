@@ -1,5 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "jakakece";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+$today=date("Y-m-d");
+$sql = "SELECT * FROM ojt where tanggal_pendaftaran_mulai<='$today' and '$today'<=tanggal_pendaftaran_selesai";
+$resultpe = $conn->query($sql);
+$sql = "SELECT * FROM ojt where '$today'<=tanggal_pendaftaran_selesai";
+$resultem = $conn->query($sql);
+$sql = "SELECT * FROM ojt where tanggal_pendaftaran_selesai<='$today' and '$today'<=tanggal_ojt";
+$resultet = $conn->query($sql);
+$sql = "SELECT * FROM prestasi_mahasiswa";
+$resultpm = $conn->query($sql);
+
+?>
 
 <head>
 
@@ -58,157 +77,102 @@
           <div class="row">
             <div class="col-md-4">
               <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
-                  href="#list-home" role="tab" aria-controls="home">Event Mendatang</a>
-                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
-                  href="#list-profile" role="tab" aria-controls="profile">Event Terlaksana</a>
-                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                  href="#list-messages" role="tab" aria-controls="messages">Prestasi Mahasiswa</a>
-                <a class="list-group-item list-group-item-action" id="list-events-list" data-toggle="list"
-                  href="#list-events" role="tab" aria-controls="events">Pendaftaran Event</a>
+                <a class="list-group-item list-group-item-action active" id="list-events-list" data-toggle="list" href="#list-events" role="tab" aria-controls="events">Pendaftaran Event</a>
+                <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Event Mendatang</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Event Terlaksana</a>
               </div>
             </div>
+            <!-- em -->
             <div class="col-md-8 ">
               <div class="tab-content m-3" style="color: white;" id="nav-tabContent">
-                <div class="tab-pane fade show active scrol" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <div class="tab-pane fade show scrol" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
 
                   <ol>
                     <hr>
-                    <li class="p-1">
-                        2D/3D Graphic Design Internship - Young Leaders Program<br>
-                      <cek><a href="#">Cek persyaratan...</a>
-                      </cek>
+                    <?php
+                    if ($resultem->num_rows > 0) {
+                      // output data of each row
+                      while ($row = $resultem->fetch_assoc()) {
+                        echo '<li class="p-1">';
+                        echo $row["nama_ojt"];
+                        echo '<br><cek><a href="detailsojtm/' . $row["id"] . '">Cek persyaratan...</a></cek>
                       <hr>
-                    </li>
-                    <li class="p-1">
-                        2D Artist - IT Total Solution<br>
-                      <cek><a href="#">Cek persyaratan...</a>
-                      </cek>
-                      <hr>
-                    </li><li class="p-1">
-                        3D Animator - Assemble EDU<br>
-                      <cek><a href="#">Cek persyaratan...</a>
-                      </cek>
-                      <hr>
-                    </li><li class="p-1">
-                        Front End Developer - BliBLi.com<br>
-                      <cek><a href="#">Cek persyaratan...</a>
-                      </cek>
-                      <hr>
-                    </li>
+                    </li>';
+                      }
+                    } else {
+                      echo "0 results";
+                    }
+
+                    ?>
+
                   </ol>
                 </div>
+                <!-- et -->
                 <div class="tab-pane fade scrol" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
 
                   <ol>
-                    <hr>
-                    <li class="p-1">
-                        2D/3D Graphic Design Internship - Young Leaders Program<br>
-                      <cek><a href="#">Cek pelaksanaan...</a>
-                      </cek>
-                      <hr>
-                    </li>
-                    <li class="p-1">
-                        2D Artist - IT Total Solution<br>
-                      <cek><a href="#">Cek pelaksanaan...</a>
-                      </cek>
-                      <hr>
-                    </li><li class="p-1">
-                        3D Animator - Assemble EDU<br>
-                      <cek><a href="#">Cek pelaksanaan...</a>
-                      </cek>
-                      <hr>
-                    </li><li class="p-1">
-                        Front End Developer - BliBLi.com<br>
-                      <cek><a href="#">Cek pelaksanaan...</a>
-                      </cek>
-                      <hr>
-                    </li>
-                  </ol>
-                </div>
-                <div class="tab-pane fade scrol" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
 
-                  <ol>
                     <hr>
-                    <li class="p-1">
-                        2D/3D Graphic Design Internship - Young Leaders Program<br>
-                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
-                      </cek>
+                    <?php
+                    if ($resultet->num_rows > 0) {
+                      // output data of each row
+                      while ($row = $resultet->fetch_assoc()) {
+                        echo '<li class="p-1">';
+                        echo $row["nama_ojt"];
+                        echo '<br><cek><a href="detailsojtt/' . $row["id"] . '">Cek pelaksanaan...</a></cek>
                       <hr>
-                    </li><li class="p-1">
-                        2D Artist - IT Total Solution<br>
-                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
-                      </cek>
-                      <hr>
-                    </li><li class="p-1">
-                        3D Animator - Assemble EDU<br>
-                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
-                      </cek>
-                      <hr>
-                    </li><li class="p-1">
-                        Front End Developer - BliBLi.com<br>
-                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
-                      </cek>
-                      <hr>
+                    </li>';
+                      }
+                    } else {
+                      echo "0 results";
+                    }
+
+                    ?>
+
                     </li>
                   </ol>
                 </div>
-                <div class="tab-pane fade show" id="list-events" role="tabpanel" aria-labelledby="list-events-list">
+
+                <!--pm-->
+                
+                <div class="tab-pane fade show active" id="list-events" role="tabpanel" aria-labelledby="list-events-list">
 
 
                   <div class="container">
                     <input class="form-control" id="listSearch" type="text" placeholder="Masukkan kata kunci...">
                     <br>
-                    <form action="">
+                    
                       <div class="scrol">
-                    <ul class="list-group" id="myList">
-                      <li class="list-group-item" style="color: black;">
-                        <div class="row">
-                            <div class="col-1">
-                                <input type="radio" id="lomba1" name="lomba-selected" value="lomba1">
-                            </div>
-                            <div class="col-11">
-                                <label for="lomba1" class="">2D/3D Graphic Design Internship - Young Leaders Program</label>
-                            </div>
+                        <ul class="list-group" id="myList">
+                          <?php
+                          if ($resultpe->num_rows > 0) {
+                            // output data of each row
+                            while ($row = $resultpe->fetch_assoc()) {
+                              echo '<li class="list-group-item" style="color: black;"><div class="row">
+                        <div class="col-1">';
+                              echo '</div>
+                        <div class="col-12">';
+                              echo '<a href="daftarojt/' . $row["id"] . '" style="color:black">' . $row["nama_ojt"] . '</a>
+                        <br><cek><a href="detailspojt/' . $row["id"] . '">Cek persyaratan...</a></cek>
                         </div>
-                        </li>
-                      <li class="list-group-item" style="color: black;">
-                        <div class="row">
-                            <div class="col-1">
-                                <input type="radio" id="lomba2" name="lomba-selected" value="lomba2">
-                            </div>
-                            <div class="col-11">
-                                <label for="lomba2" class="">2D Artist - IT Total Solution</label>
-                            </div>
-                        </div>
-                        </li>
-                      <li class="list-group-item" style="color: black;">
-                        <div class="row">
-                            <div class="col-1">
-                                <input type="radio" id="lomba3" name="lomba-selected" value="lomba3">
-                            </div>
-                            <div class="col-11">
-                                <label for="lomba3" class="">3D Animator - Assemble EDU</label>
-                            </div>
-                        </div>
-                        </li>
-                      <li class="list-group-item" style="color: black;">
-                        <div class="row">
-                            <div class="col-1">
-                                <input type="radio" id="lomba4" name="lomba-selected" value="lomba4">
-                            </div>
-                            <div class="col-11">
-                                <label for="lomba4" class="">Front End Developer - BliBLi.com</label>
-                            </div>
-                        </div>
-                        </li>
-                    </ul>
-                  </div>
-                  </form>
-                  <div class="d-flex flex-row-reverse">
-                    <div class="p-3"><button  class="btn btn-info" type="submit" form="myList" value="Submit">Daftar</button>
                     </div>
-                  </div>
+                    </li>';
+                            }
+                          } else {
+                            echo "0 results";
+                          }
+
+                          ?>
+                          </li>
+
+
+
+                        </ul>
+                      </div>
+                    
+                    <div class="d-flex flex-row-reverse">
+                      
+                    </div>
                   </div>
 
                 </div>
@@ -354,14 +318,14 @@
   <script>
     //according to loftblog tut
     $('.nav li:first').addClass('active');
-    $(document).ready(function(){
-  $("#listSearch").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myList li").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $(document).ready(function() {
+      $("#listSearch").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myList li").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
     });
-  });
-});
     var showSection = function showSection(section, isAnimate) {
       var
         direction = section.replace(/#/, ''),
@@ -378,10 +342,9 @@
       }
 
     };
-    $('.mdb-select').materialSelect({
-});
+    $('.mdb-select').materialSelect({});
     var checkSection = function checkSection() {
-      $('.section').each(function () {
+      $('.section').each(function() {
         var
           $this = $(this),
           topEdge = $this.offset().top - 80,
@@ -397,7 +360,7 @@
       });
     };
 
-    $('.main-menu, .scroll-to-section').on('click', 'a', function (e) {
+    $('.main-menu, .scroll-to-section').on('click', 'a', function(e) {
       if ($(e.target).hasClass('external')) {
         return;
       }
@@ -406,10 +369,65 @@
       showSection($(this).attr('href'), true);
     });
 
-    $(window).scroll(function () {
+    $(window).scroll(function() {
       checkSection();
     });
   </script>
 </body>
+<!--                       <li class="p-1">
+                        Juara 1 - Joints Competition 2020 UGM<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li><li class="p-1">
+                        Juara 3  - Hackavidia - ARKAVIDIA 2020 ITB<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li><li class="p-1">
+                        Gold Medal  - The 5th World Invention Innovation Contest Korea<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li><li class="p-1">
+                        Gold Medal  - International Invention & Innovative Competition Series 1 Malaysia<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li><li class="p-1">
+                        Gold Medal  - International Student Affairs Invention, Inovation & Design Competition Utm<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li><li class="p-1">
+                        Most Favourite Gamein Indigo Game Startuo Incubation's Gamejam Roadshow - Indigo Game Startup Incubation's Game Jam Roadshow<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li>
+                    <li class="p-1">
+                        Juara 1 Bisnis Model - Kompetisi 4c Virtuality National Competition<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li>
+                    <li class="p-1">
+                        Juara 1 Video Infografis - Kompetisi 4c Virtuality National Competition<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li>
+                    <li class="p-1">
+                        Juara 3 Video Infografis - Kompetisi 4c Virtuality National Competition <br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li>
+                    <li class="p-1">
+                        Juara 2 Video Musik Kolaborasi - Kompetisi 4c Virtuality National Competition<br>
+                      <cek><a href="#"> Cek prestasi mahasiswa...</a>
+                      </cek>
+                      <hr>
+                    </li> -->
 
 </html>

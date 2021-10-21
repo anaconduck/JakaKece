@@ -177,7 +177,7 @@ $resultpm = $conn->query($sql);
                         <div class="col-1">';
                               echo '</div>
                         <div class="col-12">';
-                              echo '<a href="daftar/' . $row["id"] . '" style="color:black">' . $row["nama_event"] . '</a>
+                              echo '<a href="daftarjc/' . $row["id"] . '" style="color:black">' . $row["nama_event"] . '</a>
                         <br><cek><a href="detailspe/' . $row["id"] . '">Cek persyaratan...</a></cek>
                         </div>
                     </div>

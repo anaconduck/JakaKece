@@ -89,7 +89,7 @@ if ($result->num_rows > 0) {
         <div class="col-md-12 m-2 p2 anot">
           <div class="row">
             <div class="col-md-1 m-2 p-3 anot">
-              <a href="{{ url('jawara') }}" class="external">Kembali</a>
+              <a href="{{ url('training') }}" class="external">Kembali</a>
             </div>
             <div class="col-md-10 scrol m-3 p-5 anot" style="background-color: whitesmoke;">
               <h1>
@@ -100,11 +100,20 @@ if ($result->num_rows > 0) {
               <h6>
                 <div id="container">
                   <form action="" method="get" id="form">
+                
                     <div id="inpcontainer">
-
-                      Name: <input class="m-2 p-1" type="text" name="Name"><br>
-                      NIM: <input class="m-2 p-1" type="text" name="Nim"><br>
-
+                    <table>
+    <tr>
+      <td align="left">Name:</td>
+      <td align="right"><input class="m-2 p-1" type="text" name="Name"/></td>
+    </tr>
+    <tr>
+      <td align="left">NIM:</td>
+      <td align="right"><input class="m-2 p-1" type="text" name="Nim"/></td>
+    </tr>
+    
+  
+                      </table>
                     </div>
 
                     <button id="tambah" type="button">+</button>
