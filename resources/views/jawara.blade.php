@@ -8,11 +8,12 @@ $dbname = "jakakece";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
-$sql = "SELECT * FROM pendaftaran_event";
+$today=date("Y-m-d");
+$sql = "SELECT * FROM event where tanggal_pendaftaran_mulai<='$today' and '$today'<=tanggal_pendaftaran_selesai";
 $resultpe = $conn->query($sql);
-$sql = "SELECT * FROM event_mendatang";
+$sql = "SELECT * FROM event where '$today'<=tanggal_pendaftaran_selesai";
 $resultem = $conn->query($sql);
-$sql = "SELECT * FROM event_terlaksana";
+$sql = "SELECT * FROM event where tanggal_pendaftaran_selesai<='$today' and '$today'<=tanggal_event";
 $resultet = $conn->query($sql);
 $sql = "SELECT * FROM prestasi_mahasiswa";
 $resultpm = $conn->query($sql);
@@ -94,7 +95,7 @@ $resultpm = $conn->query($sql);
                       // output data of each row
                       while ($row = $resultem->fetch_assoc()) {
                         echo '<li class="p-1">';
-                        echo $row["nama"];
+                        echo $row["nama_event"];
                         echo '<br><cek><a href="detailsem/' . $row["id"] . '">Cek persyaratan...</a></cek>
                       <hr>
                     </li>';
@@ -118,7 +119,7 @@ $resultpm = $conn->query($sql);
                       // output data of each row
                       while ($row = $resultet->fetch_assoc()) {
                         echo '<li class="p-1">';
-                        echo $row["nama"];
+                        echo $row["nama_event"];
                         echo '<br><cek><a href="detailset/' . $row["id"] . '">Cek pelaksanaan...</a></cek>
                       <hr>
                     </li>';
@@ -165,7 +166,7 @@ $resultpm = $conn->query($sql);
                   <div class="container">
                     <input class="form-control" id="listSearch" type="text" placeholder="Masukkan kata kunci...">
                     <br>
-                    <form action="">
+                    
                       <div class="scrol">
                         <ul class="list-group" id="myList">
                           <?php
@@ -174,9 +175,9 @@ $resultpm = $conn->query($sql);
                             while ($row = $resultpe->fetch_assoc()) {
                               echo '<li class="list-group-item" style="color: black;"><div class="row">
                         <div class="col-1">';
-                              echo '<input type="radio" id="lomba' . $row["id"] . '" name="lomba-selected" value="lomba' . $row["id"] . '"></div>
-                        <div class="col-11">';
-                              echo '<label for="lomba' . $row["id"] . '" class="">' . $row["nama"] . '</label>
+                              echo '</div>
+                        <div class="col-12">';
+                              echo '<a href="daftarjc/' . $row["id"] . '" style="color:black">' . $row["nama_event"] . '</a>
                         <br><cek><a href="detailspe/' . $row["id"] . '">Cek persyaratan...</a></cek>
                         </div>
                     </div>
@@ -193,10 +194,9 @@ $resultpm = $conn->query($sql);
 
                         </ul>
                       </div>
-                    </form>
+                    
                     <div class="d-flex flex-row-reverse">
-                      <div class="p-3"><button class="btn btn-info" type="submit" form="myList" value="Submit">Daftar</button>
-                      </div>
+                      
                     </div>
                   </div>
 

@@ -11,28 +11,27 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-$today = date("Y-m-d");
-$sql = "SELECT * FROM event where id=$id";
+$today=date("Y-m-d");
+$sql = "SELECT * FROM ojt where id=$id";
 $result = $conn->query($sql);
-$nama = "";
-$deskripsi = "";
+$nama ="";
+$deskripsi="";
 $tanggal_pendaftaran_mulai = "";
 $tanggal_pendaftaran_selesai = "";
 $tanggal_event = "";
 if ($result->num_rows > 0) {
   // output data of each row
   while ($row = $result->fetch_assoc()) {
-    $nama = $row["nama_event"];
+    $nama = $row["nama_ojt"];
     $deskripsi = $row["deskripsi"];
     $tanggal_pendaftaran_mulai = $row["tanggal_pendaftaran_mulai"];
     $tanggal_pendaftaran_selesai = $row["tanggal_pendaftaran_selesai"];
-    $tanggal_event = $row["tanggal_event"];
+    $tanggal_event = $row["tanggal_ojt"];
   }
 } else {
   echo "0 results";
 }
 ?>
-
 <head>
 
   <meta charset="utf-8">
@@ -88,10 +87,10 @@ if ($result->num_rows > 0) {
         </div>
         <div class="col-md-12 m-2 p2 anot">
           <div class="row">
-            <div class="col-md-1 m-2 p-3 anot">
-              <a href="{{ url('jawara') }}" class="external">Kembali</a>
-            </div>
-            <div class="col-md-10 scrol m-3 p-5 anot" style="background-color: whitesmoke;">
+<div class="col-md-1 m-2 p-3 anot">
+<a href="{{ url('training') }}" class="external">Kembali</a>
+</div>
+          <div class="col-md-10 scrol m-3 p-5 anot" style="background-color: whitesmoke;">
               <h1>
                 <?php echo $nama;
                 ?>
@@ -101,13 +100,12 @@ if ($result->num_rows > 0) {
                 <?php echo $deskripsi . '<br>';
                 echo 'tanggal_pendaftaran_mulai : '.$tanggal_pendaftaran_mulai . '<br>';
                 echo 'tanggal_pendaftaran_selesai : '.$tanggal_pendaftaran_selesai . '<br>';
-                echo 'tanggal_event : '.$tanggal_event . '<br>';
-                ?>
+                echo 'tanggal_event : '.$tanggal_event . '<br>'; ?>
               </h6>
             </div>
           </div>
         </div>
-
+            
 
 
       </div>
@@ -116,6 +114,7 @@ if ($result->num_rows > 0) {
   </section>
 
   <style>
+    
     tr {
       border-top: 1px solid white;
       border-bottom: 1px solid white;
@@ -246,14 +245,14 @@ if ($result->num_rows > 0) {
   <script>
     //according to loftblog tut
     $('.nav li:first').addClass('active');
-    $(document).ready(function() {
-      $("#listSearch").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#myList li").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-      });
+    $(document).ready(function(){
+  $("#listSearch").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
+  });
+});
     var showSection = function showSection(section, isAnimate) {
       var
         direction = section.replace(/#/, ''),
@@ -270,9 +269,10 @@ if ($result->num_rows > 0) {
       }
 
     };
-    $('.mdb-select').materialSelect({});
+    $('.mdb-select').materialSelect({
+});
     var checkSection = function checkSection() {
-      $('.section').each(function() {
+      $('.section').each(function () {
         var
           $this = $(this),
           topEdge = $this.offset().top - 80,
@@ -288,7 +288,7 @@ if ($result->num_rows > 0) {
       });
     };
 
-    $('.main-menu, .scroll-to-section').on('click', 'a', function(e) {
+    $('.main-menu, .scroll-to-section').on('click', 'a', function (e) {
       if ($(e.target).hasClass('external')) {
         return;
       }
@@ -297,7 +297,7 @@ if ($result->num_rows > 0) {
       showSection($(this).attr('href'), true);
     });
 
-    $(window).scroll(function() {
+    $(window).scroll(function () {
       checkSection();
     });
   </script>

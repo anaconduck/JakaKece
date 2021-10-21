@@ -71,7 +71,26 @@ Route::get('/detailspe/{id}', [PassController::class,'passpe']);
 Route::get('/detailspm/{id}', [PassController::class,'passpm']);
 Route::get('/detailsem/{id}', [PassController::class,'passem']);
 
+Route::get('/daftarjc/{id}', [PassController::class,'passdaftarjc']);
 Route::get('/detailset/{id}', [PassController::class,'passet']);
+
+Route::get('/detailspojt/{id}', [PassController::class,'passpojt']);
+
+Route::get('/detailsojtt/{id}', [PassController::class,'passpojt']);
+Route::get('/detailsojtm/{id}', [PassController::class,'passojtm']);
+
+Route::get('/daftarojt/{id}', [PassController::class,'passdaftarojt']);
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

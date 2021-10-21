@@ -12,7 +12,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 $today = date("Y-m-d");
-$sql = "SELECT * FROM event where id=$id";
+$sql = "SELECT * FROM ojt where id=$id";
 $result = $conn->query($sql);
 $nama = "";
 $deskripsi = "";
@@ -22,11 +22,11 @@ $tanggal_event = "";
 if ($result->num_rows > 0) {
   // output data of each row
   while ($row = $result->fetch_assoc()) {
-    $nama = $row["nama_event"];
+    $nama = $row["nama_ojt"];
     $deskripsi = $row["deskripsi"];
     $tanggal_pendaftaran_mulai = $row["tanggal_pendaftaran_mulai"];
     $tanggal_pendaftaran_selesai = $row["tanggal_pendaftaran_selesai"];
-    $tanggal_event = $row["tanggal_event"];
+    $tanggal_event = $row["tanggal_ojt"];
   }
 } else {
   echo "0 results";
@@ -89,7 +89,7 @@ if ($result->num_rows > 0) {
         <div class="col-md-12 m-2 p2 anot">
           <div class="row">
             <div class="col-md-1 m-2 p-3 anot">
-              <a href="{{ url('jawara') }}" class="external">Kembali</a>
+              <a href="{{ url('training') }}" class="external">Kembali</a>
             </div>
             <div class="col-md-10 scrol m-3 p-5 anot" style="background-color: whitesmoke;">
               <h1>

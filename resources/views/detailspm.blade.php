@@ -11,7 +11,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-
+$today=date("Y-m-d");
 $sql = "SELECT * FROM prestasi_mahasiswa where id=$id";
 $result = $conn->query($sql);
 $nama ="";
