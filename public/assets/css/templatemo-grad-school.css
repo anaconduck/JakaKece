@@ -284,7 +284,7 @@ a.menu-link {
   }
 
   .main-menu {
-    padding-right: 30px !important;
+    padding-right: 0px !important;
   }
 
   .main-menu li {
@@ -338,7 +338,7 @@ a.menu-link {
 
 .main-menu li a {
   padding: 10px 15px;
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 700;
@@ -660,9 +660,9 @@ section.why-us {
 #tabs ul {
   margin: 0;
   padding: 0;
-  -webkit-column-count: 3;
-  -moz-column-count: 3;
-  column-count: 3;
+  -webkit-column-count: 5;
+  -moz-column-count: 5;
+  column-count: 5;
   -webkit-column-gap: 0;
   -moz-column-gap: 0;
   column-gap: 0;

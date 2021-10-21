@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Practice;
 use App\Models\Examination;
 use App\Models\HistoryExam;
+use App\Models\InkubasiBahasa;
 use App\Models\Materi;
 use App\Models\Mahasiswa;
 use App\Models\Report;
@@ -21,9 +22,13 @@ class Inkubasi extends Controller
         $this->middleware('auth');
     }
     public function index(){
+        $data = InkubasiBahasa::getAllCourse();
+
         return view('inkubasi',[
             'title' => 'Inkubasi',
-            'inkubasi' => 'selected'
+            'inkubasi' => 'selected',
+            'data' => $data,
+            'ind' => 0
         ]);
     }
 

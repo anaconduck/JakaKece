@@ -13,10 +13,9 @@ class User extends Controller
     {
         $this->middleware('auth');
     }
-    public function report($historyid){
+    public function report($reportID){
         $mhs_id = Mahasiswa::getMahasiswa()->id;
-        $report = Report::getReport($mhs_id,$historyid);
-
+        $report = Report::getReportFromID($reportID);
         if(!$report){
             return $this->index();
         }
@@ -32,7 +31,7 @@ class User extends Controller
             'title' => 'Report',
             'report' => $report,
             'total' => $total,
-            'testDate' => HistoryExam::getHistoryExam($mhs_id,$report->id)->created_at,
+            'testDate' => HistoryExam::getHistoryExam($mhs_id,$report->history_exam_id)->created_at,
             'user' => auth()->user(),
             'user_s' => 'selected'
         ]);

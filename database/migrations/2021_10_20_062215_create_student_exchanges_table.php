@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMaterisTable extends Migration
+class CreateStudentExchangesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateMaterisTable extends Migration
      */
     public function up()
     {
-        Schema::create('materis', function (Blueprint $table) {
+        Schema::create('student_exchanges', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->longText('teks');
-            $table->smallInteger('id_course');
-            $table->string('materi');
-            $table->string('file')->nullable();
+            $table->unsignedBigInteger('id_mahasiswa');
+            $table->unsignedBigInteger('id_exchange_event');
+            $table->boolean('ketersediaan');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateMaterisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('materis');
+        Schema::dropIfExists('student_exchanges');
     }
 }

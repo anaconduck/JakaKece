@@ -52,9 +52,13 @@ Route::get('/jawara', function () {
     return view('jawara');
 });
 
-Route::get('/exchange', function () {
-    return view('exchange');
-});
+Route::get('/exchange', [StudentExchange::class, 'index']);
+
+Route::get('/daftar-exchange/{id}',[StudentExchange::class, 'daftar']);
+
+Route::post('/daftar-exchange',[StudentExchange::class,'daftar']);
+
+Route::get('/persyaratan-exchange/{id}',[StudentExchange::class, 'persyaratan']);
 
 Route::get('/training', function () {
     return view('training');
