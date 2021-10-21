@@ -115,4 +115,12 @@ class StudentExchange extends Controller
 
     }
 
+    public function riwayat($id){
+        return view('details-riwayat-exchange',[
+            'title' => 'Riwayat Mahasiswa',
+            'exchange' => 'selected',
+            'data' => SE::getRiwayatMahasiswa($id)
+        ]);
+    }
+
 }

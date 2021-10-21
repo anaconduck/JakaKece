@@ -60,6 +60,8 @@ Route::post('/daftar-exchange',[StudentExchange::class,'daftar']);
 
 Route::get('/persyaratan-exchange/{id}',[StudentExchange::class, 'persyaratan']);
 
+Route::get('/riwayat-exchange/{id}',[StudentExchange::class,'riwayat']);
+
 Route::get('/training', function () {
     return view('training');
 });

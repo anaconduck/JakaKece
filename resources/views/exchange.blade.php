@@ -64,7 +64,7 @@
                             <li class="p-1">
                                 {{ $event->nama_universitas }}<br>
                             <cek>
-                                <a href=""> Cek riwayat mahasiswa...</a>
+                                <a href="{{ url('/riwayat-exchange')."/$event->id" }}"> Cek riwayat mahasiswa...</a>
                             </cek>
                             <hr>
                             </li>

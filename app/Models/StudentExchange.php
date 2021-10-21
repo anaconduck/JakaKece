@@ -33,4 +33,12 @@ class StudentExchange extends Model
         $se->save();
         return $se->isClean();
     }
+
+    public static function getRiwayatMahasiswa($id){
+        return self::join('exchange_events','exchange_events.id','=','student_exchanges.id_exchange_event')
+            ->join('mahasiswas','mahasiswas.id','=','student_exchanges.id_mahasiswa')
+            ->join('users','users.id','=','mahasiswas.user_id')
+            ->where('id_exchange_event','=',$id)
+            ->get();
+    }
 }
