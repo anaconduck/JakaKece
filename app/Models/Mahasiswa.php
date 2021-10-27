@@ -11,7 +11,9 @@ class Mahasiswa extends Model
     use HasFactory;
 
     public static function getMahasiswa(){
-        return self::where('user_id',Auth::user()->id)
+        return self::select('mahasiswas.*', 'users.email', 'users.name')
+            ->join('users','users.id', '=', 'mahasiswas.user_id')
+            ->where('user_id',Auth::user()->id)
             ->first();
     }
 }

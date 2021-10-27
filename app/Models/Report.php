@@ -34,10 +34,14 @@ class Report extends Model
                     ->first();
             }
         }
-        
+
         return null;
 
 
+    }
+
+    public static function getReportFromID($reportId){
+        return self::find($reportId);
     }
 
     public static function getAllReports($mhsid){

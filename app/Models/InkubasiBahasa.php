@@ -14,4 +14,8 @@ class InkubasiBahasa extends Model
         return self::where('nama_course',$courseName)
             ->first()->toArray();
     }
+
+    public static function getAllCourse(){
+        return self::get();
+    }
 }
