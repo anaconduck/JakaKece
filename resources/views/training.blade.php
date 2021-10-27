@@ -77,9 +77,9 @@ $resultpm = $conn->query($sql);
           <div class="row">
             <div class="col-md-4">
               <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-events-list" data-toggle="list" href="#list-events" role="tab" aria-controls="events">Pendaftaran Event</a>
-                <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Event Mendatang</a>
-                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Event Terlaksana</a>
+                <a class="list-group-item list-group-item-action active" id="list-events-list" data-toggle="list" href="#list-events" role="tab" aria-controls="events">Pendaftaran Job Training</a>
+                <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Job Training Mendatang</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Job Training Terlaksana</a>
               </div>
             </div>
             <!-- em -->
