@@ -66,11 +66,11 @@ if ($result->num_rows > 0) {
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
     <nav id="menu" class="main-nav" role="navigation">
       <ul class="main-menu">
-        <li><a href="{{ url('home') }}" class="external">Home</a></li>
-        <li><a href="{{ url('inkubasi') }}" class="external">Inkubasi Digital Bahasa</a></li>
-        <li class="selected"><a href="{{ url('jawara') }}">Jawara Center</a></li>
-        <li><a href="{{ url('exchange') }}" class="external">Student Exchange</a></li>
-        <li><a href="{{ url('training') }}" class="external">On The Job Training</a></li>
+        <li><a href="{{ ('home') }}" class="external">Home</a></li>
+        <li><a href="{{ ('inkubasi') }}" class="external">Inkubasi Digital Bahasa</a></li>
+        <li><a href="{{ ('jawara') }}" class="external">Jawara Center</a></li>
+        <li><a href="{{ ('exchange') }}" class="external">Student Exchange</a></li>
+        <li class="selected"><a href="{{ ('training') }}">On The Job Training</a></li>
       </ul>
     </nav>
   </header>
