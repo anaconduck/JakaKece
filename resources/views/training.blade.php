@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $dbname = "jakakece";
@@ -134,14 +134,14 @@ $resultpm = $conn->query($sql);
                 </div>
 
                 <!--pm-->
-                
+
                 <div class="tab-pane fade show active" id="list-events" role="tabpanel" aria-labelledby="list-events-list">
 
 
                   <div class="container">
                     <input class="form-control" id="listSearch" type="text" placeholder="Masukkan kata kunci...">
                     <br>
-                    
+
                       <div class="scrol">
                         <ul class="list-group" id="myList">
                           <?php
@@ -169,9 +169,9 @@ $resultpm = $conn->query($sql);
 
                         </ul>
                       </div>
-                    
+
                     <div class="d-flex flex-row-reverse">
-                      
+
                     </div>
                   </div>
 

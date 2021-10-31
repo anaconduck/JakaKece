@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 class PassController extends Controller
 {
-   //
+   public function __construct()
+   {
+        $this->middleware(['auth']);
+   }
    public function passdaftarjc($id)
    {
       return view('daftarjc', ['id' => $id]);

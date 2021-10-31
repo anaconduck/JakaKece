@@ -18,7 +18,6 @@ class StudentExchange extends Controller
         $mendatang = ExchangeEvent::getEventMendatang();
         $terlaksana = ExchangeEvent::getEventTerlaksana();
         $riwayat = SE::getRiwayatPertukaran();
-
         return view('exchange',[
             'title' => 'Student Exchange',
             'exchange' => 'selected',
@@ -112,7 +111,16 @@ class StudentExchange extends Controller
             'exchange' => 'selected',
             'event' => $event
         ]);
+    }
 
+    public function pelaksanaan($id){
+        $event = ExchangeEvent::getPelaksanaanEvent($id);
+        
+        return view('details-pelaksanaan-exchange',[
+            'title' => "Pelaksanaan Student Exchange",
+            'exchange' => 'selected',
+            'event' => $event
+        ]);
     }
 
     public function riwayat($id){

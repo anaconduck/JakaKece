@@ -37,15 +37,21 @@
                             <div class="tab-pane fade show active" id="list-home1" role="tabpanel" aria-labelledby="list-home-list">
                               <div class="form-group">
                                 <h4>Pilih Materi :</h4>
-                                <select class="form-control" id="opsi-materi">
-                                  <option>Listening</option>
-                                  <option>Structure</option>
-                                  <option>Reading</option>
-                                  <option>Writing</option>
+                                <select class="form-control" id="opsiitp">
+                                    @foreach ($opsiitp as $opsi)
+                                        <option>{{ $opsi['materi'] }}</option>
+                                    @endforeach
                                 </select>
                                 <br>
                                 <!-- Temp anchor for replacing php form action -->
-                                <button type="submit" class="btn btn-primary mb-2"><a href="{{ url("/TOEFL/listening/1") }}" id="materi" style="color: white;">Pilih</a></button>
+                                @if(sizeof($opsiitp) == 0)
+                                <button type="submit" class="btn btn-primary mb-2" disabled>Belum Ada data
+                                </button>
+                                @else
+                                <button type="submit" class="btn btn-primary mb-2">
+                                    <a href="{{ url("/TOEFL-ITP") }}/{{ $opsiitp[0]['materi'] }}/1" id="linkitp" style="color: white;">Pilih</a>
+                                </button>
+                                @endif
                               </div>
                             </div>
                             <div class="tab-pane fade" id="list-profile1" role="tabpanel" aria-labelledby="list-profile-list">
@@ -76,7 +82,7 @@
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                            <a href="{{ url('/latihan/toefl') }}"
+                                            <a href="{{ url('/latihan/toefl-itp') }}"
                                             class="p-0"
                                             >
                                                 <button type="button" class="btn btn-primary">Mulai</button>
@@ -134,14 +140,18 @@
                             <div class="form-group">
 
                               <h4>Pilih Materi :</h4>
-                              <select class="form-control" id="opsiielts">
-                                <option>Listening</option>
-                                <option>Reading</option>
-                                <option>Writing</option>
-                                <option>Speaking</option>
+                              <select class="form-control" id="opsiibt">
+                                  @foreach ($opsiibt as $opsi)
+                                  <option>{{ $opsi['materi'] }}</option>
+                                  @endforeach
                               </select>
                               <br>
-                              <button type="submit" class="btn btn-primary mb-2"><a href="{{ url("/IELTS/listening/1") }}" id="materiielts" style="color: white;">Pilih</a></button>
+                              @if(sizeof($opsiibt) == 0)
+                                <button type="submit" class="btn btn-primary mb-2" disabled>Belum Ada data
+                                </button>
+                              @else
+                                <button type="submit" class="btn btn-primary mb-2"><a href="{{ url("/TOEFL-IBT") }}/{{ $opsiibt[0]['materi'] }}/1" id="linkibt" style="color: white;">Pilih</a></button>
+                                @endif
                             </div>
                           </div>
                           <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
@@ -155,24 +165,24 @@
                             </ol>
                             <div class="col-md-12">
                                 <div class="section-heading main-button mt-5">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testielts">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testibt">
                                         Mulai Tes!
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="testielts" tabindex="-1" aria-labelledby="testielts" aria-hidden="true">
+                                    <div class="modal fade" id="testibt" tabindex="-1" aria-labelledby="testielts" aria-hidden="true">
                                         <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Latihan IELTS</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Latihan Toefl IBT</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                            Apakah anda yakin ingin memulai sesi latihan IELTS?
+                                            Apakah anda yakin ingin memulai sesi latihan Toefl IBT?
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                            <a href="{{ url('/latihan/ielts') }}"
+                                            <a href="{{ url('/latihan/toefl-ibt') }}"
                                             class="p-0"
                                             >
                                                 <button type="button" class="btn btn-primary">Mulai</button>
@@ -188,7 +198,7 @@
 
                             <ol style="color: aliceblue; ">
                                 <li>
-                                    Halaman test dilaksanakan di website resmi test IELTS.
+                                    Halaman test dilaksanakan di website resmi test TOEFL IBT.
                                 </li>
                                 <li>
                                     Silahkan gunakan token <strong>f23sd234w</strong> untuk masuk dalam tes.
@@ -209,7 +219,7 @@
                 </div>
                </div>
               </article>
-              <article id='tabs-3'>
+              <article id='tabs-5'>
                 <div class="row d-flex justify-content-center">
 
                   <!--Grid column-->
@@ -263,37 +273,41 @@
                     </div>
                   </div>
               </article>
-              <article id='tabs-4'>
+              <article id='tabs-3'>
                 <div class="row">
                     <div class="col-md-12 ">
                       <div class="row">
                         <div class="col-md-4">
                           <div class="list-group" id="list-tab" role="tablist">
                             <a class="list-group-item list-group-item-action active" id="list-home-list1" data-toggle="list"
-                              href="#list-home1" role="tab" aria-controls="home">Materi</a>
+                              href="#tab-materi-toeic" role="tab" aria-controls="home">Materi</a>
                             <a class="list-group-item list-group-item-action" id="list-profile-list1" data-toggle="list"
-                              href="#list-profile1" role="tab" aria-controls="profile">Latihan Soal (Practice)</a>
+                              href="#tab-prac-toeic" role="tab" aria-controls="profile">Latihan Soal (Practice)</a>
                             <a class="list-group-item list-group-item-action" id="list-messages-list1" data-toggle="list"
-                              href="#list-messages1" role="tab" aria-controls="messages">Tes Online</a>
+                              href="#tab-tes-toeic" role="tab" aria-controls="messages">Tes Online</a>
                           </div>
                         </div>
                         <div class="col-md-8 ">
                           <div class="tab-content m-3" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="list-home1" role="tabpanel" aria-labelledby="list-home-list">
+                            <div class="tab-pane fade show active" id="tab-materi-toeic" role="tabpanel" aria-labelledby="list-home-list">
                               <div class="form-group">
                                 <h4>Pilih Materi :</h4>
-                                <select class="form-control" id="opsi-materi">
-                                  <option>Listening</option>
-                                  <option>Structure</option>
-                                  <option>Reading</option>
-                                  <option>Writing</option>
+                                <select class="form-control" id="opsitoeic">
+                                    @foreach ($opsitoeic as $opsi)
+                                    <option>{{ $opsi['materi'] }}</option>
+                                    @endforeach
                                 </select>
                                 <br>
                                 <!-- Temp anchor for replacing php form action -->
-                                <button type="submit" class="btn btn-primary mb-2"><a href="{{ url("/TOEFL/listening/1") }}" id="materi" style="color: white;">Pilih</a></button>
+                                @if(sizeof($opsitoeic) == 0)
+                                <button type="submit" class="btn btn-primary mb-2" disabled>Belum Ada data
+                                </button>
+                                @else
+                                <button type="submit" class="btn btn-primary mb-2"><a href="{{ url("/TOEIC") }}/{{ $opsitoeic[0]['materi'] }}/1" id="linktoeic" style="color: white;">Pilih</a></button>
+                                @endif
                               </div>
                             </div>
-                            <div class="tab-pane fade" id="list-profile1" role="tabpanel" aria-labelledby="list-profile-list">
+                            <div class="tab-pane fade" id="tab-prac-toeic" role="tabpanel" aria-labelledby="list-profile-list">
                               <h4>Ketentuan</h4>
 
                               <ol style="color: aliceblue; ">
@@ -304,24 +318,24 @@
                               <div class="col-md-12">
                                 <div class="section-heading main-button mt-5">
                                 <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testtoefl">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testtoeic">
                                         Mulai Tes!
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="testtoefl" tabindex="-1" aria-labelledby="testtoefl" aria-hidden="true">
+                                    <div class="modal fade" id="testtoeic" tabindex="-1" aria-labelledby="testtoefl" aria-hidden="true">
                                         <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Latihan TOEFL</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Latihan TOEIC</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                            Apakah anda yakin ingin memulai sesi latihan TOEFL?
+                                            Apakah anda yakin ingin memulai sesi latihan TOEIC?
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                            <a href="{{ url('/latihan/toefl') }}"
+                                            <a href="{{ url('/latihan/toeic') }}"
                                             class="p-0"
                                             >
                                                 <button type="button" class="btn btn-primary">Mulai</button>
@@ -333,12 +347,12 @@
                                 </div>
                             </div>
                             </div>
-                            <div class="tab-pane fade" id="list-messages1" role="tabpanel" aria-labelledby="list-messages-list">
+                            <div class="tab-pane fade" id="tab-tes-toeic" role="tabpanel" aria-labelledby="list-messages-list">
                               <h4>Ketentuan</h4>
 
                               <ol style="color: aliceblue; ">
                                 <li>
-                                    Halaman test dilaksanakan di website resmi test TOEFL.
+                                    Halaman test dilaksanakan di website resmi test TOEIC.
                                 </li>
                                 <li>
                                     Silahkan gunakan token <strong>f23sd234w</strong> untuk masuk dalam tes.
@@ -359,37 +373,41 @@
                     </div>
                 </div>
               </article>
-              <article id='tabs-5'>
+              <article id='tabs-4'>
                 <div class="row">
                     <div class="col-md-12 ">
                       <div class="row">
                         <div class="col-md-4">
                           <div class="list-group" id="list-tab" role="tablist">
                             <a class="list-group-item list-group-item-action active" id="list-home-list1" data-toggle="list"
-                              href="#list-home1" role="tab" aria-controls="home">Materi</a>
+                              href="#tab-materi-ielts" role="tab" aria-controls="home">Materi</a>
                             <a class="list-group-item list-group-item-action" id="list-profile-list1" data-toggle="list"
-                              href="#list-profile1" role="tab" aria-controls="profile">Latihan Soal (Practice)</a>
+                            href="#tab-prac-ielts" role="tab" aria-controls="profile">Latihan Soal (Practice)</a>
                             <a class="list-group-item list-group-item-action" id="list-messages-list1" data-toggle="list"
-                              href="#list-messages1" role="tab" aria-controls="messages">Tes Online</a>
+                              href="#tab-test-ielts" role="tab" aria-controls="messages">Tes Online</a>
                           </div>
                         </div>
                         <div class="col-md-8 ">
                           <div class="tab-content m-3" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="list-home1" role="tabpanel" aria-labelledby="list-home-list">
+                            <div class="tab-pane fade show active" id="tab-materi-ielts" role="tabpanel" aria-labelledby="list-home-list">
                               <div class="form-group">
                                 <h4>Pilih Materi :</h4>
-                                <select class="form-control" id="opsi-materi">
-                                  <option>Listening</option>
-                                  <option>Structure</option>
-                                  <option>Reading</option>
-                                  <option>Writing</option>
+                                <select class="form-control" id="opsiielts">
+                                    @foreach ($opsiielts as $opsi)
+                                    <option>{{ $opsi['materi'] }}</option>
+                                    @endforeach
                                 </select>
                                 <br>
                                 <!-- Temp anchor for replacing php form action -->
-                                <button type="submit" class="btn btn-primary mb-2"><a href="{{ url("/TOEFL/listening/1") }}" id="materi" style="color: white;">Pilih</a></button>
+                                @if(sizeof($opsiielts) == 0)
+                                <button type="submit" class="btn btn-primary mb-2" disabled>Belum Ada data
+                                </button>
+                                @else
+                                <button type="submit" class="btn btn-primary mb-2"><a href="{{ url("/IELTS") }}/{{ $opsiielts[0]['materi'] }}/1" id="linkielts" style="color: white;">Pilih</a></button>
+                                @endif
                               </div>
                             </div>
-                            <div class="tab-pane fade" id="list-profile1" role="tabpanel" aria-labelledby="list-profile-list">
+                            <div class="tab-pane fade" id="tab-prac-ielts" role="tabpanel" aria-labelledby="list-profile-list">
                               <h4>Ketentuan</h4>
 
                               <ol style="color: aliceblue; ">
@@ -400,24 +418,24 @@
                               <div class="col-md-12">
                                 <div class="section-heading main-button mt-5">
                                 <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testtoefl">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testielts">
                                         Mulai Tes!
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="testtoefl" tabindex="-1" aria-labelledby="testtoefl" aria-hidden="true">
+                                    <div class="modal fade" id="testielts" tabindex="-1" aria-labelledby="testtoefl" aria-hidden="true">
                                         <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Latihan TOEFL</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Latihan IELTS</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                            Apakah anda yakin ingin memulai sesi latihan TOEFL?
+                                            Apakah anda yakin ingin memulai sesi latihan IELTS?
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                            <a href="{{ url('/latihan/toefl') }}"
+                                            <a href="{{ url('/latihan/ielts') }}"
                                             class="p-0"
                                             >
                                                 <button type="button" class="btn btn-primary">Mulai</button>
@@ -429,12 +447,12 @@
                                 </div>
                             </div>
                             </div>
-                            <div class="tab-pane fade" id="list-messages1" role="tabpanel" aria-labelledby="list-messages-list">
+                            <div class="tab-pane fade" id="tab-test-ielts" role="tabpanel" aria-labelledby="list-messages-list">
                               <h4>Ketentuan</h4>
 
                               <ol style="color: aliceblue; ">
                                 <li>
-                                    Halaman test dilaksanakan di website resmi test TOEFL.
+                                    Halaman test dilaksanakan di website resmi test IELTS.
                                 </li>
                                 <li>
                                     Silahkan gunakan token <strong>f23sd234w</strong> untuk masuk dalam tes.
@@ -461,4 +479,32 @@
       </div>
     </div>
 </section>
+@stop
+
+@section('script')
+<script>
+    //according to loftblog tut
+    let link_materi= $('#linkitp');
+      const link = "{{ url('/') }}";
+      $('#opsiitp').on('change',function(){
+          link_materi.attr('href',link+"/toefl-itp/"+this.value.toLowerCase()+"/1");
+      });
+
+      let link_materi_ibt= $('#linkibt');
+      $('#opsiibt').on('change',function(){
+          link_materi_ibt.attr('href',link+"/toefl-ibt/"+this.value.toLowerCase()+"/1");
+      });
+      let link_materi_toeic= $('#linktoeic');
+      $('#opsitoeic').on('change',function(){
+          link_materi_toeic.attr('href',link+"/toeic/"+this.value.toLowerCase()+"/1");
+      });
+
+      let link_materi_ielts= $('#linkielts');
+      $('#opsiielts').on('change',function(){
+          link_materi_ielts.attr('href',link+"/ielts/"+this.value.toLowerCase()+"/1");
+      });
+
+    $('.nav li:first').addClass('active');
+
+  </script>
 @stop

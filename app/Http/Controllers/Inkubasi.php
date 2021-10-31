@@ -18,17 +18,23 @@ class Inkubasi extends Controller
 
     public function __construct()
     {
-        $this->mulai = false;
-        $this->middleware('auth');
+        $this->middleware(['auth']);
     }
     public function index(){
         $data = InkubasiBahasa::getAllCourse();
-
+        $opsiToeflItp = Materi::getAllMateri($data[0]->id_course);
+        $opsiToeflIbt = Materi::getAllMateri($data[1]->id_course);
+        $opsiToeic = Materi::getAllMateri($data[2]->id_course);
+        $opsiIelts = Materi::getAllMateri($data[3]->id_course);
         return view('inkubasi',[
             'title' => 'Inkubasi',
             'inkubasi' => 'selected',
             'data' => $data,
-            'ind' => 0
+            'ind' => 0,
+            'opsiitp' => $opsiToeflItp,
+            'opsiibt' => $opsiToeflIbt,
+            'opsitoeic' => $opsiToeic,
+            'opsiielts' => $opsiIelts
         ]);
     }
 
@@ -135,6 +141,8 @@ class Inkubasi extends Controller
     }
 
     public function materi($kategori,$materi,$target=1){
+        $kategori = strtoupper($kategori);
+        $kategori = str_replace('-',' ',$kategori);
         return view('materi',[
             'inkubasi' => 'selected',
             'title' => 'Materi',

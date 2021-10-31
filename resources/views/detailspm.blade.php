@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $dbname = "jakakece";
@@ -96,7 +96,7 @@ if ($result->num_rows > 0) {
             </div>
           </div>
         </div>
-            
+
 
 
       </div>
@@ -105,7 +105,7 @@ if ($result->num_rows > 0) {
   </section>
 
   <style>
-    
+
     tr {
       border-top: 1px solid white;
       border-bottom: 1px solid white;

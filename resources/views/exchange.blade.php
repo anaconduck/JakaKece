@@ -32,7 +32,7 @@
                     @if ($mendatang)
                         @foreach ($mendatang as $event)
                             <li class="p-1">
-                                {{ $event->nama_universitas }}<br>
+                                {{ $event->nama_universitas . " - " . $event->nama_fakultas }}<br>
                             <cek><a href="{{ url('/persyaratan-exchange').'/'.$event->id }}">Cek persyaratan...</a></cek>
                             <hr>
                             </li>
@@ -47,8 +47,8 @@
                     @if ($terlaksana)
                         @foreach ($terlaksana as $event)
                             <li class="p-1">
-                                {{ $event->nama_universitas }}<br>
-                            <cek><a href="#">Cek pelaksanaan...</a></cek>
+                                {{ $event->nama_universitas  . " - " . $event->nama_fakultas }}<br>
+                            <cek><a href="{{ url('/pelaksanaan-exchange') .'/'. $event->id }}">Cek pelaksanaan...</a></cek>
                             <hr>
                             </li>
                         @endforeach
@@ -62,7 +62,7 @@
                     @if ($riwayat)
                         @foreach ($riwayat as $event)
                             <li class="p-1">
-                                {{ $event->nama_universitas }}<br>
+                                {{ $event->nama_universitas  . " - " . $event->nama_fakultas }}<br>
                             <cek>
                                 <a href="{{ url('/riwayat-exchange')."/$event->id" }}"> Cek riwayat mahasiswa...</a>
                             </cek>
@@ -90,7 +90,7 @@
                                             <input type="radio" id="{{ $event->id }}" name="exchange" value="{{ $event->id }}">
                                         </div>
                                         <div class="col-11">
-                                            <label for="{{ $event->id }}" class="">{{ $event->nama_universitas }}</label>
+                                            <label for="{{ $event->id }}" class="">{{ $event->nama_universitas  . " - " . $event->nama_fakultas }}</label>
                                         </div>
                                     </div>
                                 </li>

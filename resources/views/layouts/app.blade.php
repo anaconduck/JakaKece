@@ -209,22 +209,6 @@
   <script src="{{ asset('assets/js/video.js')}}"></script>
   <script src="{{ asset('assets/js/slick-slider.js')}}"></script>
   <script src="{{ asset('assets/js/custom.js')}}"></script>
-  <script>
-    //according to loftblog tut
-    let link_materi= $('#materi');
-      const link = "{{ url('/') }}";
-      $('#opsi-materi').on('change',function(){
-          link_materi.attr('href',link+"/toefl/"+this.value.toLowerCase()+"/1");
-      });
-
-      let link_materi_ielts= $('#materiielts');
-      $('#opsiielts').on('change',function(){
-          link_materi_ielts.attr('href',link+"/ielts/"+this.value.toLowerCase()+"/1");
-      });
-
-    $('.nav li:first').addClass('active');
-
-  </script>
 
 
   <style>

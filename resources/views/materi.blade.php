@@ -33,7 +33,9 @@
         </div>
         <div class="col-lg-8">
           <article class="content">
-            {{ $data->teks ?? '' }}
+            @php
+                echo($data->teks ?? "")
+            @endphp
           </article>
         </div>
       </div>
@@ -59,6 +61,31 @@
         }
         .back:hover img{
             transform: translateX(-10px);
+        }
+        .content{
+            font-size: 11pt;
+        }
+        .content p{
+            font-size: 11pt;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .content ul li{
+            list-style-type:square;
+            margin: 0 20px;
+        }
+        .content h4{
+            margin-top: 80px;
+        }
+        .content h4:first-child{
+            margin-top: 0;
+        }
+        hr{
+            color: white;
+            border: 1px solid white;
+        }
+        .content img{
+            margin: 20px 0;
         }
 
   </style>

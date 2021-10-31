@@ -51,7 +51,7 @@ class Examination extends Model
             ->where('kategori',$kategori)
             ->where('mahasiswa_id', $mahasiswa->id)
             ->where('history_exam_id',$history->id)
-            ->first();
+            ->first();  
         if($data == null){
             $data = new Examination([
                 'type' => $type,

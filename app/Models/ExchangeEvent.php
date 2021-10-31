@@ -24,4 +24,12 @@ class ExchangeEvent extends Model
         return self::where('akhir','<',now())
             ->get();
     }
+
+    public static function getPelaksanaanEvent($id){
+        $data = self::where('akhir','<',now())
+            ->where('id',$id)
+            ->get()[0];
+        $data->persyaratan = explode('|',$data->persyaratan);
+        return $data;
+    }
 }

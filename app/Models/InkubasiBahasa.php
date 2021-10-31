@@ -11,6 +11,7 @@ class InkubasiBahasa extends Model
     protected $table = 'inkubasi_bahasa';
 
     public static function getCourse($courseName){
+        $courseName = str_replace('-',' ',$courseName);
         return self::where('nama_course',$courseName)
             ->first()->toArray();
     }
@@ -18,4 +19,6 @@ class InkubasiBahasa extends Model
     public static function getAllCourse(){
         return self::get();
     }
+
+
 }

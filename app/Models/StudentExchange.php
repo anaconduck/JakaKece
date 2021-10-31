@@ -19,6 +19,7 @@ class StudentExchange extends Model
 
     public static function getRiwayatPertukaran(){
         return self::join('exchange_events','exchange_events.id','=','student_exchanges.id_exchange_event')
+            ->orderBy('akhir','asc')
             ->get();
     }
 

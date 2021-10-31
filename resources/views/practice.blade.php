@@ -7,7 +7,7 @@
 
             <div class="col-md-12 anot">
             <div class="section-heading">
-                <h3 style="color: white">Latihan {{ $type??'TOEFL' }}</h3>
+                <h3 style="color: white">Latihan {{ str_replace('-',' ',$type)??'TOEFL' }}</h3>
             </div>
             </div>
             <div class="col-md-12">

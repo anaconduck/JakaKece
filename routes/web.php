@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::view('/try', 'try');
 
 Route::get('/home', [Home::class, 'home'])->name('home');
 
@@ -38,10 +39,10 @@ Route::get('/inkubasi', [Inkubasi::class,'index']);
 Route::get('/user', [User::class,'index'])->name('user');
 
 Route::get('/latihan/{type}',[Inkubasi::class,'mulaiLatihan'])
-    ->where('type','[A-Za-z]+');
+    ->where('type','[A-Za-z-]+');
 
 Route::get('/latihan/{type}/{kategori}/{id}',[Inkubasi::class,'latihanSoal'])
-    ->where('type','[A-Za-z]+')
+    ->where('type','[A-Za-z-]+')
     ->where('kategori','[A-Za-z]+');
 
 Route::post('/latihan/{type}/{kategori}/{id}',[Inkubasi::class,'jawab']);
@@ -50,7 +51,7 @@ Route::get('/{kategori}/{materi}/{target}',[Inkubasi::class,'materi']);
 
 Route::get('/jawara', function () {
     return view('jawara');
-});
+})->middleware(['auth']);
 
 Route::get('/exchange', [StudentExchange::class, 'index']);
 
@@ -62,9 +63,11 @@ Route::get('/persyaratan-exchange/{id}',[StudentExchange::class, 'persyaratan'])
 
 Route::get('/riwayat-exchange/{id}',[StudentExchange::class,'riwayat']);
 
+Route::get('/pelaksanaan-exchange/{id}',[StudentExchange::class, 'pelaksanaan']);
+
 Route::get('/training', function () {
     return view('training');
-});
+})->middleware(['auth']);
 Route::get('/details', function () {
     return view('details');
 });

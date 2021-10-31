@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $dbname = "jakakece";
@@ -100,7 +100,7 @@ if ($result->num_rows > 0) {
               <h6>
                 <div id="container">
                   <form action="" method="get" id="form">
-                
+
                     <div id="inpcontainer">
                     <table>
     <tr>
@@ -111,8 +111,8 @@ if ($result->num_rows > 0) {
       <td align="left">NIM:</td>
       <td align="right"><input class="m-2 p-1" type="text" name="Nim"/></td>
     </tr>
-    
-  
+
+
                       </table>
                     </div>
 
