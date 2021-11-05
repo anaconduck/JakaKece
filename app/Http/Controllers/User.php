@@ -6,6 +6,7 @@ use App\Models\HistoryExam;
 use App\Models\Mahasiswa;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Controller
 {
@@ -54,5 +55,11 @@ class User extends Controller
             'numIELTS' => $numIELTS,
             'user_s' => 'selected'
         ]);
+    }
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('home');
     }
 }

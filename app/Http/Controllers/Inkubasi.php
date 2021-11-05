@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Practice;
 use App\Models\Examination;
 use App\Models\HistoryExam;
@@ -60,8 +59,10 @@ class Inkubasi extends Controller
             $start = strtotime($lastExam->created_at);
             $now = strtotime(now());
             $diff = $now-$start;
-
             if($diff >= 125*60){
+                if(url()->previous() !== url('/')."/inkubasi"){
+                    return redirect(url("/inkubasi"));
+                }
                 $lastExam = HistoryExam::make($type);
                 $kategori = 'READING';
                 $id = 1;
@@ -171,7 +172,7 @@ class Inkubasi extends Controller
         if(!$report)
             redirect()->route('user');
 
-        $total = 10* (
+        $total = (
             $report->score_listening +
             $report->score_writing +
             $report->score_reading

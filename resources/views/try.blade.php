@@ -70,7 +70,7 @@
                     Eliminate questions that are clearly wrong answers and choose the most appropriate answer.
                   </li>
               </ul>
-              <img src="http://127.0.0.1:8000/assets/images/reading_main.png" width="100%"/>
+              <img src="/assets/images/reading_main.png" width="100%"/>
               <p>
                   What does the passage mainly discuss?
               </p>
@@ -118,7 +118,7 @@
                     Look carefully at the main object/word in the multiple choice and then you go straight to skimming where the sentence that contains the multiple choice is then read 1 sentence completely and you immediately know what the choice is.
                   </li>
               </ul>
-              <img src="http://127.0.0.1:8000/assets/images/reading_main.png" width="100%"/>
+              <img src="/assets/images/reading_main.png" width="100%"/>
               <p>
                 Which of the following is true of the Shoshone and Ute?
             </p>
@@ -168,7 +168,7 @@
                     Read the sentence and match it with the pronoun being asked
                 </li>
             </ul>
-            <img src="http://127.0.0.1:8000/assets/images/reading_main.png" width="100%"/>
+            <img src="/assets/images/reading_main.png" width="100%"/>
             <p>
                 The word "they" in line 6 refers to
             </p>
@@ -200,7 +200,7 @@
                 <li>Determine the meaning of the sentences</li>
                 <li>Choose the answer that has the closest meaning</li>
             </ul>
-            <img src="http://127.0.0.1:8000/assets/images/reading_main.png" width="100%"/>
+            <img src="/assets/images/reading_main.png" width="100%"/>
             <p>
                 The word "scarce" in line 10 is closes in meaning to
             </p>
@@ -243,7 +243,7 @@
                     Choose the aswer that best expresses the relationship
                 </li>
             </ul>
-            <img src="http://127.0.0.1:8000/assets/images/reading_2.png" width="100%"/>
+            <img src="/assets/images/reading_2.png" width="100%"/>
             <p>
                 The paragraph following the passage most likely discusses
             </p>
@@ -274,7 +274,7 @@
                 <li>Match with the available answers</li>
                 <li>Choose the correct answer</li>
             </ul>
-            <img src="http://127.0.0.1:8000/assets/images/reading_2.png" width="100%"/>
+            <img src="/assets/images/reading_2.png" width="100%"/>
             <p>
                 It can be inferred from the passage that one role of the U.S. government is to
             </p>

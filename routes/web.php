@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inkubasi;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/try', 'try');
+Route::view('/try', 'admin.home');
 
 Route::get('/home', [Home::class, 'home'])->name('home');
 
@@ -37,6 +38,8 @@ Route::post('/submit/{id}',[Inkubasi::class, 'submit']);
 Route::get('/inkubasi', [Inkubasi::class,'index']);
 
 Route::get('/user', [User::class,'index'])->name('user');
+
+Route::post('/logout',[User::class,'logout']);
 
 Route::get('/latihan/{type}',[Inkubasi::class,'mulaiLatihan'])
     ->where('type','[A-Za-z-]+');
@@ -87,8 +90,8 @@ Route::get('/detailsojtm/{id}', [PassController::class,'passojtm']);
 Route::get('/daftarojt/{id}', [PassController::class,'passdaftarojt']);
 
 
-
-
+//admin
+Route::get('/admin',[HomeController::class, 'index'])->name('admin.home');
 
 
 

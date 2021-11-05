@@ -24,6 +24,10 @@ class User extends Authenticatable
         'instansi'
     ];
 
+    protected $attributes = [
+        'instansi' => 'UM'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -44,10 +48,9 @@ class User extends Authenticatable
     ];
 
     public static function getUser($credential){
-        return self::where('status',$credential['status'])
-            ->where('name',$credential['name'])
+        return self::where('name',$credential['name'])
             ->first();
     }
 
-    
+
 }

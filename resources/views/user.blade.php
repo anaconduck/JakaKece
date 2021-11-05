@@ -91,16 +91,28 @@
                 </div>
 
               </div>
+              <div class="row">
+                <div class="col-md-6 mt-4">
+                    <div class="section-heading main-button">
+                      <a rel="nofollow" href="{{ url()->previous() }}" target="_parent">Kembali</a>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4">
+                  <div class="section-heading main-button">
+                      <form method="POST" action="{{ url('/logout') }}">
+                          @csrf
+                            <input type="text" name="name" value="logout" class="d-none"/>
+                            <input id="_lo" class="d-none" type="submit" value="Log out"/>
+                      </form>
+                    <a id="logout" rel="nofollow" href="#" target="_parent">LogOut</a>
+                  </div>
+                </div>
+              </div>
+          </div>
             </div>
           </div>
         </div>
         <br>
-        <div class="col-md-12 mt-4">
-          <div class="section-heading main-button">
-            <a rel="nofollow" href="inkubasi.html" target="_parent">Kembali</a>
-          </div>
-        </div>
-
       </div>
     </div>
 </section>
@@ -118,4 +130,12 @@ hr{
   border-top: 1px solid white;
 }
 </style>
+@stop
+
+@section('script')
+    <script>
+        $('#logout').on('click',function(){
+            $('#_lo').click()
+        })
+    </script>
 @stop

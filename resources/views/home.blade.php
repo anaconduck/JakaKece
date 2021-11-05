@@ -22,15 +22,9 @@
           <div class="right-content">
             <div class="top-content">
                 <h3>Selamat Datang</h3>
-                <div class="row role-chose justify-content-center">
-                  <div class="col-md-4 act">Mahasiswa</div>
-                  <div class="col-md-4">Dosen</div>
-                  <div class="col-md-4">Admin</div>
-                </div>
               </div>
             <form id="contact" action="" method="post">
                 @csrf
-                <input type="text" name="status" id="status" class="d-none" required>
               <div class="row">
                 <div class="col-md-12">
                   <fieldset>
@@ -64,15 +58,5 @@
 @stop
 @section('script')
 <script>
-    let roleU = $('#status');
-    roleU[0].value = "MAHASISWA"
-    let role = $('.role-chose');
-    $('.role-chose div').click(function (){
-      $.each(role.children(),function (ind, val){
-        $(val).removeClass('act');
-      });
-      $(this).addClass('act');
-      roleU[0].value = this.innerText
-    });
 </script>
 @stop
