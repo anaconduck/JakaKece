@@ -21,7 +21,10 @@
                     <dt class="col-sm-4">Instansi</dt>
                     <dd class="col-sm-8">{{ $event->nama_universitas??'University' }}</dd>
 
-                    <dt class="col-sm-4">Nama Fakultas</dt>
+                    <dt class="col-sm-4">Tujuan Exchange</dt>
+                    <dd class="col-sm-8">{{ $event->dalam_negeri?'Dalam Negeri' : 'Luar Negeri' }}</dd>
+
+                    <dt class="col-sm-4">Nama Mata Kuliah</dt>
                     <dd class="col-sm-8">
                       {{ $event->nama_fakultas??'-' }}
                     </dd>
@@ -38,6 +41,16 @@
 
                             <dl class="row">
                                 <dd class="col-sm">{{ $persyaratan }}</dd>
+                            </dl>
+                            @endforeach
+                    </dd>
+
+                    <dt class="col-sm-4">Kelengkapan Berkas</dt>
+                    <dd class="col-sm-8">
+                            @foreach ($event->kelengkapan as $kelengkapan)
+
+                            <dl class="row">
+                                <dd class="col-sm">{{ $kelengkapan }}</dd>
                             </dl>
                             @endforeach
                     </dd>

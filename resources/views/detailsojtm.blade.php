@@ -65,14 +65,15 @@ if ($result->num_rows > 0) {
     </div>
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
     <nav id="menu" class="main-nav" role="navigation">
-      <ul class="main-menu">
-        <li><a href="{{ ('home') }}" class="external">Home</a></li>
-        <li><a href="{{ ('inkubasi') }}" class="external">Inkubasi Digital Bahasa</a></li>
-        <li><a href="{{ ('jawara') }}" class="external">Jawara Center</a></li>
-        <li><a href="{{ ('exchange') }}" class="external">Student Exchange</a></li>
-        <li class="selected"><a href="{{ ('training') }}">On The Job Training</a></li>
-      </ul>
-    </nav>
+        <ul class="main-menu">
+          <li><a href="{{ url('/home') }}" class="{{ $home ?? 'external' }}">Home</a></li>
+          <li class="{{ $inkubasi ?? 'external' }}"><a href="{{ url('/inkubasi') }}">Inkubasi Digital Bahasa</a></li>
+          <li class="{{ $jawara ?? 'external' }}"><a href="{{ ('/jawara') }}" >Jawara Center</a></li>
+          <li class="{{ $exchange ?? 'external' }}"><a href="{{ url('/exchange') }}" >Student Exchange</a></li>
+          <li class="{{ $training ?? 'eksternal' }}"><a href="{{ url('/training') }}" class="{{ $training ?? 'eksternal' }}">On The Job Training</a></li>
+          <li class="{{ $user_s ?? 'eksternal' }}"><a href="{{ url('/user') }}" ><img src="{{ asset('assets/images/businessman.png') }}" width="20px"></a></li>
+        </ul>
+      </nav>
   </header>
 
   <!-- ***** Main Banner Area End ***** -->
@@ -116,6 +117,9 @@ if ($result->num_rows > 0) {
   </section>
 
   <style>
+      section{
+        min-height: 100vh;
+    }
     tr {
       border-top: 1px solid white;
       border-bottom: 1px solid white;

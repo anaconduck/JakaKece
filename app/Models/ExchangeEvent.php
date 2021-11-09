@@ -9,9 +9,17 @@ class ExchangeEvent extends Model
 {
     use HasFactory;
 
-    public static function getPendaftaranEvent(){
+    public static function getPendaftaranEventDalamNegeri(){
         return self::where('mulai', '<=', now())
             ->where('akhir','>',now())
+            ->where('dalam_negeri',true)
+            ->get();
+    }
+
+    public static function getPendaftaranEventLuarNegeri(){
+        return self::where('mulai', '<=', now())
+            ->where('akhir','>',now())
+            ->where('dalam_negeri',false)
             ->get();
     }
 
@@ -30,6 +38,14 @@ class ExchangeEvent extends Model
             ->where('id',$id)
             ->get()[0];
         $data->persyaratan = explode('|',$data->persyaratan);
+        $data->kelengkapan = explode('|', $data->kelengkapan);
         return $data;
+    }
+
+    public static function show($offset, $limit){
+        return self::orderBy('akhir','desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
     }
 }

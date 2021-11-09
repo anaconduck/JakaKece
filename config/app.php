@@ -231,4 +231,26 @@ return [
 
     ],
 
+    "toefl-itp" => [
+        'listening-comprehension' => 35,
+        'structure-written-expression' => 40,
+        'reading-comprehension' => 50
+    ],
+    'toefl-ibt' => [
+        'reading' => 63,
+        'listening' => 49,
+        'break' => 10,
+        'speaking'=> 17,
+        'writing' =>[
+            'integrated task' => 20,
+            'independent task' => 30
+        ]
+    ],
+
+    'toeic' => [
+        'listening' => 30,
+        'reading' => 60,
+        'writing' => 60,
+        'speaking' => 4
+    ]
 ];
