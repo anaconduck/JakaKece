@@ -17,7 +17,7 @@ class Inkubasi extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth','user']);
     }
     public function index(){
         $data = InkubasiBahasa::getAllCourse();
@@ -49,7 +49,7 @@ class Inkubasi extends Controller
         return $this->latihanSoal($request, $type);
     }
 
-    public function latihanSoal(Request $request, $type='TOEFL',$kategori= 'Reading', $id=1){
+    public function latihanSoal(Request $request, $type='TOEFL-ITP',$kategori= 'Reading', $id=1){
         $historyid = 0;
         $testTime = 0;
         $type = strtoupper($type);

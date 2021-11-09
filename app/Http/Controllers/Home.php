@@ -21,8 +21,10 @@ class Home extends Controller
         if(Auth::attempt($credential)){
             Auth::login(User::getUser($credential));
             $request->session()->regenerate();
+            if(auth()->user()->status === 'admin')
+                return redirect()->route('admin.home');
             return redirect()->route('home');
         }
-
+        return redirect('home');
     }
 }

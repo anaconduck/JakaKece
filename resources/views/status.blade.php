@@ -6,7 +6,7 @@
         <h2 style="margin: 20px 0 40px;color:white;text-align:center;">{{ $title }}</h2>
       <div class="row align-items-start">
           <div class="col-sm-3">
-            <a href="{{ url()->previous()}}">
+            <a href="{{ $back ?? url()->previous()}}">
                 <div class="back">
                     <img src="{{ asset('assets/images/left-chevron.png') }}" alt="">
                     Kembali

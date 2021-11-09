@@ -16,4 +16,8 @@ class Mahasiswa extends Model
             ->where('user_id',Auth::user()->id)
             ->first();
     }
+
+    public static function check($idMahasiswa){
+
+    }
 }

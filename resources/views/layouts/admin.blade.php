@@ -33,7 +33,7 @@
             <!-- Header -->
             <header id="header">
               <div class="logo">
-                <a href="index.html">JakaKece</a>
+                <a href="{{ url('/admin') }}">JakaKece | Admin</a>
               </div>
             </header>
 
@@ -50,34 +50,40 @@
             <!-- Menu -->
             <nav id="menu">
               <ul>
-                <li><a href="index.html">Homepage</a></li>
+                <li><a href="{{ url('/admin') }}">Homepage</a></li>
                 <li>
                     <span class="opener">Inkubasi Digital Bahasa</span>
                     <ul>
-                      <li><a href="#">Materi</a></li>
-                      <li><a href="#">Latihan Soal</a></li>
+                      <li><a href="{{ url('/admin/materi') }}">Materi</a></li>
+                      <li><a href="{{ url('/admin/practice') }}">Latihan Soal</a></li>
                     </ul>
                 </li>
                 <li>
                   <span class="opener">Jawara Center</span>
                   <ul>
-                    <li><a href="#">Daftar Event</a></li>
-                    <li><a href="#">Pendaftar</a></li>
+                    <li><a href="{{ url('/admin/jawara/event') }}">Daftar Event</a></li>
+                    <li><a href="{{ url('admin/jawara/pendaftar') }}">Pendaftar</a></li>
                   </ul>
                 </li>
                 <li>
                   <span class="opener">Student Exchange</span>
                   <ul>
-                    <li><a href="#">Daftar Exchange</a></li>
-                    <li><a href="#">Pendaftar</a></li>
+                    <li><a href="{{ url('/admin/se/event') }}">Daftar Event SE</a></li>
+                    <li><a href="{{ url('/admin/se/pendaftar') }}">Pendaftar</a></li>
                   </ul>
                 </li>
                 <li>
                     <span class="opener">On The Job Training</span>
                     <ul>
-                      <li><a href="#">Daftar OJT</a></li>
-                      <li><a href="#">Pendaftar</a></li>
+                      <li><a href="{{ url('/admin/ojt/event') }}">Daftar Event OJT</a></li>
+                      <li><a href="{{ url('admin/ojt/pendaftar') }}">Pendaftar</a></li>
                     </ul>
+                </li>
+                <li>
+                    <form method="POST" action="{{ url('/admin/logout') }}">
+                        @csrf
+                        <input type="submit" class="btn btn-danger mt-5" value="Logout">
+                    </form>
                 </li>
               </ul>
             </nav>

@@ -22,28 +22,28 @@
             <div class="col-md-4">
               <div class="service-item first-item">
                 <div class="icon"></div>
-                <h4>{{ $num['materi'] ?? 0 }}</h4>
+                <h4>{{ $num_materi ?? 0 }}</h4>
                 <p>Total materi<br>TOEFL-ITP, TOEFL-IBT, IELTS, TOEIC</p>
               </div>
             </div>
             <div class="col-md-4">
               <div class="service-item second-item">
                 <div class="icon"></div>
-                <h4>{{ $num['event_jawara'] ?? 0}}</h4>
+                <h4>{{ $num_event_jawara ?? 0}}</h4>
                 <p>Event Jawara</p>
               </div>
             </div>
             <div class="col-md-4">
               <div class="service-item third-item">
                 <div class="icon"></div>
-                <h4>{{ $num['event_student_exchange'] ?? 0}}</h4>
+                <h4>{{ $num_se_event ?? 0}}</h4>
                 <p>Event Student Exchange</p>
               </div>
             </div>
             <div class="col-md-4">
               <div class="service-item fourth-item">
                 <div class="icon"></div>
-                <h4>{{ $num['event_ojt'] ?? 0}}</h4>
+                <h4>{{ $num_ojt_event ?? 0}}</h4>
                 <p>Event On the Job Training</p>
               </div>
             </div>

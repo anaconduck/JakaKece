@@ -42,4 +42,15 @@ class StudentExchange extends Model
             ->where('id_exchange_event','=',$id)
             ->get();
     }
+
+    public static function show($offset, $limit){
+        return self::select('student_exchanges.*','exchange_events.*','users.name')
+            ->join('exchange_events','student_exchanges.id_exchange_event','=','exchange_events.id')
+            ->join('mahasiswas','mahasiswas.id','=','student_exchanges.id_mahasiswa')
+            ->join('users','users.id','=','mahasiswas.user_id')
+            ->orderBy('student_exchanges.created_at')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+    }
 }

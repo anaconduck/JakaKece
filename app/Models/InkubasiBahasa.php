@@ -9,6 +9,7 @@ class InkubasiBahasa extends Model
 {
     use HasFactory;
     protected $table = 'inkubasi_bahasa';
+    protected $primaryKey = 'id_course';
 
     public static function getCourse($courseName){
         $courseName = str_replace('-',' ',$courseName);

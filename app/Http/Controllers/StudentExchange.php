@@ -11,17 +11,19 @@ class StudentExchange extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth','user']);
     }
     public function index(){
-        $pendaftaran = ExchangeEvent::getPendaftaranEvent();
+        $pendaftaran_dalam = ExchangeEvent::getPendaftaranEventDalamNegeri();
+        $pendaftaran_luar = ExchangeEvent::getPendaftaranEventLuarNegeri();
         $mendatang = ExchangeEvent::getEventMendatang();
         $terlaksana = ExchangeEvent::getEventTerlaksana();
         $riwayat = SE::getRiwayatPertukaran();
         return view('exchange',[
             'title' => 'Student Exchange',
             'exchange' => 'selected',
-            'pendaftaran' => $pendaftaran,
+            'pendaftaranDalam' => $pendaftaran_dalam,
+            'pendaftaranLuar' => $pendaftaran_luar,
             'terlaksana' => $terlaksana,
             'mendatang' => $mendatang,
             'riwayat' => $riwayat,
@@ -45,6 +47,7 @@ class StudentExchange extends Controller
             }
 
             $event->persyaratan = explode('|',$event->persyaratan);
+            $event->kelengkapan = explode('|',$event->kelengkapan);
 
             return view('details-pendaftaran-exchange',[
                 'title' => 'Detail Pendaftaran Student Exchange',
@@ -105,6 +108,7 @@ class StudentExchange extends Controller
         }
 
         $event->persyaratan = explode('|',$event->persyaratan);
+        $event->kelengkapan = explode('|',$event->kelengkapan);
 
         return view('details-persyaratan-exchange',[
             'title' => 'Persyaratan Student Exchange',
@@ -115,7 +119,7 @@ class StudentExchange extends Controller
 
     public function pelaksanaan($id){
         $event = ExchangeEvent::getPelaksanaanEvent($id);
-        
+
         return view('details-pelaksanaan-exchange',[
             'title' => "Pelaksanaan Student Exchange",
             'exchange' => 'selected',

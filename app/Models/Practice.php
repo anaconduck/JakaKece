@@ -28,7 +28,7 @@ class Practice extends Model
             ->count();
     }
 
-public static function allQuest($type){
+    public static function allQuest($type){
         $data = self::where('type',$type)
             ->get();
 
@@ -39,4 +39,12 @@ public static function allQuest($type){
         }
         return $data;
     }
+
+    public static function showQuest($offset, $limit){
+        return self::orderBy('created_at','desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+    }
+
 }

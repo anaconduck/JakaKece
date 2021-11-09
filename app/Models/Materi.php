@@ -34,4 +34,11 @@ class Materi extends Model
             ->get()->toArray();
     }
 
+    public static function showMateri($offset = 0, $item = 10){
+        return self::select('materis.id','materis.title','materis.materi','materis.file','inkubasi_bahasa.nama_course')
+            ->join('inkubasi_bahasa','materis.id_course','=','inkubasi_bahasa.id_course')
+            ->offset($offset)
+            ->limit($item)
+            ->get();
+    }
 }
