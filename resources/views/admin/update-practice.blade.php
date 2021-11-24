@@ -12,26 +12,26 @@
               @csrf
             <div class="row">
               <div class="col-md-6">
-                <select name="type" id="type" required>
+                <select name="id_course" id="type" required>
                   <option value="-1"
                   @if(!$practice->type)
                     selected
-                  @endif>Select Type</option>
+                  @endif>Select Course</option>
                   <option value="1"
-                  @if($practice->type == "TOEFL-ITP")
+                  @if($practice->type == "1")
                     selected
                   @endif
                   >TOEFL ITP</option>
                   <option value="2"
-                  @if($practice->type == 'TOEFL-IBT')
+                  @if($practice->type == '2')
                     selected
                   @endif>TOEFL IBT</option>
                   <option value="3"
-                  @if($practice->type == 'TOEIC')
+                  @if($practice->type == '3')
                     selected
                   @endif>TOEIC</option>
                   <option value="4"
-                  @if($practice->type == 'IELTS')
+                  @if($practice->type == '4')
                     selected
                   @endif>IELTS</option>
                 </select>

@@ -48,7 +48,7 @@ class User extends Authenticatable
     ];
 
     public static function getUser($credential){
-        return self::where('name',$credential['name'])
+        return self::where('identity',$credential['identity'])
             ->first();
     }
 

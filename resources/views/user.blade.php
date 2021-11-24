@@ -1,121 +1,158 @@
 @extends('layouts.app')
 
+@section('css')
+<style>
+    body{
+    position: relative;
+}
+body::after{
+    content: "";
+    background: url("https://image.freepik.com/free-vector/wavy-background-with-copy-space_52683-65230.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    top: -150px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+</style>
+@stop
+
 @section('slot')
-<section class="section why-us" data-section="section2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="section-heading">
-
-          </div>
-        </div>
-        <div class="col-md-12 anot">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
-                  href="#list-home" role="tab" aria-controls="home">Info Pengguna</a>
-                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
-                  href="#list-profile" role="tab" aria-controls="profile">Riwayat Tes</a>
-                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                  href="#list-messages" role="tab" aria-controls="messages">Notifikasi</a>
-                 </div>
-            </div>
-            <div class="col-md-8 ">
-              <div class="tab-content m-3" style="color: white;" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-
-                  <table style="width: 100%;" >
-                    <tr>
-                      <td>Nama</td>
-                    <td>: {{ auth()->user()->name }}</td></tr>
-                    <tr>
-                      <td>NIM</td>
-                    <td>: {{ $user->id }}</td></tr><tr>
-                      <td>Tempat Lahir</td>
-                    <td>: {{ $user->tempat_lahir }}</td></tr><tr>
-                      <td>Tanggal Lahir</td>
-                    <td>: {{ date('d M Y',strtotime($user->tanggal_lahir)) }}</td></tr><tr>
-                      <td>Jurusan</td>
-                    <td>: {{ $user->jurusan }}</td></tr><tr>
-                      <td>Fakultas</td>
-                    <td>: {{ $user->fakultas }}</td></tr><tr>
-                      <td>Alamat</td>
-                    <td>: {{ $user->alamat }}</td></tr>
-                  </table>
-                </div>
-                <div class="tab-pane fade scrol" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                <h2>Riwayat tes</h2>
-                <br>
-                <h6>Tes TOEFL yang diambil : {{ $numTOEFL }}</h6>
-                <h6>Tes IELTS yang diambil : {{ $numIELTS }}</h6>
-                <br>
-                  <div class="tab-pane fade show active hide-sc" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                    <ol>
-                      <hr>
-                      @foreach ($reports as $report)
-                        <li class="p-1">
-                            {{ $report->type }}<br>
-                            <cek><a href="{{ url("/report/$report->id") }}"> Total Score : {{ ($report->score_reading + $report->score_listening + $report->score_writing)*10 }}</a>
-                            </cek>
-                            <hr>
-                        </li>
-                      @endforeach
-                    </ol>
-                  </div>
-                </div>
-                <div class="tab-pane fade scrol" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                  <h2>Notif</h2>
-                  <div class="tab-pane fade show active hide-sc" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-
-                    <ol>
-                      <hr>
-                      <li class="p-1">
-                        Hasil Tes TOEFL Telah Keluar<br>
-                        <cek><a href="#">Cek Status..</a>
-                        </cek>
-                        <hr>
-                      </li>
-                      <li class="p-1">
-                        Hasil Tes IELTS Telah Keluar<br>
-                        <cek><a href="#">Cek Status..</a>
-                        </cek>
-                        <hr>
-                      </li><li class="p-1">
-                        Ada Materi Baru Dalam Latihan Soal TOEFL<br>
-                        <cek><a href="#">Cek Status..</a>
-                        </cek>
-                        <hr>
-                    </ol>
-                  </div>
-                </div>
-
-              </div>
-              <div class="row">
-                <div class="col-md-6 mt-4">
-                    <div class="section-heading main-button">
-                      <a rel="nofollow" href="{{ url()->previous() }}" target="_parent">Kembali</a>
+<div class="container ex">
+    <div class="main-body">
+            <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                            <div class="mt-3">
+                                            <h4>{{ $user->name }}</h4>
+                                            <p class="text-secondary mb-1">{{ $user->email }}</p>
+                                            <p class="text-muted font-size-sm">{{ $user->identity }}</p>
+                                            <p class="text-muted font-size-sm">{{ $mahasiswa->program_studi }}</p>
+                                            <p class="text-muted font-size-sm">{{ $mahasiswa->tempat_lahir }}</p>
+                                            <p class="text-muted font-size-sm">{{ $mahasiswa->alamat }}</p>
+                                            <p class="text-muted font-size-sm">{{ date('d / M / Y',strtotime($mahasiswa->tanggal_lahir)) }}</p>
+                                            </div>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <form method="post" action="{{ url('/logout') }}">
+                                        @csrf
+                                        <input class="btn btn-danger" type="submit" value="Logout"/>
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 mt-4">
-                  <div class="section-heading main-button">
-                      <form method="POST" action="{{ url('/logout') }}">
-                          @csrf
-                            <input type="text" name="name" value="logout" class="d-none"/>
-                            <input id="_lo" class="d-none" type="submit" value="Log out"/>
-                      </form>
-                    <a id="logout" rel="nofollow" href="#" target="_parent">LogOut</a>
-                  </div>
-                </div>
-              </div>
-          </div>
+                    <div class="col-md-8">
+
+                        <div class="row gutters-sm">
+                            <div class="col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Riwayat Practice</i></h6>
+                                        @foreach ($data as $r)
+                                        <div class="link">
+                                            <a href="{{ url("/report/practice/$r->id") }}">
+                                            <small>{{ config('app.allCourse.'.$r->id_course) }}</small>
+                                            <div class="progress mb-3" style="height: 5px">
+                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            </a>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Riwayat Test</i></h6>
+                                        @foreach ($reportTest as $r)
+                                        <div class="link">
+                                            <a href="{{ url("/report/test/$r->id") }}">
+                                            <small>{{ config('app.allCourse.'.$r->id_course) }}</small>
+                                            <div class="progress mb-3" style="height: 5px">
+                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            </a>
+                                        </div>
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Riwayat Pendaftaran Jawara</i></h6>
+                                        @foreach ($jawara as $r)
+                                        <div class="link">
+                                            <a href="{{ url("/jawara/detail/$r->id") }}"
+                                            <small>{{ $r->nama }}</small>
+                                            <div class="progress mb-3" style="height: 5px">
+                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            </a>
+                                        </div>
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Riwayat Pendaftaran Student Exchange</i></h6>
+                                        @foreach ($exchange as $r)
+                                        <div class="link">
+                                            <a href="{{ url("/exchange/detail/$r->id") }}"
+                                            <small>{{ $r->nama_universitas }}</small>
+                                            <div class="progress mb-3" style="height: 5px">
+                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            </a>
+                                        </div>
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Riwayat Pendaftaran Student Exchange</i></h6>
+                                        @foreach ($ojt as $r)
+                                        <div class="link">
+                                            <a href="{{ url("/training/detail/$r->id") }}"
+                                            <small>{{ $r->nama_instansi }}</small>
+                                            <div class="progress mb-3" style="height: 5px">
+                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            </a>
+                                        </div>
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
             </div>
-          </div>
-        </div>
-        <br>
-      </div>
+
     </div>
-</section>
+</div>
 
 <style>
 tr{
@@ -129,6 +166,60 @@ tr>td{
 hr{
   border-top: 1px solid white;
 }
+body{
+    background-image: url('https://assets.codepen.io/1462889/back-page.svg')
+    overflow-x:hidden;
+}
+.section.why-us{
+    min-height: 75vh;
+}
+.main-body {
+    padding: 15px;
+}
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.mb-3, .my-3 {
+    margin-bottom: 1rem!important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+.h-100 {
+    height: 100%!important;
+}
+.shadow-none {
+    box-shadow: none!important;
+}
 </style>
 @stop
 
@@ -136,6 +227,18 @@ hr{
     <script>
         $('#logout').on('click',function(){
             $('#_lo').click()
+        })
+        let sidenav = $('.side')
+        let tab = $('.t1')
+        sidenav.on('click',function(){
+            sidenav.removeClass('active')
+            tab.removeClass('active show')
+            this.classList.toggle('active')
+            for(let i = 0; i < sidenav.length; i++){
+                if(sidenav[i] == this){
+                    tab[i].classList.add('active','show')
+                }
+            }
         })
     </script>
 @stop

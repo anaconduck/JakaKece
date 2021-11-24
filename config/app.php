@@ -231,26 +231,111 @@ return [
 
     ],
 
-    "toefl-itp" => [
-        'listening-comprehension' => 35,
-        'structure-written-expression' => 40,
-        'reading-comprehension' => 50
+    'totalTimeTest' =>[
+        'toefl-itp' => 115,
+        'toefl-ibt' => 189,
+        'toeic' => 154,
     ],
+
+    'toefl-itp' => [
+        [
+            'sesi' => 'listening-comprehension',
+            'time' => 35,
+            'num' => 50
+        ],
+         ['sesi' =>'structure-written-expression',
+            'time' => 25,
+            'num' => 40
+        ],
+        [
+            'sesi' => 'reading-comprehension',
+            'time' => 55,
+            'num' => 40
+        ]
+    ],
+
     'toefl-ibt' => [
-        'reading' => 63,
-        'listening' => 49,
-        'break' => 10,
-        'speaking'=> 17,
-        'writing' =>[
-            'integrated task' => 20,
-            'independent task' => 30
+        [
+            'sesi' => 'reading',
+            'time' => 35,
+            'num' => 40
+        ],
+        [
+            'sesi' => 'listening',
+            'time' => 49,
+            'num' => 50
+        ],
+        [
+            'sesi' => 'speaking',
+            'time' => 17,
+            'num' => 2
+        ],
+        [
+            'sesi' => 'writing - integrated task',
+            'time' => 20,
+            'num' => 2
+        ],
+        [
+            'sesi' => 'writing - independent task',
+            'time' => 30,
+            'num' => 2
         ]
     ],
 
     'toeic' => [
-        'listening' => 30,
-        'reading' => 60,
-        'writing' => 60,
-        'speaking' => 4
-    ]
+        [
+            'sesi' => 'listening',
+            'time' => 30,
+            'num' => 1,
+        ],
+        [
+            'sesi' => 'reading',
+            'time' => 60,
+            'num' => 1
+        ],
+        [
+            'sesi' => 'writing',
+            'time' => 60,
+            'num' => 1
+        ],
+        [
+            'sesi' => 'speaking',
+            'time' => 4,
+            'num' => 1
+        ]
+    ],
+
+    'mahasiswaCourse' => [
+        '1' => 'toefl-itp',
+        '2' => 'toefl-ibt',
+        '3' => 'toeic',
+    ],
+
+    'allCourse' => [
+        '1' => 'toefl-itp',
+        '2' => 'toefl-ibt',
+        '3' => 'toeic',
+        '4' => 'ielts'
+    ],
+
+    'indexCourse' =>[
+        'toefl-itp' => 1,
+        'toefl-ibt' => 2,
+        'toeic' => 3,
+        'ielts' => 4
+    ],
+
+    'allSesi' => [
+        'introduction', 'listening', 'reading', 'structure', 'writing'
+    ],
+
+    'statusPendaftaran' =>[
+        'belum_terdaftar' => 0,
+        'terdaftar' => 1
+    ],
+
+    'idProdi' => [
+        'ekonomi pembangunan' => 1,
+        'pendidikan ekonomi' =>2
+    ],
 ];

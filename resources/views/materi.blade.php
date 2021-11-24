@@ -4,6 +4,17 @@
 <section class="section video" data-section="section5">
     <div class="container anot">
         <h2 style="margin: 20px 0 40px;color:white;text-align:center;">{{ $data['title'] ?? '' }}</h2>
+
+        @if($data->file)
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <a href="{{ asset($data->file) }}">
+                    <h2>Download Materi</h2>
+                    </a>
+                </div>
+            </div>
+        @endif
+
       <div class="row align-items-start">
         <div class="col-lg-4">
             <div class="left-content">
@@ -25,7 +36,6 @@
                                     href="{{ url("/$type/$materi/".($ind+1)) }}" role="tab" aria-controls="home">{{ $ltitle[$ind]['title'] }}</a>
                                 @endif
                             @endfor
-
                         </div>
                     </div>
                 </div>

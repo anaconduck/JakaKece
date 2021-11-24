@@ -15,24 +15,37 @@
         <div class="col-md-12">
           <div class="section-heading">
             <h2>Update Materi</h2>
+            @if ($errors->any())
+                {{ implode(", ",$errors->all()) }}
+            @endif
           </div>
-          <form id="contact" action="" method="post">
+          <form id="contact" action="" method="post" enctype="multipart/form-data">
               @csrf
             <div class="row">
               <div class="col-md-6">
                 <fieldset>
-                  <input name="title" type="text" class="form-control" id="title" placeholder="Title..." required"
-                  value="{{ $materi->title }}">
+                  <input name="judul" type="text" class="form-control" id="title" placeholder="Title..." required"
+                  value="{{ $materi->judul }}">
                 </fieldset>
               </div>
               <div class="col-md-6">
                 <fieldset>
-                  <input name="materi" type="text" class="form-control" id="materi" placeholder="Materi .ex: Reading" required=""
-                  value="{{ $materi->materi }}">
+                    <select name="sesi" id="sesi" required>
+                        <option value="1"
+                        @if($materi->sesi == 1) selected @endif>Introduction</option>
+                        <option value="2"
+                        @if($materi->sesi == 2) selected @endif>Listening</option>
+                        <option value="3"
+                        @if($materi->sesi == 3) selected @endif">Reading</option>
+                        <option value="4"
+                        @if($materi->sesi == 4) selected @endif>Structure</option>
+                        <option value="5"
+                        @if($materi->sesi == 5) selected @endif>Writing</option>
+                    </select>
                 </fieldset>
               </div>
               <div class="col-md-12">
-                <select name="nama_course" id="nama_course" required>
+                <select name="id_course" id="id_course" required>
                   <option value="-1"
                   @if ($materi->id_course < 1 and $materi->id_course > 4)
                     selected
@@ -59,17 +72,20 @@
               </div>
               <div class="col-md-12">
                 <fieldset>
-                    <input class="form-control file" type="file" id="formFileMultiple" multiple>
+                    @if($materi->file)
+                        current file : {{ $materi->file }}
+                    @endif
+                    <input name="file" class="form-control file" type="file" id="formFileMultiple" >
                 </fieldset>
               </div>
               <div class="col-12">
                 <textarea name="teks" id="teks" placeholder="Enter your text" rows="6">{{ $materi->teks ?? '' }}</textarea>
               </div>
               <div class="col-md-6 mt-4">
-                <button type="submit" id="form-submit" class="button">Update</button>
+                <button name="submit" value="update" type="submit" id="form-submit" class="button">Update</button>
               </div>
               <div class="col-md-6 mt-4">
-                <button type="submit" name="delete" value="delete" id="forn-delete" class="button btn-danger">Delete</button>
+                <button name="submit" value="delete" type="submit" name="delete" value="delete" id="forn-delete" class="button btn-danger">Delete</button>
               </div>
             </div>
           </form>

@@ -1,0 +1,339 @@
+.quest {
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.144);
+    border-radius: 20px;
+}
+
+.why-us {
+    position: relative;
+    min-height: 100vh
+}
+
+.why-us::after {
+    content: "";
+    background: url("https://image.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg");
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    top: -150px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+td {
+    padding: 2px !important;
+    margin: 2px !important;
+    cursor: pointer;
+}
+
+.bn {
+    width: 100%;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bn button {
+    position: relative;
+    margin: 0;
+    padding: 5px 12px;
+    height: 60px;
+    width: 150px;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    border: 1px solid rgba(22, 76, 167, 0.6);
+    border-radius: 10px;
+    color: #1d89ff;
+    font-weight: 400;
+    font-size: 20px;
+    font-family: inherit;
+    z-index: 0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+.bn button span {
+    color: #164ca7;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.7px;
+}
+
+.bn button:hover {
+    animation: rotate 0.7s ease-in-out both;
+}
+
+.bn button:hover span {
+    animation: storm 0.7s ease-in-out both;
+    animation-delay: 0.06s;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg) translate3d(0, 0, 0);
+    }
+    25% {
+        transform: rotate(3deg) translate3d(0, 0, 0);
+    }
+    50% {
+        transform: rotate(-3deg) translate3d(0, 0, 0);
+    }
+    75% {
+        transform: rotate(1deg) translate3d(0, 0, 0);
+    }
+    100% {
+        transform: rotate(0deg) translate3d(0, 0, 0);
+    }
+}
+
+@keyframes storm {
+    0% {
+        transform: translate3d(0, 0, 0) translateZ(0);
+    }
+    25% {
+        transform: translate3d(4px, 0, 0) translateZ(0);
+    }
+    50% {
+        transform: translate3d(-3px, 0, 0) translateZ(0);
+    }
+    75% {
+        transform: translate3d(2px, 0, 0) translateZ(0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0) translateZ(0);
+    }
+}
+
+.bn .btn-shine {
+    border: 1px solid;
+    overflow: hidden;
+    position: relative;
+}
+
+.bn .btn-shine span {
+    z-index: 20;
+}
+
+.bn .btn-shine:after {
+    background: #38ef7d;
+    content: "";
+    height: 155px;
+    left: -75px;
+    opacity: 0.4;
+    position: absolute;
+    top: -50px;
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 50px;
+    z-index: -10;
+}
+
+.bn .btn-shine:hover:after {
+    left: 120%;
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.inspire a {
+    text-decoration: none;
+}
+
+.loader {
+    color: grey;
+    font-family: sans-serif;
+    height: 5vh;
+    left: 50%;
+    overflow-x: hidden;
+    padding-top: 7vh;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+}
+
+.loader:before {
+    animation: left-to-right 3s alternate infinite linear;
+    background-image: linear-gradient(to right, transparent, #f5a425, transparent);
+    content: "";
+    height: 5vh;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.loader:after {
+    background-image: repeating-linear-gradient(90deg, white, white 1vw, transparent 1vw, transparent 10vw);
+    content: "";
+    height: 5vh;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+@keyframes left-to-right {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.inp {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.inp .label {
+    position: absolute;
+    top: 20px;
+    left: 12px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+    transform-origin: 0 0;
+    transform: translate3d(0, 0, 0);
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.inp .focus-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.inp input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    border: 0;
+    font-family: inherit;
+    padding: 16px 12px 0 12px;
+    height: 56px;
+    font-size: 16px;
+    font-weight: 400;
+    background: rgba(0, 0, 0, 0.02);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    color: #000;
+    transition: all 0.15s ease;
+}
+
+.inp input:hover {
+    background: rgba(0, 0, 0, 0.04);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.inp input:not(:-moz-placeholder-shown)+.label {
+    color: rgba(0, 0, 0, 0.5);
+    transform: translate3d(0, -12px, 0) scale(0.75);
+}
+
+.inp input:not(:-ms-input-placeholder)+.label {
+    color: rgba(0, 0, 0, 0.5);
+    transform: translate3d(0, -12px, 0) scale(0.75);
+}
+
+.inp input:not(:placeholder-shown)+.label {
+    color: rgba(0, 0, 0, 0.5);
+    transform: translate3d(0, -12px, 0) scale(0.75);
+}
+
+.inp input:focus {
+    background: rgba(0, 0, 0, 0.05);
+    outline: none;
+    box-shadow: inset 0 -2px 0 #0077FF;
+}
+
+.inp input:focus+.label {
+    color: #0077FF;
+    transform: translate3d(0, -12px, 0) scale(0.75);
+}
+
+.inp input:focus+.label+.focus-bg {
+    transform: scaleX(1);
+    transition: all 0.1s ease;
+}
+
+.fl {
+    width: 100px;
+    text-align: center;
+}
+
+.circle {
+    stroke: #f8aa28;
+    stroke-dasharray: 650;
+    stroke-dashoffset: 650;
+    -webkit-transition: all 0.5s ease-in-out;
+    opacity: 0.3;
+}
+
+.playBut {
+    /*  border: 1px solid red;*/
+    display: inline-block;
+    background-color: transparent !important;
+    -webkit-transition: all 0.5s ease;
+}
+
+.playBut .triangle {
+    -webkit-transition: all 0.7s ease-in-out;
+    stroke-dasharray: 240;
+    stroke-dashoffset: 480;
+    stroke: #000;
+    transform: translateY(0);
+}
+
+.playBut:hover .triangle {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    stroke: #f8aa28;
+    animation: nudge 0.7s ease-in-out;
+}
+
+@keyframes nudge {
+    0% {
+        transform: translateX(0);
+    }
+    30% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    70% {
+        transform: translateX(-2px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.playBut:hover .circle {
+    stroke-dashoffset: 0;
+    opacity: 1;
+}

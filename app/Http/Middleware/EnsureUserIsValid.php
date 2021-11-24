@@ -16,8 +16,8 @@ class EnsureUserIsValid
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->status === 'admin'){
-            return redirect()->route('admin.home');
+        if(auth()->user()->status === 'guest'){
+            return redirect()->route('home');
         }
         return $next($request);
     }

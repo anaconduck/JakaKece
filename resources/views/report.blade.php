@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('slot')
-<section class="section video" data-section="section5">
-    <div class="container anot">
-        <h2 style="margin: 20px 0 40px;color:white;text-align:center;">Report - Latihan {{ $report->type }}</h2>
+<section class="section why-us" data-section="section5">
+    <div class="container">
+        <h1>Report - Practice {{ $course }}</h1>
       <div class="row align-items-start">
-          <div class="col-sm-3">
+          <div class="col-sm-3 left">
             <a href="{{ url('/user')}}">
                 <div class="back">
                     <img src="{{ asset('assets/images/left-chevron.png') }}" alt="">
@@ -13,30 +13,22 @@
                 </div>
             </a>
           </div>
-        <div class="col-sm-9">
+        <div class="col-sm-9 right">
             <article class="content">
-                <h4>Practice Report</h4>
+                <h4>Practice Report, id : {{ $history->id }}</h4>
                 <hr>
                 <dl class="row">
-                    <dt class="col-sm-4">Instansi</dt>
-                    <dd class="col-sm-8">{{ $user->Instansi??'University' }}</dd>
 
                     <dt class="col-sm-4">Name</dt>
                     <dd class="col-sm-8">
-                      {{ $user->name??'Name participant' }}
+                      {{ auth()->user()->name ??'Name participant' }}
                     </dd>
 
                     <dt class="col-sm-4">DOB</dt>
-                    <dd class="col-sm-8">11/02/2000</dd>
+                    <dd class="col-sm-8">{{ date('d / M / Y',strtotime($info->tanggal_lahir)) }}</dd>
 
-                    <dt class="col-sm-4">Sex</dt>
-                    <dd class="col-sm-8">M</dd>
-
-                    <dt class="col-sm-4">Degree</dt>
-                    <dd class="col-sm-8">S1</dd>
-
-                    <dt class="col-sm-4">Times taken TOEFL</dt>
-                    <dd class="col-sm-8">1</dd>
+                    <dt class="col-sm-4">Program Studi</dt>
+                    <dd class="col-sm-8">{{ $info->program_studi }}</dd>
 
                     <dt class="col-sm-4">Native Country</dt>
                     <dd class="col-sm-8">Indonesia</dd>
@@ -46,29 +38,16 @@
 
                     <dt class="col-sm-4">Scaled Scores</dt>
                     <dd class="col-sm-8">
-                      <dl class="row">
-                        <dt class="col-sm-7">Listening Comprehension</dt>
-                        <dd class="col-sm-5">{{ $report->score_listening * 10 }}</dd>
-                      </dl>
-                      <dl class="row">
-                        <dt class="col-sm-7">Structure & Written Expression</dt>
-                        <dd class="col-sm-5">{{ $report->score_writing * 10}}</dd>
-                      </dl>
-                      <dl class="row">
-                        <dt class="col-sm-7">Reading Comprehension</dt>
-                        <dd class="col-sm-5">{{ $report->score_reading * 10 }}</dd>
-                      </dl>
-                      <dl class="row">
-                        <dt class="col-sm-7">Total Score</dt>
-                        <dd class="col-sm-5"> {{ $total }}</dd>
-                      </dl>
+                        @foreach ($report as $r)
+                            <dl class="row">
+                                <dt class="col-sm-7">{{ config('app.allSesi.'.$r->sesi) }}</dt>
+                                <dd class="col-sm-5">{{ $r->jumlah_benar }}</dd>
+                            </dl>
+                        @endforeach
                     </dd>
 
                     <dt class="col-sm-4">Test Date</dt>
-                    <dd class="col-sm-8">{{ $testDate }}</dd>
-
-                    <dt class="col-sm-4">Note</dt>
-                    <dd class="col-sm-8">{{ $report->note?? "###" }}</dd>
+                    <dd class="col-sm-8">{{ date('d / M / Y',strtotime($history->created_at)) }}</dd>
 
                   </dl>
             </article>
@@ -77,8 +56,25 @@
     </div>
   </section>
   <style>
+      body{
+            position: relative;
+        }
+        body::after{
+            content: "";
+            background: url("https://image.freepik.com/free-vector/wavy-background-with-copy-space_52683-65230.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            top: -60px;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;
+        }
       .content hr{
-          border: 1px solid white;
+          border: 1px solid #333;
       }
       .back{
             margin-bottom: 20px;
@@ -99,6 +95,25 @@
         }
         .back:hover img{
             transform: translateX(-10px);
+        }
+        a{
+            color: black;
+        }
+        a:hover{
+            color: #444;
+            font-weight: 500;
+        }
+        .why-us{
+            min-height: 100vh;
+        }
+        .why-us .container{
+            background-color: #f5a52517;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 1px 1px 20px rgba(51, 51, 51, 0.384)
+        }
+        .right{
+            border-left: 2px solid rgba(0, 0, 0, 0.151);
         }
   </style>
 @stop

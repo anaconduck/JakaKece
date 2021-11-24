@@ -1,26 +1,24 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Admin\ExchangeEventController;
-use App\Http\Controllers\Admin\ExchangePendaftarController;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\JawaraEventController;
-use App\Http\Controllers\Admin\JawaraPendaftarController;
-use App\Http\Controllers\Admin\MateriController;
-use App\Http\Controllers\Admin\OJTEventController;
-use App\Http\Controllers\Admin\OJTPendaftarController;
-use App\Http\Controllers\Admin\PracticeController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\PushMateri;
+use App\Http\Controllers\Admin\PushPractice;
+use App\Http\Controllers\Admin\UpdateMateri;
+use App\Http\Controllers\Admin\UpdatePractice;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inkubasi;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\User;
-use App\Models\Examination;
-use App\Models\ExchangeEvent;
-use App\Models\JawaraEvent;
-use App\Models\Mahasiswa;
-use App\Models\Practice;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Livewire\Admin\HomeController;
+use App\Http\Livewire\Admin\MateriController;
+use App\Http\Livewire\Admin\PracticeController;
+use App\Http\Livewire\Admin\StatistikController;
+use App\Http\Livewire\MateriC;
+use App\Http\Livewire\PracticeC;
+use App\Http\Livewire\TestC;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,186 +30,131 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+//access file
+Route::get('/materi/{file}', function(Request $request, $file){
+    return Storage::download("public/materi/$file");
+})->middleware('auth');
 
 //admin
-
 Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(function(){
     //homepage
-    Route::get('/',[HomeController::class, 'index'])->name('home');
+    Route::get('/', HomeController::class)->name('home');
 
+    //statistik
+    Route::get('/statistik', StatistikController::class);
 
-    //materi
-    Route::get('/materi',[MateriController::class,'index'])->name('materi');
-
-    Route::get('/materi/{materi}',[MateriController::class,'detail']);
-
-    Route::post('/materi/{materi}',[MateriController::class,'update']);
-
-    Route::get('/inkubasi/materi/create',[MateriController::class,'create']);
-
-    Route::post('/inkubasi/materi/create',[MateriController::class,'push']);
-
-    Route::get('/inkubasi/materi/{page}',[MateriController::class, 'index']);
-
+    //halaman materi
+    Route::get('/inkubasi/materi',MateriController::class);
+    Route::get('/inkubasi/materi/create',[PushMateri::class, 'index']);
+    Route::post('/inkubasi/materi/create', [PushMateri::class, 'push']);
+    Route::get('/inkubasi/materi/{materi}', [UpdateMateri::class, 'index']);
+    Route::post('/inkubasi/materi/{materi}', [UpdateMateri::class, 'update']);
 
     //practice
-    Route::get('/practice',[PracticeController::class,'index'])->name('practice');
-
-    Route::get('/practice/{practice}',[PracticeController::class,'detail']);
-
-    Route::post('/practice/{practice}',[PracticeController::class,'update']);
-
-    Route::get('/inkubasi/practice/create',[PracticeController::class,'create']);
-
-    Route::post('/inkubasi/practice/create',[PracticeController::class,'push']);
-
-    Route::get('/inkubasi/practice/{page}',[PracticeController::class,'index']);
-
-
-
-    //jawara event
-    Route::get('/jawara/event',[JawaraEventController::class,'index']);
-
-    Route::get('/jawara/event/detail/{event}',[JawaraEventController::class,'detail']);
-
-    Route::post('/jawara/event/detail/{event}',[JawaraEventController::class,'update']);
-
-    Route::get('/jawara/event/create',[JawaraEventController::class,'create']);
-
-    Route::post('/jawara/event/create',[JawaraEventController::class,'push']);
-
-    Route::get('/jawara/event/{page}',[JawaraEventController::class,'index']);
-
-
-    //jawara pendaftar
-    Route::get('/jawara/pendaftar',[JawaraPendaftarController::class,'index']);
-
-    Route::get('/jawara/pendaftar/detail/{pendaftar}',[JawaraPendaftarController::class,'detail']);
-
-    Route::post('/jawara/pendaftar/detail/{pendaftar}',[JawaraPendaftarController::class,'update']);
-
-    Route::get('/jawara/pendaftar/{page}',[JawaraPendaftarController::class, 'index']);
-
-
-
-    //student exchange event
-    Route::get('/se/event',[ExchangeEventController::class, 'index']);
-
-    Route::get('/se/event/create',[ExchangeEventController::class,'create']);
-
-    Route::get('/se/event/{page}',[ExchangeEventController::class, 'index']);
-
-
-    //student exchange event pendaftar
-    Route::get('/se/pendaftar',[ExchangePendaftarController::class, 'index']);
-    Route::get('/se/pendaftar/{page}',[ExchangePendaftarController::class,'index']);
-
-
-    //on the job training event
-    Route::get('/ojt/event',[OJTEventController::class, 'index']);
-    Route::get('/ojt/event/create',[OJTEventController::class,'create']);
-    Route::get('/ojt/event/{page}',[OJTEventController::class,'index']);
-
-
-    //on the job training pendaftar
-    Route::get('/ojt/pendaftar',[OJTPendaftarController::class, 'index']);
-    Route::get('/ojt/pendaftar/{page}',[OJTPendaftarController::class, 'index']);
-
-
-    //logout
-    Route::post('/logout', [HomeController::class,'logout']);
+    Route::get('/inkubasi/practice',PracticeController::class);
+    Route::get('/inkubasi/practice/create', [PushPractice::class, 'index']);
+    Route::post('/inkubasi/practice/create', [PushPractice::class, 'push']);
+    Route::get('/inkubasi/practice/{practice}', [UpdatePractice::class, 'index']);
+    Route::post('/inkubasi/practice/{practice}',[UpdatePractice::class, 'update']);
 });
 
 Route::get('/try',function(){
     return view("try",[
-        'title' => 'try'
+        'title' => 'try',
+
     ]);
 });
 
+//buka halaman home
 Route::get('/home', [Home::class, 'home'])->name('home');
-
 Route::get('/guest',[Home::class,'home'])->name('login');
+Route::get('/',function(){
+    return redirect()->route('home');
+});
 
+//reset password
+Route::get('/forgot-password', [Home::class, 'forgotPassword'])->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password',[Home::class, 'sendResetLink'])
+->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}',[Home::class, 'resetPassword'])->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password',[Home::class, 'handlingResetPassword'])->middleware('guest')->name('password.update');
+
+//proses login
 Route::post('/home',[Home::class, 'login']);
-
 Route::post('/guest', [Home::class,'login']);
 
-Route::get('/report/{id}',[User::class, 'report']);
-
-Route::post('/submit/{id}',[Inkubasi::class, 'submit']);
-
+//membuka inkubasi
 Route::get('/inkubasi', [Inkubasi::class,'index']);
 
+//membuka halaman user
 Route::get('/user', [User::class,'index'])->name('user');
 
+//proses logout
 Route::post('/logout',[User::class,'logout'])->name('logout');
 
-Route::get('/latihan/{type}',[Inkubasi::class,'mulaiLatihan'])
-    ->where('type','[A-Za-z-]+');
+//memulai practice
+Route::get('/latihan/{course}',PracticeC::class)
+    ->where('course','[A-Za-z-]+')
+    ->middleware(['auth']);
 
-Route::get('/latihan/{type}/{kategori}/{id}',[Inkubasi::class,'latihanSoal'])
-    ->where('type','[A-Za-z-]+')
-    ->where('kategori','[A-Za-z]+');
+//memulai test
+Route::get('/test/{course}', TestC::class)
+    ->where('course','[A-Za-z-]+')
+    ->middleware(['auth']);
 
-Route::post('/latihan/{type}/{kategori}/{id}',[Inkubasi::class,'jawab']);
+//membuka report tertentu
+Route::get('/report/practice/{historyPractice}',[User::class, 'report']);
 
-Route::get('/{kategori}/{materi}/{target}',[Inkubasi::class,'materi']);
+Route::get('/jawara', [Jawara::class, 'index']);
 
-Route::get('/jawara', function () {
-    return view('jawara',[
-        'title' => 'Jawara',
-        'jawara' => 'selected'
-    ]);
-})->middleware(['auth','user']);
+Route::get('/jawara/{event}', [Jawara::class, 'showDaftar'])
+    ->middleware(['auth']);
 
-Route::get('/exchange', [StudentExchange::class, 'index']);
+Route::post('jawara/{event}',[Jawara::class, 'daftar'])
+    ->middleware(['auth']);
 
-Route::get('/daftar-exchange/{id}',[StudentExchange::class, 'daftar']);
+Route::get('/jawara/detail/{event}',[Jawara::class, 'detail'])
+    ->middleware('auth');
 
-Route::post('/daftar-exchange',[StudentExchange::class,'daftar']);
+Route::get('/exchange',[StudentExchange::class, 'index']);
 
-Route::get('/persyaratan-exchange/{id}',[StudentExchange::class, 'persyaratan']);
+Route::get('/exchange/{lokasi}/{tujuan}',[StudentExchange::class, 'showPaket'])
+    ->middleware('auth');
 
-Route::get('/riwayat-exchange/{id}',[StudentExchange::class,'riwayat']);
+Route::get('/exchange/{lokasi}/{tujuan}/{paket}',[StudentExchange::class, 'showDaftar'])
+    ->middleware('auth');
 
-Route::get('/pelaksanaan-exchange/{id}',[StudentExchange::class, 'pelaksanaan']);
+Route::post('/exchange/{lokasi}/{tujuan}/{paket}', [StudentExchange::class, 'daftar'])
+    ->middleware('auth');
 
-Route::get('/training', function () {
-    return view('training',[
-        'training' => 'selected'
-    ]);
-})->middleware(['auth']);
+Route::get('/training', [Ojt::class, 'index'] );
 
-Route::get('/details', function () {
-    return view('details');
-});
-Route::get('/detailspe/{id}', [PassController::class,'passpe']);
+Route::get('/training/{tujuan}',[Ojt::class,'showPaket'])
+    ->middleware('auth');
 
-Route::get('/detailspm/{id}', [PassController::class,'passpm']);
+Route::get('/training/terlaksana/{paket}',[Ojt::class, 'showTerlaksana'])
+    ->middleware('auth');
 
-Route::get('/detailsem/{id}', [PassController::class,'passem']);
+Route::get('/training/riwayat/{tujuan}',[Ojt::class, 'riwayat'])
+    ->middleware('auth');
 
-Route::get('/daftarjc/{id}', [PassController::class,'passdaftarjc']);
+Route::get('/training/{tujuan}/{paket}',[Ojt::class,'showPendaftaran'])
+    ->middleware('auth');
 
-Route::post('/daftarjc/{id}',[PendaftaranJawara::class, 'daftar']);
-
-Route::get('/detailset/{id}', [PassController::class,'passet']);
-
-Route::get('/detailspojt/{id}', [PassController::class,'passpojt']);
-
-Route::get('/detailsojtt/{id}', [PassController::class,'passpojt']);
-Route::get('/detailsojtm/{id}', [PassController::class,'passojtm']);
-
-Route::get('/daftarojt/{id}', [PassController::class,'passdaftarojt']);
-Route::post('/daftarojt/{id}',[PendaftaranOJT::class,'daftar']);
+Route::post('/training/{tujuan}/{paket}',[Ojt::class,'daftar'])
+    ->middleware('auth');
 
 
 
+Route::post('/logout', [User::class, 'logout'])
+    ->middleware('auth');
 
-
-
-
-
+Route::get('/{course}/{sesi}/{target}',MateriC::class)
+    ->where('target','[0-9]+')
+    ->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -219,5 +162,5 @@ Route::get('/dashboard', function () {
 
 
 Route::fallback(function(){
-    return redirect('home');
+    abort(404);
 });

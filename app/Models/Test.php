@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Test extends Model
 {
-    
+    use HasFactory;
+
+    public static function show($idCourse, $sesi, $offset){
+        return self::where('id_course',$idCourse)
+            ->where('sesi',$sesi)
+            ->offset($offset-1)
+            ->first();
+    }
 }

@@ -4,20 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 class Mahasiswa extends Model
 {
     use HasFactory;
 
-    public static function getMahasiswa(){
-        return self::select('mahasiswas.*', 'users.email', 'users.name')
-            ->join('users','users.id', '=', 'mahasiswas.user_id')
-            ->where('user_id',Auth::user()->id)
-            ->first();
+    public static function countMahasiswa($nim){
+        return self::whereIn('id',$nim)
+            ->count();
     }
 
-    public static function check($idMahasiswa){
-
+    public static function currentMahasiswa(){
+        return self::find(auth()->user()->identity);
     }
 }
