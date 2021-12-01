@@ -32,7 +32,7 @@ class PushPractice extends Controller
     public function push(Request $request){
         $request->validate([
             'id_course' => 'required|numeric|min:1|max:4',
-            'sesi' => 'required|numeric|min:1|max:5',
+            'sesi' => 'required|numeric|min:0|max:5',
             'soal' => 'required',
             'tipe' => 'required',
             'opsi1' => 'required',
@@ -41,7 +41,7 @@ class PushPractice extends Controller
         ]);
 
 
-        $data = $request->only(['id_course','sesi','soal','tipe','opsi1','opsi2','opsi3','opsi4','jawaban']);
+        $data = $request->only(['id_course','sesi','soal','tipe','opsi1','opsi2','opsi3','opsi4','jawaban','teks']);
         if($request->hasFile('file')){
             $name = time().Str::random(10).$request->file("file")->getClientOriginalName();
             $course = config('app.allCourse.'.$request->get('id_course'));

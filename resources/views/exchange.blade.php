@@ -7,7 +7,7 @@
 }
 section.why-us::after{
     content: "";
-    background: url("https://image.freepik.com/free-vector/wavy-background-with-copy-space_52683-65230.jpg");
+    background: url("https://image.freepik.com/free-vector/flat-geometric-background_23-2148957201.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

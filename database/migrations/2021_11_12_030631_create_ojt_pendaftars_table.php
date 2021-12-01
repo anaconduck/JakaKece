@@ -18,8 +18,8 @@ class CreateOjtPendaftarsTable extends Migration
             $table->unsignedTinyInteger('id_prodi');
             $table->unsignedInteger('id_paket');
             $table->string('identity',30);
-            $table->boolean('status_pendaftaran')->default('false');
-            $table->boolean('status_kelulusan')->default('false');
+            $table->boolean('status_pendaftaran')->default(false);
+            $table->boolean('status_kelulusan')->default(false);
             $table->timestamps();
         });
     }

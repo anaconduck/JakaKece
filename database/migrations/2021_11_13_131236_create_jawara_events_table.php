@@ -17,7 +17,7 @@ class CreateJawaraEventsTable extends Migration
             $table->id();
             $table->string('nama',50);
             $table->string('file');
-            $table->unsignedTinyInteger('max_anggota',20)->default(1);
+            $table->unsignedTinyInteger('max_anggota')->default(1);
             $table->date('mulai_daftar');
             $table->date('akhir_daftar');
             $table->dateTime('mulai');

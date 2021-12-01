@@ -19,6 +19,7 @@ class CreateJawaraPendaftarsTable extends Migration
             $table->string('id_mahasiswa');
             $table->string('id_dosen', 50);
             $table->string('status',10)->default('0');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

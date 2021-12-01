@@ -22,5 +22,13 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('jakaadminkece#0'),
             'status' => 'admin' 
         ]);
+
+        DB::table('users')->insert([
+            'identity' => '195150200',
+            'name' => 'adinaelah',
+            'email' => 'falvracoadin@gmail.com',
+            'password' => Hash::make('q1a2z3'),
+            'status' => 'mahasiswa'
+        ]); 
     }
 }

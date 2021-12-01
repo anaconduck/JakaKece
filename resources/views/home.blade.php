@@ -12,10 +12,10 @@
                 <div class="continer centerIt">
                     <h4>Tentang <em>Aplikasi</em></h4>
                     <div>
-                    <p style="font-weight: bold;font-size: 15px" color="black">- &nbspAplikasi Sistem Sistem Rumah Jawara Kampus Merdeka EKP Innovation Center (Jaka
+                    <p style="font-weight: bold;font-size: 15px" color="black">- &nbspAplikasi Sistem Rumah Jawara Kampus Merdeka EKP Innovation Center (Jaka
                         Kece) dibuat untuk membantu Fakultas Ekonomi Universitas Negeri Malang dalam menyediakan layanan
                         berbasis teknologi.
-                        <br><br>- &nbspLayanan Pendidikan ini telah diterapkan pada sistem akademik di semua Program Studi
+                        <br><br>- &nbspLayanan pendidikan ini diterapkan di jurusan ekonomi pembangunan prodi pendidikan ekonomi
                         dengan tujuan memudahkan akademisi (tenaga pendidik dan mahasiswa) dalam mendapatkan informasi terkait
                         pendidikan, kegiatan akademik, dan lowongan pekerjaan.
                     </p>

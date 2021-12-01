@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class JawaraEvent extends Model
 {
@@ -26,5 +27,11 @@ class JawaraEvent extends Model
     public static function getEventTerlaksana(){
         return self::where('mulai','<', now())
             ->get();
+    }
+
+    public static function pushEvent($data){
+        DB::beginTransaction();
+        DB::table('jawara_events')->insert($data);
+        DB::commit();
     }
 }

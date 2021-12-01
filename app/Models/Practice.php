@@ -10,6 +10,11 @@ class Practice extends Model
 {
     use HasFactory;
 
+    protected $attributes = [
+        'jumlah_pengerjaan' => 0,
+        'jumlah_benar' => 0
+    ];
+
     public static function show($idCourse, $sesi, $offset){
         return self::where('id_course',$idCourse)
             ->where('sesi',$sesi)

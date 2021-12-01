@@ -64,7 +64,8 @@ class Jawara extends Controller
         unset($data['_token']);
         $idDosen = $data['dosen'];
         unset($data['dosen']);
-
+        if($idDosen == 0)
+            $idDosen = null;
         $nim = [];
         $num = 0;
 
@@ -75,7 +76,7 @@ class Jawara extends Controller
             }
         }
         sort($nim);
-        $idPendaftar = implode('',$nim);
+        $idPendaftar = $event->id . implode('',$nim);
         $mhs = Mahasiswa::countMahasiswa($nim);
         if($mhs == $num){
             if(JawaraPendaftar::daftar([

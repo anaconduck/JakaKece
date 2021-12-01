@@ -24,6 +24,10 @@
             color: white;
         }
 
+        table tbody tr:hover p {
+            color: white;
+        }
+
         a.active {
             background-color: #535ba0 !important;
             color: white !important;
@@ -100,42 +104,33 @@
             transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
         }
 
-        .box select {
-            background-color: whitesmoke;
-            color: black;
-            padding: 12px;
-            width: 200px;
-            border: none;
-            font-size: 15px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-            -webkit-appearance: button;
-            appearance: button;
-            outline: none;
+        ol {
+            list-style-type: upper-alpha;
         }
 
-        .box select option {
-            padding: 30px;
+        tbody {
+            text-align: justify;
         }
 
-        #keyword {
-            text-align: center;
-            margin-top: 10px;
-            margin-right: 20px;
-            display: inline-block;
-        }
-
-        @media only screen and (max-width:634px) {
-            .ri {
-                margin-top: 30px;
-            }
+        p.teks {
+            font-family: 'Roboto Slab', sans-serif !important;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            max-width: 600px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 100px;
         }
 
     </style>
-    <div class="page-heading">
+
+
+    <div wire:ignore class="page-heading">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Materi - Inkubasi Bahasa</h1>
+                    <h1>Jawara Center - Pendaftar</h1>
                 </div>
             </div>
         </div>
@@ -145,98 +140,97 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading mb-5">
-                        <h2>Daftar Materi</h2>
+                        <h2>Daftar Pendaftar Jawara Event</h2>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="box">
-                                    <label for="filter" class="mr-3">Filter :</label>
-                                    <select id="filter" wire:model="filter">
-                                        <option value="judul" @if ($filter == 'title')
+                                    <label for="filter_" class="mr-3">Order :</label>
+                                    <select id="filter_" wire:model="filter">
+                                        <option value="users.name" @if ($filter == 'users.name')
                                             selected
-                                            @endif>Judul</option>
-                                        <option value="id_course" @if ($filter == 'materi')
+                                            @endif>Nama Pendaftar</option>
+                                        <option value="jawara_events.nama" @if ($filter == 'jawara_events.nama')
                                             selected
-                                            @endif>Course</option>
-                                        <option value="sesi" @if ($filter == 'id_course')
+                                            @endif>Nama Event</option>
+                                        <option value="jawara_pendaftars.created_at" @if ($filter == 'created_at')
                                             selected
-                                            @endif>Sesi</option>
+                                            @endif>Waktu Pendaftaran</option>
                                     </select>
+                                    @if($filter){{$filter}}@endif
                                 </div>
                             </div>
-                            <div class="col-md-6 ri">
+                            <div class="col-md-6">
                                 <div class="d-flex flex-row-reverse bd-highlight">
 
-                                    <a href="{{ url('/admin/inkubasi/materi/create') }}">
-                                        <button id="tambah" type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                            Tambah Materi
-                                        </button>
-                                    </a>
-
                                     <div class="search-box">
-                                        <button id="search" class="btn-search"><img
+                                        <button class="btn-search"><img
                                                 src="{{ asset('assets/images/search.png') }}" /></button>
-                                        <input wire:model.debounce.1000ms="keyword" id="key" type="text" type="text"
-                                            class="input-search" placeholder="Type to Search..." @if ($keyword)
-                                        value="{{ $keyword }}"
-                                        @endif>
+                                        <input wire:model="keyword" type="text" class="input-search"
+                                            placeholder="Type to Search...">
                                     </div>
-                                    @if ($keyword)
-                                        <p id="keyword">keyword : <span id="word">{{ $keyword }}</span></p>
-                                    @endif
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <div class="default-table table-responsive">
                         <table>
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Judul</th>
-                                    <th>File</th>
-                                    <th>Nama Course</th>
-                                    <th>Nama Sesi</th>
+                                    <th>Nama Pendaftar</th>
+                                    <th>Nama Event</th>
+                                    <th>Nama Dosen</th>
+                                    <th>Status Pendaftaran</th>
+                                    <th>Waktu Pendaftaran</th>
+                                    <th>Pengajuan</th>
                                 </tr>
                             </thead>
                             <tbody class="table-hover">
-                                @foreach ($materi as $data)
-                                    <tr wire::click="show({{$data->id}})" id="{{ $data->id }}">
+                                @foreach ($pendaftar as $data)
+                                    
+                                    <tr wire:click="show({{$data->id}})" id="{{ $data->id }}">
                                         <td>{{ $ind++ }}</td>
-                                        <td>{{ $data->judul }}</td>
+                                        <td><ol>
+                                            @php
+                                            $data->id_mahasiswa = json_decode($data->id_mahasiswa)
+                                            @endphp
+                                            @foreach ($data->id_mahasiswa as $nim)
+                                                <li>{{$nim}}</li>   
+                                            @endforeach
+                                        </ol></td>
                                         <td>
-                                            @if ($data->file)
-                                                <a href="{{ url($data->file) }}">
-                                                    {{ $data->file }}
-                                                </a>
+                                            {{ $data->nama ?? 1}}
+                                        </td>
+                                        <td>{{$data->nama_dosen}}
+                                        </td>
+                                        <td>
+                                            @if($data->status == 0)
+                                                Belum Terdaftar
+                                            @elseif($data->status == 1)
+                                                Terdaftar
+                                            @elseif($data->status == 2)
+                                                Tersetujui
+                                            @endif 
+                                        </td>
+                                        <td>{{date("d/M/y", strtotime($data->created_at))}}</td>
+                                        <td>
+                                            @if($data->file)
+                                            <a href="{{url($data->file)}}">File</a>
                                             @else
-                                                -
+                                            -
                                             @endif
                                         </td>
-                                        <td>{{ config('app.allCourse.' . $data->id_course) }}</td>
-                                        <td>{{ config('app.allSesi')[$data->sesi-1] }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="pagination d-flex justify-content-center">
-                            {{ $materi->links() }}
+                        <div class="d-flex justify-content-center">
+                            {{ $pendaftar->links() }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <script>
-        let butttonTambah = $('#tambah')
-        let modal = $('#exampleModal')
-        let title = $('#exampleModalLabel')[0]
-        $('.cls').on('click', function() {
-            modal.modal('toggle')
-        })
-        butttonTambah.on('click', function() {
-            modal.modal('toggle')
-            title.innerText = "Tambah Materi"
-        })
-    </script>
 </div>

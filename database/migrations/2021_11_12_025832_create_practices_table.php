@@ -15,7 +15,7 @@ class CreatePracticesTable extends Migration
     {
         Schema::create('practices', function (Blueprint $table) {
             $table->id();
-            $table->text('teks');
+            $table->text('teks')->nullable();
             $table->string('soal');
             $table->string('file',150)->nullable();
             $table->string('tipe',10);

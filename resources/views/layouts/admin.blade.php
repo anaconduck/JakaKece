@@ -49,10 +49,7 @@
                                         @for ($i = 0; $i < sizeof($nav) - 1; $i++)
                                             <li class="breadcrumb-item font-weight-bold"><a
                                                     class="black-text text-uppercase "
-                                                    href="{{ $nav[$i]['link'] }}"><span>{{ $nav[$i]['title'] }}</span></a><img
-                                                    class="ml-md-3"
-                                                    src="https://img.icons8.com/offices/30/000000/double-right.png"
-                                                    width="20" height="20"> </li>
+                                                    href="{{ $nav[$i]['link'] }}"><span>{{ $nav[$i]['title'] }}</span></a> </li>
                                         @endfor
 
                                         <li class="breadcrumb-item font-weight-bold mr-0 pr-0"><a
@@ -97,7 +94,9 @@
                         <li>
                             <span class="opener">Student Exchange</span>
                             <ul>
+                                <li><a href="{{ url('/admin/se/tujuan') }}">Tujuan SE</a></li>
                                 <li><a href="{{ url('/admin/se/event') }}">Daftar Event SE</a></li>
+                                <li><a href="{{ url('/admin/se/mk') }}">Daftar MK SE</a></li>
                                 <li><a href="{{ url('/admin/se/pendaftar') }}">Pendaftar</a></li>
                             </ul>
                         </li>

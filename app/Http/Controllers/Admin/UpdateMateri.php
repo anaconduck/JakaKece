@@ -55,7 +55,7 @@ class UpdateMateri extends Controller
             $data = $request->only(['judul', 'sesi', 'id_course', 'teks']);
             if ($request->hasFile('file') and $request->file('file')->isValid()) {
                 if ($materi->file) {
-                    Storage::delete('$materi->file');
+                    Storage::delete("$materi->file");
                 }
                 $name = time() . Str::random(10) . $request->file('file')->getClientOriginalName();
                 $path = $request->file('file')->storeAs('materi', $name, 'public');

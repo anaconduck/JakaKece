@@ -269,7 +269,7 @@
             @php
                 $ind = 0;
             @endphp
-            <option>Select Dosen Pembimbing</option>
+            <option value="0">Select Dosen Pembimbing</option>
             @foreach ($dosen as $d)
             <option value="{{ $d->id }}">{{ $d->nama_lengkap }}</option>
             @endforeach

@@ -130,7 +130,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Practice - Inkubasi Bahasa</h1>
+                    <h1>Student Exchange - Tujuan</h1>
                 </div>
             </div>
         </div>
@@ -140,29 +140,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading mb-5">
-                        <h2>Daftar Soal</h2>
+                        <h2>Daftar Matkul SE</h2>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="box">
-                                    <label for="filter_" class="mr-3">Filter :</label>
-                                    <select id="filter_" wire:model="filter">
-                                        <option value="tipe" @if ($filter == 'tipe')
-                                            selected
-                                            @endif>Tipe</option>
-                                        <option value="id_course" @if ($filter == 'id_course')
-                                            selected
-                                            @endif>Course</option>
-                                        <option value="sesi" @if ($filter == 'sesi')
-                                            selected
-                                            @endif>sesi</option>
-                                    </select>
-                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="d-flex flex-row-reverse bd-highlight">
 
-                                    <a class="btn btn-primary" href="{{ url('/admin/inkubasi/practice/create') }}"
-                                        role="button">Tambah Soal</a>
+                                    <a class="btn btn-primary" href="{{ url('/admin/se/mk/create') }}"
+                                        role="button">Tambah Matkul</a>
                                     <div class="search-box">
                                         <button class="btn-search"><img
                                                 src="{{ asset('assets/images/search.png') }}" /></button>
@@ -179,34 +165,26 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Teks</th>
-                                    <th>Soal</th>
-                                    <th>File</th>
-                                    <th>Tipe</th>
-                                    <th>Course</th>
-                                    <th>Sesi</th>
+                                    <th>Nama Mata Kuliah</th>
+                                    <th>SKS</th>
                                 </tr>
                             </thead>
                             <tbody class="table-hover">
-                                @foreach ($quest as $data)
+                                @foreach ($mk as $data)
                                     <tr wire:click="show({{$data->id}})" id="{{ $data->id }}">
                                         <td>{{ $ind++ }}</td>
                                         <td>
-                                            <p class="teks">{{ $data->teks }}</p>
+                                            {{ $data->nama_mata_kuliah ?? '' }}
                                         </td>
                                         <td>
-                                            <p class="teks">{{ $data->soal }}</p>
+                                            {{ $data->sks }}
                                         </td>
-                                        <td>{{ $data->file ?? '-' }}</td>
-                                        <td>{{ $data->tipe == 'm' ? 'Multiple choice' : 'Fill the Blank' }}</td>
-                                        <td>{{ config("app.allCourse.$data->id_course") }}</td>
-                                        <td>{{ config('app.allSesi')[$data->sesi] }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-center">
-                            {{ $quest->links() }}
+                            {{ $mk->links() }}
                         </div>
                     </div>
                 </div>

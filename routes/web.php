@@ -13,10 +13,15 @@ use App\Http\Livewire\Admin\HomeController;
 use App\Http\Livewire\Admin\MateriController;
 use App\Http\Livewire\Admin\PracticeController;
 use App\Http\Livewire\Admin\StatistikController;
+use App\Http\Livewire\ExchangeTujuan;
+use App\Http\Livewire\JawaraCenter;
+use App\Http\Livewire\JawaraPendaftar;
 use App\Http\Livewire\MateriC;
+use App\Http\Livewire\MKExchange;
 use App\Http\Livewire\PracticeC;
 use App\Http\Livewire\TestC;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -33,6 +38,10 @@ use Illuminate\Support\Facades\Storage;
 //access file
 Route::get('/materi/{file}', function(Request $request, $file){
     return Storage::download("public/materi/$file");
+})->middleware('auth');
+
+Route::get('/jawara/event/{file}', function(Request $request, $file){
+    return Storage::download("public/jawara/event/$file");
 })->middleware('auth');
 
 //admin
@@ -56,6 +65,41 @@ Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(func
     Route::post('/inkubasi/practice/create', [PushPractice::class, 'push']);
     Route::get('/inkubasi/practice/{practice}', [UpdatePractice::class, 'index']);
     Route::post('/inkubasi/practice/{practice}',[UpdatePractice::class, 'update']);
+
+    //jawaraCenter
+    Route::get('/jawara/event', JawaraCenter::class);
+    Route::get('/jawara/event/create', [PushJawaraEvent::class, 'index']);
+    Route::post('/jawara/event/create',[PushJawaraEvent::class, 'push']);
+    Route::get('/jawara/event/{event}', [UpdateJawaraEvent::class, 'index']);
+    Route::post('/jawara/event/{event}',[UpdateJawaraEvent::class, 'update']);
+
+    //Jawara Pendaftar
+    Route::get('/jawara/pendaftar', JawaraPendaftar::class);
+    Route::get('/jawara/pendaftar/{pendaftar}',[UpdateJawaraPendaftar::class, 'index']);
+    Route::post('/jawara/pendaftar/{pendaftar}',[UpdateJawaraPendaftar::class,'update']);
+
+    //tujuan SE
+    Route::get('/se/tujuan', ExchangeTujuan::class);
+    Route::get('/se/tujuan/create',[PushExchangeTujuan::class, 'index']);
+    Route::post('/se/tujuan/create',[PushExchangeTujuan::class, 'push']);
+    Route::get('/se/tujuan/{tujuan}',[UpdateExchangeTujuan::class,'index']);
+    Route::post('/se/tujuan/{tujuan}',[UpdateExchangeTujuan::class, 'update']);
+
+    //matkul se
+    Route::get('/se/mk',MKExchange::class);
+    Route::get('/se/mk/create',[PushMKExchange::class,'index']);
+    Route::post('/se/mk/create',[PushMKExchange::class,'push']);
+    Route::get('/se/mk/{mk}',[UpdateMKExchange::class,'index']);
+    Route::post('/se/mk/{mk}',[UpdateMKExchange::class,'update']);
+
+    //Student Exchange
+
+    Route::post('/logout', function (Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('home');    
+    });
 });
 
 Route::get('/try',function(){

@@ -26,6 +26,10 @@ class PracticeController extends Component
             ];
     }
 
+    public function show($id){
+        return redirect('/admin/inkubasi/practice/'.$id);
+    }
+
     public function render()
     {
         $data = Practice::where('teks', 'like', "%$this->keyword%")
