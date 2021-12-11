@@ -76,7 +76,6 @@
                 <nav id="menu">
                     <ul>
                         <li><a href="{{ url('/admin') }}">Homepage</a></li>
-                        <li><a href="{{ url('/admin/statistik') }}">Statistik</a></li>
                         <li>
                             <span class="opener">Inkubasi Digital Bahasa</span>
                             <ul>
@@ -89,22 +88,27 @@
                             <ul>
                                 <li><a href="{{ url('/admin/jawara/event') }}">Daftar Event</a></li>
                                 <li><a href="{{ url('admin/jawara/pendaftar') }}">Pendaftar</a></li>
+                                <li><a href="{{ url('admin/jawara/tanya') }}">Tanya Admin</a></li>
                             </ul>
                         </li>
                         <li>
                             <span class="opener">Student Exchange</span>
                             <ul>
                                 <li><a href="{{ url('/admin/se/tujuan') }}">Tujuan SE</a></li>
-                                <li><a href="{{ url('/admin/se/event') }}">Daftar Event SE</a></li>
                                 <li><a href="{{ url('/admin/se/mk') }}">Daftar MK SE</a></li>
                                 <li><a href="{{ url('/admin/se/pendaftar') }}">Pendaftar</a></li>
+                                <li><a href="{{ url('admin/se/tanya') }}">Tanya Admin</a></li>
                             </ul>
                         </li>
                         <li>
                             <span class="opener">On The Job Training</span>
                             <ul>
+                                <li><a href="{{ url('/admin/ojt/magang') }}">Daftar Magang Tersedia</a></li>
                                 <li><a href="{{ url('/admin/ojt/event') }}">Daftar Event OJT</a></li>
+                                <li><a href="{{ url('/admin/ojt/tujuan') }}">Daftar Instansi Magang</a></li>
+                                <li><a href="{{ url('/admin/ojt/mk') }}">Daftar MK</a></li>
                                 <li><a href="{{ url('admin/ojt/pendaftar') }}">Pendaftar</a></li>
+                                <li><a href="{{ url('admin/ojt/tanya') }}">Tanya Admin</a></li>
                             </ul>
                         </li>
                         <li>

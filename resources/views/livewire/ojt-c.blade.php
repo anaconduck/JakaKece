@@ -17,7 +17,7 @@
             <div class="list_">
                 <div class="items">
                     <div class="items-head">
-                        <p>Pendaftaran Training</p>
+                        <p>Pendaftaran Magang</p>
                         <hr>
                     </div>
                     @foreach ($pendaftaran as $data)
@@ -44,15 +44,15 @@
             <div class="list_">
                 <div class="items">
                     <div class="items-head">
-                        <p>Training Terlaksana</p>
+                        <p>Magang Terlaksana</p>
 
                         <hr>
                     </div>
                     @foreach ($terlaksana as $data)
-                        <a href="{{ url('/training/terlaksana')  . '/' . $data->id }}">
+                        <a href="{{ url('/training/terlaksana') . '/' . $data->id }}">
                             <div class="items-body">
                                 <div class="items-body-content">
-                                    <span>{{ $data->nama_event.' - '.$data->nama_instansi }}</span>
+                                    <span>{{ $data->nama_event . ' - ' . $data->nama_instansi }}</span>
                                     <i class="fa fa-angle-right"></i>
                                 </div>
                             </div>
@@ -67,31 +67,35 @@
         @endif
         "
             id="Section3">
-            <form action="" class="search-bar" autocomplete="off">
-                <input wire:model.debounce.1500ms="searchRiwayat" type="search" name="search" pattern=".*\S.*"
-                    required>
-                <button class="search-btn">
-                    <span>Search</span>
-                </button>
-            </form>
-            <div class="list_">
-                <div class="items">
-                    <div class="items-head">
-                        <p>Riwayat</p>
-                        <hr>
-                    </div>
-                    @foreach ($riwayat as $data)
-                        <a href="{{ url('/training/riwayat')  . '/' . $data->id }}">
-                            <div class="items-body">
-                                <div class="items-body-content">
-                                    <span>{{ $data->nama_instansi }}</span>
-                                    <i class="fa fa-angle-right"></i>
-                                </div>
+            <div class="container ta">
+                @if (!$statusTanya)
+                    @if ($errors->any())
+                        <p>{{ implode(', ', $errors->all()) }}</p>
+                    @endif
+                    <form method="POST" action="" wire:submit.prevent="submit">
+                        <div class="row">
+                            <h4>Tanya Admin</h4>
+                            <div class="input-group input-group-icon">
+                                <input wire:model.lazy="pertanyaan.email" name="email" type="email"
+                                    placeholder="Email Anda" required />
+                                <div class="input-icon"><i class="fa fa-envelope"></i></div>
                             </div>
-                        </a>
-                    @endforeach
-                    {{ $riwayat->links() }}
-                </div>
+                        </div>
+                        <div class="row">
+                            <h4>Pertanyaan</h4>
+                            <div class="input-group input-group-icon">
+                                <textarea wire:model.lazy="pertanyaan.pertanyaan" name="pertanyaan"
+                                    placeholder="Tuliskan pertanyaan" required
+                                    style="width: 100%; height: 100px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="ro">
+                            <input class="btn btn-warning" type="submit" value="Kirim" />
+                        </div>
+                    </form>
+                @else
+                    <h3>Pertanyaan anda telah terkirim!</h3>
+                @endif
             </div>
         </div>
     </div>

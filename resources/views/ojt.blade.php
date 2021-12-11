@@ -2,23 +2,25 @@
 
 @section('css')
     <style>
-        section.why-us{
-    position: relative;
-}
-section.why-us::after{
-    content: "";
-    background: url("https://image.freepik.com/free-vector/flat-design-polygonal-background_23-2148898663.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.2;
-    top: -150px;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-}
+        section.why-us {
+            position: relative;
+        }
+
+        section.why-us::after {
+            content: "";
+            background: url("https://image.freepik.com/free-vector/flat-design-polygonal-background_23-2148898663.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+            top: -150px;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;
+        }
+
         .body-card {
             display: flex;
             align-items: center;
@@ -573,15 +575,171 @@ section.why-us::after{
                 background: #f1f1f1;
             }
         }
-        .nav-tabs{
+
+        .nav-tabs {
             width: 250px !important;
             min-width: 250px !important;
         }
-        h1{
+
+        h1 {
             color: #f5a425;
             text-align: center;
         }
 
+        .ta input,
+        .ta input[type="radio"]+label,
+        .ta input[type="checkbox"]+label:before,
+        .ta select option,
+        .ta select {
+            width: 100%;
+            padding: 1em;
+            line-height: 1.4;
+            background-color: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 3px;
+            -webkit-transition: 0.35s ease-in-out;
+            -moz-transition: 0.35s ease-in-out;
+            -o-transition: 0.35s ease-in-out;
+            transition: 0.35s ease-in-out;
+            transition: all 0.35s ease-in-out;
+        }
+
+        .ta input:focus {
+            outline: 0;
+            border-color: #bd8200;
+        }
+
+        .ta input:focus+.input-icon i {
+            color: #f0a500;
+        }
+
+        .ta input:focus+.input-icon:after {
+            border-right-color: #f0a500;
+        }
+
+
+        .ta .input-group {
+            margin-bottom: 1em;
+            zoom: 1;
+        }
+
+        .ta .input-group:before,
+        .ta .input-group:after {
+            content: "";
+            display: table;
+        }
+
+        .ta .input-group:after {
+            clear: both;
+        }
+
+        .ta .input-group-icon {
+            position: relative;
+        }
+
+        .ta .input-group-icon input {
+            padding-left: 4.4em;
+        }
+
+        .ta .input-group-icon .input-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3.4em;
+            height: 3.4em;
+            line-height: 3.4em;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .ta .input-group-icon .input-icon:after {
+            position: absolute;
+            top: 0.6em;
+            bottom: 0.6em;
+            left: 3.4em;
+            display: block;
+            border-right: 1px solid #e5e5e5;
+            content: "";
+            -webkit-transition: 0.35s ease-in-out;
+            -moz-transition: 0.35s ease-in-out;
+            -o-transition: 0.35s ease-in-out;
+            transition: 0.35s ease-in-out;
+            transition: all 0.35s ease-in-out;
+        }
+
+        .ta .input-group-icon .input-icon i {
+            -webkit-transition: 0.35s ease-in-out;
+            -moz-transition: 0.35s ease-in-out;
+            -o-transition: 0.35s ease-in-out;
+            transition: 0.35s ease-in-out;
+            transition: all 0.35s ease-in-out;
+        }
+
+        .ta.container {
+            max-width: 38em;
+            padding: 1em 3em 2em 3em;
+            margin: 0em auto;
+            background-color: #fff;
+            border-radius: 4.2px;
+            box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+        }
+
+        .ta .row {
+            zoom: 1;
+        }
+
+        .ta .row:before,
+        .ta .row:after {
+            content: "";
+            display: table;
+        }
+
+        .ta .row:after {
+            clear: both;
+        }
+
+        .ta .col-half {
+            padding-right: 10px;
+            float: left;
+            width: 50%;
+        }
+
+        .ta .col-half:last-of-type {
+            padding-right: 0;
+        }
+
+        .ta .col-third {
+            padding-right: 10px;
+            float: left;
+            width: 33.33333333%;
+        }
+
+        .ta .col-third:last-of-type {
+            padding-right: 0;
+        }
+
+        @media only screen and (max-width: 540px) {
+            .ta .col-half {
+                width: 100%;
+                padding-right: 0;
+            }
+        }
+
+        h2 {
+            font-size: 17px;
+        }
+        .desc{
+            background-color: rgba(255, 255, 255, 0.397);
+            box-shadow: 10px 5px 20px rgba(0, 0, 0, 0.35);
+            padding: 40px;
+            text-align: justify;
+            border-radius: 20px;
+        }
+        .desc p{
+            font-size: 14px;
+            font-weight: 500;
+            color: #221807
+        }
     </style>
 @stop
 
@@ -598,6 +756,19 @@ section.why-us::after{
 
                 <div class="col-md-12">
                     <h1>On The Job Training</h1>
+                    <div class="desc">
+                        <p>Halo Mahasiswa EKP, selamat datang di system On the Job Training (OJT). Sistem ini merupakan wadah informasi serta pendaftaran mahasiswa EKP yang ingin melakukan program OJT/magang di instansi-instansi yang sudah bekerja sama dengan jurusan EKP FE UM. Selain itu kalian juga dapat melihat mata kuliah apa yang bisa dikonversi dalam kegiatan magang ini. Program magang ini akan dikonversi dengan 20 sks lo.. yakin gk mau ikutan??
+                        </p>
+                        <br>
+                        <p>Dalam riwayat OJT, kalian juga bisa track record teman-teman kalian yang sudah menyelesaikan program magang. Yuk check it out!
+                            Pengantar Student Exchange
+                            Halo Mahasiswa EKP, selamat datang di system Student Exchange.  Sistem ini merupakan wadah informasi serta pendaftaran mahasiswa EKP yang ingin melakukan program pertukarang pelajar di universitas baik dalam dan luar negeri yang sudah bekerja sama dengan jurusan EKP FE UM.</p>
+                            <br>
+                            <p>
+                                Dalam riwayat Student Exchange, kalian juga bisa track record teman-teman kalian yang sudah menyelesaikan program Student Exchange, baik dalam bentuk modul mapun video kegiatan. Tertarik? Yuk ikutin terus update infonya ya!
+                            </p>
+
+                    </div>
                     @if ($message[0] == 1)
                         <div class="alert alert-success" role="alert">
                             {{ $message[1] }}
@@ -610,7 +781,7 @@ section.why-us::after{
                     @if ($errors->any())
                         <div class="alert alert-danger" role="alert">
                             @foreach ($errors->all() as $error)
-                            {{ $error.', ' }}
+                                {{ $error . ', ' }}
                             @endforeach
                         </div>
                     @endif
@@ -718,13 +889,14 @@ section.why-us::after{
 
                                         <ul class="nav nav-tabs" role="tablist">
                                             <li role="presentation" class="active side">
-                                                <a aria-controls="home" role="tab" data-toggle="tab">Pendaftaran Training</a>
+                                                <a aria-controls="home" role="tab" data-toggle="tab">Pendaftaran Magang</a>
                                             </li>
                                             <li class="side" role="presentation">
-                                                <a aria-controls="profile" role="tab" data-toggle="tab">Training Terlaksana</a>
+                                                <a aria-controls="profile" role="tab" data-toggle="tab">Magang
+                                                    Terlaksana</a>
                                             </li>
                                             <li class="side" role="presentation">
-                                                <a aria-controls="typeset" role="tab" data-toggle="tab">Riwayat</a>
+                                                <a aria-controls="typeset" role="tab" data-toggle="tab">Tanya Admin</a>
                                             </li>
                                         </ul>
                                         @livewire('ojt-c')

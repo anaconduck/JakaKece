@@ -13,28 +13,36 @@ class HistoryPractice extends Model
     protected $fillable = [
         'identity',
         'id_course',
+        'full_sesi',
+        'pendek'
     ];
     public $attributes =[
-        'status_selesai' => false
+        'status_selesai' => false,
+        'full_sesi' => true,
+        'pendek' => false
     ];
-    public static function getLastPractice($idCourse){
-        return self::where('identity', auth()->user()->identity)
+    public static function getLastPractice($idCourse, $sesi = true, $tipe = null){
+        $query = self::where('identity', auth()->user()->identity)
             ->where('id_course',$idCourse)
-            ->orderBy('created_at','desc')
+            ->where('full_sesi', $sesi);
+        if($tipe !== null) $query = $query->where('pendek', $tipe);
+        return $query->where('status_selesai', false)
             ->first();
     }
 
-    public static function makeHistoryPractice($identity, $course){
+    public static function makeHistoryPractice($identity, $course, $fullSesi = true, $pendek = false, $sesi = 0){
         $idCourse = config('app.indexCourse')[$course];
         $h = new HistoryPractice([
             'identity' => $identity,
-            'id_course' => $idCourse
+            'id_course' => $idCourse,
+            'full_sesi' => $fullSesi,
+            'pendek' => $pendek
         ]);
 
         DB::beginTransaction();
         $h->save();
-        $size = config('app.'.$course)[0]['num'];
-        $historyJawaban = HistoryJawabanPractice::makeHistoryJawaban($h->id,0,$size);
+        $size = config('app.'.$course)[$sesi]['num'];
+        $historyJawaban = HistoryJawabanPractice::makeHistoryJawaban($h->id,$sesi,$size, $pendek);
         DB::commit();
 
         return [$h, $historyJawaban];
@@ -53,9 +61,12 @@ class HistoryPractice extends Model
             ->orderBy('history_practices.created_at','desc')
             ->get();
     }
-    public static function allWithIdentity($identity){
-        return self:: where('identity', $identity)
-            ->get();
+    public static function allWithIdentity($identity, $limit = null, $paginate = false){
+        $query =  self:: where('identity', $identity)
+            ->orderBy('created_at', 'desc');
+        if($limit) $query = $query->limit($limit);
+        if($paginate) return $query->paginate(9);
+        return $query->get();
     }
 
     public static function countTaker(){

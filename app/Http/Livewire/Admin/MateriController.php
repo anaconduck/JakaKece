@@ -24,7 +24,7 @@ class MateriController extends Component
             ]
             ];
     }
-    
+
     public function show($id){
         return redirect('/admin/inkubasi/materi/'.$id);
     }

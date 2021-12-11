@@ -17,6 +17,9 @@
     <section class="services">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-12">
+                    <h3>Statistik Umum</h3>
+                </div>
                 <div class="col-md-4">
                     <div class="service-item fourth-item">
                         <div class="icon"></div>
@@ -31,32 +34,102 @@
                         <p>Total materi</p>
                     </div>
                 </div>
+
+
+                <div class="col-md-12">
+                    <h3>Inkubasi Bahasa</h3>
+                </div>
+
                 <div class="col-md-4">
                     <div class="service-item fivth-item">
                         <div class="icon"></div>
-                        <h4>{{ $totalEventJawara ?? 0 }}</h4>
-                        <p>Event Jawara</p>
+                        <h4>{{ $totalMateriITP ?? 0 }}</h4>
+                        <p>Materi TOEFL ITP</p>
                     </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="service-item second-item">
+                        <div class="icon"></div>
+                        <h4>{{ $totalMateriIBT ?? 0 }}</h4>
+                        <p>Materi TOEFL IBT</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="service-item third-item">
+                        <div class="icon"></div>
+                        <h4>{{ $totalMateriTOEIC ?? 0 }}</h4>
+                        <p>Materi TOEIC</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="service-item first-item">
+                        <div class="icon"></div>
+                        <h4>{{ $totalMateriIELTS ?? 0 }}</h4>
+                        <p>Materi IELTS</p>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <h3>Jawara Center</h3>
                 </div>
                 <div class="col-md-4">
                     <div class="service-item second-item">
                         <div class="icon"></div>
-                        <h4>{{ $totalSE ?? 0 }}</h4>
-                        <p>Institusi Student Exchange</p>
+                        <h4>{{ $totalLomba ?? 0 }}</h4>
+                        <p>Total Lomba</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="service-item third-item">
                         <div class="icon"></div>
-                        <h4>{{ $totalTraining ?? 0 }}</h4>
-                        <p>Institusi Training</p>
+                        <h4>{{ $totalPendaftar ?? 0 }}</h4>
+                        <p>Total Pendaftar</p>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <h3>Student Exchange</h3>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-item fourth-item">
+                        <div class="icon"></div>
+                        <h4>{{ $totalTujuanSE ?? 0 }}</h4>
+                        <p>Institusi SE</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-item fivth-item">
+                        <div class="icon"></div>
+                        <h4>{{ $totalPendaftarSE ?? 0 }}</h4>
+                        <p>Pendaftar SE</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="service-item sixth-item">
                         <div class="icon"></div>
-                        <h4>{{ $totalTaker ?? 0 }}</h4>
-                        <p>Mahasiswa Telah Mengambil Practice</p>
+                        <h4>{{ $totalMatkulSE ?? 0 }}</h4>
+                        <p>Mata kuliah tersedia</p>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <h3>Magang</h3>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-item first-item">
+                        <div class="icon"></div>
+                        <h4>{{ $totalTujuanOJT ?? 0 }}</h4>
+                        <p>Institusi Magang</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-item second-item">
+                        <div class="icon"></div>
+                        <h4>{{ $totalPendaftarOJT ?? 0 }}</h4>
+                        <p>Pendaftar Magang</p>
                     </div>
                 </div>
 
@@ -64,4 +137,9 @@
         </div>
     </section>
 
+    <style wire:ignore>
+        h3{
+            margin-top: 20px;
+        }
+    </style>
 </div>

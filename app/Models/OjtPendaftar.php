@@ -26,11 +26,21 @@ class OjtPendaftar extends Model
             ->count();
     }
 
-    public static function riwayat($identity){
-        return self::select('ojt_pendaftars.*','ojt_tujuans.nama_instansi')
+    public static function riwayat($identity, $limit = null, $paginate = false){
+        $query = self::select('ojt_pendaftars.*','ojt_tujuans.nama_instansi')
             ->join('ojt_pakets','ojt_pendaftars.id_paket','=','ojt_pakets.id')
             ->join('ojt_tujuans','ojt_tujuans.id','=','ojt_pakets.id_ojt_tujuan')
-            ->where('identity',$identity)
-            ->get();
+            ->where('identity',$identity);
+        if($limit)$query = $query->limit($limit);
+        if($paginate) return $query->paginate(9);
+        return $query->get();
+    }
+
+    public static function getDokumentasi($idProdi, $idPaket){
+        return self::select('file')
+            ->where('id_prodi', $idProdi)
+            ->where('id_paket',$idPaket)
+            ->where('status_kelulusan',true)
+            ->paginate(10);
     }
 }

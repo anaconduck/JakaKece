@@ -167,6 +167,7 @@
                                     <th>No.</th>
                                     <th>Nama Universitas</th>
                                     <th>Lokasi</th>
+                                    <th>File Pelaksanan</th>
                                 </tr>
                             </thead>
                             <tbody class="table-hover">
@@ -178,6 +179,13 @@
                                         </td>
                                         <td>
                                             {{ $data->dalam_negeri ? "Dalam Negeri" : "Luar Negeri"}}
+                                        </td>
+                                        <td>
+                                            @if ($data->file_penjelas)
+                                            <a class="btn btn-light" href="{{ Storage::url($data->file_penjelas) }}">Unduh</a>
+                                            @else
+                                            -
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

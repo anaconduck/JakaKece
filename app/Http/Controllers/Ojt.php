@@ -43,13 +43,17 @@ class Ojt extends Controller
         ]);
 
         $paket = OjtPaket::getPaket($tujuan->id, $request->session()->get('prodi', ''));
-
+        $mkPaket = [];
+        foreach($paket as $p){
+            $mkPaket[$p->id] = OjtMataKuliah::getMatkul($p->id_ojt_event);
+        }
         return view('ojt-paket',[
             'title' => 'On The Job Training',
             'nav' => $this->nav,
             'tujuan' => $tujuan,
             'paket' => $paket,
-            'training' => 'selected'
+            'training' => 'selected',
+            'mk' => $mkPaket
         ]);
     }
 
@@ -87,7 +91,8 @@ class Ojt extends Controller
             'event' => $event,
             'matkul' => $matkul,
             'tujuan' => $tujuan,
-            'training' => 'selected'
+            'training' => 'selected',
+            'paket' => $paket
         ]);
     }
     public function daftar(OjtTujuan $tujuan, OjtPaket $paket){
@@ -117,18 +122,15 @@ class Ojt extends Controller
             return $this->index([1, 'Pendaftaran Ojt Berhasil dilakukan']);
         return $this->index([0, 'Pendaftaran Ojt gagal dilakukan.']);
     }
-    public function showTerlaksana(OjtPaket $paket){
-        if($paket == null)
-            abort(404);
-        $now = strtotime(now());
-        $mulai = strtotime($paket->mulai_training);
-        $akhir = strtotime($paket->akhir_training);
 
-        if($now < $mulai or $now >$akhir)
+    public function showTerlaksana(OjtPaket $paket){
+        if(!$paket)
             abort(404);
+
         $event = OjtEvent::find($paket->id_ojt_event);
         $matkul = OjtMataKuliah::getMatkul($event->id);
         $tujuan = OjtTujuan::find($paket->id_ojt_tujuan);
+        $dokumentasi = OjtPendaftar::getDokumentasi($event->id_prodi, $paket->id);
 
         $numTraining = OjtPendaftar::countTraining($paket->id, config('app.idProdi')[session('prodi')]);
 
@@ -145,7 +147,8 @@ class Ojt extends Controller
             'matkul' => $matkul,
             'tujuan' => $tujuan,
             'numTraining' => $numTraining,
-            'paket' => $paket
+            'paket' => $paket,
+            'dokumentasi' => $dokumentasi
         ]);
     }
     public function riwayat(OjtTujuan $tujuan){

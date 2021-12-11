@@ -61,9 +61,13 @@ class HistoryTest extends Model
             ->get();
     }
 
-    public static function riwayat($identity){
-        return self::where('identity',$identity)
-            ->get();
+    public static function riwayat($identity, $limit = null, $paginate = false){
+        $query =  self::where('identity',$identity)
+            ->orderBy('created_at', 'desc')
+            ->limit($limit);
+        if($limit) $query = $query->limit($limit);
+        if($paginate) return $query->paginate(9);
+        return $query->get();
     }
 
 }

@@ -35,13 +35,16 @@ class PracticeC extends Component
     ];
 
     public function mount($course){
-        if(!strpos(url()->previous(),'inkubasi')){
+        if(!strpos(url()->previous(),'inkubasi') and (!strpos(url()->previous(),"latihan/$course"))){
             return redirect('/inkubasi');
         }
         $course = strtolower($course);
         if(array_key_exists($course,config('app.indexCourse')))
             $this->idCourse = config('app.indexCourse')[$course];
         else abort(404);
+        if(auth()->user()->status == 'mahasiswa'){
+            if($this->idCourse == 4) abort(404);
+        }
         $this->course = $course;
         $this->allsesi = config('app.'.$course);
         $this->sesi =0;
@@ -89,7 +92,7 @@ class PracticeC extends Component
                 $this->waktu = $waktu*60;
             }
         }
-        if(!$historyPractice){
+        if(!$historyJawaban){
             abort(500);
         }
 
@@ -181,10 +184,6 @@ class PracticeC extends Component
         }else{
             $this->next = 1;
         }
-    }
-
-    public function hasListenPractice($soal){
-        Session::put('hasListenPractice.'.$soal, 1);
     }
 
     public function render()

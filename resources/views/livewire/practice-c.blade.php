@@ -36,7 +36,7 @@
                                             <tbody>
                                                 @for ($indexRow = 0; $indexRow < ceil($allsesi[$sesi]['num'] / 5); $indexRow++)
                                                     <tr>
-                                                        @for ($index = $indexRow * 4 + 1; $index <= min($indexRow * 4 + 4, $allsesi[$sesi]['num']); $index++)
+                                                        @for ($index = $indexRow * 5 + 1; $index <= min($indexRow * 5 + 5, $allsesi[$sesi]['num']); $index++)
                                                             @if ($index == $posisiSoal + 1)
                                                                 <td wire:click="show({{ $index - 1 }})"
                                                                     class="now"><b>{{ $index }}
@@ -65,14 +65,14 @@
                             </div>
                             <div class="col-md-9">
                                 <div wire:loading class="loader">Loading...</div>
-                                <div class="card quest">
+                                <div wire:loading.class="d-none" class="card quest">
                                     <div class="card-header" style="font-weight: bold; color:#ffdfac;">
                                         {{ $posisiSoal + 1 . ' / ' . $allsesi[$sesi]['num'] }}
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $allsesi[$sesi]['sesi'] }}</h5>
-                                        @if($soal->file && Session::get('hasListenPractice.'.$posisiSoal,-1) == 0)
-                                            <div class='fl' wire:click="hasListenPractice({{ $posisiSoal }})">
+                                        @if($soal->file)
+                                            <div class='fl'>
                                                 <a href='#'class='playBut'>
 
                                             <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In  -->
@@ -155,7 +155,7 @@
                                         </div>
                                     </div>
                                     <div class="bn d-flex justify-content-around">
-                                        <button wire:click="show({{ abs($posisiSoal - 1) }})" class="btn-shine">
+                                        <button wire:click="show({{ ($posisiSoal - 1) }})" class="btn-shine">
                                             <span>Prev</span>
                                         </button>
                                         <button wire:click="show({{ $posisiSoal + 1 }})" class="btn-shine">
@@ -169,12 +169,10 @@
             </div>
         </div>
     </section>
-    @if(!Session::get("hasListenPractice.$posisiSoal",false))
         <script>
             let e = new Audio('{{ $soal->file }}');
 
             $('.fl').on('click',function(){
-                this.classList.add('d-none')
                 e.play()
             })
             $('.btn-shine').on('click',function(){
@@ -182,7 +180,6 @@
             })
 
         </script>
-    @endif
 
     <script wire:ignore>
 
@@ -254,7 +251,7 @@
 
                 if (timeLeft === 0) {
                     onTimesUp();
-                    window.location = "{{ url('/report/practice' . '/' . $idHistoryPractice) }}"
+                    window.location = "{{ url('/user/riwayat-latihan' . '/' . $idHistoryPractice) }}"
                 }
             }, 1000);
         }

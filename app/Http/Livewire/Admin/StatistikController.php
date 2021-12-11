@@ -24,7 +24,6 @@ class StatistikController extends Component
 
     public function render()
     {
-
         return view('livewire.admin.statistik-controller')
             ->extends('layouts.admin',[
                 'title' => 'Statistik',

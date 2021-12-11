@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use App\Models\JawaraEvent;
 use App\Models\JawaraPendaftar;
 use App\Models\User;
@@ -26,12 +27,12 @@ class UpdateJawaraPendaftar extends Controller
     {
         if (!$pendaftar)
             abort(404);
-        
+
         $pendaftar->id_mahasiswa = array_values(json_decode($pendaftar->id_mahasiswa));
 
         $mahasiswa = User::whereIn('identity',$pendaftar->id_mahasiswa)
             ->get();
-        
+
         $event = JawaraEvent::find($pendaftar->id_jawara_event);
 
         array_push($this->nav,[
@@ -39,8 +40,7 @@ class UpdateJawaraPendaftar extends Controller
             'link' => url('/admin/jawara/pendaftar/'.$pendaftar->id)
         ]);
 
-        $dosen = User::select('name','identity', 'status')
-            ->where('status', '=', 'dosen')
+        $dosen = Dosen::where('pembimbing', true)
             ->get();
 
         return view('admin.update-jawara-pendaftar', [
@@ -56,17 +56,23 @@ class UpdateJawaraPendaftar extends Controller
     public function update(Request $request, JawaraPendaftar $pendaftar){
         if(!$pendaftar)
             abort(404);
-        
+
         $request->validate([
-            'status' => 'required|min:0|max:2',
-            'dosen' => 'required'
+            'status' => 'required|min:0|max:1',
+            'dosen' => 'required',
+            'status_pendanaan' => 'required|min:0|max:1',
         ]);
 
-        $data = $request->only(['status','dosen']);
+        $data = $request->only(['status','dosen','status_pendanaan','catatan_pembimbing', 'catatan_pendanaan']);
+
+        $dosen = Dosen::find($data['dosen']);
 
         if($request->get('submit') == 'update'){
             $pendaftar->status = $data['status'];
-            $pendaftar->id_dosen = $data['dosen'];
+            if($dosen) $pendaftar->id_dosen = $data['dosen'];
+            $pendaftar->status_pendanaan = $data['status_pendanaan'];
+            $pendaftar->catatan_pembimbing = $data['catatan_pembimbing'];
+            $pendaftar->catatan_pendanaan = $data['catatan_pendanaan'];
 
             if($pendaftar->save())
                 return redirect(url('/admin/jawara/pendaftar'));

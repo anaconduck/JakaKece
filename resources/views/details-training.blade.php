@@ -3,7 +3,7 @@
 @section('slot')
 <section class="section why-us" data-section="section5">
     <div class="container">
-        <h1>Detail Training {{ $event->nama_event.' - '.$tujuan->nama_instansi }}</h1>
+        <h1>Detail Training {{ $event->nama_event}}<br>{{ $tujuan->nama_instansi }}</h1>
       <div class="row align-items-start">
           <div class="col-sm-3 left">
             <a href="{{ url('/training')}}">
@@ -34,7 +34,7 @@
                     <dt class="col-sm-4">Tanggal Akhir Training</dt>
                     <dd class="col-sm-8">{{ date('d / M / Y',strtotime($paket->akhir_training)) }}</dd>
 
-                    <dt class="col-sm-4">Mata Kuliah</dt>
+                    <dt class="col-sm-4">Setara Menempuh Mata Kuliah</dt>
                     <dd class="col-sm-8">
                         <dl class="row">
 
@@ -45,8 +45,28 @@
                         </dl>
                     </dd>
 
-                    <dt class="col-sm-4">Jumlah Mahasiswa</dt>
+                    <dt class="col-sm-4">Total Peserta Magang</dt>
                     <dd class="col-sm-8">{{ $numTraining}} Mahasiswa</dd>
+
+                    @if($dokumentasi->count() !== 0 and $dokumentasi[0]->file !== null)
+                    <dt class="col-sm-4">Dokumentasi</dt>
+                    <dd class="col-sm-8">
+                        <dl class="row">
+                            <ol>
+                            @foreach ($dokumentasi as $item)
+                                @php
+                                    $item = json_decode($item);
+                                @endphp
+                                @foreach ($item as $doc)
+                                <li>
+                                    <a href="{{ $doc }}">{{ $doc }}</a>
+                                </li>
+                                @endforeach
+                            @endforeach
+                            </ol>
+                        </dl>
+                    </dd>
+                    @endif
 
                   </dl>
             </article>
@@ -113,6 +133,9 @@
         }
         .right{
             border-left: 2px solid rgba(0, 0, 0, 0.151);
+        }
+        h1{
+            text-align: center;
         }
   </style>
 @stop

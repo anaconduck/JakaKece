@@ -66,6 +66,7 @@ class HistoryJawabanTest extends Model
 
     public static function showHistoryJawaban($idHistoryTest){
         return self::where('id_history_test',$idHistoryTest)
+            ->orderBy('sesi','desc')
             ->get();
     }
 }

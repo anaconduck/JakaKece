@@ -52,5 +52,9 @@ class User extends Authenticatable
             ->first();
     }
 
-
+    public static function getMahasiswa($nim){
+        return self::select('name', 'identity', 'email')
+            ->whereIn('identity', $nim)
+            ->get();
+    }
 }

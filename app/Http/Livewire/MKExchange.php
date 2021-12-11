@@ -14,6 +14,7 @@ class MKExchange extends Component
     public $filter = "nama_mata_kuliah";
     public $keyword;
     public $ind;
+    protected $paginationTheme = 'bootstrap';
 
     public function mount(){
         $this->nav = [
@@ -34,9 +35,9 @@ class MKExchange extends Component
             ->orwhere('sks', '=',"$this->keyword")
             ->orderBy('nama_mata_kuliah', 'asc')
             ->paginate(10);
-        
+
         $this->ind = 1;
-        
+
         return view('livewire.m-k-exchange',[
             'mk' => $data
         ])

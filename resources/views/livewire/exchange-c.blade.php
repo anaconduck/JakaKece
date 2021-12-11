@@ -102,5 +102,43 @@
                 </div>
             </div>
         </div>
+        @if (auth()->user())
+            <div role="tabpanel" class="t1 tab-pane
+        @if ($pos == 3)
+        show active
+        @endif
+        "
+                id="Section4">
+
+                <div class="container ta">
+                    @if(!$statusTanya)
+                        @if($errors->any())
+                            <p>{{ implode(', ', $errors->all()) }}</p>
+                        @endif
+                    <form method="POST" action="" wire:submit.prevent="submit">
+                        <div class="row">
+                            <h4>Tanya Admin</h4>
+                            <div class="input-group input-group-icon">
+                                <input wire:model.lazy="pertanyaan.email" name="email" type="email" placeholder="Email Anda" required />
+                                <div class="input-icon"><i class="fa fa-envelope"></i></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4>Pertanyaan</h4>
+                            <div class="input-group input-group-icon">
+                                <textarea wire:model.lazy="pertanyaan.pertanyaan" name="pertanyaan" placeholder="Tuliskan pertanyaan" required
+                                    style="width: 100%; height: 100px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="ro">
+                            <input class="btn btn-warning" type="submit" value="Kirim"/>
+                        </div>
+                    </form>
+                    @else
+                        <h3>Pertanyaan anda telah terkirim!</h3>
+                    @endif
+                </div>
+            </div>
+        @endif
     </div>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\JawaraEvent;
+use App\Models\JawaraTanya;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,76 +12,69 @@ class JawaraC extends Component
     use WithPagination;
 
     public $searchPendaftaran;
-    public $searchMendatang;
     public $searchTerlaksana;
-    public $searchHasil;
-    public $pos=0;
+    public $pos = 0;
     public $pendaftaran;
-    public $mendatang;
     public $terlaksana;
-    public $hasil;
+    public $statusTanya;
+    public $pertanyaan;
 
     protected $paginationTheme = 'bootstrap';
 
-    public function mount(){
-
+    public function mount()
+    {
+        if (auth()->user()) {
+            $this->pertanyaan = [
+                'identity' => auth()->user()->identity
+            ];
+        }
     }
 
-    public function updatingSearchPendaftaran(){
+    public function updatingSearchPendaftaran()
+    {
         $this->resetPage();
         $this->pos = 0;
     }
-    public function updatingSearchMendatang(){
+    public function updatingSearchTerlaksana()
+    {
         $this->resetPage();
         $this->pos = 1;
     }
-    public function updatingSearchTerlaksana(){
-        $this->resetPage();
-        $this->pos = 2;
-    }
-    public function updatingSearchHasil(){
-        $this->resetPage();
-        $this->pos = 3;
-    }
 
-    public function updatingPendaftaran(){
+    public function updatingPendaftaran()
+    {
         $this->resetPage();
         $this->pos = 0;
     }
-    public function updatingMendatang(){
+    public function updatingTerlaksana()
+    {
         $this->resetPage();
         $this->pos = 1;
     }
-    public function updatingTerlaksana(){
-        $this->resetPage();
+    public function updatingPertanyaan()
+    {
         $this->pos = 2;
     }
-    public function updatingHasil(){
-        $this->resetPage();
-        $this->pos = 3;
+
+    public function submit()
+    {
+        $this->validate([
+            'pertanyaan.email' => 'required|email',
+            'pertanyaan.pertanyaan' => 'required|max:255'
+        ]);
+        $this->statusTanya = (JawaraTanya::tanya($this->pertanyaan));
     }
 
     public function render()
     {
-        $this->pendaftaran = JawaraEvent::where('mulai_daftar','<',now())
-            ->where('akhir_daftar','>',now())
-            ->where('nama','like','%'.$this->searchPendaftaran.'%')
-            ->orderBy('akhir_daftar','desc')
-            ->paginate(10,['*'],'pendaftaran');
-        $this->mendatang = JawaraEvent::where('mulai_daftar','>',now())
-            ->where('nama','like','%'.$this->searchMendatang.'%')
-            ->orderBy('mulai_daftar','desc')
-            ->paginate(10,['*'],'mendatang');
-        $this->terlaksana = JawaraEvent::where('mulai','<',now())
-            ->where('finish',false)
-            ->where('nama','like','%'.$this->searchTerlaksana.'%')
-            ->orderBy('mulai','desc')
-            ->paginate(10,['*'],'terlaksana');
-        $this->hasil = JawaraEvent::where('finish',true)
-            ->orderBy('mulai','desc')
-            ->where('nama','like','%'.$this->searchHasil.'%')
-            ->paginate(10,['*'],'hasil');
-        return view('livewire.jawara-c',[
-        ]);
+        $this->pendaftaran = JawaraEvent::where('akhir_daftar', '>', now())
+            ->where('nama', 'like', '%' . $this->searchPendaftaran . '%')
+            ->orderBy('akhir_daftar', 'asc')
+            ->paginate(10, ['*'], 'pendaftaran');
+        $this->terlaksana = JawaraEvent::where('mulai', '<=', now())
+            ->where('nama', 'like', '%' . $this->searchTerlaksana . '%')
+            ->orderBy('mulai', 'desc')
+            ->paginate(10, ['*'], 'terlaksana');
+        return view('livewire.jawara-c', []);
     }
 }

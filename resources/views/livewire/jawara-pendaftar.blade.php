@@ -178,7 +178,7 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Nama Pendaftar</th>
+                                    <th>Nim Pendaftar</th>
                                     <th>Nama Event</th>
                                     <th>Nama Dosen</th>
                                     <th>Status Pendaftaran</th>
@@ -188,15 +188,15 @@
                             </thead>
                             <tbody class="table-hover">
                                 @foreach ($pendaftar as $data)
-                                    
+
                                     <tr wire:click="show({{$data->id}})" id="{{ $data->id }}">
                                         <td>{{ $ind++ }}</td>
-                                        <td><ol>
+                                        <td><ol style="list-style-type: lower-roman">
                                             @php
                                             $data->id_mahasiswa = json_decode($data->id_mahasiswa)
                                             @endphp
                                             @foreach ($data->id_mahasiswa as $nim)
-                                                <li>{{$nim}}</li>   
+                                                <li>{{$nim}}</li>
                                             @endforeach
                                         </ol></td>
                                         <td>
@@ -211,7 +211,7 @@
                                                 Terdaftar
                                             @elseif($data->status == 2)
                                                 Tersetujui
-                                            @endif 
+                                            @endif
                                         </td>
                                         <td>{{date("d/M/y", strtotime($data->created_at))}}</td>
                                         <td>

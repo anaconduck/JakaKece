@@ -220,7 +220,7 @@
       <div class="modal-body modal-body-step-1 is-showing">
         <div class="title">Step 1</div>
         <div class="description">Poster Pendaftaran</div>
-        <form method="POST" action="">
+        <form method="POST" action="" enctype="multipart/form-data">
             @csrf
             @if($event->file)
             <img id="poster" class="poster" src="{{ asset($event->file) }}" width="100%"/>
@@ -264,7 +264,7 @@
       </div>
       <div class="modal-body modal-body-step-3">
         <div class="title">Step 3</div>
-        <div class="description">Dosen Pembimbing</div>
+        <div class="description">Data Pendukung</div>
         <select name="dosen">
             @php
                 $ind = 0;
@@ -274,6 +274,10 @@
             <option value="{{ $d->id }}">{{ $d->nama_lengkap }}</option>
             @endforeach
         </select>
+        <label>
+            Fail Pendanaan
+          <input type="file" name="file" required/>
+        </label>
         <div class="text-center">
             <div id="submit" class="button">Daftar</div>
         </div>
@@ -292,7 +296,6 @@
         $pag = $('.modal-header span').eq(stepIndex);
 
     if(stepIndex === 0 || stepIndex === 1) { step1($step, $pag); }
-    else { step3($step, $pag); }
 
   });
 

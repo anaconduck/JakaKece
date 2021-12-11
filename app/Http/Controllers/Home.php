@@ -15,6 +15,7 @@ class Home extends Controller
 {
 
     public function home(){
+        $berita = null;
         return view('home',[
             'title' => 'Home',
             'home' => 'selected'

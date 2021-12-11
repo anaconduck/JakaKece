@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExchangeMataKuliah;
 use App\Models\ExchangeMataKuliahTujuan;
 use App\Models\ExchangePendaftar;
 use App\Models\ExchangePersyaratan;
@@ -45,37 +46,42 @@ class StudentExchange extends Controller
         ]);
 
         $persyaratan = ExchangePersyaratan::lazy();
-        $paketMataKuliah = ExchangeMataKuliahTujuan::getMataKuliahFrom($tujuan->id);
-        $paket = [];
-        foreach($paketMataKuliah as $p){
-            if(!array_key_exists($p->paket, $paket))
-                $paket[$p->paket] = [];
-            array_push($paket[$p->paket],$p);
-        }
+
+        $mk = ExchangeMataKuliah::getMK($tujuan->id);
 
         return view('exchange-paket',[
             'title' => 'Paket Student Exchange '. $tujuan->nama_universitas,
             'exchange' => 'selected',
             'nav' => $this->nav,
             'tujuan' => $tujuan,
-            'paket' => $paket,
             'persyaratan' => $persyaratan,
-            'lokasi' => $lokasi
+            'lokasi' => $lokasi,
+            'mk' => $mk
         ]);
     }
 
-    public function showDaftar($lokasi, ExchangeTujuan $tujuan, $paket){
+    public function showDaftar(Request $request,$lokasi, ExchangeTujuan $tujuan){
         if(($lokasi != 'dn' and $lokasi != 'ln') or !$tujuan)
             abort(404);
-
-        if(!ExchangeMataKuliahTujuan::checkPaket($tujuan->id,$paket)){
-            abort(404);
-        }
 
         if(ExchangePendaftar::checkPendaftaran(auth()->user()->identity,$tujuan->id)){
             return $this->index([1, 'Anda telah terdaftar. Tunggu info selanjutnya!']);
         }
-        
+
+        $mk = [];
+
+        foreach($request->all() as $ind => $val){
+            if(strpos($ind, 'mk') !== false){
+                array_push($mk, $val);
+            }
+        }
+
+        if(sizeof($mk) === 0) return redirect()->back();
+
+        $mk = ExchangeMataKuliah::filterMk($tujuan->id, $mk);
+
+        if($mk->count() == 0) abort(404);
+
         $mahasiswa = Mahasiswa::find(auth()->user()->identity);
 
         if(!$mahasiswa)
@@ -92,20 +98,32 @@ class StudentExchange extends Controller
             'nav' => $this->nav,
             'tujuan' => $tujuan,
             'mahasiswa' => $mahasiswa,
-            'paket' => $paket
+            'mk' => $mk,
+            'lokasi' => $lokasi
         ]);
     }
 
-    public function daftar(Request $request, $lokasi, ExchangeTujuan $tujuan, $paket){
+    public function daftar(Request $request, $lokasi, ExchangeTujuan $tujuan, $identity){
         if(($lokasi != 'dn' and $lokasi != 'ln') or !$tujuan)
             abort(404);
 
-        if(!ExchangeMataKuliahTujuan::checkPaket($tujuan->id,$paket)){
-            abort(404);
-        }
-
         if(ExchangePendaftar::checkPendaftaran(auth()->user()->identity,$tujuan->id)){
             return $this->index([1, 'Anda telah terdaftar. Tunggu info selanjutnya!']);
+        }
+
+        $mk = [];
+
+        foreach($request->all() as $ind => $val){
+            if(strpos($ind, 'mk') !== false){
+                array_push($mk, $val);
+            }
+        }
+        if(sizeof($mk) === 0) return redirect()->back();
+
+        $mk = ExchangeMataKuliah::filterMk($tujuan->id, $mk);
+        $mkTujuan = [];
+        foreach($mk as $m){
+            array_push($mkTujuan, $m->id);
         }
 
         $mahasiswa = Mahasiswa::find(auth()->user()->identity);
@@ -134,7 +152,7 @@ class StudentExchange extends Controller
                 'identity' => $mahasiswa->id,
                 'id_exchange_tujuan' => $tujuan->id,
                 'file' => json_encode($fileU),
-                'paket_exchange' => $paket
+                'id_exchange_mata_kuliah' => json_encode($mkTujuan)
             ]);
             if($pendaftar->save())
                 return $this->index([1, 'Pendaftaran Anda berhasil!']);
@@ -142,4 +160,26 @@ class StudentExchange extends Controller
         return $this->index([0, 'Pendaftaran Anda gagal!']);
     }
 
+
+    public function detail(ExchangeTujuan $tujuan){
+        if(!$tujuan) abort(404);
+
+        $mk = ExchangeMataKuliah::getMK($tujuan->id);
+
+        $dokumentasi = ExchangePendaftar::getDokumentasi($tujuan->id);
+
+        array_push($this->nav, [
+            'title' => 'Detail Tujuan SE - '.$tujuan->nama_universitas,
+            'link' => url("/exchange/riwayat/$tujuan->id")
+        ]);
+        return view('details-exchange',[
+            'title' => 'Detail Tujuan SE - '.$tujuan->nama_universitas,
+            'tujuan' => $tujuan,
+            'nav' => $this->nav,
+            'exchange' => 'selected',
+            'dokumentasi' => $dokumentasi,
+            'mk' => $mk,
+            'jumlahPendaftar' => ExchangePendaftar::jumlahPendaftar($tujuan->id)
+        ]);
+    }
 }

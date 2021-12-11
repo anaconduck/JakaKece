@@ -9,5 +9,5 @@ class OjtMataKuliahEvent extends Model
 {
     use HasFactory;
 
-
+    
 }

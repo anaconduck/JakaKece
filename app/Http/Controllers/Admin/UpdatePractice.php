@@ -20,7 +20,7 @@ class UpdatePractice extends Controller
             ]
         ];
     }
-    public function index(Practicjawae $practice)
+    public function index(Practice $practice)
     {
         if ($practice == null) {
             abort(404);

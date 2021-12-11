@@ -20,6 +20,11 @@
                         @foreach ($paket as $no => $ev)
                         <a class="card1" href="{{ url("/training/$tujuan->id/$ev->id") }}">
                             <h3>Paket-{{ $ev->nama_event ?? '' }}</h3>
+                            <ol>
+                                @foreach ($mk[$ev->id] as $item)
+                                    <li>{{ $item->sks." sks - ".$item->nama_mata_kuliah }}</li>
+                                @endforeach
+                            </ol>
                             <p class="small">
                                 konversi sks maks : {{ $ev->max_konversi_sks ?? '' }}
                             </p>

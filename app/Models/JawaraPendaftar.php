@@ -21,8 +21,12 @@ class JawaraPendaftar extends Model
     }
 
     public static function daftar($data){
-        return DB::table('jawara_pendaftars')
+        $data->created_at = now();
+        DB::beginTransaction();
+        $res = DB::table('jawara_pendaftars')
             ->insert($data);
+        DB::commit();
+        return $res;
     }
 
     public static function countPendaftar($idEvent){
@@ -30,10 +34,20 @@ class JawaraPendaftar extends Model
             ->count();
     }
 
-    public static function riwayat($identity){
-        return self::select('jawara_events.id', 'jawara_events.nama')
+    public static function riwayat($identity, $limit = null, $paginate= false){
+        $query = self::select('jawara_pendaftars.id', 'jawara_events.nama', 'jawara_pendaftars.status')
             ->join('jawara_events','jawara_pendaftars.id_jawara_event','=','jawara_events.id')
             ->where('id_mahasiswa', 'like', "%$identity%")
-            ->get();
+            ->orderBy('id_jawara_event', 'desc');
+        if($limit)
+            $query = $query->limit($limit);
+        if($paginate) return $query->paginate(9);
+        return $query->get();
+    }
+
+    public static function riwayatFile($eventID){
+        return self::select('file')
+            ->where('id_jawara_event', $eventID)
+            ->get()->toArray();
     }
 }

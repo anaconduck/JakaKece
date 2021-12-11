@@ -2,24 +2,26 @@
 
 @section('css')
     <style>
-        section.why-us{
-    position: relative;
-}
-section.why-us::after{
-    content: "";
-    background: url("https://image.freepik.com/free-vector/flat-geometric-background_23-2148957201.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.2;
-    top: -150px;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-}
-h1{
+        section.why-us {
+            position: relative;
+        }
+
+        section.why-us::after {
+            content: "";
+            background: url("https://image.freepik.com/free-vector/flat-geometric-background_23-2148957201.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+            top: -150px;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;
+        }
+
+        h1 {
             color: #f5a425;
             text-align: center;
         }
@@ -579,6 +581,147 @@ h1{
             }
         }
 
+        .ta input,
+        .ta input[type="radio"]+label,
+        .ta input[type="checkbox"]+label:before,
+        .ta select option,
+        .ta select {
+            width: 100%;
+            padding: 1em;
+            line-height: 1.4;
+            background-color: #f9f9f9;
+            border: 1px solid #e5e5e5;
+            border-radius: 3px;
+            -webkit-transition: 0.35s ease-in-out;
+            -moz-transition: 0.35s ease-in-out;
+            -o-transition: 0.35s ease-in-out;
+            transition: 0.35s ease-in-out;
+            transition: all 0.35s ease-in-out;
+        }
+
+        .ta input:focus {
+            outline: 0;
+            border-color: #bd8200;
+        }
+
+        .ta input:focus+.input-icon i {
+            color: #f0a500;
+        }
+
+        .ta input:focus+.input-icon:after {
+            border-right-color: #f0a500;
+        }
+
+
+        .ta .input-group {
+            margin-bottom: 1em;
+            zoom: 1;
+        }
+
+        .ta .input-group:before,
+        .ta .input-group:after {
+            content: "";
+            display: table;
+        }
+
+        .ta .input-group:after {
+            clear: both;
+        }
+
+        .ta .input-group-icon {
+            position: relative;
+        }
+
+        .ta .input-group-icon input {
+            padding-left: 4.4em;
+        }
+
+        .ta .input-group-icon .input-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3.4em;
+            height: 3.4em;
+            line-height: 3.4em;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .ta .input-group-icon .input-icon:after {
+            position: absolute;
+            top: 0.6em;
+            bottom: 0.6em;
+            left: 3.4em;
+            display: block;
+            border-right: 1px solid #e5e5e5;
+            content: "";
+            -webkit-transition: 0.35s ease-in-out;
+            -moz-transition: 0.35s ease-in-out;
+            -o-transition: 0.35s ease-in-out;
+            transition: 0.35s ease-in-out;
+            transition: all 0.35s ease-in-out;
+        }
+
+        .ta .input-group-icon .input-icon i {
+            -webkit-transition: 0.35s ease-in-out;
+            -moz-transition: 0.35s ease-in-out;
+            -o-transition: 0.35s ease-in-out;
+            transition: 0.35s ease-in-out;
+            transition: all 0.35s ease-in-out;
+        }
+
+        .ta.container {
+            max-width: 38em;
+            padding: 1em 3em 2em 3em;
+            margin: 0em auto;
+            background-color: #fff;
+            border-radius: 4.2px;
+            box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+        }
+
+        .ta .row {
+            zoom: 1;
+        }
+
+        .ta .row:before,
+        .ta .row:after {
+            content: "";
+            display: table;
+        }
+
+        .ta .row:after {
+            clear: both;
+        }
+
+        .ta .col-half {
+            padding-right: 10px;
+            float: left;
+            width: 50%;
+        }
+
+        .ta .col-half:last-of-type {
+            padding-right: 0;
+        }
+
+        .ta .col-third {
+            padding-right: 10px;
+            float: left;
+            width: 33.33333333%;
+        }
+
+        .ta .col-third:last-of-type {
+            padding-right: 0;
+        }
+
+        @media only screen and (max-width: 540px) {
+            .ta .col-half {
+                width: 100%;
+                padding-right: 0;
+            }
+        }
+        h2{
+            font-size: 17px;
+        }
     </style>
 @stop
 
@@ -607,7 +750,7 @@ h1{
                     @if ($errors->any())
                         <div class="alert alert-danger" role="alert">
                             @foreach ($errors->all() as $error)
-                            {{ $error.', ' }}
+                                {{ $error . ', ' }}
                             @endforeach
                         </div>
                     @endif
@@ -723,6 +866,9 @@ h1{
                                             </li>
                                             <li class="side" role="presentation">
                                                 <a aria-controls="typeset" role="tab" data-toggle="tab">Riwayat</a>
+                                            </li>
+                                            <li class="side" role="presentation">
+                                                <a aria-controls="typeset" role="tab" data-toggle="tab">Tanya Admin</a>
                                             </li>
                                         </ul>
                                         @livewire('exchange-c')

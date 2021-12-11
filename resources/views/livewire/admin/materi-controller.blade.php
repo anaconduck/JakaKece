@@ -201,7 +201,7 @@
                             </thead>
                             <tbody class="table-hover">
                                 @foreach ($materi as $data)
-                                    <tr wire::click="show({{$data->id}})" id="{{ $data->id }}">
+                                    <tr wire:click="show({{ $data->id }})" id="{{ $data->id }}">
                                         <td>{{ $ind++ }}</td>
                                         <td>{{ $data->judul }}</td>
                                         <td>
@@ -214,7 +214,7 @@
                                             @endif
                                         </td>
                                         <td>{{ config('app.allCourse.' . $data->id_course) }}</td>
-                                        <td>{{ config('app.allSesi')[$data->sesi-1] }}</td>
+                                        <td>{{ config('app.allSesi')[$data->sesi - 1] }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

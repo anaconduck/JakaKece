@@ -27,10 +27,12 @@ class HistoryJawabanPractice extends Model
             ->first();
     }
 
-    public static function makeHistoryJawaban($idHistoryPractice, $sesi ,$size){
+    public static function makeHistoryJawaban($idHistoryPractice, $sesi ,$size, $pendek = false){
+        $daftarSoal = self::generateSoal($size);
+        if($pendek) $daftarSoal = array_slice($daftarSoal, 0, $size/2);
         $h = new HistoryJawabanPractice([
             'id_history_practice' => $idHistoryPractice,
-            'daftar_soal' => self::generateSoal($size),
+            'daftar_soal' => json_encode($daftarSoal),
             'sesi' => $sesi
         ]);
         if($h->save()){
@@ -42,15 +44,14 @@ class HistoryJawabanPractice extends Model
     public static function generateSoal($size){
         $daftar = range(1,$size);
         shuffle($daftar);
-        $daftar[0] = 1;
-        $daftar[1] = 2;
-        return json_encode($daftar);
+        return $daftar;
     }
 
-    public static function getHistoryJawaban($idHistoryPractice, $sesi){
-        return self::where('id_history_practice',$idHistoryPractice)
-            ->where('sesi', $sesi)
-            ->first();
+    public static function getHistoryJawaban($idHistoryPractice, $sesi = null){
+        $query = self::where('id_history_practice',$idHistoryPractice);
+            if($sesi) $query = $query->where('sesi', $sesi);
+
+        return $query->first();
     }
 
     public static function jawab($idHistoryPractice, $sesi, $jawaban, $up = 0){
@@ -69,6 +70,7 @@ class HistoryJawabanPractice extends Model
 
     public static function showHistoryJawaban($idHistoryPractice){
         return self::where('id_history_practice',$idHistoryPractice)
+            ->orderBy('sesi','asc')
             ->get();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExchangeMataKuliah;
+use App\Models\ExchangeMataKuliahTujuan;
 use App\Models\ExchangeTujuan;
 use Illuminate\Http\Request;
 
@@ -27,10 +29,13 @@ class UpdateExchangeTujuan extends Controller
             'link' => url('/admin/se/tujuan/'.$tujuan->id)
         ]);
 
+        $mk = ExchangeMataKuliahTujuan::getMataKuliahFrom($tujuan->id);
+        dd($mk);
         return view('admin.update-exchange-tujuan',[
             'title' => 'Update '. $tujuan->nama_universitas,
             'nav' => $this->nav,
-            'tujuan' => $tujuan
+            'tujuan' => $tujuan,
+            'mk' => $mk
         ]);
     }
 
@@ -52,7 +57,7 @@ class UpdateExchangeTujuan extends Controller
             $tujuan->dalam_negeri = $data['dalam_negeri'];
             if($tujuan->save())
                 return redirect('/admin/se/tujuan');
-            
+
         }
         else if($request->get('submit') == 'delete'){
             $tujuan->delete();

@@ -257,9 +257,10 @@
                     <label> Prodi Pendaftar
                         <input type="text" name="prodi" required readonly value="{{ session()->get('prodi') }}" />
                     </label>
+
+                    <a href="{{ Storage::url($paket->file_pelaksanaan) }}">Download Dokumen Pelaksanaan</a>
                     <div class="text-center mt-5">
                         <div class="button">Daftar</div>
-
                     </div>
             </div>
             <div class="modal-body modal-body-step-2">
@@ -366,7 +367,7 @@
                 .siblings().removeClass('is-active');
             $(this).hide();
         });
-        
+
         $('#submit').on('click', function() {
             $('#send')[0].click()
         })

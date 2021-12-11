@@ -32,7 +32,7 @@
 <body style="position: relative">
     <!-- ***** Main Banner Area Start ***** -->
     <!--header-->
-    <header class="main-header clearfix" role="header">
+    <header class="main-header clearfix" role="header" id="nav-bar">
         <div class="logo">
             <a href="{{ url('/') }}"><em>JAKA</em> KECE</a>
             <a href="https://www.kemdikbud.go.id/"><img src="{{ asset('assets/images/kemdikbud.png') }}"
@@ -44,16 +44,56 @@
         <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
         <nav id="menu" class="main-nav" role="navigation">
             <ul class="main-menu">
-                <li class="{{ $home ?? 'external' }}"><a href="{{ url('/home') }}">Home</a></li>
-                <li class="{{ $inkubasi ?? 'external' }}"><a href="{{ url('/inkubasi') }}">Inkubasi Digital
-                        Bahasa</a></li>
-                <li class="{{ $jawara ?? 'external' }}"><a href="{{ '/jawara' }}">Jawara Center</a></li>
-                <li class="{{ $exchange ?? 'external' }}"><a href="{{ url('/exchange') }}">Student Exchange</a>
+                <li class="{{ $home ?? 'external' }}">
+                    <a href="{{ url('/home') }}">Home</a>
+
                 </li>
-                <li class="{{ $training ?? 'eksternal' }}"><a href="{{ url('/training') }}"
-                        class="{{ $training ?? 'eksternal' }}">On The Job Training</a></li>
-                <li class="{{ $user_s ?? 'eksternal' }}"><a href="{{ url('/user') }}"><img
-                            src="{{ asset('assets/images/businessman.png') }}" width="30px"></a></li>
+                <li class="{{ $inkubasi ?? 'external' }} dr">
+                    <a href="{{ url('/inkubasi') }}">Inkubasi Digital
+                        Bahasa</a>
+                    <div class="drop-down">
+                        <ol>
+                            <li>tes</li>
+                            <li>tes2</li>
+                            <li>tes3</li>
+                        </ol>
+                    </div>
+                </li>
+                <li class="{{ $jawara ?? 'external' }} dr">
+                    <a href="{{ '/jawara' }}">Jawara Center</a>
+                    <div class="drop-down">
+                        <ol>
+                            <li>tes</li>
+                            <li>tes2</li>
+                            <li>tes3</li>
+                        </ol>
+                    </div>
+                </li>
+                <li class="{{ $exchange ?? 'external' }} dr">
+                    <a href="{{ url('/exchange') }}">Student Exchange</a>
+                    <div class="drop-down">
+                        <ol>
+                            <li>tes</li>
+                            <li>tes2</li>
+                            <li>tes3</li>
+                        </ol>
+                    </div>
+                </li>
+                <li class="{{ $training ?? 'eksternal' }} dr">
+                    <a href="{{ url('/training') }}" class="{{ $training ?? 'eksternal' }}">On The Job
+                        Training</a>
+                    <div class="drop-down">
+                        <ol>
+                            <li>tes</li>
+                            <li>tes2</li>
+                            <li>tes3</li>
+                        </ol>
+                    </div>
+                </li>
+                @if (auth()->user())
+                    <li class="{{ $user_s ?? 'eksternal' }}"><a href="{{ url('/user') }}"><img
+                                src="{{ asset('assets/images/businessman.png') }}" width="30px"></a></li>
+                @endif
             </ul>
         </nav>
 
@@ -61,7 +101,7 @@
     @if (!empty($nav))
         <div class="container2 container-md-fluid">
             <div class="row ">
-                <div class="col-auto col-md-10 ">
+                <div class="col-auto col-md-12 ">
                     <nav aria-label="breadcrumb " class="first d-md-flex">
                         <ol class="breadcrumb indigo lighten-6 first-1 shadow-lg ">
                             @for ($i = 0; $i < sizeof($nav) - 1; $i++)
@@ -407,7 +447,7 @@
         }
 
         .container2 {
-            margin-top: 120px;
+            margin-top: 130px;
         }
 
         .container2 .breadcrumb>li+li:before {
@@ -415,16 +455,23 @@
         }
 
         .container2 .breadcrumb {
-            padding: 19px;
             font-size: 14px;
             color: #aaa !important;
             letter-spacing: 2px;
-            border-radius: 5px !important
+            border-radius: 5px !important;
+            padding: 10px;
+            padding-left: 10px;
         }
 
         .container2 .first ol {
             border-top-right-radius: 200px !important;
             border-bottom-right-radius: 200px !important
+        }
+
+        @media only screen and (max-width:417px) {
+            .container2 {
+                margin-top: 150px;
+            }
         }
 
         .container2 .first-1 {

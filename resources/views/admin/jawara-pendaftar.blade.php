@@ -159,10 +159,6 @@
                                 $data->data_mahasiswa = json_decode($data->data_mahasiswa)
                             @endphp
                             @foreach ($data->data_mahasiswa as $key => $mahasiswa)
-                                @php
-                                    if(str_contains($key,'Nim'))
-                                        continue;
-                                @endphp
                                 <li>{{ $mahasiswa }}</li>
                             @endforeach
                             </ol>

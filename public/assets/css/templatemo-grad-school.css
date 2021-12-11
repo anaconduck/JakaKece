@@ -155,7 +155,7 @@ p {
 }
 
 .section-heading h2 {
-    margin-top: 100px;
+    margin-top: 40px;
     position: relative;
     font-size: 18px;
     font-weight: 500;
@@ -266,7 +266,7 @@ a.menu-link {
 }
 
 .main-header {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.959);
     height: fit-content;
     min-height: 65px;
     position: fixed;
@@ -274,7 +274,7 @@ a.menu-link {
     width: 100%;
     top: 0;
     border-bottom: 1px solid #797A7E;
-    box-shadow: 0 3px 10px rgba(121, 122, 126, 0.4);
+    box-shadow: 0 3px 30px 10px rgba(0, 0, 0, 0.404)
 }
 
 .main-header .logo {
@@ -415,6 +415,7 @@ a.menu-link {
     min-width: 100%;
     max-width: 100%;
     max-height: 100vh;
+    height: 100vh;
     object-fit: cover;
     z-index: -1;
 }
@@ -1328,7 +1329,7 @@ section .center .inputbox:hover [type="submit"] {
 section.courses {
     background-color: #f5a5250c;
     padding-bottom: 100px;
-    padding: 0px 30px 100px 30px;
+    padding: 0px 30px 30px 30px;
 }
 
 section.courses .item img {
@@ -2142,7 +2143,69 @@ footer p a:hover {
 }
 
 @media screen and (max-width: 1140px) {
-    section.coming-soon {
-        margin-top: 30px;
+    .main-banner {
+        margin-top: 80px;
+    }
+}
+
+@media screen and (max-width:432px) {
+    .main-banner {
+        margin-top: 150px;
+    }
+}
+
+@media screen and (max-width:367px) {
+    .main-banner {
+        margin-top: 221px;
+    }
+}
+
+.dr:hover .drop-down {
+    display: block;
+}
+
+.drop-down {
+    position: absolute;
+    color: #583b0c;
+    left: 10px;
+    right: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 150px;
+    transform: translateY(-350px);
+    transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.7s;
+}
+
+.dr:hover .drop-down {
+    transform: translateY(0);
+}
+
+.drop-down ol {
+    padding: 0;
+    width: 100%;
+}
+
+.drop-down li {
+    width: 100%;
+    border-top: 1px solid #f5a425;
+    border-left: 2px solid #f5a425;
+    border-bottom: 2px solid #f5a425;
+    border-right: 2px solid #f5a425;
+    background-color: rgba(255, 255, 255, 0.945);
+    margin-bottom: 10px;
+    border-radius: 0 0 10px 10px;
+    cursor: pointer;
+    transition: all cubic-bezier(0.6, -0.28, 0.735, 0.045) 0.5s;
+}
+
+.drop-down li:hover {
+    box-shadow: 0 8px 10px 2px rgb(255, 255, 255);
+    transform: scale(0.95);
+}
+
+@media screen and (max-width:950px) {
+    .drop-down li {
+        display: none;
     }
 }

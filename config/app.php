@@ -338,4 +338,22 @@ return [
         'ekonomi pembangunan' => 1,
         'pendidikan ekonomi' =>2
     ],
+    'prodi' =>[
+        1 => 'Ekonomi Pembangunan',
+        2 => 'Pendidikan Ekonomi'
+    ],
+    'dokumentasi' => [
+        'cv' => 'Curriculum Vitae',
+        'ml' => 'Motivation Letter',
+        'ac' => 'Transkrip akademik semua semester',
+        'sf' => 'Sertifikat kemampuan Bahasa Inggris (TOEFL/IELTS)',
+        'ktm' => 'Kartu Tanda Mahasiswa',
+        'bc' => 'Bukti cetak sebagai mahasiswa aktif di Pangkalan Data Pendidikan Tinggi (PDDIKTI)',
+        'la' => 'Learning Agreement',
+        'mo' => 'MoU/MoA (bisa didownload dari sikarsa.um.ac.id)',
+    ],
+    'dokumentasi_ojt' => [
+
+    ],
+    'emailSys' => 'AdminJaka@jakakece.com',
 ];
