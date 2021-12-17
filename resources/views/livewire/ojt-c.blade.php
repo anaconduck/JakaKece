@@ -61,6 +61,7 @@
                 </div>
             </div>
         </div>
+        @auth
         <div role="tabpanel" class="t1 tab-pane
         @if ($pos == 2)
         show active
@@ -98,5 +99,6 @@
                 @endif
             </div>
         </div>
+        @endauth
     </div>
 </div>

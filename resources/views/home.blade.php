@@ -2,12 +2,27 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
+    <style>
+        .untitled__slide:nth-child(1) .untitled__slideBg {
+            background-image: url({{ Storage::url($dashboard->background['inkubasi']) }})
+        }
+        .untitled__slide:nth-child(2) .untitled__slideBg {
+            background-image: url({{ Storage::url($dashboard->background['jawara']) }})
+        }
+        .untitled__slide:nth-child(3) .untitled__slideBg {
+            background-image: url({{ Storage::url($dashboard->background['exchange']) }})
+        }
+        .untitled__slide:nth-child(4) .untitled__slideBg {
+            background-image: url({{ Storage::url($dashboard->background['training']) }})
+        }
+    </style>
 @stop
 
 @section('slot')
 
     <section class="section main-banner" id="top" data-section="section1">
-        <iframe src="https://www.youtube.com/embed/LsTMccNX8LA?autoplay=1&mute=1&loop=1&playlist=LsTMccNX8LA" frameborder="0" id="bg-video" allowfullscreen allow="autoplay"></iframe>
+        <iframe src="https://www.youtube.com/embed/{{ $dashboard->banner  }}?autoplay=1&mute=1&loop=1&playlist={{ $dashboard->banner }}"
+            frameborder="0" id="bg-video" allowfullscreen allow="autoplay"></iframe>
 
         <div class="video-overlay header-text">
             <div class="caption">
@@ -26,97 +41,44 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
-                        <h2><b>Berita</b></h2>
+                        <h2><b>Berita Terbaru</b></h2>
                     </div>
                 </div>
                 <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <img src="assets/images/courses-02.jpg" alt="Course #1">
-                        <div class="down-content">
-                            <h4>Inkubasi Bahasa</h4>
-                            <p>Terdapat 4 course dengan materi dan latihan soal yang lengkap.</p>
-                            <div class="text-button-pay">
-                                <a href="{{ url('/inkubasi') }}">visit <i class="fa fa-angle-double-right"></i></a>
+                    @foreach ($berita as $b)
+                        <div class="item">
+                            <img src="
+                            @if ($b->file)
+                                {{ Storage::url($b->file) }}
+                            @else
+                                assets/images/courses-04.jpg
+                            @endif
+                            " alt="{{ $b->judul }}">
+                            <div class="down-content">
+                                <h4>{{ $b->judul }}</h4>
+                                <p>{{ substr($b->deskripsi, 3, 20) }} ...</p>
+                                <div class="text-button-pay">
+                                    <a href="{{ url('/berita/' . $b->id) }}"> Detail <i class="fa fa-angle-double-right"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <img src="assets/images/courses-05.jpg" alt="Course #2">
-                        <div class="down-content">
-                            <h4>Jawara Center</h4>
-                            <p>Jadilah juara dunia!</p>
-                            <div class="text-button-pay">
-                                <a href="{{ url('/jawara') }}">visit <i class="fa fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="assets/images/courses-03.jpg" alt="Course #3">
-                        <div class="down-content">
-                            <h4>Student Exchange</h4>
-                            <p>Dapatkan pengalaman belajar di luar.</p>
-                            <div class="text-button-pay">
-                                <a href="{{ url('/exchange') }}">visit <i class="fa fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="assets/images/courses-04.jpg" alt="Course #4">
-                        <div class="down-content">
-                            <h4>On the Job Training</h4>
-                            <p>Perbanyak pengalaman dengan mengikuti kegiatan magang</p>
-                            <div class="text-button-pay">
-                                <a href="{{ url('/training') }}">visit <i class="fa fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
         <div class="container ctr"">
-                    <div class="  card">
-            <figure class="card__thumb">
-                <img src="" alt="Picture by Kyle Cottrell" class="card__image">
-                <figcaption class="card__caption">
-                    <h2 class="card__title">ttess</h2>
-                    <p class="card__snippet">deskripsi sinkgat</p>
-                    <a href="" class="card__button">Read more</a>
-                </figcaption>
-            </figure>
-        </div>
-
-        <div class="card">
-            <figure class="card__thumb">
-                <img src="" alt="Picture by Nathan Dumlao" class="card__image">
-                <figcaption class="card__caption">
-                    <h2 class="card__title">ttess</h2>
-                    <p class="card__snippet">deskripsi sinkgat</p>
-                    <a href="" class="card__button">Read more</a>
-                </figcaption>
-            </figure>
-        </div>
-
-        <div class="card">
-            <figure class="card__thumb">
-                <img src="" alt="Picture by Daniel Lincoln" class="card__image">
-                <figcaption class="card__caption">
-                    <h2 class="card__title">ttess</h2>
-                    <p class="card__snippet">deskripsi sinkgat</p>
-                    <a href="" class="card__button">Read more</a>
-                </figcaption>
-            </figure>
-        </div>
-
-        <div class="card">
-            <figure class="card__thumb">
-                <img src="" alt="Picture by Daniel Lincoln" class="card__image">
-                <figcaption class="card__caption">
-                    <h2 class="card__title">ttess</h2>
-                    <p class="card__snippet">deskripsi sinkgat</p>
-                    <a href="" class="card__button">Read more</a>
-                </figcaption>
-            </figure>
-        </div>
+            @foreach ($top as $t)
+                <div class=" card">
+                    <figure class="card__thumb">
+                        <img src="{{ Storage::url($t->file) }}" alt="{{ $t->judul }} Cottrell" class="card__image">
+                        <figcaption class="card__caption">
+                            <h2 class="card__title">{{ $t->judul }}</h2>
+                            <p class="card__snippet">{{ substr($b->deskripsi, 5, 40) }} ...</p>
+                            <a href="{{ url('/berita/'.$t->id) }}" class="card__button">Baca Selengkapnya</a>
+                        </figcaption>
+                    </figure>
+                </div>
+            @endforeach
         </div>
     </section>
 
@@ -174,23 +136,22 @@
             <div class="row">
                 <div class="col-md-6 col-xs-12">
                     <div class="continer centerIt">
-                        <h4>Tentang <em>Aplikasi</em></h4>
+                        <h4 style="margin: 0; margin-bottom: 30px;">Tentang <em>Aplikasi</em></h4>
                         <div>
-                            <p style="font-weight: bold;font-size: 15px; text-align: justify" color="black">- &nbspAplikasi
-                                Sistem Rumah Jawara Kampus Merdeka EKP Innovation Center (Jaka
-                                Kece) dibuat untuk membantu Fakultas Ekonomi Universitas Negeri Malang dalam menyediakan
-                                layanan
-                                berbasis teknologi.
-                                <br><br>- &nbspInovasi Layanan ini diterapkan di jurusan ekonomi pembangunan dengan tujuan
-                                memudahkan akademisi (tenaga pendidik dan mahasiswa) dalam mendapatkan informasi terkait
-                                dengan
-                                pendidikan, kegiatan akademik, kegiatan kemahasiswaan, magang mahasiswa, dan pertukaran
-                                mahasiswa.
+                            <p style="font-weight: bold;font-size: 15px; text-align: justify" color="black">
+                                {{ $dashboard->tentangAplikasi['deskripsi1'] }}
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <div class="continer centerIt">
+                        <div>
+                            <p style="font-weight: bold;font-size: 15px; text-align: justify" color="black">
+                                {{ $dashboard->tentangAplikasi['deskripsi2'] }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -198,8 +159,7 @@
 @stop
 @section('script')
     <script>
-        // Master DOManipulator v2 ------------------------------------------------------------
-        const items = document.querySelectorAll('.item'),
+       const items = document.querySelectorAll('.item'),
             controls = document.querySelectorAll('.control'),
             headerItems = document.querySelectorAll('.item-header'),
             descriptionItems = document.querySelectorAll('.item-description'),
@@ -216,16 +176,16 @@
                 controls[current].classList.add('active');
                 items[current].classList.add('active');
             },
-            nextSlide: () => { // Increment current slide and add active class
+            nextSlide: () => {
                 slider.reset();
-                if (current === items.length - 1) current = -1; // Check if current slide is last in array
+                if (current === items.length - 1) current = -1;
                 current++;
                 controls[current].classList.add('active');
                 items[current].classList.add('active');
                 slider.transitionDelay(headerItems);
                 slider.transitionDelay(descriptionItems);
             },
-            clickedControl: (e) => { // Add active class to clicked control and corresponding slide
+            clickedControl: (e) => {
                 slider.reset();
                 clearInterval(intervalF);
 
@@ -234,37 +194,37 @@
 
                 control.classList.add('active');
                 items.forEach((item, index) => {
-                    if (index === dataIndex) { // Add active class to corresponding slide
+                    if (index === dataIndex) {
                         item.classList.add('active');
                     }
                 })
-                current = dataIndex; // Update current slide
+                current = dataIndex;
                 slider.transitionDelay(headerItems);
                 slider.transitionDelay(descriptionItems);
-                intervalF = setInterval(slider.nextSlide, interval); // Fire that bad boi back up
+                intervalF = setInterval(slider.nextSlide, interval);
             },
-            reset: () => { // Remove active classes
+            reset: () => {
                 items.forEach(item => item.classList.remove('active'));
                 controls.forEach(control => control.classList.remove('active'));
             },
             transitionDelay: (
                 items
-            ) => { // Set incrementing css transition-delay for .item-header & .item-description, .vertical-part, b elements
+            ) => {
                 let seconds;
 
                 items.forEach(item => {
-                    const children = item.childNodes; // .vertical-part(s)
+                    const children = item.childNodes;
                     let count = 1,
                         delay;
 
                     item.classList.value === 'item-header' ? seconds = .015 : seconds = .007;
 
-                    children.forEach(child => { // iterate through .vertical-part(s) and style b element
+                    children.forEach(child => {
                         if (child.classList) {
                             item.parentNode.classList.contains('active') ? delay = count * seconds +
                                 activeDelay : delay = count * seconds;
                             child.firstElementChild.style.transitionDelay =
-                                `${delay}s`; // b element
+                                `${delay}s`;
                             count++;
                         }
                     })

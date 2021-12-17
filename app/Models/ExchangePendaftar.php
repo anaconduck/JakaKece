@@ -43,4 +43,8 @@ class ExchangePendaftar extends Model
             ->whereNotNull('dokumentasi')
             ->count();
     }
+
+    public static function countPendaftar(){
+        return self::where('created_at', );
+    }
 }

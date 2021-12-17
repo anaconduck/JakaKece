@@ -378,14 +378,14 @@ a.menu-link {
     border: none;
 }
 
-.main-nav li:hover a,
-.main-nav li.active a {
+.main-nav li:hover>a,
+.main-nav li.active>a {
     border-left: 2px solid #56566b;
     border-top: 2px solid #56566b;
     border-right: 2px solid #56566b;
 }
 
-.main-nav li.selected a {
+.main-nav li.selected>a {
     border-bottom: 2px solid #4C4C6D;
 }
 
@@ -2167,13 +2167,13 @@ footer p a:hover {
 .drop-down {
     position: absolute;
     color: #583b0c;
-    left: 10px;
-    right: 10px;
+    left: 2px;
+    right: 2px;
     font-size: 17px;
     font-weight: 600;
     text-align: center;
     min-width: 150px;
-    transform: translateY(-350px);
+    transform: translateY(-550px);
     transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.7s;
 }
 
@@ -2196,7 +2196,12 @@ footer p a:hover {
     margin-bottom: 10px;
     border-radius: 0 0 10px 10px;
     cursor: pointer;
-    transition: all cubic-bezier(0.6, -0.28, 0.735, 0.045) 0.5s;
+    transition: all cubic-bezier(0.6, -0.28, 0.735, 0.045) 0.1s;
+}
+
+.drop-down a {
+    border: none;
+    padding: 0;
 }
 
 .drop-down li:hover {

@@ -11,8 +11,6 @@
 
     <title>JAKA KECE | {{ $title ?? 'Admin' }}</title>
 
-    <!-- Bootstrap core CSS -->
-    <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/templatemo-style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
@@ -26,15 +24,9 @@
 </head>
 
 <body class="is-preload">
-
-    <!-- Wrapper -->
     <div id="wrapper">
-
-        <!-- Main -->
         <div id="main">
             <div class="inner">
-
-                <!-- Header -->
                 <header id="header">
                     <div class="logo">
                         <a href="{{ url('/admin') }}">JakaKece | Admin</a>
@@ -49,7 +41,8 @@
                                         @for ($i = 0; $i < sizeof($nav) - 1; $i++)
                                             <li class="breadcrumb-item font-weight-bold"><a
                                                     class="black-text text-uppercase "
-                                                    href="{{ $nav[$i]['link'] }}"><span>{{ $nav[$i]['title'] }}</span></a> </li>
+                                                    href="{{ $nav[$i]['link'] }}"><span>{{ $nav[$i]['title'] }}</span></a>
+                                            </li>
                                         @endfor
 
                                         <li class="breadcrumb-item font-weight-bold mr-0 pr-0"><a
@@ -76,6 +69,18 @@
                 <nav id="menu">
                     <ul>
                         <li><a href="{{ url('/admin') }}">Homepage</a></li>
+                        @if (auth()->user()->status)
+                            <li><a href="{{ url('/admin/dashboard') }}">Statistik</a></li>
+                        @endif
+                        <li><a href="{{ url('/admin/berita') }}">Berita</a></li>
+                        <li>
+                            <span class="opener">Kelola Dashboard</span>
+                            <ul>
+                                <li><a href="{{ url('/admin/kelola-dashboard') }}">Kelola Home</a></li>
+                                <li><a href="{{ url('/admin/kelola-deskripsi') }}">Kelola Slideshow Deskripsi</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li>
                             <span class="opener">Inkubasi Digital Bahasa</span>
                             <ul>
@@ -130,9 +135,6 @@
         </div>
 
     </div>
-
-    <!-- Scripts -->
-    <!-- Bootstrap core JavaScript -->
 
     <script src="{{ asset('assets/js/browser.min.js') }}"></script>
     <script src="{{ asset('assets/js/breakpoints.min.js') }}"></script>

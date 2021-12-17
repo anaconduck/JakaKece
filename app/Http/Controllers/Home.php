@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
+use App\Models\Dashboard;
 use App\Models\Mahasiswa;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
@@ -15,10 +17,21 @@ class Home extends Controller
 {
 
     public function home(){
-        $berita = null;
+        $berita = Berita::showBertita();
+        $top = Berita::topBerita();
+        $dashboard = Dashboard::first();
+        if($dashboard->background)
+            $dashboard->background = json_decode($dashboard->background, true);
+        else $dashboard->background = [];
+        if($dashboard->tentangAplikasi)
+            $dashboard->tentangAplikasi = json_decode($dashboard->tentangAplikasi, true);
+        else $dashboard->tentangAplikasi = [];
         return view('home',[
             'title' => 'Home',
-            'home' => 'selected'
+            'home' => 'selected',
+            'berita' => $berita,
+            'top' => $top,
+            'dashboard' => $dashboard
         ]);
     }
 

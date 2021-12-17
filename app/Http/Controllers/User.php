@@ -29,7 +29,7 @@ class User extends Controller
     public $nav;
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth','user']);
         $this->nav = [
             [
                 'title' => 'User',

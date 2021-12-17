@@ -19,6 +19,8 @@ class EnsureUserIsValid
         if(auth()->user()->status === 'guest'){
             return redirect()->route('home');
         }
+        else if(auth()->user()->status === 'admin')
+            return redirect('/admin');
         return $next($request);
     }
 }

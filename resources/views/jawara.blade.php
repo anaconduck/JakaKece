@@ -3,178 +3,6 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/css/jawara.css') }}" />
     <style>
-        section.why-us {
-            position: relative;
-        }
-
-        section.why-us::after {
-            content: "";
-            background: url('https://image.freepik.com/free-vector/flat-geometric-background_23-2148957209.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.2;
-            top: -150px;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            position: absolute;
-            z-index: -1;
-        }
-
-        .ta input,
-        .ta input[type="radio"]+label,
-        .ta input[type="checkbox"]+label:before,
-        .ta select option,
-        .ta select {
-            width: 100%;
-            padding: 1em;
-            line-height: 1.4;
-            background-color: #f9f9f9;
-            border: 1px solid #e5e5e5;
-            border-radius: 3px;
-            -webkit-transition: 0.35s ease-in-out;
-            -moz-transition: 0.35s ease-in-out;
-            -o-transition: 0.35s ease-in-out;
-            transition: 0.35s ease-in-out;
-            transition: all 0.35s ease-in-out;
-        }
-
-        .ta input:focus {
-            outline: 0;
-            border-color: #bd8200;
-        }
-
-        .ta input:focus+.input-icon i {
-            color: #f0a500;
-        }
-
-        .ta input:focus+.input-icon:after {
-            border-right-color: #f0a500;
-        }
-
-
-        .ta .input-group {
-            margin-bottom: 1em;
-            zoom: 1;
-        }
-
-        .ta .input-group:before,
-        .ta .input-group:after {
-            content: "";
-            display: table;
-        }
-
-        .ta .input-group:after {
-            clear: both;
-        }
-
-        .ta .input-group-icon {
-            position: relative;
-        }
-
-        .ta .input-group-icon input {
-            padding-left: 4.4em;
-        }
-
-        .ta .input-group-icon .input-icon {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3.4em;
-            height: 3.4em;
-            line-height: 3.4em;
-            text-align: center;
-            pointer-events: none;
-        }
-
-        .ta .input-group-icon .input-icon:after {
-            position: absolute;
-            top: 0.6em;
-            bottom: 0.6em;
-            left: 3.4em;
-            display: block;
-            border-right: 1px solid #e5e5e5;
-            content: "";
-            -webkit-transition: 0.35s ease-in-out;
-            -moz-transition: 0.35s ease-in-out;
-            -o-transition: 0.35s ease-in-out;
-            transition: 0.35s ease-in-out;
-            transition: all 0.35s ease-in-out;
-        }
-
-        .ta .input-group-icon .input-icon i {
-            -webkit-transition: 0.35s ease-in-out;
-            -moz-transition: 0.35s ease-in-out;
-            -o-transition: 0.35s ease-in-out;
-            transition: 0.35s ease-in-out;
-            transition: all 0.35s ease-in-out;
-        }
-
-        .ta.container {
-            max-width: 38em;
-            padding: 1em 3em 2em 3em;
-            margin: 0em auto;
-            background-color: #fff;
-            border-radius: 4.2px;
-            box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
-        }
-
-        .ta .row {
-            zoom: 1;
-        }
-
-        .ta .row:before,
-        .ta .row:after {
-            content: "";
-            display: table;
-        }
-
-        .ta .row:after {
-            clear: both;
-        }
-
-        .ta .col-half {
-            padding-right: 10px;
-            float: left;
-            width: 50%;
-        }
-
-        .ta .col-half:last-of-type {
-            padding-right: 0;
-        }
-
-        .ta .col-third {
-            padding-right: 10px;
-            float: left;
-            width: 33.33333333%;
-        }
-
-        .ta .col-third:last-of-type {
-            padding-right: 0;
-        }
-
-        @media only screen and (max-width: 540px) {
-            .ta .col-half {
-                width: 100%;
-                padding-right: 0;
-            }
-        }
-        h2{
-            font-size: 17px;
-        }
-        .desc{
-            background-color: rgba(255, 255, 255, 0.397);
-            box-shadow: 10px 5px 20px rgba(0, 0, 0, 0.35);
-            padding: 40px;
-            text-align: justify;
-            border-radius: 20px;
-        }
-        .desc p{
-            font-size: 14px;
-            font-weight: 500;
-            color: #221807
-        }
     </style>
 @stop
 
@@ -190,12 +18,75 @@
                 </div>
                 <div class="col-md-12">
                     <h1>Jawara Center</h1>
-                    <div class="desc">
-                        <p>Halo Mahasiswa EKP! Selamat datang di Jawara Center yang merupakan sebuah wadah bagi mahasiswa EKP dalam mengikuti kegiatan kompetisi/lomba baik secara Regional, Nasional maupun Internasional. Disini kalian bisa melihat daftar list lomba/kompetisi serta melakukan pendaftaran lomba untuk memperoleh bantuan pendanaan lomba dan reward bagi mahasiswa yang berprestasi. Tidak hanya itu jika lomba yang kalian ikuti belum ada dalam daftar, kalian bisa langsung memberikan informasi kepada admin lewat kolom dibawah.   </p>
-                        <br>
-                        <p>Dalam riwayat Jawa Center kalian juga bisa melihat track record teman-teman kalian yang sudah berhasil meraih kejuaraan. Yuk semangat, jadilah bagian dari Jawara Center EKP yang berprestasi!</p>
+                    <hr>
+                    <main class="main-content">
+                        <section class="slideshow">
+                            <div class="slideshow-inner">
+                                <div class="slides">
 
-                    </div>
+                                    @foreach ($slides as $ind => $slide)
+
+                                        <div
+                                            class="slide
+                                    @if ($ind == 0)
+                                    is-active
+                                    @endif">
+                                            <div class="slide-content">
+                                                <div class="caption">
+                                                    <div class="text">
+                                                        <p>{{ $slide['deskripsi'] }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="image-container">
+                                                <img src="{{ Storage::url($slide['file']) }}" alt=""
+                                                    class="image" />
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="pagination">
+
+                                    <div class="item is-active">
+                                        <span class="icon">1</span>
+                                    </div>
+                                    @for ($i = 1; $i < $slides->count(); $i++)
+
+                                        <div class="item">
+                                            <span class="icon">{{ $i + 1 }}</span>
+                                        </div>
+                                    @endfor
+                                </div>
+                                <div class="arrows">
+                                    <div class="arrow prev">
+                                        <span class="svg svg-arrow-left">
+                                            <svg version="1.1" id="svg4-Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px"
+                                                height="26px" viewBox="0 0 14 26" enable-background="new 0 0 14 26"
+                                                xml:space="preserve">
+                                                <path
+                                                    d="M13,26c-0.256,0-0.512-0.098-0.707-0.293l-12-12c-0.391-0.391-0.391-1.023,0-1.414l12-12c0.391-0.391,1.023-0.391,1.414,0s0.391,1.023,0,1.414L2.414,13l11.293,11.293c0.391,0.391,0.391,1.023,0,1.414C13.512,25.902,13.256,26,13,26z" />
+                                            </svg>
+                                            <span class="alt sr-only"></span>
+                                        </span>
+                                    </div>
+                                    <div class="arrow next">
+                                        <span class="svg svg-arrow-right">
+                                            <svg version="1.1" id="svg5-Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px"
+                                                height="26px" viewBox="0 0 14 26" enable-background="new 0 0 14 26"
+                                                xml:space="preserve">
+                                                <path
+                                                    d="M1,0c0.256,0,0.512,0.098,0.707,0.293l12,12c0.391,0.391,0.391,1.023,0,1.414l-12,12c-0.391,0.391-1.023,0.391-1.414,0s-0.391-1.023,0-1.414L11.586,13L0.293,1.707c-0.391-0.391-0.391-1.023,0-1.414C0.488,0.098,0.744,0,1,0z" />
+                                            </svg>
+                                            <span class="alt sr-only"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <hr>
                     @if ($message[0] == 1)
                         <div class="alert alert-success" role="alert">
                             {{ $message[1] }}
@@ -206,50 +97,7 @@
                         </div>
                     @endif
                     <hr>
-                    <div style="max-width: 60%; margin: 0 auto;">
-                        <section class="carousel" aria-label="Gallery">
-                            <ol class="carousel__viewport">
-                                <li id="carousel__slide1" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper">
-                                        <a href="#carousel__slide4" class="carousel__prev">Go to last slide</a>
-                                        <a href="#carousel__slide2" class="carousel__next">Go to next slide</a>
-                                    </div>
-                                </li>
-                                <li id="carousel__slide2" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper"></div>
-                                    <a href="#carousel__slide1" class="carousel__prev">Go to previous slide</a>
-                                    <a href="#carousel__slide3" class="carousel__next">Go to next slide</a>
-                                </li>
-                                <li id="carousel__slide3" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper"></div>
-                                    <a href="#carousel__slide2" class="carousel__prev">Go to previous slide</a>
-                                    <a href="#carousel__slide4" class="carousel__next">Go to next slide</a>
-                                </li>
-                                <li id="carousel__slide4" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper"></div>
-                                    <a href="#carousel__slide3" class="carousel__prev">Go to previous slide</a>
-                                    <a href="#carousel__slide1" class="carousel__next">Go to first slide</a>
-                                </li>
-                            </ol>
-                            <aside class="carousel__navigation">
-                                <ol class="carousel__navigation-list">
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide1" class="carousel__navigation-button">Go to slide 1</a>
-                                    </li>
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide2" class="carousel__navigation-button">Go to slide 2</a>
-                                    </li>
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide3" class="carousel__navigation-button">Go to slide 3</a>
-                                    </li>
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide4" class="carousel__navigation-button">Go to slide 4</a>
-                                    </li>
-                                </ol>
-                            </aside>
-                        </section>
 
-                    </div>
                     <div class="body-card mt-5 mb-5">
                         <div class="cont">
                             <ul class="cards">
@@ -308,14 +156,27 @@
                                     <div class="vertical-tab" role="tabpanel">
 
                                         <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" class="active side">
+
+                                            <li role="presentation" class="side
+                                            @if ($section === 'pendaftaran')
+                                                active
+                                            @endif
+                                            ">
                                                 <a aria-controls="home" role="tab" data-toggle="tab">Pendaftaran</a>
                                             </li>
-                                            <li class="side" role="presentation">
+                                            <li class="side
+                                            @if ($section === 'terlaksana')
+                                                active
+                                            @endif
+                                            " role="presentation">
                                                 <a aria-controls="messages" role="tab" data-toggle="tab">Terlaksana</a>
                                             </li>
                                             @if (auth()->user())
-                                                <li class="side" role="presentation">
+                                                <li class="side
+                                                @if ($section === 'tanya')
+                                                active
+                                                @endif
+                                                " role="presentation">
                                                     <a aria-controls="typeset" role="tab" data-toggle="tab">Tanya Admin</a>
                                                 </li>
                                             @endif
@@ -335,6 +196,7 @@
 @stop
 
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
     <script>
         let sidenav = $('.side')
         let tab = $('.t1')
@@ -349,5 +211,248 @@
             }
         })
         $('form').submit(false);
+
+
+        var slideshowDuration = 4000;
+        var slideshow = $('.main-content .slideshow');
+
+        function slideshowSwitch(slideshow, index, auto) {
+            if (slideshow.data('wait')) return;
+
+            var slides = slideshow.find('.slide');
+            var pages = slideshow.find('.pagination');
+            var activeSlide = slides.filter('.is-active');
+            var activeSlideImage = activeSlide.find('.image-container');
+            var newSlide = slides.eq(index);
+            var newSlideImage = newSlide.find('.image-container');
+            var newSlideContent = newSlide.find('.slide-content');
+            var newSlideElements = newSlide.find('.caption > *');
+            if (newSlide.is(activeSlide)) return;
+
+            newSlide.addClass('is-new');
+            var timeout = slideshow.data('timeout');
+            clearTimeout(timeout);
+            slideshow.data('wait', true);
+            var transition = slideshow.attr('data-transition');
+            if (transition == 'fade') {
+                newSlide.css({
+                    display: 'block',
+                    zIndex: 2
+                });
+                newSlideImage.css({
+                    opacity: 0
+                });
+
+                TweenMax.to(newSlideImage, 1, {
+                    alpha: 1,
+                    onComplete: function() {
+                        newSlide.addClass('is-active').removeClass('is-new');
+                        activeSlide.removeClass('is-active');
+                        newSlide.css({
+                            display: '',
+                            zIndex: ''
+                        });
+                        newSlideImage.css({
+                            opacity: ''
+                        });
+                        slideshow.find('.pagination').trigger('check');
+                        slideshow.data('wait', false);
+                        if (auto) {
+                            timeout = setTimeout(function() {
+                                slideshowNext(slideshow, false, true);
+                            }, slideshowDuration);
+                            slideshow.data('timeout', timeout);
+                        }
+                    }
+                });
+            } else {
+                if (newSlide.index() > activeSlide.index()) {
+                    var newSlideRight = 0;
+                    var newSlideLeft = 'auto';
+                    var newSlideImageRight = -slideshow.width() / 8;
+                    var newSlideImageLeft = 'auto';
+                    var newSlideImageToRight = 0;
+                    var newSlideImageToLeft = 'auto';
+                    var newSlideContentLeft = 'auto';
+                    var newSlideContentRight = 0;
+                    var activeSlideImageLeft = -slideshow.width() / 4;
+                } else {
+                    var newSlideRight = '';
+                    var newSlideLeft = 0;
+                    var newSlideImageRight = 'auto';
+                    var newSlideImageLeft = -slideshow.width() / 8;
+                    var newSlideImageToRight = '';
+                    var newSlideImageToLeft = 0;
+                    var newSlideContentLeft = 0;
+                    var newSlideContentRight = 'auto';
+                    var activeSlideImageLeft = slideshow.width() / 4;
+                }
+
+                newSlide.css({
+                    display: 'block',
+                    width: 0,
+                    right: newSlideRight,
+                    left: newSlideLeft,
+                    zIndex: 2
+                });
+
+                newSlideImage.css({
+                    width: slideshow.width(),
+                    right: newSlideImageRight,
+                    left: newSlideImageLeft
+                });
+
+                newSlideContent.css({
+                    width: slideshow.width(),
+                    left: newSlideContentLeft,
+                    right: newSlideContentRight
+                });
+
+                activeSlideImage.css({
+                    left: 0
+                });
+
+                TweenMax.set(newSlideElements, {
+                    y: 20,
+                    force3D: true
+                });
+                TweenMax.to(activeSlideImage, 1, {
+                    left: activeSlideImageLeft,
+                    ease: Power3.easeInOut
+                });
+
+                TweenMax.to(newSlide, 1, {
+                    width: slideshow.width(),
+                    ease: Power3.easeInOut
+                });
+
+                TweenMax.to(newSlideImage, 1, {
+                    right: newSlideImageToRight,
+                    left: newSlideImageToLeft,
+                    ease: Power3.easeInOut
+                });
+
+                TweenMax.staggerFromTo(newSlideElements, 0.8, {
+                    alpha: 0,
+                    y: 60
+                }, {
+                    alpha: 1,
+                    y: 0,
+                    ease: Power3.easeOut,
+                    force3D: true,
+                    delay: 0.6
+                }, 0.1, function() {
+                    newSlide.addClass('is-active').removeClass('is-new');
+                    activeSlide.removeClass('is-active');
+                    newSlide.css({
+                        display: '',
+                        width: '',
+                        left: '',
+                        zIndex: ''
+                    });
+
+                    newSlideImage.css({
+                        width: '',
+                        right: '',
+                        left: ''
+                    });
+
+                    newSlideContent.css({
+                        width: '',
+                        left: ''
+                    });
+
+                    newSlideElements.css({
+                        opacity: '',
+                        transform: ''
+                    });
+
+                    activeSlideImage.css({
+                        left: ''
+                    });
+
+                    slideshow.find('.pagination').trigger('check');
+                    slideshow.data('wait', false);
+                    if (auto) {
+                        timeout = setTimeout(function() {
+                            slideshowNext(slideshow, false, true);
+                        }, slideshowDuration);
+                        slideshow.data('timeout', timeout);
+                    }
+                });
+            }
+        }
+
+        function slideshowNext(slideshow, previous, auto) {
+            var slides = slideshow.find('.slide');
+            var activeSlide = slides.filter('.is-active');
+            var newSlide = null;
+            if (previous) {
+                newSlide = activeSlide.prev('.slide');
+                if (newSlide.length === 0) {
+                    newSlide = slides.last();
+                }
+            } else {
+                newSlide = activeSlide.next('.slide');
+                if (newSlide.length == 0)
+                    newSlide = slides.filter('.slide').first();
+            }
+
+            slideshowSwitch(slideshow, newSlide.index(), auto);
+        }
+
+        function homeSlideshowParallax() {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > windowHeight) return;
+            var inner = slideshow.find('.slideshow-inner');
+            var newHeight = windowHeight - (scrollTop / 2);
+            var newTop = scrollTop * 0.8;
+
+            inner.css({
+                transform: 'translateY(' + newTop + 'px)',
+                height: newHeight
+            });
+        }
+
+        $(document).ready(function() {
+            $('.slide').addClass('is-loaded');
+
+            $('.slideshow .arrows .arrow').on('click', function() {
+                slideshowNext($(this).closest('.slideshow'), $(this).hasClass('prev'));
+            });
+
+            $('.slideshow .pagination .item').on('click', function() {
+                slideshowSwitch($(this).closest('.slideshow'), $(this).index());
+            });
+
+            $('.slideshow .pagination').on('check', function() {
+                var slideshow = $(this).closest('.slideshow');
+                var pages = $(this).find('.item');
+                var index = slideshow.find('.slides .is-active').index();
+                pages.removeClass('is-active');
+                pages.eq(index).addClass('is-active');
+            });
+
+            /* Lazyloading
+            $('.slideshow').each(function(){
+              var slideshow=$(this);
+              var images=slideshow.find('.image').not('.is-loaded');
+              images.on('loaded',function(){
+                var image=$(this);
+                var slide=image.closest('.slide');
+                slide.addClass('is-loaded');
+              });
+            */
+
+            var timeout = setTimeout(function() {
+                slideshowNext(slideshow, false, true);
+            }, slideshowDuration);
+
+            slideshow.data('timeout', timeout);
+        });
+
+        if ($('.main-content .slideshow').length > 1) {
+            $(window).on('scroll', homeSlideshowParallax);
+        }
     </script>
 @stop

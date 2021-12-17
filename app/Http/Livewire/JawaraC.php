@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\JawaraEvent;
 use App\Models\JawaraTanya;
+use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -27,6 +28,18 @@ class JawaraC extends Component
             $this->pertanyaan = [
                 'identity' => auth()->user()->identity
             ];
+        }
+
+        switch(Request('s')){
+            case 'pendaftaran' : {
+                $this->pos = 0;break;
+            }
+            case 'terlaksana' : {
+                $this->pos = 1;break;
+            }
+            case 'tanya' : {
+                $this->pos = 2;break;
+            }
         }
     }
 

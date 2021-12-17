@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeskripsiSistem;
 use App\Models\Dosen;
 use App\Models\JawaraEvent;
 use App\Models\JawaraPendaftar;
@@ -29,6 +30,7 @@ class Jawara extends Controller
 
     public function index($message = [-1])
     {
+        $slides = DeskripsiSistem::getDeskripsiSistem(config('app.fitur.jawara'));
         return view('jawara', [
             'title' => 'Jawara Center',
             'jawara' => 'selected',
@@ -36,7 +38,9 @@ class Jawara extends Controller
             'totalPendaftar' => JawaraPendaftar::count(),
             'totalJawara' => JawaraPendaftar::countPemenang(),
             'totalLomba' => JawaraEvent::count(),
-            'message' => $message
+            'message' => $message,
+            'slides' => $slides,
+            'section' => Request('s')
         ]);
     }
 

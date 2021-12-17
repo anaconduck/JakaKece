@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeskripsiSistem;
 use App\Models\ExchangeMataKuliah;
 use App\Models\ExchangeMataKuliahTujuan;
 use App\Models\ExchangePendaftar;
@@ -25,6 +26,7 @@ class StudentExchange extends Controller
             ];
     }
     public function index($message = [-2,null]){
+        $slides = DeskripsiSistem::getDeskripsiSistem(config('app.fitur.exchange'));
         return view('exchange',[
             'title' => "Student Exchange",
             'exchange' => 'selected',
@@ -32,7 +34,9 @@ class StudentExchange extends Controller
             'message' => $message,
             'totalMahasiswaExchange' =>0,
             'totalExchangeEvent' => 0,
-            'totalPendaftar' => 0
+            'totalPendaftar' => 0,
+            'slides' => $slides,
+            'section' => Request('s')
         ]);
     }
 

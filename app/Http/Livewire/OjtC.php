@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\OjtPaket;
 use App\Models\OjtTanya;
 use App\Models\OjtTujuan;
+use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -29,6 +30,19 @@ class OjtC extends Component
                 'identity' => auth()->user()->identity
             ];
         }
+        switch(Request('s')){
+            case 'pendaftaran' : {
+                $this->pos = 0;
+                break;
+            }
+            case 'terlaksana':{
+                $this->pos = 1; break;
+            }
+            case 'tanya' : {
+                $this->pos = 2;break;
+            }
+        }
+
         $this->terlaksana = OjtPaket::select('ojt_pakets.id','ojt_events.nama_event','ojt_tujuans.nama_instansi')
             ->join('ojt_events','ojt_pakets.id_ojt_event','=','ojt_events.id')
             ->join('ojt_tujuans','ojt_pakets.id_ojt_tujuan','=','ojt_tujuans.id')
@@ -70,7 +84,6 @@ class OjtC extends Component
         ->paginate(10,['*'],'pendaftaran');
 
         return view('livewire.ojt-c',[
-
         ]);
     }
 }

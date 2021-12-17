@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeskripsiSistem;
 use App\Models\OjtEvent;
 use App\Models\OjtMataKuliah;
 use App\Models\OjtPaket;
@@ -23,6 +24,7 @@ class Ojt extends Controller
     }
 
     public function index($message = [-1, null]){
+        $slides = DeskripsiSistem::getDeskripsiSistem(config('app.fitur.training'));
         return view('ojt',[
             'title' => 'On The Job Training',
             'nav' => $this->nav,
@@ -30,7 +32,9 @@ class Ojt extends Controller
             'message' => $message,
             'jumlahTujuanTraining' => OjtTujuan::count(),
             'jumlahPendaftarTraining' => OjtPendaftar::count(),
-            'jumlahEvent' => OjtEvent::count()
+            'jumlahEvent' => OjtEvent::count(),
+            'slides' => $slides,
+            'section' => Request('s')
         ]);
     }
     public function showPaket(Request $request, OjtTujuan $tujuan){

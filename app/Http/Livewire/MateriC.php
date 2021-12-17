@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class MateriC extends Component
 {
-    public $currentMateri;
+    public Materi $currentMateri;
     public $idCourse;
     public $sesi;
     public $indMateri;
@@ -21,12 +21,13 @@ class MateriC extends Component
 
         $this->idCourse = config('app.indexCourse')[$course] ?? 1;
         $this->sesi = array_search($sesi,config('app.allSesi')) + 1 ?? 1;
-        $this->indMateri = $target;
 
-        $this->currentMateri = Materi::getMateri($this->idCourse, $this->sesi, $this->indMateri);
+        $this->currentMateri = Materi::firstMateri($this->idCourse, $this->sesi);
         if(!$this->currentMateri){
             abort(404);
         }
+
+        $this->indMateri = $this->currentMateri->id;
         $this->allJudul = Materi::allJudulWith($this->idCourse, $this->sesi);
 
         $this->nav = [

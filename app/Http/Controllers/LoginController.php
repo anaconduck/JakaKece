@@ -23,7 +23,6 @@ class LoginController extends Controller
         $request->validate([
             'identity' => 'bail|required',
             'password' => 'bail|required'
-
         ]);
 
         $credential = $request->only('identity','password');
@@ -37,6 +36,6 @@ class LoginController extends Controller
             return redirect()->route('home')->with('error','Account not found!');
         }
 
-        return redirect('home')->with('error','Credential Invalid!');
+        return redirect('login')->with('error','Credential Invalid!');
     }
 }

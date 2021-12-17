@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeskripsiSistem;
 use Illuminate\Http\Request;
 use App\Models\Practice;
 use App\Models\Examination;
@@ -16,7 +17,7 @@ class Inkubasi extends Controller
 {
     public $mulai = false;
 
-    public function index(){
+    public function index(Request $request){
         $status = 'guest';
         if(auth()->user()){
             $status = auth()->user()->status;
@@ -27,6 +28,9 @@ class Inkubasi extends Controller
                 'link' => url('/inkubasi')
             ]
         ];
+        $slides = DeskripsiSistem::getDeskripsiSistem(config('app.fitur.inkubasi'));
+        $section = $request->get('s');
+        
         return view('inkubasi',[
             'title' => 'Inkubasi Digital Bahasa',
             'inkubasi' => 'selected',
@@ -36,7 +40,9 @@ class Inkubasi extends Controller
             'numSubject' => Materi::count(),
             'allSesi' => config('app.allSesi'),
             'status' => $status,
-            'nav' => $nav
+            'nav' => $nav,
+            'slides' => $slides,
+            'section' => $section
         ]);
     }
 }

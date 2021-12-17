@@ -1,746 +1,8 @@
 @extends('layouts.app')
 
 @section('css')
-    <style>
-        section.why-us {
-            position: relative;
-        }
-
-        section.why-us::after {
-            content: "";
-            background: url("https://image.freepik.com/free-vector/flat-design-polygonal-background_23-2148898663.jpg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.2;
-            top: -150px;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            position: absolute;
-            z-index: -1;
-        }
-
-        .body-card {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 40px;
-            font-family: "Poppins", sans-serif;
-            color: #ffffff;
-        }
-
-        .cont {
-            flex-grow: 1;
-            max-width: 960px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 32px;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .cards__item {
-            height: 200px;
-        }
-
-        .card {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #000000;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 20;
-            width: 50%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.1);
-            pointer-events: none;
-        }
-
-        .card:nth-child(1) {
-            background-image: linear-gradient(45deg, #3503ad, #f7308c);
-        }
-
-        .card:nth-child(2) {
-            background-image: linear-gradient(45deg, #ccff00, #09afff);
-        }
-
-        .card:nth-child(3) {
-            background-image: linear-gradient(45deg, #e91e63, #ffeb3b);
-        }
-
-        .card__frame {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .card__picture {
-            margin-bottom: 12px;
-            filter: invert(1);
-        }
-
-        .card__picture img {
-            display: block;
-            max-width: 100%;
-            height: auto;
-        }
-
-        .card__title {
-            margin: 0;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .card__overlay {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 52px;
-            height: 52px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            transition: 0.5s;
-            cursor: pointer;
-        }
-
-        .card__overlay::before {
-            content: "Read";
-            font-size: 12px;
-            text-transform: uppercase;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-        }
-
-        .card__overlay:hover,
-        .card__overlay:focus {
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            box-shadow: none;
-            border-radius: 0;
-            opacity: 0.9;
-        }
-
-        .card__overlay:hover::before,
-        .card__overlay:focus::before {
-            content: none;
-        }
-
-        .card:nth-child(1) .card__overlay {
-            background-image: linear-gradient(45deg, #3503ad, #f7308c);
-        }
-
-        .card:nth-child(2) .card__overlay {
-            background-image: linear-gradient(45deg, #ccff00, #09afff);
-        }
-
-        .card:nth-child(3) .card__overlay {
-            background-image: linear-gradient(45deg, #e91e63, #ffeb3b);
-        }
-
-        .card__content {
-            z-index: 1;
-            padding: 20px;
-            line-height: 1.4;
-            opacity: 0;
-            visibility: hidden;
-            box-sizing: border-box;
-            pointer-events: none;
-            transition: 0s;
-        }
-
-        .card__overlay:hover~.card__content {
-            opacity: 1;
-            visibility: visible;
-            transition: 0.2s 0.3s;
-        }
-
-        .card__content h2 {
-            margin: 0;
-            margin-bottom: 16px;
-        }
-
-        @keyframes tonext {
-            75% {
-                left: 0;
-            }
-
-            95% {
-                left: 100%;
-            }
-
-            98% {
-                left: 100%;
-            }
-
-            99% {
-                left: 0;
-            }
-        }
-
-        @keyframes tostart {
-            75% {
-                left: 0;
-            }
-
-            95% {
-                left: -300%;
-            }
-
-            98% {
-                left: -300%;
-            }
-
-            99% {
-                left: 0;
-            }
-        }
-
-        @keyframes snap {
-            96% {
-                scroll-snap-align: center;
-            }
-
-            97% {
-                scroll-snap-align: none;
-            }
-
-            99% {
-                scroll-snap-align: none;
-            }
-
-            100% {
-                scroll-snap-align: center;
-            }
-        }
-
-        * {
-            box-sizing: border-box;
-            scrollbar-color: transparent transparent;
-            /* thumb and track color */
-            scrollbar-width: 0px;
-        }
-
-        *::-webkit-scrollbar {
-            width: 0;
-        }
-
-        *::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        *::-webkit-scrollbar-thumb {
-            background: transparent;
-            border: none;
-        }
-
-        * {
-            -ms-overflow-style: none;
-        }
-
-        .carousel ol,
-        li {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .carousel {
-            position: relative;
-            padding-top: 75%;
-            filter: drop-shadow(0 0 10px #0003);
-            perspective: 100px;
-        }
-
-        .carousel__viewport {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            display: flex;
-            overflow-x: scroll;
-            counter-reset: item;
-            scroll-behavior: smooth;
-            scroll-snap-type: x mandatory;
-        }
-
-        .carousel__slide {
-            position: relative;
-            flex: 0 0 100%;
-            width: 100%;
-            background-color: #f99;
-            counter-increment: item;
-        }
-
-        .carousel__slide:nth-child(even) {
-            background-color: #99f;
-        }
-
-        .carousel__slide:before {
-            content: counter(item);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate3d(-50%, -40%, 70px);
-            color: #fff;
-            font-size: 2em;
-        }
-
-        .carousel__snapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            scroll-snap-align: center;
-        }
-
-        @media (hover: hover) {
-            .carousel__snapper {
-                animation-name: tonext, snap;
-                animation-timing-function: ease;
-                animation-duration: 4s;
-                animation-iteration-count: infinite;
-            }
-
-            .carousel__slide:last-child .carousel__snapper {
-                animation-name: tostart, snap;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .carousel__snapper {
-                animation-name: none;
-            }
-        }
-
-        .carousel:hover .carousel__snapper,
-        .carousel:focus-within .carousel__snapper {
-            animation-name: none;
-        }
-
-        .carousel__navigation {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            text-align: center;
-        }
-
-        .carousel__navigation-list,
-        .carousel__navigation-item {
-            display: inline-block;
-        }
-
-        .carousel__navigation-button {
-            display: inline-block;
-            width: 1.5rem;
-            height: 1.5rem;
-            background-color: #333;
-            background-clip: content-box;
-            border: 0.25rem solid transparent;
-            border-radius: 50%;
-            font-size: 0;
-            transition: transform 0.1s;
-        }
-
-        .carousel::before,
-        .carousel::after,
-        .carousel__prev,
-        .carousel__next {
-            position: absolute;
-            top: 0;
-            margin-top: 37.5%;
-            width: 4rem;
-            height: 4rem;
-            transform: translateY(-50%);
-            border-radius: 50%;
-            font-size: 0;
-            outline: 0;
-        }
-
-        .carousel::before,
-        .carousel__prev {
-            left: -1rem;
-        }
-
-        .carousel::after,
-        .carousel__next {
-            right: -1rem;
-        }
-
-        .carousel::before,
-        .carousel::after {
-            content: '';
-            z-index: 1;
-            background-color: #333;
-            background-size: 1.5rem 1.5rem;
-            background-repeat: no-repeat;
-            background-position: center center;
-            color: #fff;
-            font-size: 2.5rem;
-            line-height: 4rem;
-            text-align: center;
-            pointer-events: none;
-        }
-
-        .carousel::before {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='0,50 80,100 80,0' fill='%23fff'/%3E%3C/svg%3E");
-        }
-
-        .carousel::after {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
-        }
-
-        .tab {
-            width: 100%;
-            min-width: 100%;
-        }
-
-        .search-bar {
-            display: flex;
-        }
-
-        .search-bar input,
-        .search-btn,
-        .search-btn:before,
-        .search-btn:after {
-            transition: all 0.25s ease-out;
-        }
-
-        .search-bar input,
-        .search-btn {
-            width: 3em;
-            height: 40px;
-        }
-
-        .search-bar input:invalid:not(:focus),
-        .search-btn {
-            cursor: pointer;
-        }
-
-        .search-bar,
-        .search-bar input:focus,
-        .search-bar input:valid {
-            width: 100%;
-        }
-
-        .search-bar input:focus,
-        .search-bar input:not(:focus)+.search-btn:focus {
-            outline: transparent;
-        }
-
-        .search-bar {
-            margin: auto;
-            padding: 1.5em;
-            justify-content: center;
-            max-width: 30em;
-        }
-
-        .search-bar input {
-            background: transparent;
-            border-radius: 1.5em;
-            box-shadow: 0 0 0 0.4em #171717 inset;
-            padding: 0.75em;
-            transform: translate(0.5em, 0.5em) scale(0.5);
-            transform-origin: 100% 0;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        .search-bar input::-webkit-search-decoration {
-            -webkit-appearance: none;
-        }
-
-        .search-bar input:focus,
-        .search-bar input:valid {
-            background: #fff;
-            border-radius: 0.375em 0 0 0.375em;
-            box-shadow: 0 0 0 0.1em #d9d9d9 inset;
-            transform: scale(1);
-        }
-
-        .search-btn {
-            background: #171717;
-            border-radius: 0 0.75em 0.75em 0 / 0 1.5em 1.5em 0;
-            position: relative;
-            transform: translate(0.25em, 0.25em) rotate(45deg) scale(0.25, 0.125);
-            transform-origin: 0 50%;
-        }
-
-        .search-btn:before,
-        .search-btn:after {
-            content: "";
-            display: block;
-            opacity: 0;
-            position: absolute;
-        }
-
-        .search-btn:before {
-            border-radius: 50%;
-            box-shadow: 0 0 0 0.2em #f1f1f1 inset;
-            top: 0.75em;
-            left: 0.75em;
-            width: 20px;
-            height: 20px;
-        }
-
-        .search-btn:after {
-            background: #f1f1f1;
-            border-radius: 0 0.25em 0.25em 0;
-            top: 51%;
-            left: 51%;
-            width: 15px;
-            height: 5px;
-            transform: translate(0.2em, 0) rotate(45deg);
-            transform-origin: 0 50%;
-        }
-
-        .search-btn span {
-            display: inline-block;
-            overflow: hidden;
-            width: 1px;
-            height: 1px;
-        }
-
-        /* Active state */
-        .search-bar input:focus+.search-btn,
-        .search-bar input:valid+.search-btn {
-            background: #2762f3;
-            border-radius: 0 0.375em 0.375em 0;
-            transform: scale(1);
-        }
-
-        .search-bar input:focus+.search-btn:before,
-        .search-bar input:focus+.search-btn:after,
-        .search-bar input:valid+.search-btn:before,
-        .search-bar input:valid+.search-btn:after {
-            opacity: 1;
-        }
-
-        .search-bar input:focus+.search-btn:hover,
-        .search-bar input:valid+.search-btn:hover,
-        .search-bar input:valid:not(:focus)+.search-btn:focus {
-            background: #0c48db;
-        }
-
-        .search-bar input:focus+.search-btn:active,
-        .search-bar input:valid+.search-btn:active {
-            transform: translateY(1px);
-        }
-
-        @media screen and (prefers-color-scheme: dark) {
-            .search-bar input {
-                box-shadow: 0 0 0 0.4em #f1f1f1 inset;
-            }
-
-            .search-bar input:focus,
-            .search-bar input:valid {
-                background: #3d3d3d;
-                box-shadow: 0 0 0 0.1em #3d3d3d inset;
-            }
-
-            .search-btn {
-                background: #f1f1f1;
-            }
-        }
-
-        .nav-tabs {
-            width: 250px !important;
-            min-width: 250px !important;
-        }
-
-        h1 {
-            color: #f5a425;
-            text-align: center;
-        }
-
-        .ta input,
-        .ta input[type="radio"]+label,
-        .ta input[type="checkbox"]+label:before,
-        .ta select option,
-        .ta select {
-            width: 100%;
-            padding: 1em;
-            line-height: 1.4;
-            background-color: #f9f9f9;
-            border: 1px solid #e5e5e5;
-            border-radius: 3px;
-            -webkit-transition: 0.35s ease-in-out;
-            -moz-transition: 0.35s ease-in-out;
-            -o-transition: 0.35s ease-in-out;
-            transition: 0.35s ease-in-out;
-            transition: all 0.35s ease-in-out;
-        }
-
-        .ta input:focus {
-            outline: 0;
-            border-color: #bd8200;
-        }
-
-        .ta input:focus+.input-icon i {
-            color: #f0a500;
-        }
-
-        .ta input:focus+.input-icon:after {
-            border-right-color: #f0a500;
-        }
-
-
-        .ta .input-group {
-            margin-bottom: 1em;
-            zoom: 1;
-        }
-
-        .ta .input-group:before,
-        .ta .input-group:after {
-            content: "";
-            display: table;
-        }
-
-        .ta .input-group:after {
-            clear: both;
-        }
-
-        .ta .input-group-icon {
-            position: relative;
-        }
-
-        .ta .input-group-icon input {
-            padding-left: 4.4em;
-        }
-
-        .ta .input-group-icon .input-icon {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3.4em;
-            height: 3.4em;
-            line-height: 3.4em;
-            text-align: center;
-            pointer-events: none;
-        }
-
-        .ta .input-group-icon .input-icon:after {
-            position: absolute;
-            top: 0.6em;
-            bottom: 0.6em;
-            left: 3.4em;
-            display: block;
-            border-right: 1px solid #e5e5e5;
-            content: "";
-            -webkit-transition: 0.35s ease-in-out;
-            -moz-transition: 0.35s ease-in-out;
-            -o-transition: 0.35s ease-in-out;
-            transition: 0.35s ease-in-out;
-            transition: all 0.35s ease-in-out;
-        }
-
-        .ta .input-group-icon .input-icon i {
-            -webkit-transition: 0.35s ease-in-out;
-            -moz-transition: 0.35s ease-in-out;
-            -o-transition: 0.35s ease-in-out;
-            transition: 0.35s ease-in-out;
-            transition: all 0.35s ease-in-out;
-        }
-
-        .ta.container {
-            max-width: 38em;
-            padding: 1em 3em 2em 3em;
-            margin: 0em auto;
-            background-color: #fff;
-            border-radius: 4.2px;
-            box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
-        }
-
-        .ta .row {
-            zoom: 1;
-        }
-
-        .ta .row:before,
-        .ta .row:after {
-            content: "";
-            display: table;
-        }
-
-        .ta .row:after {
-            clear: both;
-        }
-
-        .ta .col-half {
-            padding-right: 10px;
-            float: left;
-            width: 50%;
-        }
-
-        .ta .col-half:last-of-type {
-            padding-right: 0;
-        }
-
-        .ta .col-third {
-            padding-right: 10px;
-            float: left;
-            width: 33.33333333%;
-        }
-
-        .ta .col-third:last-of-type {
-            padding-right: 0;
-        }
-
-        @media only screen and (max-width: 540px) {
-            .ta .col-half {
-                width: 100%;
-                padding-right: 0;
-            }
-        }
-
-        h2 {
-            font-size: 17px;
-        }
-        .desc{
-            background-color: rgba(255, 255, 255, 0.397);
-            box-shadow: 10px 5px 20px rgba(0, 0, 0, 0.35);
-            padding: 40px;
-            text-align: justify;
-            border-radius: 20px;
-        }
-        .desc p{
-            font-size: 14px;
-            font-weight: 500;
-            color: #221807
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/ojt.css') }}" />
+    <style></style>
 @stop
 
 @section('slot')
@@ -756,19 +18,75 @@
 
                 <div class="col-md-12">
                     <h1>On The Job Training</h1>
-                    <div class="desc">
-                        <p>Halo Mahasiswa EKP, selamat datang di system On the Job Training (OJT). Sistem ini merupakan wadah informasi serta pendaftaran mahasiswa EKP yang ingin melakukan program OJT/magang di instansi-instansi yang sudah bekerja sama dengan jurusan EKP FE UM. Selain itu kalian juga dapat melihat mata kuliah apa yang bisa dikonversi dalam kegiatan magang ini. Program magang ini akan dikonversi dengan 20 sks lo.. yakin gk mau ikutan??
-                        </p>
-                        <br>
-                        <p>Dalam riwayat OJT, kalian juga bisa track record teman-teman kalian yang sudah menyelesaikan program magang. Yuk check it out!
-                            Pengantar Student Exchange
-                            Halo Mahasiswa EKP, selamat datang di system Student Exchange.  Sistem ini merupakan wadah informasi serta pendaftaran mahasiswa EKP yang ingin melakukan program pertukarang pelajar di universitas baik dalam dan luar negeri yang sudah bekerja sama dengan jurusan EKP FE UM.</p>
-                            <br>
-                            <p>
-                                Dalam riwayat Student Exchange, kalian juga bisa track record teman-teman kalian yang sudah menyelesaikan program Student Exchange, baik dalam bentuk modul mapun video kegiatan. Tertarik? Yuk ikutin terus update infonya ya!
-                            </p>
+                    <hr>
+                    <main class="main-content">
+                        <section class="slideshow">
+                            <div class="slideshow-inner">
+                                <div class="slides">
 
-                    </div>
+                                    @foreach ($slides as $ind => $slide)
+
+                                        <div
+                                            class="slide
+                                    @if ($ind == 0)
+                                    is-active
+                                    @endif">
+                                            <div class="slide-content">
+                                                <div class="caption">
+                                                    <div class="text">
+                                                        <p>{{ $slide['deskripsi'] }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="image-container">
+                                                <img src="{{ Storage::url($slide['file']) }}" alt=""
+                                                    class="image" />
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="pagination">
+
+                                    <div class="item is-active">
+                                        <span class="icon">1</span>
+                                    </div>
+                                    @for ($i = 1; $i < $slides->count(); $i++)
+
+                                        <div class="item">
+                                            <span class="icon">{{ $i + 1 }}</span>
+                                        </div>
+                                    @endfor
+                                </div>
+                                <div class="arrows">
+                                    <div class="arrow prev">
+                                        <span class="svg svg-arrow-left">
+                                            <svg version="1.1" id="svg4-Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px"
+                                                height="26px" viewBox="0 0 14 26" enable-background="new 0 0 14 26"
+                                                xml:space="preserve">
+                                                <path
+                                                    d="M13,26c-0.256,0-0.512-0.098-0.707-0.293l-12-12c-0.391-0.391-0.391-1.023,0-1.414l12-12c0.391-0.391,1.023-0.391,1.414,0s0.391,1.023,0,1.414L2.414,13l11.293,11.293c0.391,0.391,0.391,1.023,0,1.414C13.512,25.902,13.256,26,13,26z" />
+                                            </svg>
+                                            <span class="alt sr-only"></span>
+                                        </span>
+                                    </div>
+                                    <div class="arrow next">
+                                        <span class="svg svg-arrow-right">
+                                            <svg version="1.1" id="svg5-Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px"
+                                                height="26px" viewBox="0 0 14 26" enable-background="new 0 0 14 26"
+                                                xml:space="preserve">
+                                                <path
+                                                    d="M1,0c0.256,0,0.512,0.098,0.707,0.293l12,12c0.391,0.391,0.391,1.023,0,1.414l-12,12c-0.391,0.391-1.023,0.391-1.414,0s-0.391-1.023,0-1.414L11.586,13L0.293,1.707c-0.391-0.391-0.391-1.023,0-1.414C0.488,0.098,0.744,0,1,0z" />
+                                            </svg>
+                                            <span class="alt sr-only"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <hr>
                     @if ($message[0] == 1)
                         <div class="alert alert-success" role="alert">
                             {{ $message[1] }}
@@ -786,50 +104,6 @@
                         </div>
                     @endif
                     <hr>
-                    <div style="max-width: 60%; margin: 0 auto;">
-                        <section class="carousel" aria-label="Gallery">
-                            <ol class="carousel__viewport">
-                                <li id="carousel__slide1" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper">
-                                        <a href="#carousel__slide4" class="carousel__prev">Go to last slide</a>
-                                        <a href="#carousel__slide2" class="carousel__next">Go to next slide</a>
-                                    </div>
-                                </li>
-                                <li id="carousel__slide2" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper"></div>
-                                    <a href="#carousel__slide1" class="carousel__prev">Go to previous slide</a>
-                                    <a href="#carousel__slide3" class="carousel__next">Go to next slide</a>
-                                </li>
-                                <li id="carousel__slide3" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper"></div>
-                                    <a href="#carousel__slide2" class="carousel__prev">Go to previous slide</a>
-                                    <a href="#carousel__slide4" class="carousel__next">Go to next slide</a>
-                                </li>
-                                <li id="carousel__slide4" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper"></div>
-                                    <a href="#carousel__slide3" class="carousel__prev">Go to previous slide</a>
-                                    <a href="#carousel__slide1" class="carousel__next">Go to first slide</a>
-                                </li>
-                            </ol>
-                            <aside class="carousel__navigation">
-                                <ol class="carousel__navigation-list">
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide1" class="carousel__navigation-button">Go to slide 1</a>
-                                    </li>
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide2" class="carousel__navigation-button">Go to slide 2</a>
-                                    </li>
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide3" class="carousel__navigation-button">Go to slide 3</a>
-                                    </li>
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide4" class="carousel__navigation-button">Go to slide 4</a>
-                                    </li>
-                                </ol>
-                            </aside>
-                        </section>
-
-                    </div>
                     <div class="body-card mt-5 mb-5">
                         <div class="cont">
                             <ul class="cards">
@@ -888,16 +162,30 @@
                                     <div class="vertical-tab" role="tabpanel">
 
                                         <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" class="active side">
+                                            <li role="presentation" class="side
+                                            @if ($section === 'pendaftaran')
+                                            active
+                                            @endif
+                                            ">
                                                 <a aria-controls="home" role="tab" data-toggle="tab">Pendaftaran Magang</a>
                                             </li>
-                                            <li class="side" role="presentation">
+                                            <li class="side
+                                            @if ($section === 'terlaksana')
+                                            active
+                                            @endif
+                                            " role="presentation">
                                                 <a aria-controls="profile" role="tab" data-toggle="tab">Magang
                                                     Terlaksana</a>
                                             </li>
-                                            <li class="side" role="presentation">
-                                                <a aria-controls="typeset" role="tab" data-toggle="tab">Tanya Admin</a>
-                                            </li>
+                                            @auth
+                                                <li class="side
+                                                @if ($section === 'tanya')
+                                                active
+                                                @endif
+                                                " role="presentation">
+                                                    <a aria-controls="typeset" role="tab" data-toggle="tab">Tanya Admin</a>
+                                                </li>
+                                            @endauth
                                         </ul>
                                         @livewire('ojt-c')
                                     </div>
@@ -913,6 +201,7 @@
 @stop
 
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
     <script>
         let sidenav = $('.side')
         let tab = $('.t1')
@@ -927,5 +216,248 @@
             }
         })
         $('form').submit(false);
+
+
+        var slideshowDuration = 4000;
+        var slideshow = $('.main-content .slideshow');
+
+        function slideshowSwitch(slideshow, index, auto) {
+            if (slideshow.data('wait')) return;
+
+            var slides = slideshow.find('.slide');
+            var pages = slideshow.find('.pagination');
+            var activeSlide = slides.filter('.is-active');
+            var activeSlideImage = activeSlide.find('.image-container');
+            var newSlide = slides.eq(index);
+            var newSlideImage = newSlide.find('.image-container');
+            var newSlideContent = newSlide.find('.slide-content');
+            var newSlideElements = newSlide.find('.caption > *');
+            if (newSlide.is(activeSlide)) return;
+
+            newSlide.addClass('is-new');
+            var timeout = slideshow.data('timeout');
+            clearTimeout(timeout);
+            slideshow.data('wait', true);
+            var transition = slideshow.attr('data-transition');
+            if (transition == 'fade') {
+                newSlide.css({
+                    display: 'block',
+                    zIndex: 2
+                });
+                newSlideImage.css({
+                    opacity: 0
+                });
+
+                TweenMax.to(newSlideImage, 1, {
+                    alpha: 1,
+                    onComplete: function() {
+                        newSlide.addClass('is-active').removeClass('is-new');
+                        activeSlide.removeClass('is-active');
+                        newSlide.css({
+                            display: '',
+                            zIndex: ''
+                        });
+                        newSlideImage.css({
+                            opacity: ''
+                        });
+                        slideshow.find('.pagination').trigger('check');
+                        slideshow.data('wait', false);
+                        if (auto) {
+                            timeout = setTimeout(function() {
+                                slideshowNext(slideshow, false, true);
+                            }, slideshowDuration);
+                            slideshow.data('timeout', timeout);
+                        }
+                    }
+                });
+            } else {
+                if (newSlide.index() > activeSlide.index()) {
+                    var newSlideRight = 0;
+                    var newSlideLeft = 'auto';
+                    var newSlideImageRight = -slideshow.width() / 8;
+                    var newSlideImageLeft = 'auto';
+                    var newSlideImageToRight = 0;
+                    var newSlideImageToLeft = 'auto';
+                    var newSlideContentLeft = 'auto';
+                    var newSlideContentRight = 0;
+                    var activeSlideImageLeft = -slideshow.width() / 4;
+                } else {
+                    var newSlideRight = '';
+                    var newSlideLeft = 0;
+                    var newSlideImageRight = 'auto';
+                    var newSlideImageLeft = -slideshow.width() / 8;
+                    var newSlideImageToRight = '';
+                    var newSlideImageToLeft = 0;
+                    var newSlideContentLeft = 0;
+                    var newSlideContentRight = 'auto';
+                    var activeSlideImageLeft = slideshow.width() / 4;
+                }
+
+                newSlide.css({
+                    display: 'block',
+                    width: 0,
+                    right: newSlideRight,
+                    left: newSlideLeft,
+                    zIndex: 2
+                });
+
+                newSlideImage.css({
+                    width: slideshow.width(),
+                    right: newSlideImageRight,
+                    left: newSlideImageLeft
+                });
+
+                newSlideContent.css({
+                    width: slideshow.width(),
+                    left: newSlideContentLeft,
+                    right: newSlideContentRight
+                });
+
+                activeSlideImage.css({
+                    left: 0
+                });
+
+                TweenMax.set(newSlideElements, {
+                    y: 20,
+                    force3D: true
+                });
+                TweenMax.to(activeSlideImage, 1, {
+                    left: activeSlideImageLeft,
+                    ease: Power3.easeInOut
+                });
+
+                TweenMax.to(newSlide, 1, {
+                    width: slideshow.width(),
+                    ease: Power3.easeInOut
+                });
+
+                TweenMax.to(newSlideImage, 1, {
+                    right: newSlideImageToRight,
+                    left: newSlideImageToLeft,
+                    ease: Power3.easeInOut
+                });
+
+                TweenMax.staggerFromTo(newSlideElements, 0.8, {
+                    alpha: 0,
+                    y: 60
+                }, {
+                    alpha: 1,
+                    y: 0,
+                    ease: Power3.easeOut,
+                    force3D: true,
+                    delay: 0.6
+                }, 0.1, function() {
+                    newSlide.addClass('is-active').removeClass('is-new');
+                    activeSlide.removeClass('is-active');
+                    newSlide.css({
+                        display: '',
+                        width: '',
+                        left: '',
+                        zIndex: ''
+                    });
+
+                    newSlideImage.css({
+                        width: '',
+                        right: '',
+                        left: ''
+                    });
+
+                    newSlideContent.css({
+                        width: '',
+                        left: ''
+                    });
+
+                    newSlideElements.css({
+                        opacity: '',
+                        transform: ''
+                    });
+
+                    activeSlideImage.css({
+                        left: ''
+                    });
+
+                    slideshow.find('.pagination').trigger('check');
+                    slideshow.data('wait', false);
+                    if (auto) {
+                        timeout = setTimeout(function() {
+                            slideshowNext(slideshow, false, true);
+                        }, slideshowDuration);
+                        slideshow.data('timeout', timeout);
+                    }
+                });
+            }
+        }
+
+        function slideshowNext(slideshow, previous, auto) {
+            var slides = slideshow.find('.slide');
+            var activeSlide = slides.filter('.is-active');
+            var newSlide = null;
+            if (previous) {
+                newSlide = activeSlide.prev('.slide');
+                if (newSlide.length === 0) {
+                    newSlide = slides.last();
+                }
+            } else {
+                newSlide = activeSlide.next('.slide');
+                if (newSlide.length == 0)
+                    newSlide = slides.filter('.slide').first();
+            }
+
+            slideshowSwitch(slideshow, newSlide.index(), auto);
+        }
+
+        function homeSlideshowParallax() {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > windowHeight) return;
+            var inner = slideshow.find('.slideshow-inner');
+            var newHeight = windowHeight - (scrollTop / 2);
+            var newTop = scrollTop * 0.8;
+
+            inner.css({
+                transform: 'translateY(' + newTop + 'px)',
+                height: newHeight
+            });
+        }
+
+        $(document).ready(function() {
+            $('.slide').addClass('is-loaded');
+
+            $('.slideshow .arrows .arrow').on('click', function() {
+                slideshowNext($(this).closest('.slideshow'), $(this).hasClass('prev'));
+            });
+
+            $('.slideshow .pagination .item').on('click', function() {
+                slideshowSwitch($(this).closest('.slideshow'), $(this).index());
+            });
+
+            $('.slideshow .pagination').on('check', function() {
+                var slideshow = $(this).closest('.slideshow');
+                var pages = $(this).find('.item');
+                var index = slideshow.find('.slides .is-active').index();
+                pages.removeClass('is-active');
+                pages.eq(index).addClass('is-active');
+            });
+
+            /* Lazyloading
+            $('.slideshow').each(function(){
+              var slideshow=$(this);
+              var images=slideshow.find('.image').not('.is-loaded');
+              images.on('loaded',function(){
+                var image=$(this);
+                var slide=image.closest('.slide');
+                slide.addClass('is-loaded');
+              });
+            */
+
+            var timeout = setTimeout(function() {
+                slideshowNext(slideshow, false, true);
+            }, slideshowDuration);
+
+            slideshow.data('timeout', timeout);
+        });
+
+        if ($('.main-content .slideshow').length > 1) {
+            $(window).on('scroll', homeSlideshowParallax);
+        }
     </script>
 @stop

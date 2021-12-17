@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Admin\PushBerita;
 use App\Http\Controllers\Admin\PushMateri;
 use App\Http\Controllers\Admin\PushOjtEvent;
 use App\Http\Controllers\Admin\PushOjtMagang;
 use App\Http\Controllers\Admin\PushPractice;
 use App\Http\Controllers\Admin\TanyaAdmin;
+use App\Http\Controllers\Admin\UpdateBerita;
 use App\Http\Controllers\Admin\UpdateExchangePendaftar;
 use App\Http\Controllers\Admin\UpdateMateri;
 use App\Http\Controllers\Admin\UpdateOjtMagang;
@@ -16,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inkubasi;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\User;
+use App\Http\Livewire\Admin\BeritaC;
+use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Admin\HomeController;
+use App\Http\Livewire\Admin\KelolaDashBoard;
+use App\Http\Livewire\Admin\KelolaSlide;
 use App\Http\Livewire\Admin\MateriController;
 use App\Http\Livewire\Admin\OjtEventController;
 use App\Http\Livewire\Admin\OjtMagang;
@@ -28,6 +34,7 @@ use App\Http\Livewire\Admin\SEPendaftar;
 use App\Http\Livewire\Admin\StatistikController;
 use App\Http\Livewire\Admin\Tanya;
 use App\Http\Livewire\Admin\UpdateOjtEvent;
+use App\Http\Livewire\BeritaController;
 use App\Http\Livewire\ExchangeTujuan;
 use App\Http\Livewire\JawaraCenter;
 use App\Http\Livewire\JawaraPendaftar;
@@ -50,6 +57,9 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+visits('App\Models\Berita')->increment();
 
 Route::get('/try', function(){
     return view('/login');
@@ -172,6 +182,25 @@ Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(func
     Route::get('/jawab/{menu}/{id}', [TanyaAdmin::class, 'jawab']);
     Route::post('/jawab/{menu}/{id}', [TanyaAdmin::class, 'kirim']);
 
+    //kelola dashboard
+    ROute::get('/kelola-dashboard', KelolaDashBoard::class);
+
+    //kelola slideshow
+    Route::get('/kelola-deskripsi', KelolaSlide::class);
+
+    //berita
+    Route::get('/berita', BeritaC::class);
+
+    //tambah berita
+    Route::get('/berita/create', [PushBerita::class, 'index']);
+    Route::post('/berita/create', [PushBerita::class, 'push']);
+
+    //detail berita
+    Route::get('/berita/{berita}', [UpdateBerita::class, 'index']);
+    Route::post('/berita/{berita}', [UpdateBerita::class, 'update']);
+
+    //dashboard
+    Route::get('/dashboard', Dashboard::class);
 
     Route::post('/logout', function (Request $request){
         Auth::logout();
@@ -190,6 +219,9 @@ Route::get('/',function(){
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+
+//detail berita
+Route::get('/berita/{berita}', BeritaController::class);
 
 //membuka inkubasi
 Route::get('/inkubasi', [Inkubasi::class,'index']);

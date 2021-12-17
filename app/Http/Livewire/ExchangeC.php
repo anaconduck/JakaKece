@@ -31,6 +31,20 @@ class ExchangeC extends Component
                 'identity' => auth()->user()->identity
             ];
         }
+        switch(Request('s')){
+            case 'dalam-negeri' : {
+                $this->pos = 0;break;
+            }
+            case 'luar-negeri' : {
+                $this->pos = 1; break;
+            }
+            case 'riwayat' : {
+                $this->pos = 2; break;
+            }
+            case 'tanya' : {
+                $this->pos = 3;break;
+            }
+        }
     }
 
     public function updatingSearchDn()

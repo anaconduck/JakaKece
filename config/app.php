@@ -356,4 +356,13 @@ return [
 
     ],
     'emailSys' => 'AdminJaka@jakakece.com',
+    'fitur' => [
+        'inkubasi' => 1,
+        'jawara' => 2,
+        'exchange' => 3,
+        'training' => 4
+    ],
+    'period' => [
+        'start' => '2022'
+    ],
 ];

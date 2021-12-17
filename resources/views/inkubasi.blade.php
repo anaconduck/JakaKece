@@ -31,14 +31,16 @@
         .lp:hover {
             color: #f5a425;
         }
-        .desc{
+
+        .desc {
             background-color: rgba(255, 255, 255, 0.397);
             box-shadow: 10px 5px 20px rgba(0, 0, 0, 0.35);
             padding: 40px;
             text-align: justify;
             border-radius: 20px;
         }
-        .desc p{
+
+        .desc p {
             font-size: 14px;
             font-weight: 500;
             color: #221807
@@ -59,83 +61,75 @@
                 </div>
                 <div class="col-md-12 anot">
                     <h1>Inkubasi Bahasa</h1>
-                    <div class="desc">
-                        <p>
-                            Bahasa inggris adalah bahasa global yang sangat berperan dalam intreraksi dan komunikasi global
-                            seiring dengan kemajuan dan persaingan globalisasi Selain daripada itu, bahasa inggris telah menjadi
-                            satu kata kunci yang sanggup menggenggam segala aspek, baik itu bisnis, politik, sosial, maupun
-                            budaya. Dahulu, mungkin bahasa inggris masih menjadi hal yang sedikit tabu untuk dipelajari dan
-                            dipahami lebih dalam lagi. Namun, saat ini justru sebaliknya, bahasa inggris yang merupakan alat
-                            komunikasi dalam era globalisasi digital menjadi kunci utama keberhasilan seseorang dalam mencapai
-                            karier bermasa depan cerah. Mengingat, komuniksai khususnya dalam bahasa (bahasa internasional)
-                            menjadi jembatan berbagai kegiatan maka kemampuan dalam berbahasa inggris dapat pula dijadikan
-                            sebagai investasi. Ibarat orang menanam, harus sabar untuk memetik hasilnya. Demikin pula dalam
-                            belajar bahasa inggris, sabar tapi pasti. Adapun keuntungan dari investasi tersebut adalah: dalam
-                            dinamika aktivitas global nanti kita akan selalu kompeten dan dapat terus bertahan dengan kemampuan
-                            yang telah kita miliki ditunjang dengan kemampuan dalam berbahasa Inggris.
-                        </p>
-                        <br>
-                        <p>
-                            Bahasa inggris telah menjadi salah satu hal yang wajib untuk dipelajari disetiap level pendidikan di
-                            Indonesia. Seiring dengan perkembangan jaman yang semakin kompetitif, kemampuan untuk memahami
-                            bahasa inggris menjadi salah satu dasar yang harus dimiliki oleh setiap orang terutama bagi para
-                            akademisi tingkat perguruan tinggi. Pengembangan sistem inkubasi bahasa inggris bertujuan untuk
-                            meningkat kemampuan bahasa inggris untuk para akademisi di Jurusan Ekonomi Pembangunan Fakultas
-                            Ekonomi UM.
-                            Dalam rangka untuk meningkatan kemampuan Bahasa inggris bagi para akademisi maka hadir sistem
-                            digital bahasa yang dirasa sangat efektif dalam upaya untuk meningkatkan kemampuan dasar untuk
-                            memahami bahasa inggris.  Para akademisi dapat melakukan latihan Bahasa Inggris melalui sistem
-                            digital bahasa inggris dimanapun dan kapanpun secara lebih fleksibel. Sistem inkubasi Bahasa ini
-                            memiliki pelatihan Tes Bahasa Inggris (IELTS, TOEFL, IBT, TOEIC) yang memberikan wawasan serta
-                            menguji kompetensi berkaitan dengan kemampuan Listening, Reading, Writing dan Speaking.
-                        </p>
-
-                    </div>
                     <hr>
-                    <div style="max-width: 60%; margin: 0 auto;">
-                        <section class="carousel" aria-label="Gallery">
-                            <ol class="carousel__viewport">
-                                <li id="carousel__slide1" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper">
-                                        <a href="#carousel__slide4" class="carousel__prev">Go to last slide</a>
-                                        <a href="#carousel__slide2" class="carousel__next">Go to next slide</a>
-                                    </div>
-                                </li>
-                                <li id="carousel__slide2" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper"></div>
-                                    <a href="#carousel__slide1" class="carousel__prev">Go to previous slide</a>
-                                    <a href="#carousel__slide3" class="carousel__next">Go to next slide</a>
-                                </li>
-                                <li id="carousel__slide3" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper"></div>
-                                    <a href="#carousel__slide2" class="carousel__prev">Go to previous slide</a>
-                                    <a href="#carousel__slide4" class="carousel__next">Go to next slide</a>
-                                </li>
-                                <li id="carousel__slide4" tabindex="0" class="carousel__slide">
-                                    <div class="carousel__snapper"></div>
-                                    <a href="#carousel__slide3" class="carousel__prev">Go to previous slide</a>
-                                    <a href="#carousel__slide1" class="carousel__next">Go to first slide</a>
-                                </li>
-                            </ol>
-                            <aside class="carousel__navigation">
-                                <ol class="carousel__navigation-list">
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide1" class="carousel__navigation-button">Go to slide 1</a>
-                                    </li>
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide2" class="carousel__navigation-button">Go to slide 2</a>
-                                    </li>
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide3" class="carousel__navigation-button">Go to slide 3</a>
-                                    </li>
-                                    <li class="carousel__navigation-item">
-                                        <a href="#carousel__slide4" class="carousel__navigation-button">Go to slide 4</a>
-                                    </li>
-                                </ol>
-                            </aside>
-                        </section>
+                    <main class="main-content">
+                        <section class="slideshow">
+                            <div class="slideshow-inner">
+                                <div class="slides">
 
-                    </div>
+                                    @foreach ($slides as $ind => $slide)
+
+                                        <div
+                                            class="slide
+                                    @if ($ind == 0)
+                                    is-active
+                                    @endif">
+                                            <div class="slide-content">
+                                                <div class="caption">
+                                                    <div class="text">
+                                                        <p>{{ $slide['deskripsi'] }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="image-container">
+                                                <img src="{{ Storage::url($slide['file']) }}" alt=""
+                                                    class="image" />
+                                            </div>
+                                        </div>
+
+                                    @endforeach
+                                </div>
+                                <div class="pagination">
+
+                                    <div class="item is-active">
+                                        <span class="icon">1</span>
+                                    </div>
+                                    @for ($i = 1; $i < $slides->count(); $i++)
+
+                                        <div class="item">
+                                            <span class="icon">{{ $i + 1 }}</span>
+                                        </div>
+                                    @endfor
+                                </div>
+                                <div class="arrows">
+                                    <div class="arrow prev">
+                                        <span class="svg svg-arrow-left">
+                                            <svg version="1.1" id="svg4-Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px"
+                                                height="26px" viewBox="0 0 14 26" enable-background="new 0 0 14 26"
+                                                xml:space="preserve">
+                                                <path
+                                                    d="M13,26c-0.256,0-0.512-0.098-0.707-0.293l-12-12c-0.391-0.391-0.391-1.023,0-1.414l12-12c0.391-0.391,1.023-0.391,1.414,0s0.391,1.023,0,1.414L2.414,13l11.293,11.293c0.391,0.391,0.391,1.023,0,1.414C13.512,25.902,13.256,26,13,26z" />
+                                            </svg>
+                                            <span class="alt sr-only"></span>
+                                        </span>
+                                    </div>
+                                    <div class="arrow next">
+                                        <span class="svg svg-arrow-right">
+                                            <svg version="1.1" id="svg5-Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px"
+                                                height="26px" viewBox="0 0 14 26" enable-background="new 0 0 14 26"
+                                                xml:space="preserve">
+                                                <path
+                                                    d="M1,0c0.256,0,0.512,0.098,0.707,0.293l12,12c0.391,0.391,0.391,1.023,0,1.414l-12,12c-0.391,0.391-1.023,0.391-1.414,0s-0.391-1.023,0-1.414L11.586,13L0.293,1.707c-0.391-0.391-0.391-1.023,0-1.414C0.488,0.098,0.744,0,1,0z" />
+                                            </svg>
+                                            <span class="alt sr-only"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
                     <hr>
                     <div class="body-card">
                         <div class="cont">
@@ -188,11 +182,21 @@
                     <hr>
                     <div class="tabs">
 
-                        <input type="radio" id="tab1" name="tab-control" checked>
-                        <input type="radio" id="tab2" name="tab-control">
-                        <input type="radio" id="tab3" name="tab-control">
-                        <input type="radio" id="tab4" name="tab-control">
-                        <input type="radio" id="tab5" name="tab-control">
+                        <input type="radio" id="tab1" name="tab-control" @if ($section === 'toefl-itp')
+                        checked
+                        @endif>
+                        <input type="radio" id="tab2" name="tab-control" @if ($section === 'toefl-ibt')
+                        checked
+                        @endif>
+                        <input type="radio" id="tab3" name="tab-control" @if ($section === 'toeic')
+                        checked
+                        @endif>
+                        <input type="radio" id="tab4" name="tab-control" @if ($section === 'ielts')
+                        checked
+                        @endif>
+                        <input type="radio" id="tab5" name="tab-control" @if ($section === 'typeset')
+                        checked
+                        @endif>
                         <ul>
                             <li title="Toefl-itp"><label for="tab1" role="button">
                                     <svg viewBox="0 0 24 24">
@@ -221,12 +225,14 @@
                                                 d="M14,2A8,8 0 0,0 6,10A8,8 0 0,0 14,18A8,8 0 0,0 22,10H20C20,13.32 17.32,16 14,16A6,6 0 0,1 8,10A6,6 0 0,1 14,4C14.43,4 14.86,4.05 15.27,4.14L16.88,2.54C15.96,2.18 15,2 14,2M20.59,3.58L14,10.17L11.62,7.79L10.21,9.21L14,13L22,5M4.93,5.82C3.08,7.34 2,9.61 2,12A8,8 0 0,0 10,20C10.64,20 11.27,19.92 11.88,19.77C10.12,19.38 8.5,18.5 7.17,17.29C5.22,16.25 4,14.21 4,12C4,11.7 4.03,11.41 4.07,11.11C4.03,10.74 4,10.37 4,10C4,8.56 4.32,7.13 4.93,5.82Z" />
                                         </svg><br><span>IELTS</span></label>
                                 </li>
-                                <li title="Typeset"><label for="tab5" role="button">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M14,2A8,8 0 0,0 6,10A8,8 0 0,0 14,18A8,8 0 0,0 22,10H20C20,13.32 17.32,16 14,16A6,6 0 0,1 8,10A6,6 0 0,1 14,4C14.43,4 14.86,4.05 15.27,4.14L16.88,2.54C15.96,2.18 15,2 14,2M20.59,3.58L14,10.17L11.62,7.79L10.21,9.21L14,13L22,5M4.93,5.82C3.08,7.34 2,9.61 2,12A8,8 0 0,0 10,20C10.64,20 11.27,19.92 11.88,19.77C10.12,19.38 8.5,18.5 7.17,17.29C5.22,16.25 4,14.21 4,12C4,11.7 4.03,11.41 4.07,11.11C4.03,10.74 4,10.37 4,10C4,8.56 4.32,7.13 4.93,5.82Z" />
-                                        </svg><br><span>Typeset</span></label>
-                                </li>
+                                @auth
+                                    <li title="Typeset"><label for="tab5" role="button">
+                                            <svg viewBox="0 0 24 24">
+                                                <path
+                                                    d="M14,2A8,8 0 0,0 6,10A8,8 0 0,0 14,18A8,8 0 0,0 22,10H20C20,13.32 17.32,16 14,16A6,6 0 0,1 8,10A6,6 0 0,1 14,4C14.43,4 14.86,4.05 15.27,4.14L16.88,2.54C15.96,2.18 15,2 14,2M20.59,3.58L14,10.17L11.62,7.79L10.21,9.21L14,13L22,5M4.93,5.82C3.08,7.34 2,9.61 2,12A8,8 0 0,0 10,20C10.64,20 11.27,19.92 11.88,19.77C10.12,19.38 8.5,18.5 7.17,17.29C5.22,16.25 4,14.21 4,12C4,11.7 4.03,11.41 4.07,11.11C4.03,10.74 4,10.37 4,10C4,8.56 4.32,7.13 4.93,5.82Z" />
+                                            </svg><br><span>Typeset</span></label>
+                                    </li>
+                                @endauth
                             @endif
                         </ul>
 
@@ -757,15 +763,16 @@
                                                                     </div>
                                                                     <div class="d-flex justify-content-around">
                                                                         <a style="
-                                                                        background-color: rgb(76, 76, 109);
-                                                                        width: 240px;
-                                                                        height: 50px;
-                                                                        line-height: 50px;
-                                                                        padding:0;
-                                                                        border:none;
-                                                                        margin-bottom: 10px;
-                                                                        color: rgb(255, 225, 148);
-                                                                        " type="button" class="btn btn-info">Start
+                                                                                            background-color: rgb(76, 76, 109);
+                                                                                            width: 240px;
+                                                                                            height: 50px;
+                                                                                            line-height: 50px;
+                                                                                            padding:0;
+                                                                                            border:none;
+                                                                                            margin-bottom: 10px;
+                                                                                            color: rgb(255, 225, 148);
+                                                                                            " type="button"
+                                                                            class="btn btn-info">Start
                                                                             Test</a>
                                                                     </div>
                                                                 </div>
@@ -815,39 +822,43 @@
                                         </div>
                                     </div>
                                 </section>
-                                <section>
-                                    <h2>Typeset</h2>
-                                    <div class="container ver">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="vertical-tab" role="tabpanel">
+                                @if (auth()->user() and auth()->user()->status !== 'mahasiswa')
+                                    <section>
+                                        <h2>Typeset</h2>
+                                        <div class="container ver">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="vertical-tab" role="tabpanel">
 
-                                                    <div role="tabpanel" class="t5 tab-pane" id="Section4">
-                                                        <div class="list_">
-                                                            <div class="items">
-                                                                <div class="items-head">
-                                                                    <p>Typeset</p>
-                                                                    <hr>
-                                                                </div>
-                                                                <div class="items-body">
-                                                                    <p>Gunakan akun gmail berikut untuk login ke typeset</p>
-                                                                    <p>email: pelatihanbahasa005@gmail.com | paswd:
-                                                                        bahasaekp005</p>
-                                                                    <p>email: pelatihanbahasa010@gmail.com | paswd:
-                                                                        bahasaekp010</p>
-                                                                </div>
-                                                                <div class="d-flex justify-content-around">
-                                                                    <a href="https://typeset.io/" style="
-                                                                    background-color: rgb(76, 76, 109);
-                                                                    width: 240px;
-                                                                    height: 50px;
-                                                                    line-height: 50px;
-                                                                    padding:0;
-                                                                    border:none;
-                                                                    margin: 20px;
-                                                                    color: rgb(255, 225, 148);
-                                                                    " type="button" class="btn btn-info">Open
-                                                                        Typeset</a>
+                                                        <div role="tabpanel" class="t5 tab-pane" id="Section4">
+                                                            <div class="list_">
+                                                                <div class="items">
+                                                                    <div class="items-head">
+                                                                        <p>Typeset</p>
+                                                                        <hr>
+                                                                    </div>
+                                                                    <div class="items-body">
+                                                                        <p>Gunakan akun gmail berikut untuk login ke typeset
+                                                                        </p>
+                                                                        <p>email: pelatihanbahasa005@gmail.com | paswd:
+                                                                            bahasaekp005</p>
+                                                                        <p>email: pelatihanbahasa010@gmail.com | paswd:
+                                                                            bahasaekp010</p>
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-around">
+                                                                        <a href="https://typeset.io/" style="
+                                                                                        background-color: rgb(76, 76, 109);
+                                                                                        width: 240px;
+                                                                                        height: 50px;
+                                                                                        line-height: 50px;
+                                                                                        padding:0;
+                                                                                        border:none;
+                                                                                        margin: 20px;
+                                                                                        color: rgb(255, 225, 148);
+                                                                                        " type="button"
+                                                                            class="btn btn-info">Open
+                                                                            Typeset</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -855,8 +866,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </section>
+                                    </section>
+                                @endif
                             @endif
                         </div>
                     </div>
@@ -868,6 +879,7 @@
 @stop
 
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
     <script>
         //according to loftblog tut
         let link_materi = $('#linkitp');
@@ -1003,5 +1015,247 @@
         $('#ti3').on('click', function() {
             window.location = tujuan
         })
+
+        var slideshowDuration = 4000;
+        var slideshow = $('.main-content .slideshow');
+
+        function slideshowSwitch(slideshow, index, auto) {
+            if (slideshow.data('wait')) return;
+
+            var slides = slideshow.find('.slide');
+            var pages = slideshow.find('.pagination');
+            var activeSlide = slides.filter('.is-active');
+            var activeSlideImage = activeSlide.find('.image-container');
+            var newSlide = slides.eq(index);
+            var newSlideImage = newSlide.find('.image-container');
+            var newSlideContent = newSlide.find('.slide-content');
+            var newSlideElements = newSlide.find('.caption > *');
+            if (newSlide.is(activeSlide)) return;
+
+            newSlide.addClass('is-new');
+            var timeout = slideshow.data('timeout');
+            clearTimeout(timeout);
+            slideshow.data('wait', true);
+            var transition = slideshow.attr('data-transition');
+            if (transition == 'fade') {
+                newSlide.css({
+                    display: 'block',
+                    zIndex: 2
+                });
+                newSlideImage.css({
+                    opacity: 0
+                });
+
+                TweenMax.to(newSlideImage, 1, {
+                    alpha: 1,
+                    onComplete: function() {
+                        newSlide.addClass('is-active').removeClass('is-new');
+                        activeSlide.removeClass('is-active');
+                        newSlide.css({
+                            display: '',
+                            zIndex: ''
+                        });
+                        newSlideImage.css({
+                            opacity: ''
+                        });
+                        slideshow.find('.pagination').trigger('check');
+                        slideshow.data('wait', false);
+                        if (auto) {
+                            timeout = setTimeout(function() {
+                                slideshowNext(slideshow, false, true);
+                            }, slideshowDuration);
+                            slideshow.data('timeout', timeout);
+                        }
+                    }
+                });
+            } else {
+                if (newSlide.index() > activeSlide.index()) {
+                    var newSlideRight = 0;
+                    var newSlideLeft = 'auto';
+                    var newSlideImageRight = -slideshow.width() / 8;
+                    var newSlideImageLeft = 'auto';
+                    var newSlideImageToRight = 0;
+                    var newSlideImageToLeft = 'auto';
+                    var newSlideContentLeft = 'auto';
+                    var newSlideContentRight = 0;
+                    var activeSlideImageLeft = -slideshow.width() / 4;
+                } else {
+                    var newSlideRight = '';
+                    var newSlideLeft = 0;
+                    var newSlideImageRight = 'auto';
+                    var newSlideImageLeft = -slideshow.width() / 8;
+                    var newSlideImageToRight = '';
+                    var newSlideImageToLeft = 0;
+                    var newSlideContentLeft = 0;
+                    var newSlideContentRight = 'auto';
+                    var activeSlideImageLeft = slideshow.width() / 4;
+                }
+
+                newSlide.css({
+                    display: 'block',
+                    width: 0,
+                    right: newSlideRight,
+                    left: newSlideLeft,
+                    zIndex: 2
+                });
+
+                newSlideImage.css({
+                    width: slideshow.width(),
+                    right: newSlideImageRight,
+                    left: newSlideImageLeft
+                });
+
+                newSlideContent.css({
+                    width: slideshow.width(),
+                    left: newSlideContentLeft,
+                    right: newSlideContentRight
+                });
+
+                activeSlideImage.css({
+                    left: 0
+                });
+
+                TweenMax.set(newSlideElements, {
+                    y: 20,
+                    force3D: true
+                });
+                TweenMax.to(activeSlideImage, 1, {
+                    left: activeSlideImageLeft,
+                    ease: Power3.easeInOut
+                });
+
+                TweenMax.to(newSlide, 1, {
+                    width: slideshow.width(),
+                    ease: Power3.easeInOut
+                });
+
+                TweenMax.to(newSlideImage, 1, {
+                    right: newSlideImageToRight,
+                    left: newSlideImageToLeft,
+                    ease: Power3.easeInOut
+                });
+
+                TweenMax.staggerFromTo(newSlideElements, 0.8, {
+                    alpha: 0,
+                    y: 60
+                }, {
+                    alpha: 1,
+                    y: 0,
+                    ease: Power3.easeOut,
+                    force3D: true,
+                    delay: 0.6
+                }, 0.1, function() {
+                    newSlide.addClass('is-active').removeClass('is-new');
+                    activeSlide.removeClass('is-active');
+                    newSlide.css({
+                        display: '',
+                        width: '',
+                        left: '',
+                        zIndex: ''
+                    });
+
+                    newSlideImage.css({
+                        width: '',
+                        right: '',
+                        left: ''
+                    });
+
+                    newSlideContent.css({
+                        width: '',
+                        left: ''
+                    });
+
+                    newSlideElements.css({
+                        opacity: '',
+                        transform: ''
+                    });
+
+                    activeSlideImage.css({
+                        left: ''
+                    });
+
+                    slideshow.find('.pagination').trigger('check');
+                    slideshow.data('wait', false);
+                    if (auto) {
+                        timeout = setTimeout(function() {
+                            slideshowNext(slideshow, false, true);
+                        }, slideshowDuration);
+                        slideshow.data('timeout', timeout);
+                    }
+                });
+            }
+        }
+
+        function slideshowNext(slideshow, previous, auto) {
+            var slides = slideshow.find('.slide');
+            var activeSlide = slides.filter('.is-active');
+            var newSlide = null;
+            if (previous) {
+                newSlide = activeSlide.prev('.slide');
+                if (newSlide.length === 0) {
+                    newSlide = slides.last();
+                }
+            } else {
+                newSlide = activeSlide.next('.slide');
+                if (newSlide.length == 0)
+                    newSlide = slides.filter('.slide').first();
+            }
+
+            slideshowSwitch(slideshow, newSlide.index(), auto);
+        }
+
+        function homeSlideshowParallax() {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > windowHeight) return;
+            var inner = slideshow.find('.slideshow-inner');
+            var newHeight = windowHeight - (scrollTop / 2);
+            var newTop = scrollTop * 0.8;
+
+            inner.css({
+                transform: 'translateY(' + newTop + 'px)',
+                height: newHeight
+            });
+        }
+
+        $(document).ready(function() {
+            $('.slide').addClass('is-loaded');
+
+            $('.slideshow .arrows .arrow').on('click', function() {
+                slideshowNext($(this).closest('.slideshow'), $(this).hasClass('prev'));
+            });
+
+            $('.slideshow .pagination .item').on('click', function() {
+                slideshowSwitch($(this).closest('.slideshow'), $(this).index());
+            });
+
+            $('.slideshow .pagination').on('check', function() {
+                var slideshow = $(this).closest('.slideshow');
+                var pages = $(this).find('.item');
+                var index = slideshow.find('.slides .is-active').index();
+                pages.removeClass('is-active');
+                pages.eq(index).addClass('is-active');
+            });
+
+            /* Lazyloading
+            $('.slideshow').each(function(){
+              var slideshow=$(this);
+              var images=slideshow.find('.image').not('.is-loaded');
+              images.on('loaded',function(){
+                var image=$(this);
+                var slide=image.closest('.slide');
+                slide.addClass('is-loaded');
+              });
+            */
+
+            var timeout = setTimeout(function() {
+                slideshowNext(slideshow, false, true);
+            }, slideshowDuration);
+
+            slideshow.data('timeout', timeout);
+        });
+
+        if ($('.main-content .slideshow').length > 1) {
+            $(window).on('scroll', homeSlideshowParallax);
+        }
     </script>
 @stop

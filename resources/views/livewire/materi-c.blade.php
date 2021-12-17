@@ -94,6 +94,7 @@
                 font-weight: 600;
                 text-align: center;
                 display: inline-block;
+                min-height: 60px;
                 height: 100%;
                 cursor: pointer;
                 width: 100%;
@@ -110,7 +111,8 @@
                 margin-right: auto;
                 border-radius: 10px;
                 width: 200px;
-                height: 40px;
+                min-height: 60px;
+                height: 100%;
                 margin-top: 4%;
                 transition-duration: 0.5s;
 

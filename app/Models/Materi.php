@@ -36,4 +36,10 @@ class Materi extends Model
         DB::table('materis')->insert($data);
         DB::commit();
     }
+
+    public static function firstMateri($idCourse, $sesi){
+        return self::where('id_course', $idCourse)
+            ->where('sesi', $sesi)
+            ->first();
+    }
 }
