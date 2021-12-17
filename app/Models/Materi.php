@@ -42,4 +42,8 @@ class Materi extends Model
             ->where('sesi', $sesi)
             ->first();
     }
+
+    public static function countMateri(){
+        return self::count();
+    }
 }

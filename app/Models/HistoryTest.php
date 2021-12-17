@@ -70,4 +70,10 @@ class HistoryTest extends Model
         return $query->get();
     }
 
+    public static function countHT(){
+        return self::select('identity')
+            ->groupBy('identity')
+            ->lazy()
+            ->count();
+    }
 }

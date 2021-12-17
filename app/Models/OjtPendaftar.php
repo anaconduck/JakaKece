@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PDO;
 
 class OjtPendaftar extends Model
 {
@@ -42,5 +43,10 @@ class OjtPendaftar extends Model
             ->where('id_paket',$idPaket)
             ->where('status_kelulusan',true)
             ->paginate(10);
+    }
+
+    public static function countOJT(){
+        return self::where('status_pendaftaran', true)
+            ->count();
     }
 }

@@ -27,4 +27,8 @@ class Practice extends Model
         DB::table('practices')->insert($data);
         DB::commit();
     }
+
+    public static function countSoal(){
+        return self::count();
+    }
 }

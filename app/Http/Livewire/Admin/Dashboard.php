@@ -2,12 +2,20 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\ExchangePendaftar;
+use App\Models\HistoryPractice;
+use App\Models\HistoryTest;
+use App\Models\JawaraPendaftar;
+use App\Models\Materi;
+use App\Models\OjtPendaftar;
+use App\Models\Practice;
+use App\Models\Test;
 use Livewire\Component;
 
 class Dashboard extends Component
 {
 
-    public $jumlahPengunjuang;
+    public $jumlahPengunjung;
 
     public $jumlahSE;
     public $jumlahMagang;
@@ -17,6 +25,7 @@ class Dashboard extends Component
 
     public $jumlahMateri;
     public $jumlahSoal;
+    public $jumlahSoalTest;
 
     public $meanPractice;
     public $meanTest;
@@ -26,7 +35,17 @@ class Dashboard extends Component
     protected $paginationTheme = 'bootstrap';
 
     public function mount(){
-        
+        $this->jumlahPengunjung = visits('App\Models\Berita')->count();
+        $this->jumlahSE = ExchangePendaftar::countSE();
+        $this->jumlahMagang = OjtPendaftar::countOJT();
+        $this->jumlahJawara = JawaraPendaftar::countJawara();
+        $this->jumlahPractice = HistoryPractice::countHP();
+        $this->jumlahTest = HistoryTest::countHT();
+        $this->jumlahMateri = Materi::count();
+        $this->jumlahSoal = Practice::count();
+        $this->jumlahSoalTest = Test::count();
+
+        dd($this);
     }
 
     public function render()

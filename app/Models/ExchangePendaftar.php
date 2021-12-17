@@ -47,4 +47,9 @@ class ExchangePendaftar extends Model
     public static function countPendaftar(){
         return self::where('created_at', );
     }
+
+    public static function countSE(){
+        return self::where('status_pendaftaran', true)
+            ->count();
+    }
 }

@@ -50,4 +50,9 @@ class JawaraPendaftar extends Model
             ->where('id_jawara_event', $eventID)
             ->get()->toArray();
     }
+
+    public static function countJawara(){
+        return self::where('status_pendanaan', true)
+            ->count();
+    }
 }
