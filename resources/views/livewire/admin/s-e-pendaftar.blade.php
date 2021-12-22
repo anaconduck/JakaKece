@@ -130,8 +130,27 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Jawara Center - Pendaftar</h1>
+                    <h1>Student Exchange - Pendaftar</h1>
+                    <hr>
                 </div>
+                <div class="col-md-12">
+
+                    <label>Tujuan : </label>
+                    <select id="tujuan"
+                        style="width: 300px;padding: 10px 20px;margin-left: 5px;border-radius: 10px;background-color: whitesmoke;">
+                        <option value="0">Semua</option>
+                        @foreach ($daftarTujuan as $tujuan)
+                            <option value="{{ $tujuan['id'] }}">{{ $tujuan['nama_universitas'] }}</option>
+                        @endforeach
+                    </select>
+
+                </div>
+                <div class="col-md-12 mt-5">
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -156,7 +175,7 @@
                                             selected
                                             @endif>Waktu Pendaftaran</option>
                                     </select>
-                                    @if($filter){{$filter}}@endif
+                                    @if ($filter){{ $filter }}@endif
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -189,17 +208,17 @@
                             <tbody class="table-hover">
                                 @foreach ($pendaftar as $data)
 
-                                    <tr wire:click="show({{$data->id}})" id="{{ $data->id }}">
+                                    <tr wire:click="show({{ $data->id }})" id="{{ $data->id }}">
                                         <td>{{ $ind++ }}</td>
                                         <td>{{ $data->identity }}</td>
                                         <td>
-                                            {{ $data->name ?? 1}}
+                                            {{ $data->name ?? 1 }}
                                         </td>
                                         <td>
-                                            {{$data->nama_universitas}}
+                                            {{ $data->nama_universitas }}
                                         </td>
                                         <td>
-                                            @if($data->status_pendaftaran == 0)
+                                            @if ($data->status_pendaftaran == 0)
                                                 Belum Terdaftar
                                             @elseif($data->status_pendaftaran == 1)
                                                 Terdaftar
@@ -208,13 +227,13 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if($data->status_kelulusan == 0)
+                                            @if ($data->status_kelulusan == 0)
                                                 Belum Lulus
                                             @elseif($data->status_kelulusan == 1)
                                                 Lulus
                                             @endif
                                         </td>
-                                        <td>{{date("d/M/y", strtotime($data->created_at))}}</td>
+                                        <td>{{ date('d/M/y', strtotime($data->created_at)) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -222,9 +241,65 @@
                         <div class="d-flex justify-content-center">
                             {{ $pendaftar->links() }}
                         </div>
+
+                    </div>
+                </div>
+                <div class="col-md-2 mt-5">
+                    <div class="filled-rounded-button">
+                        <a href="{{ url('/admin/se/pendaftar/export') }}">Export Excel</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <script wire:ignore src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script wire:ignore>
+        let labels = [
+            @foreach ($labels as $i => $l)
+                '{{ $i }}',
+            @endforeach
+        ];
+        let data = {
+            labels: labels,
+            datasets: [{
+                label: 'Jumlah Lulusan SE',
+                backgroundColor: 'rgb(83,91,160)',
+                borderColor: 'rgb(83,91,160)',
+                data: [
+                    @foreach ($labels as $l)
+                        {{ $l }},
+                    @endforeach
+                ],
+            }]
+        };
+        const config = {
+            type: 'line',
+            data,
+            options: {}
+        };
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+    <script wire:ignore>
+        $('#tujuan').on('change', function() {
+            window.livewire.emit('changeTujuan', this.value)
+        })
+        document.addEventListener('DOMContentLoaded', () => {
+            Livewire.hook('message.processed', (el, component) => {
+                var d = @this.labels
+                labels = []
+                data.datasets[0].data = []
+                let ind = 0
+                for (key in d) {
+                    labels[ind] = key
+                    data.datasets[0].data[ind++] = d[key]
+                }
+                data.labels = labels
+                myChart.data = data
+                myChart.update()
+            })
+        })
+    </script>
 </div>

@@ -26,32 +26,44 @@
 
                             <div class="col-md-6">
                                 <fieldset>
+                                    <label>Nama Event</label>
                                     <input value="{{ $event->nama ?? '' }}" placeholder="Nama Event"
                                         class="form-control file" type="text" name="nama">
                                 </fieldset>
                             </div>
                             <div class="col-md-6">
                                 <fieldset>
+                                    <label>Max Anggota</label>
                                     <input value="{{ $event->max_anggota ?? 1 }}" placeholder="max anggota"
                                         class="form-control file" type="number" name="max_anggota">
                                 </fieldset>
                             </div>
                             <div class="col-md-6">
                                 <fieldset>
+                                    <label>Tanggal Mulai Pendaftaran</label>
                                     <input value="{{ $event->mulai_daftar }}" placeholder="mulai pendaftaran"
                                         class="form-control file" type="date" name="mulai_daftar">
                                 </fieldset>
                             </div>
                             <div class="col-md-6">
                                 <fieldset>
+                                    <label>Tanggal Akhir Pendaftaran</label>
                                     <input value="{{ $event->akhir_daftar }}" placeholder="akhir pendaftaran"
                                         class="form-control file" type="date" name="akhir_daftar">
                                 </fieldset>
                             </div>
                             <div class="col-md-6">
                                 <fieldset>
-                                    <input value="{{ $event->mulai }}" placeholder="mulai event" class="form-control file"
-                                        type="datetime-local" name="mulai">
+                                    <label>Tanggal Pelaksanaan Event</label>
+                                    <input placeholder="tanggal mulai event" class="form-control file" type="date"
+                                        name="mulai" value="{{ substr($event->mulai, 0, 10) }}">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <label>Waktu Pelaksanaan Event</label>
+                                    <input placeholder="waktu mulai event" class="form-control file" type="time"
+                                        name="mulai_time" value="{{ substr($event->mulai, 11,5) }}">
                                 </fieldset>
                             </div>
                             <div class="col-md-6">

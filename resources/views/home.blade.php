@@ -6,22 +6,27 @@
         .untitled__slide:nth-child(1) .untitled__slideBg {
             background-image: url({{ Storage::url($dashboard->background['inkubasi']) }})
         }
+
         .untitled__slide:nth-child(2) .untitled__slideBg {
             background-image: url({{ Storage::url($dashboard->background['jawara']) }})
         }
+
         .untitled__slide:nth-child(3) .untitled__slideBg {
             background-image: url({{ Storage::url($dashboard->background['exchange']) }})
         }
+
         .untitled__slide:nth-child(4) .untitled__slideBg {
             background-image: url({{ Storage::url($dashboard->background['training']) }})
         }
+
     </style>
 @stop
 
 @section('slot')
 
     <section class="section main-banner" id="top" data-section="section1">
-        <iframe src="https://www.youtube.com/embed/{{ $dashboard->banner  }}?autoplay=1&mute=1&loop=1&playlist={{ $dashboard->banner }}"
+        <iframe
+            src="https://www.youtube.com/embed/{{ $dashboard->banner }}?autoplay=1&mute=1&loop=1&playlist={{ $dashboard->banner }}"
             frameborder="0" id="bg-video" allowfullscreen allow="autoplay"></iframe>
 
         <div class="video-overlay header-text">
@@ -48,36 +53,36 @@
                     @foreach ($berita as $b)
                         <div class="item">
                             <img src="
-                            @if ($b->file)
-                                {{ Storage::url($b->file) }}
-                            @else
-                                assets/images/courses-04.jpg
-                            @endif
-                            " alt="{{ $b->judul }}">
-                            <div class="down-content">
-                                <h4>{{ $b->judul }}</h4>
-                                <p>{{ substr($b->deskripsi, 3, 20) }} ...</p>
-                                <div class="text-button-pay">
-                                    <a href="{{ url('/berita/' . $b->id) }}"> Detail <i class="fa fa-angle-double-right"></i></a>
-                                </div>
-                            </div>
+                                      @if ($b->file)
+                            {{ Storage::url($b->file) }}
+                        @else
+                            assets/images/courses-04.jpg
+                    @endif
+                    " alt="{{ $b->judul }}">
+                    <div class="down-content">
+                        <h4>{{ $b->judul }}</h4>
+                        <p>{{ substr($b->deskripsi, 3, 20) }} ...</p>
+                        <div class="text-button-pay">
+                            <a href="{{ url('/berita/' . $b->id) }}"> Detail <i class="fa fa-angle-double-right"></i></a>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
+                @endforeach
             </div>
         </div>
+        </div>
         <div class="container ctr"">
-            @foreach ($top as $t)
-                <div class=" card">
-                    <figure class="card__thumb">
-                        <img src="{{ Storage::url($t->file) }}" alt="{{ $t->judul }} Cottrell" class="card__image">
-                        <figcaption class="card__caption">
-                            <h2 class="card__title">{{ $t->judul }}</h2>
-                            <p class="card__snippet">{{ substr($b->deskripsi, 5, 40) }} ...</p>
-                            <a href="{{ url('/berita/'.$t->id) }}" class="card__button">Baca Selengkapnya</a>
-                        </figcaption>
-                    </figure>
-                </div>
+                      @foreach ($top as $t)
+            <div class=" card">
+                <figure class="card__thumb">
+                    <img src="{{ Storage::url($t->file) }}" alt="{{ $t->judul }} Cottrell" class="card__image">
+                    <figcaption class="card__caption">
+                        <h2 class="card__title">{{ $t->judul }}</h2>
+                        <p class="card__snippet">{{ substr($b->deskripsi, 5, 40) }} ...</p>
+                        <a href="{{ url('/berita/' . $t->id) }}" class="card__button">Baca Selengkapnya</a>
+                    </figcaption>
+                </figure>
+            </div>
             @endforeach
         </div>
     </section>
@@ -156,11 +161,36 @@
             </div>
         </div>
     </section>
+    <section class="section coming-soon stat" data-section="section3">
+        <div class="container">
+            <h4 class="jd" style="margin: 0; margin-bottom: 30px;">Statistik Pengguna</h4>
+            <div class="row stat-ct">
+                <div class="col-md-6 col-sm-6">
+                    <div class="counter">
+                        <span class="counter-value">{{ $pengguna }}</span>
+                        <h3>Jumlah Pengguna Sistem</h3>
+                        <div class="counter-icon">
+                            <i class="fa fa-briefcase"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="counter magenta">
+                        <span class="counter-value">{{ $harian ?? 0 }}</span>
+                        <h3>Jumlah Pengunjung Hari Ini</h3>
+                        <div class="counter-icon">
+                            <i class="fa fa-globe"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 @stop
 @section('script')
     <script>
-       const items = document.querySelectorAll('.item'),
-            controls = document.querySelectorAll('.control'),
+        const items = document.querySelectorAll('.item'),
             headerItems = document.querySelectorAll('.item-header'),
             descriptionItems = document.querySelectorAll('.item-description'),
             activeDelay = .76,
@@ -170,42 +200,18 @@
 
         const slider = {
             init: () => {
-                controls.forEach(control => control.addEventListener('click', (e) => {
-                    slider.clickedControl(e)
-                }));
-                controls[current].classList.add('active');
                 items[current].classList.add('active');
             },
             nextSlide: () => {
                 slider.reset();
                 if (current === items.length - 1) current = -1;
                 current++;
-                controls[current].classList.add('active');
                 items[current].classList.add('active');
                 slider.transitionDelay(headerItems);
                 slider.transitionDelay(descriptionItems);
             },
-            clickedControl: (e) => {
-                slider.reset();
-                clearInterval(intervalF);
-
-                const control = e.target,
-                    dataIndex = Number(control.dataset.index);
-
-                control.classList.add('active');
-                items.forEach((item, index) => {
-                    if (index === dataIndex) {
-                        item.classList.add('active');
-                    }
-                })
-                current = dataIndex;
-                slider.transitionDelay(headerItems);
-                slider.transitionDelay(descriptionItems);
-                intervalF = setInterval(slider.nextSlide, interval);
-            },
             reset: () => {
                 items.forEach(item => item.classList.remove('active'));
-                controls.forEach(control => control.classList.remove('active'));
             },
             transitionDelay: (
                 items
@@ -234,5 +240,26 @@
 
         let intervalF = setInterval(slider.nextSlide, interval);
         slider.init();
+
+        let stat_ct = $('.stat-ct')[0];
+        var doc = document.documentElement;
+        var count = false;
+        $(window).on('scroll', function() {
+            var top = (window.pageYOffset || doc.scrollTop) - (stat_ct.clientTop || 0);
+            if (top >= 2700 && !count) {
+                $('.counter-value').each(function() {
+                    $(this).prop('Counter', 0).animate({
+                        Counter: $(this).text()
+                    }, {
+                        duration: 3500,
+                        easing: 'swing',
+                        step: function(now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                });
+                count= true;
+            }
+        })
     </script>
 @stop

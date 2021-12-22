@@ -69,28 +69,44 @@
                                         <option value="0" selected>Pilih Dosen Pembimbing</option>
                                     @endif
                                     @foreach ($dosen as $ds)
-                                        <option value="{{ $ds->id }}" @if ($ds->id == $pendaftar->id_dosen) selected @endif>{{ $ds->nama_lengkap }}
+                                        <option value="{{ $ds->id }}" @if ($ds->id == $pendaftar->id_dosen) selected @endif>
+                                            {{ $ds->nama_lengkap }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="col-md-6">
+                                <label>Besar Pendanaan yang diberikan (Rp.): </label>
+                                <input value="{{ $event->pendanaan ?? 0 }}" type="number" name="pendanaan" class="form-control" id="title">
+                            </div>
+
                             <div class="col-md-6">
                                 <label>File Pendanaan : </label>
                                 @if ($pendaftar->file)
-                                    <a href="{{ url($pendaftar->file) }}">File</a>
+                                    <a href="{{ Storage::url($pendaftar->file['pendanaan']) }}">unduh</a>
+                                @else
+                                    -
+                                @endif
+                            </div>
+                            <div class="col-md-6">
+                                <label>Bukti Pendaftaran : </label>
+                                @if ($pendaftar->file)
+                                    <a href="{{ Storage::url($pendaftar->file['bukti']) }}">unduh</a>
                                 @else
                                     -
                                 @endif
                             </div>
                             <div class="col-12">
                                 <label>Catatan Pembimbing : </label>
-                                <textarea name="catatan_pembimbing" id="catatan_pembimbing" placeholder="Masukkan Catatan Pembimbing"
-                                    rows="6"></textarea>
+                                <textarea name="catatan_pembimbing" id="catatan_pembimbing"
+                                    placeholder="Masukkan Catatan Pembimbing" rows="6"></textarea>
                             </div>
                             <div class="col-12">
                                 <label>Catatan Pendanaan : </label>
-                                <textarea name="catatan_pendanaan" id="catatan_pendanaan" placeholder="MasukkanCatatan Pendanaan" rows="6"></textarea>
-                              </div>
+                                <textarea name="catatan_pendanaan" id="catatan_pendanaan"
+                                    placeholder="MasukkanCatatan Pendanaan" rows="6"></textarea>
+                            </div>
                             <div class="col-md-6 mt-4">
                                 <button name="submit" value="update" type="submit" id="form-submit"
                                     class="button">Update</button>

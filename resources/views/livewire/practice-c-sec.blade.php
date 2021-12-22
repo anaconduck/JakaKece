@@ -43,12 +43,12 @@
                                                                     @elseif (array_key_exists($index - 1,
                                                                         $daftarJawaban))
                                                                 <td wire:click="show({{ $index - 1 }})"
-                                                                    class="num_d answered"><b><a
+                                                                    class="num_d answered nm"><b><a
                                                                             class="num_s">{{ $index }}
                                                                         </a>
                                                                     @else
                                                                 <td wire:click="show({{ $index - 1 }})"
-                                                                    class="num_d "><b><a
+                                                                    class="num_d nm"><b><a
                                                                             class="num_s">{{ $index }}
 
                                                             @endif
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $allsesi[$sesi]['sesi'] }}</h5>
-                                        @if ($soal->file)
+                                        @if ($soal['file'])
                                             <div class='fl'>
                                                 <a href='#' class='playBut'>
 
@@ -104,19 +104,19 @@
                                         <p class="card-text" style="text-align: justify">{{ $soal->soal ?? '' }}
                                         </p>
                                         <div class="ans">
-                                            @if ($soal->tipe == 'm')
+                                            @if ($soal['tipe'] == 'm')
                                                 <div>
-                                                    @if ($soal->opsi1)
+                                                    @if ($soal['opsi1'])
                                                         <label class="rad-label">
                                                             <input wire:click="jawab(0)" type="radio"
                                                                 class="rad-input" name="rad"
                                                                 @if ($isAnswered and $daftarJawaban[$posisiSoal] == 0) checked @endif>
                                                             <div class="rad-design"></div>
-                                                            <div class="rad-text">{{ $soal->opsi1 }}</div>
+                                                            <div class="rad-text">{{ $soal['opsi1'] }}</div>
                                                         </label>
                                                     @endif
 
-                                                    @if ($soal->opsi2)
+                                                    @if ($soal['opsi2'])
                                                         <label class="rad-label">
                                                             <input wire:click="jawab(1)" type="radio"
                                                                 class="rad-input" name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 1)
@@ -124,11 +124,11 @@
                                                     @endif
                                                     >
                                                     <div class="rad-design"></div>
-                                                    <div class="rad-text">{{ $soal->opsi2 }}</div>
+                                                    <div class="rad-text">{{ $soal['opsi2'] }}</div>
                                                     </label>
                                             @endif
 
-                                            @if ($soal->opsi3)
+                                            @if ($soal['opsi3'])
                                                 <label class="rad-label">
                                                     <input wire:click="jawab(2)" type="radio" class="rad-input"
                                                         name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 2)
@@ -136,11 +136,11 @@
                                             @endif
                                             >
                                             <div class="rad-design"></div>
-                                            <div class="rad-text">{{ $soal->opsi3 }}</div>
+                                            <div class="rad-text">{{ $soal['opsi3'] }}</div>
                                             </label>
                                             @endif
 
-                                            @if ($soal->opsi4)
+                                            @if ($soal['opsi4'])
                                                 <label class="rad-label">
                                                     <input wire:click="jawab(3)" type="radio" class="rad-input"
                                                         name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 3)
@@ -148,12 +148,12 @@
                                             @endif
                                             >
                                             <div class="rad-design"></div>
-                                            <div class="rad-text">{{ $soal->opsi4 }}</div>
+                                            <div class="rad-text">{{ $soal['opsi4'] }}</div>
                                             </label>
                                             @endif
 
                                         </div>
-                                    @elseif($soal->tipe == 'f')
+                                    @elseif($soal['tipe'] == 'f')
                                         <label for="inp" class="inp">
                                             <input wire:model.lazy='ans' type="text" id="inp" placeholder="&nbsp;">
                                             <span class="label">Ans..</span>
@@ -177,17 +177,26 @@
             </div>
         </div>
     </section>
-    <script>
-        let e = new Audio('{{ $soal->file }}');
+    <script wire:ignore>
+        document.addEventListener('DOMContentLoaded', () => {
+            Livewire.hook('message.processed', (el, component) => {
+                var q = @this.soal
+                if (q.file !== null) {
+                    let e = new Audio(q.file);
 
-        $('.fl').on('click', function() {
-            e.play()
-        })
-        $('.btn-shine').on('click', function() {
-            e.pause()
+                    $('.fl').on('click', function() {
+                        e.play()
+                    })
+                    $('.btn-shine').on('click', function() {
+                        e.pause()
+                    })
+                    $('.nm').on('click', function() {
+                        e.pause();
+                    })
+                }
+            })
         })
     </script>
-
     <script wire:ignore>
         // Credit: Mateusz Rybczonec
 

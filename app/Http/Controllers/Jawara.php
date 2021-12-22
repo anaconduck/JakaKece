@@ -79,10 +79,10 @@ class Jawara extends Controller
         if ($now < $daftar or $akhir < $now) {
             abort(404);
         }
-
         $request->validate([
             'dosen' => 'numeric|required',
-            'file' => 'bail|required|max:10240|mimetypes:jpeg,jpg,png,gif,application/msword,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf'
+            'file' => 'bail|required|max:10240|mimetypes:image/jpeg,image/jpg,image/png,image/gif,application/msword,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf',
+            'bukti' => 'bail|required|max:10240|mimetypes:image/jpeg,image/jpg,image/png,image/gif,application/msword,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf',
         ]);
 
         $data = $request->all();
@@ -104,6 +104,7 @@ class Jawara extends Controller
         sort($nim);
         $idPendaftar = $event->id . implode('', $nim);
         $pendaftar = JawaraPendaftar::find($idPendaftar);
+        if($pendaftar and $pendaftar->status!='0') return $this->index([1, 'Anda sudah terdaftar dalam event jawara '.$event->nama]);
         if ($pendaftar) {
             $file = json_decode($pendaftar->file,true);
             if($request->hasFile('file')){
@@ -113,8 +114,16 @@ class Jawara extends Controller
                 $filename = time().'_'.Str::random(3).$request->file('file')->getClientOriginalName();
                 $path = $request->file('file')->storeAs('jawara/pendanaan', $filename, 'local');
                 $file['pendanaan'] = $path;
-                $pendaftar->file = json_encode($file);
             }
+            if($request->hasFile('bukti')){
+                if($file['bukti']){
+                    Storage::delete($file['bukti']);
+                }
+                $filename = time().Str::random(3).request()->file('bukti')->getClientOriginalName();
+                $path = $request->file('bukti')->storeAs('jawara/bukti', $filename, 'local');
+                $file['bukti'] = $path;
+            }
+            $pendaftar->file = json_encode($file);
             $pendaftar->id_dosen = $idDosen;
             if($pendaftar->save(['file','id_dosen']))
                 return $this->index([1, 'Data Anda telah terbarui. Tunggu info selanjutnya!']);
@@ -128,6 +137,11 @@ class Jawara extends Controller
                 $filename = time() . '_' . Str::random(3) . $request->file('file')->getClientOriginalName();
                 $path = $request->file('file')->storeAs('jawara/pendanaan', $filename, 'local');
                 $file['pendanaan'] = $path;
+            }
+            if($request->hasFile('bukti')){
+                $filename = time(). '_'.Str::random(3).$request->file('bukti')->getClientOriginalName();
+                $path = $request->file('bukti')->storeAs('jawara/bukti', $filename, 'local');
+                $file['bukti'] = $path;
             }
             if (JawaraPendaftar::daftar([
                 'id' => $idPendaftar,

@@ -116,6 +116,12 @@
       <div class="row">
         <div class="col-md-12">
           <h1>On The Job Training - Pendaftar</h1>
+          <hr>
+        </div>
+        <div class="col-md-12 mt-5">
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
       </div>
     </div>
@@ -192,6 +198,7 @@
             </ul>
           </div>
         </div>
+        
       </div>
     </div>
   </section>

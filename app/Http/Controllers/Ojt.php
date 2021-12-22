@@ -114,8 +114,15 @@ class Ojt extends Controller
 
         if($event == null)
             abort(404);
+        $pendaftar = OjtPendaftar::where('id_prodi',config('app.idProdi')[session('prodi')])
+            ->where('id_paket', $paket->id)
+            ->where('identity', auth()->user()->identity)
+            ->first();
+        if($pendaftar){
+            return $this->index([1, 'Anda telah terdaftar dalam program magang '.$tujuan->nama_instansi]);
+        }
 
-        $pendaftar = OjtPendaftar::firstOrCreate([
+        $pendaftar = OjtPendaftar::create([
             'id_prodi' => config('app.idProdi')[session('prodi')],
             'id_paket' => $paket->id,
             'identity' => auth()->user()->identity,
@@ -123,7 +130,7 @@ class Ojt extends Controller
         ]);
 
         if($pendaftar)
-            return $this->index([1, 'Pendaftaran Ojt Berhasil dilakukan']);
+            return $this->index([1, 'Pendaftaran Ojt berhasil dilakukan. Tunggu Informasi selanjutnya!']);
         return $this->index([0, 'Pendaftaran Ojt gagal dilakukan.']);
     }
 

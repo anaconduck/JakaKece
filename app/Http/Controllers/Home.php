@@ -26,12 +26,16 @@ class Home extends Controller
         if($dashboard->tentangAplikasi)
             $dashboard->tentangAplikasi = json_decode($dashboard->tentangAplikasi, true);
         else $dashboard->tentangAplikasi = [];
+        $harian = visits('App\Models\Berita')->period('day')->count();
+        $pengguna = User::count();
         return view('home',[
             'title' => 'Home',
             'home' => 'selected',
             'berita' => $berita,
             'top' => $top,
-            'dashboard' => $dashboard
+            'dashboard' => $dashboard,
+            'harian' => $harian,
+            'pengguna' => $pengguna
         ]);
     }
 

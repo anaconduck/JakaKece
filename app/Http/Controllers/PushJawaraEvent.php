@@ -25,13 +25,15 @@ class PushJawaraEvent extends Controller
             ]
         ];
     }
-    public function index(){
-        return view('admin.create-jawara-event',[
+    public function index()
+    {
+        return view('admin.create-jawara-event', [
             'title' => 'Tambah Jawara Event',
             'nav' => $this->nav
         ]);
     }
-    public function push(Request $request){
+    public function push(Request $request)
+    {
         $request->validate([
             'nama' => 'required',
             'max_anggota' => 'required|numeric',
@@ -53,13 +55,29 @@ class PushJawaraEvent extends Controller
             'finish'
         ]);
         $data['mulai'] = date("Y-m-d H:i", $mulai);
-        if($request->hasFile('file')){
-            $name = time().Str::random(5).$request->file('file')->getClientOriginalName();
-            $path = $request->file('file')->storeAs("jawara/event",$name, 'public');
+        $periode = 0;
+        $time = $mulai - strtotime(config('app.periode.batas_awal') . config('app.periode.start'));
+        $tahun = config('app.periode.start');
+        while (true) {
+            $tgl = null;
+            if ($periode % 2 == 0) {
+                $tgl = config('app.periode.batas_tengah') . ' ' . $tahun;
+            } else {
+                $tahun += 1;
+                $tgl = config('app.periode.batas_awal') . ' ' . $tahun;
+            }
+            $time = $mulai - strtotime($tgl);
+            if ($time < 0) break;
+            $periode += 1;
+        }
+        $data['periode'] = $periode;
+        if ($request->hasFile('file')) {
+            $name = time() . Str::random(5) . $request->file('file')->getClientOriginalName();
+            $path = $request->file('file')->storeAs("jawara/event", $name, 'public');
             $data['file'] = $path;
             JawaraEvent::pushEvent($data);
             return redirect(url('/admin/jawara/event'));
-        }else{
+        } else {
             JawaraEvent::pushEvent($data);
             return redirect(url('/admin/jawara/event'));
         }

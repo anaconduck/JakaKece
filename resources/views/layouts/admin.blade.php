@@ -21,6 +21,7 @@
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     @yield('css')
     @livewireStyles
+    @livewireScripts
 </head>
 
 <body class="is-preload">
@@ -70,7 +71,19 @@
                     <ul>
                         <li><a href="{{ url('/admin') }}">Homepage</a></li>
                         @if (auth()->user()->status)
-                            <li><a href="{{ url('/admin/dashboard') }}">Statistik</a></li>
+                            <li>
+                                <span class="opener">Statistik</span>
+                                <ul>
+
+                                    <li><a href="{{ url('/admin/dashboard') }}">Statistik</a></li>
+                                    <li><a href="{{ url('/admin/pengunjung') }}">Pengunjung</a>
+                                    <li><a href="{{ url('/admin/jumlah-practice') }}">Statistik Latihan</a>
+                                    <li><a href="{{ url('/admin/jumlah-test') }}">Statistik Test</a>
+                                    <li><a href="{{ url('/admin/mean-jawara') }}">Rerata Dana Jawara</a>
+
+                                    </li>
+                                </ul>
+                            </li>
                         @endif
                         <li><a href="{{ url('/admin/berita') }}">Berita</a></li>
                         <li>
@@ -142,7 +155,6 @@
     <script src="{{ asset('assets/js/owl-carousel.js') }}"></script>
     <script src="{{ asset('assets/js/custom_admin.js') }}"></script>
     @yield('js')
-    @livewireScripts
 </body>
 
 

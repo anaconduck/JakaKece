@@ -174,7 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -228,7 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
     'totalTimeTest' =>[
@@ -362,7 +362,10 @@ return [
         'exchange' => 3,
         'training' => 4
     ],
-    'period' => [
-        'start' => '2022'
+    'periode' => [
+        'start' => ' 2021',
+        'batas_tengah' => '1 July',
+        'batas_awal' => '1 January',
+        'batas_akhir' => '31 December'
     ],
 ];

@@ -60,12 +60,34 @@ class UpdateExchangePendaftar extends Controller
             'status_kelulusan' => 'required|min:0|max:1',
             'status_pendaftaran' =>'required|min:0|max:1',
         ]);
-
         $data = $request->only(['status_kelulusan', 'status_pendaftaran', 'catatan']);
+
+        if($pendaftar->status_pendaftaran !=2 and $data['status_pendaftaran'] == 2){
+            $time = strtotime($pendaftar->created_at) - strtotime(config('app.periode.batas_awal').config('app.periode.start'));
+            $periode = 0;
+            $tahun = config('app.periode.start');
+            while(true){
+                $tgl = null;
+                if($periode%2 == 0){
+                    $tgl = config('app.periode.batas_tengah').' '.$tahun;
+                }else{
+                    $tahun += 1;
+                    $tgl = config('app.periode.batas_awal').' '.$tahun;
+                }
+                $time = strtotime($pendaftar->created_at) - strtotime($tgl);
+                $periode +=1;
+                if($time < 0) break;
+            }
+            $data['periode'] = $periode;
+        }else if($pendaftar->status_pendaftaran==2 and $data['status_pendaftaran']!=2){
+            $data['periode'] = null;
+        }
+
         if($request->get('submit') == 'update'){
             $pendaftar->status_kelulusan = $data['status_kelulusan'];
             $pendaftar->status_pendaftaran = $data['status_pendaftaran'];
             $pendaftar->catatan = $data['catatan'];
+            $pendaftar->periode = $data['periode'];
             if($pendaftar->save())
                 return redirect(url('/admin/se/pendaftar'));
         }else if($request->get('submit') == 'delete'){

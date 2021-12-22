@@ -76,4 +76,26 @@ class HistoryTest extends Model
             ->lazy()
             ->count();
     }
+
+    public static function mean($idCourse = null){
+        if(!$idCourse){
+            $q = self::select('jumlah_benar', 'sesi', 'id_course')
+                ->join('history_jawaban_tests', 'history_jawaban_tests.id_history_test', '=', 'history_tests.id')
+                ->lazy();
+            $mean = 0;
+            if($q->count() == 0) return $mean;
+            foreach($q as $data){
+                $course = config('app.allCourse.'.$data->id_course);
+                $mean += $data->jumlah_benar*100/config("app.$course.$data->sesi.num");
+            }
+            $mean /= $q->count();
+            return $mean;
+        }
+    }
+
+    public static function pointer($idCourse){
+        return self::where('created_at', '>', now()->subYear())
+            ->where('id_course', $idCourse)
+            ->lazy();
+    }
 }

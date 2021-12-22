@@ -31,4 +31,9 @@ class Practice extends Model
     public static function countSoal(){
         return self::count();
     }
+    public static function countQuest($course, $sesi){
+        return self::where('id_course', $course)
+            ->where('sesi', $sesi)
+            ->count();
+    }
 }

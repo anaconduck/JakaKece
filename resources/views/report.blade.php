@@ -38,15 +38,11 @@
 
                             <dt class="col-sm-4">Skor Skala</dt>
                             <dd class="col-sm-8">
-                                @foreach (config(" app.$course") as $ind=> $sesi)
+                                @foreach ($report as $ind => $sesi)
                                     <dl class="row">
-                                        <dt class="col-sm-7">{{ $sesi['sesi'] }}</dt>
+                                        <dt class="col-sm-7">{{ config("app.$course.".$sesi['sesi'])['sesi'] }}</dt>
                                         <dd class="col-sm-5">
-                                            @if ($counter < sizeof($report) and $ind == $report[$counter]['sesi'])
-                                                {{ $report[$counter++]['jumlah_benar'] }}
-                                            @else
-                                                0
-                                            @endif
+                                            {{ $sesi['jumlah_benar'] }}
                                         </dd>
                                     </dl>
                                 @endforeach

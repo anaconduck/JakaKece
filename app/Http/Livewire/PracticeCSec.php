@@ -12,7 +12,7 @@ class PracticeCSec extends Component
 {
 
     public $idHistoryPractice;
-    public Practice $soal;
+    public $soal;
     public $daftarSoal;
     public $daftarJawaban;
     public $isAnswered;
@@ -100,16 +100,12 @@ class PracticeCSec extends Component
             ]
             ];
 
-        $soal = Practice::show($this->idCourse, $this->sesi, $this->daftarSoal[$this->posisiSoal]);
+        $soal = Practice::show($this->idCourse, $this->sesi, $this->daftarSoal[$this->posisiSoal])->toArray();
 
         if(!($soal == null)) $this->soal = $soal;
         else abort(500);
 
-        if($this->soal->tipe == 'f') $this->ans = $this->daftarJawaban[$this->posisiSoal];
-
-        if(strpos($this->allsesi[$this->sesi]['sesi'],'listening')!== false and !Session::has('hasListenPractice')){
-            Session::put('hasListenPractice', collect(array_fill(0, sizeof($this->daftarSoal), 0)));
-        }
+        if($this->soal['tipe'] == 'f') $this->ans = $this->daftarJawaban[$this->posisiSoal]?? null;
     }
 
     public function jawab($jawab){
@@ -152,10 +148,10 @@ class PracticeCSec extends Component
     public function show($soal){
         if($soal >= 0 and $soal < sizeof($this->daftarSoal)){
             $this->posisiSoal = $soal;
-            $soal = Practice::show($this->idCourse, $this->sesi, $this->daftarSoal[$this->posisiSoal]);
+            $soal = Practice::show($this->idCourse, $this->sesi, $this->daftarSoal[$this->posisiSoal])->toArray();
             if(!($soal == null)) $this->soal = $soal;
             else abort(500);
-            if($this->soal->tipe == 'f') $this->ans = $this->daftarJawaban[$this->posisiSoal] ?? '';
+            if($this->soal['tipe'] == 'f') $this->ans = $this->daftarJawaban[$this->posisiSoal] ?? '';
         }
     }
 

@@ -117,6 +117,7 @@
         <div class="col-md-12">
           <h1>Jawara Center - Pendaftar</h1>
         </div>
+
       </div>
     </div>
 </div>
@@ -201,5 +202,4 @@
       </div>
     </div>
   </section>
-
 @stop

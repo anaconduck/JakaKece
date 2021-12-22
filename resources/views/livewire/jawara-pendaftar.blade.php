@@ -132,6 +132,11 @@
                 <div class="col-md-12">
                     <h1>Jawara Center - Pendaftar</h1>
                 </div>
+                <div class="col-md-12 mt-5">
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -184,6 +189,7 @@
                                     <th>Status Pendaftaran</th>
                                     <th>Waktu Pendaftaran</th>
                                     <th>Pengajuan</th>
+                                    <th>Pendanaan</th>
                                 </tr>
                             </thead>
                             <tbody class="table-hover">
@@ -202,7 +208,8 @@
                                         <td>
                                             {{ $data->nama ?? 1}}
                                         </td>
-                                        <td>{{$data->nama_dosen}}
+                                        <td>
+                                            {{$data->nama_dosen}}
                                         </td>
                                         <td>
                                             @if($data->status == 0)
@@ -221,6 +228,7 @@
                                             -
                                             @endif
                                         </td>
+                                        <td>Rp. {{ number_format($data->pendanaan, 2, ',', '.') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -230,7 +238,42 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-2 mt-5">
+                    <div class="filled-rounded-button">
+                        <a href="{{ url('/admin/jawara/pendaftar/export') }}">Export Excel</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+    <script wire:ignore src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const labels = [
+            @foreach ($labels as $i => $l)
+                '{{ $i }}',
+            @endforeach
+        ];
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Jumlah Penerima Pendanaan',
+                backgroundColor: 'rgb(83,91,160)',
+                borderColor: 'rgb(83,91,160)',
+                data: [
+                    @foreach ($labels as $l)
+                        {{ $l }},
+                    @endforeach
+                ],
+            }]
+        };
+        const config = {
+            type: 'line',
+            data,
+            options: {}
+        };
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
 </div>

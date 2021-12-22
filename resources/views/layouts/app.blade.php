@@ -74,9 +74,11 @@
                                     @endif
                                 @endif
                             @endauth
+                            @if (!auth()->user())
                             <a href="{{ url('/inkubasi?s=ielts') }}">
                                 <li>IELTS</li>
                             </a>
+                            @endif
                         </ol>
                     </div>
                 </li>
@@ -125,7 +127,7 @@
                     <div class="drop-down">
                         <ol>
                             <a href="{{ url('/training?s=pendaftaran') }}">
-                                <li>Pendaftaran Magang</li>
+                                <li>Pendaftaran</li>
                             </a>
                             <a href="{{ url('/training?s=terlaksana') }}">
                                 <li>Magang Terlaksana</li>

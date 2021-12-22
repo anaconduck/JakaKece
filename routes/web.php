@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Exports\ExchangePendaftarExport;
+use App\Exports\JawaraPendaftarExport;
+use App\Exports\OjtPendaftarExport;
 use App\Http\Controllers\Admin\PushBerita;
 use App\Http\Controllers\Admin\PushMateri;
 use App\Http\Controllers\Admin\PushOjtEvent;
@@ -39,14 +42,20 @@ use App\Http\Livewire\ExchangeTujuan;
 use App\Http\Livewire\JawaraCenter;
 use App\Http\Livewire\JawaraPendaftar;
 use App\Http\Livewire\MateriC;
+use App\Http\Livewire\MeanDanaJawara;
+use App\Http\Livewire\MeanPractice;
+use App\Http\Livewire\MeanTest;
 use App\Http\Livewire\MKExchange;
 use App\Http\Livewire\PracticeC;
 use App\Http\Livewire\PracticeCSec;
+use App\Http\Livewire\StatistikPengunjung;
+use App\Http\Livewire\StatistikPractice;
+use App\Http\Livewire\StatistikTest;
 use App\Http\Livewire\TestC;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use Maatwebsite\Excel\Facades\Excel;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,6 +87,10 @@ Route::get('/storage/jawara/pendanaan/{file}', function($file){
     return Storage::download("jawara/pendanaan/$file");
 })->middleware(['auth']);
 
+Route::get('/storage/jawara/bukti/{file}', function($file){
+    return Storage::download("jawara/bukti/$file");
+})->middleware(['auth']);
+
 Route::get('/storage/berkas_student_exchange/{file}', function($file){
     return Storage::download("berkas_student_exchange/$file");
 })->middleware(['auth']);
@@ -94,9 +107,6 @@ Route::get('/storage/ojt/pelaksanaan/{file}', function ($file){
 Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(function(){
     //homepage
     Route::get('/', HomeController::class)->name('home');
-
-    //statistik
-    Route::get('/statistik', StatistikController::class);
 
     //halaman materi
     Route::get('/inkubasi/materi',MateriController::class);
@@ -119,8 +129,11 @@ Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(func
     Route::get('/jawara/event/{event}', [UpdateJawaraEvent::class, 'index']);
     Route::post('/jawara/event/{event}',[UpdateJawaraEvent::class, 'update']);
 
-    //Jawara Pendaftar
+    //Jawara Pendaftar\
     Route::get('/jawara/pendaftar', JawaraPendaftar::class);
+    Route::get('/jawara/pendaftar/export', function(){
+        return Excel::download(new JawaraPendaftarExport, 'jawara-pendaftar.xlsx');
+    });
     Route::get('/jawara/pendaftar/{pendaftar}',[UpdateJawaraPendaftar::class, 'index']);
     Route::post('/jawara/pendaftar/{pendaftar}',[UpdateJawaraPendaftar::class,'update']);
 
@@ -140,6 +153,9 @@ Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(func
 
     //pendaftar se
     Route::get('/se/pendaftar',SEPendaftar::class);
+    Route::get('/se/pendaftar/export', function(){
+        return Excel::download(new ExchangePendaftarExport, 'se-pendaftar.xlsx');
+    });
     Route::get('/se/pendaftar/{pendaftar}', [UpdateExchangePendaftar::class, 'index']);
     Route::post('/se/pendaftar/{pendaftar}', [UpdateExchangePendaftar::class, 'update']);
 
@@ -172,6 +188,9 @@ Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(func
 
     //pendaftar ojt
     Route::get('/ojt/pendaftar', OjtPendaftarController::class);
+    Route::get('/ojt/pendaftar/export', function(){
+        return Excel::download(new OjtPendaftarExport, 'ojt-pendaftar.xlsx');
+    });
     Route::get('/ojt/pendaftar/{pendaftar}',[UpdateOjtPendaftar::class, 'index']);
     Route::post('/ojt/pendaftar/{pendaftar}', [UpdateOjtPendaftar::class, 'update']);
     Route::get('/ojt/yzyzla/{pendaftar}/{ind}', [UpdateOjtPendaftar::class, 'hapus']);
@@ -201,6 +220,18 @@ Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(func
 
     //dashboard
     Route::get('/dashboard', Dashboard::class);
+
+    //pengunjugn
+    Route::get('/pengunjung', StatistikPengunjung::class);
+
+    //jumlah telah berlatih
+    Route::get('/jumlah-practice', StatistikPractice::class);
+
+    //jumlah telah test
+    Route::get('/jumlah-test',StatistikTest::class);
+
+    //rerata dana jawara
+    Route::get('/mean-jawara', MeanDanaJawara::class);
 
     Route::post('/logout', function (Request $request){
         Auth::logout();
@@ -246,9 +277,6 @@ Route::get('/latihan/{course}/{sesi}/{tipe}',PracticeCSec::class)
 Route::get('/test/{course}', TestC::class)
     ->where('course','[A-Za-z-]+')
     ->middleware(['auth']);
-
-//membuka report tertentu
-Route::get('/report/practice/{historyPractice}',[User::class, 'report']);
 
 //list riwayat jawara
 Route::get('/user/riwayat-jawara',[User::class, 'riwayatJawara']);
@@ -326,8 +354,6 @@ Route::get('/training/{tujuan}/{paket}',[Ojt::class,'showPendaftaran'])
 
 Route::post('/training/{tujuan}/{paket}',[Ojt::class,'daftar'])
     ->middleware('auth');
-
-
 
 Route::post('/logout', [User::class, 'logout'])
     ->middleware('auth');

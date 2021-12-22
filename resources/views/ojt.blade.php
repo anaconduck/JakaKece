@@ -19,6 +19,24 @@
                 <div class="col-md-12">
                     <h1>On The Job Training</h1>
                     <hr>
+                    <hr>
+                    @if ($message[0] == 1)
+                        <div class="alert alert-success" role="alert">
+                            {{ $message[1] }}
+                        </div>
+                    @elseif ($message[0]==0))
+                        <div class="alert alert-danger" role="alert">
+                            {{ $message[1] }}
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            @foreach ($errors->all() as $error)
+                                {{ $error . ', ' }}
+                            @endforeach
+                        </div>
+                    @endif
+                    <hr>
                     <main class="main-content">
                         <section class="slideshow">
                             <div class="slideshow-inner">
@@ -86,24 +104,6 @@
                             </div>
                         </section>
                     </main>
-                    <hr>
-                    @if ($message[0] == 1)
-                        <div class="alert alert-success" role="alert">
-                            {{ $message[1] }}
-                        </div>
-                    @elseif ($message[0]==0))
-                        <div class="alert alert-danger" role="alert">
-                            {{ $message[1] }}
-                        </div>
-                    @endif
-                    @if ($errors->any())
-                        <div class="alert alert-danger" role="alert">
-                            @foreach ($errors->all() as $error)
-                                {{ $error . ', ' }}
-                            @endforeach
-                        </div>
-                    @endif
-                    <hr>
                     <div class="body-card mt-5 mb-5">
                         <div class="cont">
                             <ul class="cards">

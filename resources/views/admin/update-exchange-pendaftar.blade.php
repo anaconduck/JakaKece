@@ -56,6 +56,7 @@
                                     <select name="status_pendaftaran" id="status" required>
                                         <option value="0" @if ($pendaftar->status_pendaftaran == 0) selected @endif>Belum Terdaftar</option>
                                         <option value="1" @if ($pendaftar->status_pendaftaran == 1) selected @endif>Terdaftar</option>
+                                        <option value="2" @if ($pendaftar->status_pendaftaran == 2) selected @endif>Diterima</option>
                                     </select>
                                 </fieldset>
                             </div>

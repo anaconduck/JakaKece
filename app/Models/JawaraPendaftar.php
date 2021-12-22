@@ -21,7 +21,7 @@ class JawaraPendaftar extends Model
     }
 
     public static function daftar($data){
-        $data->created_at = now();
+        $data['created_at'] = now();
         DB::beginTransaction();
         $res = DB::table('jawara_pendaftars')
             ->insert($data);
@@ -54,5 +54,33 @@ class JawaraPendaftar extends Model
     public static function countJawara(){
         return self::where('status_pendanaan', true)
             ->count();
+    }
+
+    public static function meanPendanaan(){
+        $q  = self::select('pendanaan')
+            ->where('status_pendanaan', true)
+            ->lazy();
+
+        $total = 0;
+        if($q->count() == 0) return $total;
+        foreach($q as $data){
+            $total += $data->pendanaan;
+        }
+        return $total/$q->count();
+    }
+
+    public static function pointer(){
+        return self::select('jawara_pendaftars.*', 'jawara_events.periode')
+            ->join('jawara_events', 'jawara_events.id', '=', 'jawara_pendaftars.id_jawara_event')
+            ->where('status', true)
+            ->where('status_pendanaan', true)
+            ->lazy();
+    }
+
+    public static function pointerDana(){
+        return self::where('status', true)
+            ->where('status_pendanaan', true)
+            ->orderBy('created_at')
+            ->lazy();
     }
 }

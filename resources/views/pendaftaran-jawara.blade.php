@@ -218,6 +218,12 @@
     <div class="modal-header"><span class="is-active"></span><span></span><span></span></div>
     <div class="modal-bodies">
       <div class="modal-body modal-body-step-1 is-showing">
+          @if ($errors->any())
+          <div class="alert alert-danger" role="alert">
+              {{ implode(', ', $errors->all()) }}
+          </div>
+
+          @endif
         <div class="title">Step 1</div>
         <div class="description">Poster Pendaftaran</div>
         <form method="POST" action="" enctype="multipart/form-data">
@@ -274,6 +280,10 @@
             <option value="{{ $d->id }}">{{ $d->nama_lengkap }}</option>
             @endforeach
         </select>
+        <label>
+            Bukti Pendaftaran
+          <input type="file" name="bukti" required/>
+        </label>
         <label>
             Fail Pendanaan
           <input type="file" name="file" required/>

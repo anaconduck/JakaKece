@@ -12,8 +12,11 @@ class OjtPendaftarController extends Component
     public $ind;
     protected $paginationTheme = 'bootstrap';
 
-    public function mount(){
+    //istatistik
+    public $labels;
 
+    public function mount(){
+        $this->labels = array();
     }
 
     public function show($id){
@@ -39,6 +42,20 @@ class OjtPendaftarController extends Component
             ->orWhere('ojt_tujuans.nama_instansi', 'like', "%$this->keyword%")
             ->orderBy($this->filter, 'desc')
             ->paginate(10);
+
+        $pointer = OjtPendaftar::pointer();
+        foreach($pointer as $p){
+            $label = null;
+            $thn = config('app.periode.start') + ceil($p->periode/2);
+            if($p->periode %2 == 0){
+                $label = 'Genap '.($thn-1).'/'.($thn);
+            }else{
+                $label = 'Ganjil '.($thn-1).'/'.($thn);
+            }
+            if(!isset($this->labels[$label])){
+                $this->labels[$label] = 1;
+            }else $this->labels[$label] +=1;
+        }
         return view('livewire.admin.ojt-pendaftar-controller',[
             'pendaftar' => $data
         ])

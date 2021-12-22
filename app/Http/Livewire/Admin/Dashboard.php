@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\ExchangePendaftar;
+use App\Models\HistoryJawabanPractice;
 use App\Models\HistoryPractice;
 use App\Models\HistoryTest;
 use App\Models\JawaraPendaftar;
@@ -30,12 +31,12 @@ class Dashboard extends Component
     public $meanPractice;
     public $meanTest;
 
-    public $meanDana;
+    public $meanPendanaan;
 
     protected $paginationTheme = 'bootstrap';
 
     public function mount(){
-        $this->jumlahPengunjung = visits('App\Models\Berita')->count();
+        $this->jumlahPengunjung = visits('App\Models\Berita')->period('day')->count();
         $this->jumlahSE = ExchangePendaftar::countSE();
         $this->jumlahMagang = OjtPendaftar::countOJT();
         $this->jumlahJawara = JawaraPendaftar::countJawara();
@@ -44,8 +45,8 @@ class Dashboard extends Component
         $this->jumlahMateri = Materi::count();
         $this->jumlahSoal = Practice::count();
         $this->jumlahSoalTest = Test::count();
-
-        dd($this);
+        $this->meanTest = HistoryTest::mean();
+        $this->meanPendanaan = JawaraPendaftar::meanPendanaan();
     }
 
     public function render()

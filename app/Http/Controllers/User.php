@@ -41,55 +41,6 @@ class User extends Controller
             ]
         ];
     }
-    public function report(Request $request, HistoryPractice $historyPractice)
-    {
-        if ($historyPractice->identity != auth()->user()->identity)
-            abort(404);
-
-        $now = strtotime(now());
-        $test = strtotime($historyPractice->created_at);
-
-        $course = config("app.allCourse.$historyPractice->id_course");
-
-        if (($now - $test) / 60 < config("app.totalTimeTest.$course")) {
-            return redirect("/latihan/$course");
-        }
-        session()->forget('hasListenPractice');
-
-        if (!$historyPractice->status_selesai) {
-            $historyPractice->status_selesai = true;
-            $historyPractice->save(['status_selesai']);
-        }
-
-        $info = [];
-        switch (auth()->user()->status) {
-            case "mahasiswa": {
-                    $info = Mahasiswa::find(auth()->user()->identity);
-                    break;
-                }
-            case "dosen": {
-                    $info = Dosen::find(auth()->user()->identity);
-                    break;
-                }
-            default: {
-                    abort(404);
-                }
-        }
-        $historyJawaban = HistoryJawabanPractice::showHistoryJawaban($historyPractice->id);
-        array_push($this->nav, [
-            'title' => 'Report ' . $historyPractice->id,
-            'link' => url('/report/practice') . "/$historyPractice->id"
-        ]);
-        return view('report', [
-            'title' => 'Report',
-            'user_s' => 'selected',
-            'course' => $course,
-            'info' => $info,
-            'history' => $historyPractice,
-            'report' => $historyJawaban,
-            'nav' => $this->nav,
-        ]);
-    }
 
     public function riwayatJawara()
     {
@@ -246,7 +197,6 @@ class User extends Controller
             'title' => config('app.allCourse.' . $riwayat->id_course),
             'link' => url('/user/riwayat-latihan/' . $riwayat->id)
         ]);
-
         $report = HistoryJawabanPractice::showHistoryJawaban($riwayat->id)->toArray();
         return view('report', [
             'title' => 'Hasil Latihan ' . config('app.allCourse.' . $riwayat->id_course),
@@ -256,7 +206,6 @@ class User extends Controller
             'report' => $report,
             'info' => Mahasiswa::find($riwayat->identity),
             'course' => config('app.allCourse.' . $riwayat->id_course),
-            'counter' => 0,
             'tipe' => 'Latihan'
         ]);
     }

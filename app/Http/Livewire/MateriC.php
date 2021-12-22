@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class MateriC extends Component
 {
-    public Materi $currentMateri;
+    public $currentMateri;
     public $idCourse;
     public $sesi;
     public $indMateri;
@@ -24,11 +24,25 @@ class MateriC extends Component
 
         $this->currentMateri = Materi::firstMateri($this->idCourse, $this->sesi);
         if(!$this->currentMateri){
-            abort(404);
+            return;
+        }else{
+            $this->currentMateri = $this->currentMateri->toArray();
         }
 
-        $this->indMateri = $this->currentMateri->id;
+        $this->indMateri = $this->currentMateri['id'];
         $this->allJudul = Materi::allJudulWith($this->idCourse, $this->sesi);
+
+    }
+
+    public function updateInd($ind){
+        if($ind <= sizeof($this->allJudul)){
+            $this->indMateri = $ind;
+            $this->currentMateri = Materi::getMateri($this->idCourse, $this->sesi, $this->indMateri)->toArray();
+        }
+    }
+
+    public function render()
+    {
 
         $this->nav = [
             [
@@ -36,24 +50,13 @@ class MateriC extends Component
                 'link' => url('/inkubasi')
             ],
             [
-                'title' => 'Materi ' . $course,
-                'link' => url('/materi/toefl-itp/1')
+                'title' => 'Materi ' . config('app.allCourse.'.$this->idCourse),
+                'link' => url('/materi/toefl-itp/0')
             ]
         ];
-    }
-
-    public function updateInd($ind){
-        if($ind <= sizeof($this->allJudul)){
-            $this->indMateri = $ind;
-            $this->currentMateri = Materi::getMateri($this->idCourse, $this->sesi, $this->indMateri);
-        }
-    }
-
-    public function render()
-    {
         return view('livewire.materi-c')
             ->extends('layouts.app',[
-                'title' => $this->currentMateri->judul,
+                'title' => "Materi ".config('app.allCourse.'.$this->idCourse),
                 'nav' => $this->nav,
                 'inkubasi' => 'selected'
             ])

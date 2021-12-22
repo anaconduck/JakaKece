@@ -49,4 +49,10 @@ class OjtPendaftar extends Model
         return self::where('status_pendaftaran', true)
             ->count();
     }
+
+    public static function pointer(){
+        return self::where('status_pendaftaran', 2)
+            ->where('status_kelulusan', true)
+            ->lazy();
+    }
 }

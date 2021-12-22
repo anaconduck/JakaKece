@@ -2167,12 +2167,11 @@ footer p a:hover {
 .drop-down {
     position: absolute;
     color: #583b0c;
-    left: 2px;
-    right: 2px;
     font-size: 17px;
     font-weight: 600;
     text-align: center;
-    min-width: 150px;
+    width: 200px;
+    right: 20px;
     transform: translateY(-550px);
     transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.7s;
 }

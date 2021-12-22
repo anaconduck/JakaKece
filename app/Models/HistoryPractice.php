@@ -43,7 +43,7 @@ class HistoryPractice extends Model
 
         DB::beginTransaction();
         $h->save();
-        $size = config('app.' . $course)[$sesi]['num'];
+        $size = min(config('app.' . $course)[$sesi]['num'], Practice::countQuest($idCourse, $sesi));
         $historyJawaban = HistoryJawabanPractice::makeHistoryJawaban($h->id, $sesi, $size, $pendek);
         DB::commit();
 
@@ -80,8 +80,21 @@ class HistoryPractice extends Model
             ->get()->count();
     }
 
-    public static function mean($idCourse)
+    public static function mean($idCourse = null)
     {
+        if(!$idCourse){
+            $q = self::select('jumlah_benar', 'sesi', 'id_course')
+                ->join('history_jawaban_practices', 'history_jawaban_practices.id_history_practice', '=', 'history_practices.id')
+                ->lazy();
+            $mean = 0;
+            if($q->count() == 0) return $mean;
+            foreach($q as $data){
+                $course = config('app.allCourse.'. $data->id_course);
+                $mean += $data->jumlah_benar*100/config("app.$course.$data->sesi.num");
+            }
+            $mean /= $q->count();
+            return $mean;
+        }
         return self::selectRaw('history_practices.*, sum(jumlah_benar)')
             ->join('history_jawaban_practices', 'history_practices.id', '=', 'history_jawaban_practices.id_history_practice')
             ->groupBy('history_practices.id')
@@ -96,5 +109,10 @@ class HistoryPractice extends Model
             ->count();
     }
 
-    public static function 
+    public static function pointer($idCourse){
+        return self::where('created_at', '>', now()->subYear())
+            ->where('id_course',$idCourse)
+            ->lazy();
+    }
+
 }

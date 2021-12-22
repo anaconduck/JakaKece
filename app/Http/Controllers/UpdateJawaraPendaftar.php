@@ -29,6 +29,7 @@ class UpdateJawaraPendaftar extends Controller
             abort(404);
 
         $pendaftar->id_mahasiswa = array_values(json_decode($pendaftar->id_mahasiswa));
+        $pendaftar->file = json_decode($pendaftar->file, true);
 
         $mahasiswa = User::whereIn('identity',$pendaftar->id_mahasiswa)
             ->get();
@@ -61,9 +62,10 @@ class UpdateJawaraPendaftar extends Controller
             'status' => 'required|min:0|max:1',
             'dosen' => 'required',
             'status_pendanaan' => 'required|min:0|max:1',
+            'pendanaan' => 'numeric'
         ]);
 
-        $data = $request->only(['status','dosen','status_pendanaan','catatan_pembimbing', 'catatan_pendanaan']);
+        $data = $request->only(['status','dosen','status_pendanaan','catatan_pembimbing', 'catatan_pendanaan', 'pendanaan']);
 
         $dosen = Dosen::find($data['dosen']);
 
@@ -73,6 +75,7 @@ class UpdateJawaraPendaftar extends Controller
             $pendaftar->status_pendanaan = $data['status_pendanaan'];
             $pendaftar->catatan_pembimbing = $data['catatan_pembimbing'];
             $pendaftar->catatan_pendanaan = $data['catatan_pendanaan'];
+            $pendaftar->pendanaan = $data['pendanaan'];
 
             if($pendaftar->save())
                 return redirect(url('/admin/jawara/pendaftar'));

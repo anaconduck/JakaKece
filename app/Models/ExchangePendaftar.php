@@ -49,7 +49,21 @@ class ExchangePendaftar extends Model
     }
 
     public static function countSE(){
-        return self::where('status_pendaftaran', true)
+        return self::where('status_pendaftaran', 2)
             ->count();
     }
+
+    public static function pointer($idTujuan){
+        $q = self::where('status_pendaftaran', 2)
+            ->where('status_kelulusan', true);
+        if(!$idTujuan){
+            return $q->orderBy('created_at', 'asc')
+            ->lazy();
+        }
+        return $q->where('id_exchange_tujuan', $idTujuan)
+        ->orderBy('created_at', 'asc')
+        ->lazy();
+    }
+    
+
 }

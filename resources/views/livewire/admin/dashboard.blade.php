@@ -137,8 +137,8 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @stop
     <section class="page-contain">
-        <a href="#" class="data-card">
-            <h3>{{ $jumlahPengnjung ?? 0 }}</h3>
+        <a href="{{ url('/admin/pengunjung') }}" class="data-card">
+            <h3>{{ $jumlahPengunjung ?? 0 }}</h3>
             <h4>Jumlah pengunjung hari ini</h4>
             <span class="link-text">
                 Detail
@@ -150,7 +150,7 @@
             </span>
         </a>
 
-        <a href="#" class="data-card">
+        <a href="{{ url('/admin/se/pendaftar') }}" class="data-card">
             <h3>{{ $jumlahSE ?? 0 }}</h3>
             <h4>Jumlah Mahasiswa Exchange</h4>
             <span class="link-text">
@@ -163,7 +163,7 @@
             </span>
         </a>
 
-        <a href="#" class="data-card">
+        <a href="{{ url('/admin/ojt/pendaftar') }}" class="data-card">
             <h3>{{ $jumlahMagang ?? 0 }}</h3>
             <h4>Jumlah Mahasiswa Magang</h4>
             <span class="link-text">
@@ -176,7 +176,7 @@
             </span>
         </a>
 
-        <a href="#" class="data-card">
+        <a href="{{ url('/admin/jawara/pendaftar') }}" class="data-card">
             <h3>{{ $jumlahJawara ?? 0 }}</h3>
             <h4>Jumlah Mahasiswa Jawara</h4>
             <span class="link-text">
@@ -189,7 +189,7 @@
             </span>
         </a>
 
-        <a href="#" class="data-card">
+        <a href="{{ url('/admin/jumlah-practice') }}" class="data-card">
             <h3>{{ $jumlahPractice ?? 0 }}</h3>
             <h4>Orang telah melakukan latihan inkubasi bahasa</h4>
             <span class="link-text">
@@ -202,7 +202,7 @@
             </span>
         </a>
 
-        <a href="#" class="data-card">
+        <a href="{{ url('/admin/jumlah-test') }}" class="data-card">
             <h3>{{ $jumlahTest ?? 0 }}</h3>
             <h4>Orang telah melakukan tes inkubasi bahasa</h4>
             <span class="link-text">
@@ -215,61 +215,9 @@
             </span>
         </a>
 
-        <a href="#" class="data-card">
-            <h3>{{ $jumlahMateri ?? 0 }}</h3>
-            <h4>Total materi inkubasi bahasa</h4>
-            <span class="link-text">
-                Detail
-                <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M17.8631 0.929124L24.2271 7.29308C24.6176 7.68361 24.6176 8.31677 24.2271 8.7073L17.8631 15.0713C17.4726 15.4618 16.8394 15.4618 16.4489 15.0713C16.0584 14.6807 16.0584 14.0476 16.4489 13.657L21.1058 9.00019H0.47998V7.00019H21.1058L16.4489 2.34334C16.0584 1.95281 16.0584 1.31965 16.4489 0.929124C16.8394 0.538599 17.4726 0.538599 17.8631 0.929124Z"
-                        fill="#753BBD" />
-                </svg>
-            </span>
-        </a>
-
-        <a href="#" class="data-card">
-            <h3>{{ $jumlahSoal ?? 0 }}</h3>
-            <h4>Total soal inkubasi bahasa</h4>
-            <span class="link-text">
-                Detail
-                <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M17.8631 0.929124L24.2271 7.29308C24.6176 7.68361 24.6176 8.31677 24.2271 8.7073L17.8631 15.0713C17.4726 15.4618 16.8394 15.4618 16.4489 15.0713C16.0584 14.6807 16.0584 14.0476 16.4489 13.657L21.1058 9.00019H0.47998V7.00019H21.1058L16.4489 2.34334C16.0584 1.95281 16.0584 1.31965 16.4489 0.929124C16.8394 0.538599 17.4726 0.538599 17.8631 0.929124Z"
-                        fill="#753BBD" />
-                </svg>
-            </span>
-        </a>
-
-        <a href="#" class="data-card">
-            <h3>{{ $meanPractice ?? 0 }}</h3>
-            <h4>Rerata nilai latihan inkubasi bahasa</h4>
-            <span class="link-text">
-                Detail
-                <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M17.8631 0.929124L24.2271 7.29308C24.6176 7.68361 24.6176 8.31677 24.2271 8.7073L17.8631 15.0713C17.4726 15.4618 16.8394 15.4618 16.4489 15.0713C16.0584 14.6807 16.0584 14.0476 16.4489 13.657L21.1058 9.00019H0.47998V7.00019H21.1058L16.4489 2.34334C16.0584 1.95281 16.0584 1.31965 16.4489 0.929124C16.8394 0.538599 17.4726 0.538599 17.8631 0.929124Z"
-                        fill="#753BBD" />
-                </svg>
-            </span>
-        </a>
-
-        <a href="#" class="data-card">
-            <h3>{{ $meanTest ?? 0 }}</h3>
-            <h4>Retata nilai tes inkubasi bahasa</h4>
-            <span class="link-text">
-                Detail
-                <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M17.8631 0.929124L24.2271 7.29308C24.6176 7.68361 24.6176 8.31677 24.2271 8.7073L17.8631 15.0713C17.4726 15.4618 16.8394 15.4618 16.4489 15.0713C16.0584 14.6807 16.0584 14.0476 16.4489 13.657L21.1058 9.00019H0.47998V7.00019H21.1058L16.4489 2.34334C16.0584 1.95281 16.0584 1.31965 16.4489 0.929124C16.8394 0.538599 17.4726 0.538599 17.8631 0.929124Z"
-                        fill="#753BBD" />
-                </svg>
-            </span>
-        </a>
-
-        <a href="#" class="data-card">
+        <a href="{{ url('/admin/mean-jawara') }}" class="data-card">
             <h3>{{ $meanDana ?? 0 }}</h3>
-            <h4>Retata Dana Perlombaan</h4>
+            <h4>Rerata Dana Perlombaan</h4>
             <span class="link-text">
                 Detail
                 <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
