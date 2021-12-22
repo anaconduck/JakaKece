@@ -115,4 +115,11 @@ class HistoryPractice extends Model
             ->lazy();
     }
 
+    public static function countHarian(){
+        return self::select('identity')
+            ->where('created_at', '>', now()->subDay())
+            ->groupBy('identity')
+            ->lazy()
+            ->count();
+    }
 }

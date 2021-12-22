@@ -31,4 +31,5 @@ class ExchangeTujuan extends Model
             ->get()
             ->toArray();
     }
+
 }

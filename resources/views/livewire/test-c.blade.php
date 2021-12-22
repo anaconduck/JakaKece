@@ -2,7 +2,7 @@
     @section('css')
         <link wire:ignore rel="stylesheet" href="{{ asset('assets/css/counter.css') }}" />
         <link wire:ignore rel="stylesheet" href="{{ asset('assets/css/answer.css') }}" />
-        <link wire:ignore rel="stylesheet" href="{{ asset('assets/css/practce-test.css') }}"/>
+        <link wire:ignore rel="stylesheet" href="{{ asset('assets/css/practce-test.css') }}" />
     @stop
     <section class="section why-us" data-section="section2">
         <div class="container">
@@ -71,21 +71,28 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $allsesi[$sesi]['sesi'] }}</h5>
-                                        @if($soal->file && Session::get('hasListenTest.'.$posisiSoal,0) == 0)
+                                        @if ($soal->file && Session::get('hasListenTest.' . $posisiSoal, 0) == 0)
                                             <div class='fl' wire:click="hasListenTest({{ $posisiSoal }})">
-                                                <a href='#'class='playBut'>
+                                                <a href='#' class='playBut'>
 
-                                            <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In  -->
-                                            <svg version="1.1"
-                                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-                                                x="0px" y="0px" width="100px" height="100px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7"
-                                                xml:space="preserve">
+                                                    <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In  -->
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                                                        x="0px" y="0px" width="100px" height="100px"
+                                                        viewBox="0 0 213.7 213.7"
+                                                        enable-background="new 0 0 213.7 213.7" xml:space="preserve">
 
-                                            <polygon class='triangle' id="XMLID_18_" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-                                                73.5,62.5 148.5,105.8 73.5,149.1 "/>
+                                                        <polygon class='triangle' id="XMLID_18_" fill="none"
+                                                            stroke-width="7" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-miterlimit="10" points="
+                                                73.5,62.5 148.5,105.8 73.5,149.1 " />
 
-                                            <circle class='circle' id="XMLID_17_" fill="none"  stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3"/>
-                                            </svg>
+                                                        <circle class='circle' id="XMLID_17_" fill="none"
+                                                            stroke-width="7" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-miterlimit="10" cx="106.8"
+                                                            cy="106.8" r="103.3" />
+                                                    </svg>
 
 
 
@@ -102,90 +109,98 @@
                                                     @if ($soal->opsi1)
                                                         <label class="rad-label">
                                                             <input wire:click="jawab(0)" type="radio"
-                                                                class="rad-input" name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 0) checked @endif>
-                                                        <div class="rad-design"></div>
-                                                        <div class="rad-text">{{ $soal->opsi1 }}</div>
+                                                                class="rad-input" name="rad"
+                                                                @if ($isAnswered and $daftarJawaban[$posisiSoal] == 0) checked @endif>
+                                                            <div class="rad-design"></div>
+                                                            <div class="rad-text">{{ $soal->opsi1 }}</div>
                                                         </label>
                                                     @endif
 
                                                     @if ($soal->opsi2)
                                                         <label class="rad-label">
-                                                            <input wire:click="jawab(1)" type="radio" class="rad-input"
-                                                                name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 1)
+                                                            <input wire:click="jawab(1)" type="radio"
+                                                                class="rad-input" name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 1)
                                                             checked
-                                                            @endif
-                                                        >
-                                                        <div class="rad-design"></div>
-                                                        <div class="rad-text">{{ $soal->opsi2 }}</div>
-                                                        </label>
                                                     @endif
-
-                                                    @if ($soal->opsi3)
-                                                        <label class="rad-label">
-                                                            <input wire:click="jawab(2)" type="radio" class="rad-input"
-                                                                name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 2)
-                                                            checked
-                                                        @endif
-                                                        >
-                                                        <div class="rad-design"></div>
-                                                        <div class="rad-text">{{ $soal->opsi3 }}</div>
-                                                        </label>
-                                                    @endif
-
-                                                    @if ($soal->opsi4)
-                                                        <label class="rad-label">
-                                                            <input wire:click="jawab(3)" type="radio" class="rad-input"
-                                                                name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 3)
-                                                            checked
-                                                        @endif
-                                                        >
-                                                        <div class="rad-design"></div>
-                                                        <div class="rad-text">{{ $soal->opsi4 }}</div>
-                                                        </label>
-                                                    @endif
-
-                                                </div>
-                                            @elseif($soal->tipe == 'f')
-                                                <label for="inp" class="inp">
-                                                    <input wire:model.lazy='ans' type="text" id="inp" placeholder="&nbsp;">
-                                                    <span class="label">Ans..</span>
-                                                    <span class="focus-bg"></span>
-                                                </label>
+                                                    >
+                                                    <div class="rad-design"></div>
+                                                    <div class="rad-text">{{ $soal->opsi2 }}</div>
+                                                    </label>
                                             @endif
+
+                                            @if ($soal->opsi3)
+                                                <label class="rad-label">
+                                                    <input wire:click="jawab(2)" type="radio" class="rad-input"
+                                                        name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 2)
+                                                    checked
+                                            @endif
+                                            >
+                                            <div class="rad-design"></div>
+                                            <div class="rad-text">{{ $soal->opsi3 }}</div>
+                                            </label>
+                                            @endif
+
+                                            @if ($soal->opsi4)
+                                                <label class="rad-label">
+                                                    <input wire:click="jawab(3)" type="radio" class="rad-input"
+                                                        name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 3)
+                                                    checked
+                                            @endif
+                                            >
+                                            <div class="rad-design"></div>
+                                            <div class="rad-text">{{ $soal->opsi4 }}</div>
+                                            </label>
+                                            @endif
+
                                         </div>
-                                    </div>
-                                    <div class="bn d-flex justify-content-around">
-                                        <button wire:click="show({{ abs($posisiSoal - 1) }})" class="btn-shine">
-                                            <span>Prev</span>
-                                        </button>
-                                        <button wire:click="show({{ $posisiSoal + 1 }})" class="btn-shine">
-                                            <span>Next</span>
-                                        </button>
+                                    @elseif($soal->tipe == 'f')
+                                        <label for="inp" class="inp">
+                                            <input wire:model.lazy='ans' type="text" id="inp" placeholder="&nbsp;">
+                                            <span class="label">Ans..</span>
+                                            <span class="focus-bg"></span>
+                                        </label>
+                                        @endif
                                     </div>
                                 </div>
+                                <div class="bn d-flex justify-content-around">
+                                    <button wire:click="show({{ abs($posisiSoal - 1) }})" class="btn-shine">
+                                        <span>Prev</span>
+                                    </button>
+                                    <button wire:click="show({{ $posisiSoal + 1 }})" class="btn-shine">
+                                        <span>Next</span>
+                                    </button>
+                                </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    @if(!Session::get("hasListenTest.$posisiSoal",false))
+    @if (!Session::get(" hasListenTest.$posisiSoal", false))
         <script>
-            let e = new Audio('{{ $soal->file }}');
+            document.addEventListener('DOMContentLoaded', () => {
+                Livewire.hook('message.processed', (el, component) => {
+                    var q = @this.soal
+                    if (q.file !== null) {
+                        let e = new Audio(q.file);
 
-            $('.fl').on('click',function(){
-                this.classList.add('d-none')
-                e.play()
+                        $('.fl').on('click', function() {
+                            e.play()
+                        })
+                        $('.btn-shine').on('click', function() {
+                            e.pause()
+                        })
+                        $('.nm').on('click', function() {
+                            e.pause();
+                        })
+                    }
+                })
             })
-            $('.btn-shine').on('click',function(){
-                e.pause()
-            })
-
         </script>
     @endif
 
     <script wire:ignore>
-
         // Credit: Mateusz Rybczonec
 
         const FULL_DASH_ARRAY = 283;

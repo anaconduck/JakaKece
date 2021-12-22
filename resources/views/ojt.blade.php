@@ -113,11 +113,11 @@
                                             <img src="https://image.flaticon.com/icons/svg/1496/1496034.svg" alt=""
                                                 width="120">
                                         </div>
-                                        <h6 class="card__title">Jumlah Tujuan Training</h6>
+                                        <h6 class="card__title">Jumlah Tujuan Magang</h6>
                                     </div>
                                     <div class="card__overlay"></div>
                                     <div class="card__content">
-                                        <h6>Jumlah Tujuan Training</h6>
+                                        <h6>Jumlah Tujuan Magang</h6>
                                         <p>{{ $jumlahTujuanTraining }} Instansi</p>
                                     </div>
                                 </li>
@@ -127,7 +127,7 @@
                                             <img src="https://image.flaticon.com/icons/svg/1336/1336494.svg" alt=""
                                                 width="120">
                                         </div>
-                                        <h6 class="card__title">Jumlah Pendaftar Training</h6>
+                                        <h6 class="card__title">Jumlah Pendaftar Magang</h6>
                                     </div>
                                     <div class="card__overlay"></div>
                                     <div class="card__content">
@@ -141,7 +141,7 @@
                                             <img src="https://image.flaticon.com/icons/svg/478/478543.svg" alt=""
                                                 width="120">
                                         </div>
-                                        <h6 class="card__title">Jumlah Event Training</h6>
+                                        <h6 class="card__title">Jumlah Event Magang</h6>
                                     </div>
                                     <div class="card__overlay"></div>
                                     <div class="card__content">

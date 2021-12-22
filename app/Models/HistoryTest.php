@@ -98,4 +98,13 @@ class HistoryTest extends Model
             ->where('id_course', $idCourse)
             ->lazy();
     }
+
+    public static function countHarian(){
+        return self::select('identity')
+            ->where('created_at' ,'>', now()->subDay())
+            ->groupBy('identity')
+            ->lazy()
+            ->count();
+    }
+
 }

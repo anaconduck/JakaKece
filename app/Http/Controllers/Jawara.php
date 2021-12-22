@@ -36,7 +36,7 @@ class Jawara extends Controller
             'jawara' => 'selected',
             'nav' => $this->nav,
             'totalPendaftar' => JawaraPendaftar::count(),
-            'totalJawara' => JawaraPendaftar::countPemenang(),
+            'totalPendanaan' => (JawaraPendaftar::totalPendanaan()[0]->pendanaan),
             'totalLomba' => JawaraEvent::count(),
             'message' => $message,
             'slides' => $slides,

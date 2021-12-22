@@ -83,4 +83,9 @@ class JawaraPendaftar extends Model
             ->orderBy('created_at')
             ->lazy();
     }
+
+    public static function totalPendanaan(){
+        return self::selectRaw('sum(pendanaan) as pendanaan')
+            ->get();
+    }
 }

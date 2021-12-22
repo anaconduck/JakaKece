@@ -107,12 +107,12 @@
                                             <img src="https://image.flaticon.com/icons/svg/1496/1496034.svg" alt=""
                                                 width="120">
                                         </div>
-                                        <h2 class="card__title">Total Jawara</h2>
+                                        <h2 class="card__title">Total Pendanaan</h2>
                                     </div>
                                     <div class="card__overlay"></div>
                                     <div class="card__content">
-                                        <h2>Total Mahasiswa Berprestasi</h2>
-                                        <p>{{ $totalJawara }} Jawara</p>
+                                        <h2>Total Pendanaan</h2>
+                                        <p>Rp {{ number_format($totalPendanaan, 2, ",", '.') }}</p>
                                     </div>
                                 </li>
                                 <li class="card cards__item">
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="card__overlay"></div>
                                     <div class="card__content">
-                                        <h2>Total Lomba Yang tersedia</h2>
+                                        <h2>Total Lomba</h2>
                                         <p>{{ $totalLomba }} Lomba</p>
                                     </div>
                                 </li>
@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="card__overlay"></div>
                                     <div class="card__content">
-                                        <h2>Total Pendaftar Lomba</h2>
+                                        <h2>Total Pendaftar</h2>
                                         <p>{{ $totalPendaftar }} Pendaftar</p>
                                     </div>
                                 </li>
@@ -149,7 +149,7 @@
                     <hr>
                     <hr>
                     <section class="">
-                        <h2></h2>
+                        <h2>Informasi Jawara Center</h2>
                         <div class="container ver">
                             <div class="row">
                                 <div class="col-md-12">

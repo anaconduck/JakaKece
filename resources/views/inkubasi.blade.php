@@ -140,12 +140,12 @@
                                             <img src="https://image.flaticon.com/icons/svg/1496/1496034.svg" alt=""
                                                 width="120">
                                         </div>
-                                        <h2 class="card__title">Courses</h2>
+                                        <h2 class="card__title">Jumlah Materi</h2>
                                     </div>
                                     <div class="card__overlay"></div>
                                     <div class="card__content">
-                                        <h2>Courses</h2>
-                                        <p>{{ $numSubject }} Materi</p>
+                                        <h2></h2>
+                                        <p>{{ $numSubject }} Materi <br>TOEFL-ITP , TOEFL-IBT, TOEIC, IELTS</p>
                                     </div>
                                 </li>
                                 <li class="card cards__item">
@@ -154,12 +154,12 @@
                                             <img src="https://image.flaticon.com/icons/svg/1336/1336494.svg" alt=""
                                                 width="120">
                                         </div>
-                                        <h2 class="card__title">Questions</h2>
+                                        <h2 class="card__title">Jumlah Pengguna Sistem Practice Inkubasi Bahasa</h2>
                                     </div>
                                     <div class="card__overlay"></div>
                                     <div class="card__content">
-                                        <h2>Questions</h2>
-                                        <p>{{ $numQuest ?? 0 }} Questions</p>
+                                        <h2>Jumlah Pengguna</h2>
+                                        <p>{{ $numPengguna ?? 0 }} Pengguna</p>
                                     </div>
                                 </li>
                                 <li class="card cards__item">
@@ -168,12 +168,12 @@
                                             <img src="https://image.flaticon.com/icons/svg/478/478543.svg" alt=""
                                                 width="120">
                                         </div>
-                                        <h2 class="card__title">Exam</h2>
+                                        <h2 class="card__title">Jumlah Pengguna Sistem Test Inkubasi Bahasa</h2>
                                     </div>
                                     <div class="card__overlay"></div>
                                     <div class="card__content">
-                                        <h2>Exam</h2>
-                                        <p>{{ $numTaker ?? 0 }} people have taken the exam.</p>
+                                        <h2>Jumlah Pengguna</h2>
+                                        <p>{{ $numTaker ?? 0 }} Pengguna</p>
                                     </div>
                                 </li>
                             </ul>

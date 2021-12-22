@@ -8,6 +8,7 @@ use App\Models\Practice;
 use App\Models\Examination;
 use App\Models\HistoryExam;
 use App\Models\HistoryPractice;
+use App\Models\HistoryTest;
 use App\Models\InkubasiBahasa;
 use App\Models\Materi;
 use App\Models\Mahasiswa;
@@ -30,13 +31,13 @@ class Inkubasi extends Controller
         ];
         $slides = DeskripsiSistem::getDeskripsiSistem(config('app.fitur.inkubasi'));
         $section = $request->get('s');
-        
+
         return view('inkubasi',[
             'title' => 'Inkubasi Digital Bahasa',
             'inkubasi' => 'selected',
             'allCourse' => config('app.allCourse'),
-            'numQuest' => Practice::count(),
-            'numTaker' => HistoryPractice::count(),
+            'numPengguna' => HistoryPractice::countHarian(),
+            'numTaker' => HistoryTest::countHarian(),
             'numSubject' => Materi::count(),
             'allSesi' => config('app.allSesi'),
             'status' => $status,

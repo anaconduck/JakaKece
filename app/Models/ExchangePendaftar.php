@@ -64,6 +64,9 @@ class ExchangePendaftar extends Model
         ->orderBy('created_at', 'asc')
         ->lazy();
     }
-    
 
+    public static function totalMahasiswaExchange(){
+        return self::where('status_pendaftaran', '>', 0)
+            ->count();
+    }
 }

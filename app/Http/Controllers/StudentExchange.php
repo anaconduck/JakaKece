@@ -33,9 +33,9 @@ class StudentExchange extends Controller
             'exchange' => 'selected',
             'nav' => $this->nav,
             'message' => $message,
-            'totalMahasiswaExchange' => 0,
-            'totalExchangeEvent' => 0,
-            'totalPendaftar' => 0,
+            'totalMahasiswaExchange' => ExchangePendaftar::totalMahasiswaExchange(),
+            'totalExchangeEvent' => ExchangeTujuan::count(),
+            'totalPendaftar' => ExchangePendaftar::count(),
             'slides' => $slides,
             'section' => Request('s')
         ]);

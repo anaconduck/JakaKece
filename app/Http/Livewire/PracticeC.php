@@ -13,7 +13,7 @@ use Livewire\Component;
 class PracticeC extends Component
 {
     public $idHistoryPractice;
-    public Practice $soal;
+    public $soal;
     public $daftarSoal;
     public $posisiSoal;
     public $daftarJawaban;
@@ -114,15 +114,12 @@ class PracticeC extends Component
                 'link' => '#'
             ]
         ];
-        $soal = Practice::show($this->idCourse, $this->sesi, $this->daftarSoal[$this->posisiSoal]);
+        $soal = Practice::show($this->idCourse, $this->sesi, $this->daftarSoal[$this->posisiSoal])->toArray();
         if(!($soal == null))
             $this->soal = $soal;
         else abort(500);
-        if($this->soal->tipe == 'f')
+        if($this->soal['tipe'] == 'f')
             $this->ans = $this->daftarJawaban[$this->posisiSoal];
-        if(strpos($this->allsesi[$this->sesi]['sesi'],'listening')!== false and !Session::has('hasListenPractice')){
-            Session::put('hasListenPractice', collect(array_fill(0, $this->allsesi[$this->sesi]['num'],0)));
-        }
     }
 
     public function jawab($jawab){
@@ -165,14 +162,13 @@ class PracticeC extends Component
     public function show($soal){
         if($soal >=0 and $soal < $this->allsesi[$this->sesi]['num']){
             $this->posisiSoal = $soal;
-            $soal = Practice::show($this->idCourse, $this->sesi, $this->daftarSoal[$this->posisiSoal]);
+            $soal = Practice::show($this->idCourse, $this->sesi, $this->daftarSoal[$this->posisiSoal])->toArray();
             if(!($soal == null))
                 $this->soal = $soal;
             else abort(500);
-            if($this->soal->tipe == 'f')
+            if($this->soal['tipe'] == 'f')
                 $this->ans = $this->daftarJawaban[$this->posisiSoal] ?? '';
         }
-
     }
 
     public function checkSesi(){
