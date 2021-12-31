@@ -78,7 +78,7 @@
 
                             <div class="col-md-6">
                                 <label>Besar Pendanaan yang diberikan (Rp.): </label>
-                                <input value="{{ $event->pendanaan ?? 0 }}" type="number" name="pendanaan" class="form-control" id="title">
+                                <input value="{{ $pendaftar->pendanaan ?? 0 }}" type="number" name="pendanaan" class="form-control" id="title">
                             </div>
 
                             <div class="col-md-6">

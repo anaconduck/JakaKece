@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
-                        <h2>Penambahan Soal Practice</h2>
+                        <h2>Perubahan Soal Practice</h2>
                         @if ($errors->any())
                             {{ implode(', ', $errors->all()) }}
                         @endif
@@ -15,6 +15,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
+                                <label>Jenis Course</label>
                                 <select name="id_course" id="type" required>
                                     <option value="-1" 
                                     @if (!$practice->id_course)
@@ -40,6 +41,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
+                                <label>Sesi</label>
                                 <select name="sesi" id="kategori" required>
                                     <option value="-1" selected>Select Category</option>
                                     @foreach (config('app.allSesi') as $i => $item)
@@ -60,6 +62,7 @@
                                     required>{{$practice->soal ?? ''}}</textarea>
                             </div>
                             <div class="col-md-6">
+                                <label>Tipe Soal</label>
                                 <select name="tipe" id="tipe" required>
                                     <option value="m" @if ($practice->tipe == 'm')
                                         selected
@@ -70,9 +73,11 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
+                                <label>Audio</label><br>
                                 @if ($practice->file)
-                                    current file : {{$practice->file}}
+                                    current file : <a href='{{Storage::url($practice->file??'')}}' target="_blank">{{$practice->file}}</a>
                                 @endif
+                                <p>File yang diterima : mp3</p>
                                 <fieldset>
                                     <input class="form-control file" type="file" name="file" id="formFileMultiple">
                                 </fieldset>
@@ -115,7 +120,7 @@
                             </div>
                             <div class="col-md-3 col-sm-3 ct">
                                 <div class="circle-item">
-                                    <input class="check" name="jawaban" type="radio" id="opsi4" value="4" @if ($practice->jawaban == 3)
+                                    <input class="check" name="jawaban" type="radio" id="opsi4" value="3" @if ($practice->jawaban == 3)
                                      checked   
                                     @endif>
                                     <label for="opsi4">

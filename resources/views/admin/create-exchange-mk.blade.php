@@ -15,12 +15,15 @@
                     </div>
                     <form id="contact" action="" method="post" enctype="multipart/form-data">
                         @csrf
+                        <div class="row">
                         <div class="col-md-6">
+                            <label>Nama MK</label>
                             <fieldset>
                                 <input placeholder="Nama Mata Kuliah" class="form-control file" type="text" name="nama_mata_kuliah">
                             </fieldset>
                         </div>
                         <div class="col-md-6">
+                            <label>Bobot MK</label>
                             <fieldset>
                                 <input placeholder="Bobot sks" class="form-control file" type="number" name="sks">
                             </fieldset>
@@ -28,6 +31,7 @@
                         </div>
                         <div class="col-md-12 mt-4">
                             <button type="submit" id="form-submit" class="button">Create</button>
+                        </div>
                         </div>
                     </form>
                 </div>

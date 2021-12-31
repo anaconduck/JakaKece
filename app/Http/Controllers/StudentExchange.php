@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeskripsiSistem;
+use App\Models\DokumentasiSistem;
 use App\Models\ExchangeMataKuliah;
 use App\Models\ExchangeMataKuliahTujuan;
 use App\Models\ExchangePendaftar;
@@ -28,6 +29,8 @@ class StudentExchange extends Controller
     public function index($message = [-2, null])
     {
         $slides = DeskripsiSistem::getDeskripsiSistem(config('app.fitur.exchange'));
+        $deskripsi = DokumentasiSistem::getDokumentasi(config('app.fitur.exchange'));
+        
         return view('exchange', [
             'title' => "Student Exchange",
             'exchange' => 'selected',
@@ -37,12 +40,14 @@ class StudentExchange extends Controller
             'totalExchangeEvent' => ExchangeTujuan::count(),
             'totalPendaftar' => ExchangePendaftar::count(),
             'slides' => $slides,
-            'section' => Request('s')
+            'section' => Request('s'),
+            'deskripsi' => $deskripsi
         ]);
     }
 
     public function showPaket($lokasi, ExchangeTujuan $tujuan)
     {
+        $this->middleware(['mahasiswa']);
         if (($lokasi != 'dn' and $lokasi != 'ln') or !$tujuan)
             abort(404);
 
@@ -68,6 +73,7 @@ class StudentExchange extends Controller
 
     public function showDaftar(Request $request, $lokasi, ExchangeTujuan $tujuan)
     {
+        $this->middleware(['mahasiswa']);
         if (($lokasi != 'dn' and $lokasi != 'ln') or !$tujuan)
             abort(404);
 
@@ -112,6 +118,7 @@ class StudentExchange extends Controller
 
     public function daftar(Request $request, $lokasi, ExchangeTujuan $tujuan, $identity)
     {
+        $this->middleware(['mahasiswa']);
         if (($lokasi != 'dn' and $lokasi != 'ln') or !$tujuan)
             abort(404);
 
@@ -176,7 +183,7 @@ class StudentExchange extends Controller
         $mk = ExchangeMataKuliah::getMK($tujuan->id);
 
         $dokumentasi = ExchangePendaftar::getDokumentasi($tujuan->id);
-
+        
         array_push($this->nav, [
             'title' => 'Detail Tujuan SE - ' . $tujuan->nama_universitas,
             'link' => url("/exchange/riwayat/$tujuan->id")

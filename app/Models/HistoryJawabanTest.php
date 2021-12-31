@@ -11,7 +11,7 @@ class HistoryJawabanTest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_history_practice',
+        'id_history_test',
         'daftar_soal',
         'sesi'
     ];

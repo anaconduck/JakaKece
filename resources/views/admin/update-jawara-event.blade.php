@@ -73,13 +73,20 @@
                                     <option value="1" @if ($event->finish == 1) selected @endif>Selesai</option>
                                 </select>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 @if ($event->file)
                                     current file : <a href="{{ url($event->file) }}">Poster</a>
                                 @endif
                                 <label for="file">Poster</label>
                                 <fieldset>
                                     <input class="form-control file" type="file" name="file" id="formFileMultiple">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-12">
+                                <fieldset>
+                                    <label>Laman Lomba</label>
+                                    <input placeholder="Laman Lomba" class="form-control file" type="text"
+                                        name="laman" value="{{$event->laman??''}}">
                                 </fieldset>
                             </div>
                             <div class="col-md-6 mt-4">

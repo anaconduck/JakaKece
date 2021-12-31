@@ -252,7 +252,7 @@
                                                             </div>
                                                         </dt>
                                                         <dd class="col-sm-10 ef">
-                                                            <a href="{{ asset($file) }}">
+                                                            <a href="{{ asset($file) }}" target="_blank">
                                                                 {{ $file }}
                                                             </a>
                                                         </dd>

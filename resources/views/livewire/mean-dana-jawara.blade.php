@@ -130,7 +130,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mt-2">
-                    <h1>Rerata Pendanaan per semester</h1>
+                    <h1>Total Pendanaan per semester</h1>
                     <hr>
                 </div>
                 <div class="col-md-12 mt-5">
@@ -143,57 +143,41 @@
     </div>
     <script wire:ignore src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script wire:ignore>
-        let labels = [
-            @foreach ($labels as $i => $l)
-                '{{ $i }}',
-            @endforeach
-        ];
-        let data = {
-            labels: labels,
-            datasets: [{
-                label: 'Jumlah Mahasiswa melakukan latihan inkubasi bahasa',
-                backgroundColor: 'rgb(83,91,160)',
-                borderColor: 'rgb(83,91,160)',
-                data: [
-                    @foreach ($labels as $l)
-                        {{ $l['total'] / $l['mhs'] }},
-                    @endforeach
-                ],
-            }]
-        };
-        const config = {
-            type: 'line',
-            data,
-            options: {
-                indexAxis: 'y',
-                scales: {
-                    x: {
-                        beginAtZero: true
+        $(document).ready(function(){
+            let labels = [
+                @foreach ($labels as $i => $l)
+                    '{{ $i }}',
+                @endforeach
+            ];
+            let data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Pendanaan Jawara',
+                    backgroundColor: 'rgb(83,91,160)',
+                    borderColor: 'rgb(83,91,160)',
+                    data: [
+                        @foreach ($labels as $l)
+                            {{ $l['total']}},
+                        @endforeach
+                    ],
+                }]
+            };
+            const config = {
+                type: 'line',
+                data,
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        };
-        var myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
-    </script>
-    <script wire:ignore>
-        $('#crs').on('change', function() {
-            window.livewire.emit('changeCourse', this.value)
-        })
-        document.addEventListener('DOMContentLoaded', () => {
-            Livewire.hook('message.processed', (el, component) => {
-                var d = @this.labels
-                labels = []
-                data.datasets[0].data = []
-                let ind = 0
-                for (key in d) {
-                    labels[ind] = 'bulan-' + key
-                    data.datasets[0].data[ind++] = d[key]
-                }
-                data.labels = labels
-            })
+            };
+            var myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
         })
     </script>
 </div>

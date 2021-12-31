@@ -31,11 +31,12 @@ class JawaraPendaftar extends Model
 
     public static function countPendaftar($idEvent){
         return self::where('id_jawara_event',$idEvent)
+            ->lazy()
             ->count();
     }
 
     public static function riwayat($identity, $limit = null, $paginate= false){
-        $query = self::select('jawara_pendaftars.id', 'jawara_events.nama', 'jawara_pendaftars.status')
+        $query = self::select('jawara_pendaftars.id', 'jawara_events.nama', 'jawara_pendaftars.status', 'jawara_pendaftars.id_mahasiswa', 'jawara_pendaftars.id_jawara_event')
             ->join('jawara_events','jawara_pendaftars.id_jawara_event','=','jawara_events.id')
             ->where('id_mahasiswa', 'like', "%$identity%")
             ->orderBy('id_jawara_event', 'desc');
@@ -57,16 +58,9 @@ class JawaraPendaftar extends Model
     }
 
     public static function meanPendanaan(){
-        $q  = self::select('pendanaan')
-            ->where('status_pendanaan', true)
-            ->lazy();
-
-        $total = 0;
-        if($q->count() == 0) return $total;
-        foreach($q as $data){
-            $total += $data->pendanaan;
-        }
-        return $total/$q->count();
+        $q  = self::selectRaw('sum(pendanaan) as total')
+            ->get();
+        return $q[0]->total;
     }
 
     public static function pointer(){
@@ -88,4 +82,6 @@ class JawaraPendaftar extends Model
         return self::selectRaw('sum(pendanaan) as pendanaan')
             ->get();
     }
+
+    
 }

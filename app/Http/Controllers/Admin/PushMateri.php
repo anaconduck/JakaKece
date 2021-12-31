@@ -39,7 +39,8 @@ class PushMateri extends Controller
             'judul' => 'required|bail',
             'sesi' => 'required|numeric|bail',
             'id_course' => 'required|numeric',
-            'file' => 'mimetypes:jpeg,jpg,png,gif,application/msword,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf',
+            'file' => 'mimetypes:video/mp4,image/jpeg,image/jpg,i,image/png,image/gif,application/msword,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf',
+            'transcript' => 'mimetypes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf',
             'teks' => 'required'
         ]);
 
@@ -48,6 +49,11 @@ class PushMateri extends Controller
             $name = time() . Str::random(10) . $request->file('file')->getClientOriginalName();
             $path = $request->file('file')->storeAs('materi', $name, 'public');
             $data['file'] = $path;
+            if($request->hasFile('transcript') and $request->file('transcript')->isValid()){
+                $name = time().Str::random(3).$request->file('transcript')->getClientOriginalName();
+                $path = $request->file('transcript')->storeAs('materi/transcript',$name, 'public');
+                $data['transcript'] = $path;
+            }
             Materi::pushMateri($data);
             return redirect(url('/admin/inkubasi/materi'));
         }

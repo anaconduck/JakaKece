@@ -18,7 +18,7 @@ class MeanDanaJawara extends Component
                 'link' => url('/admin/dashboard')
             ],
             [
-                'title' => 'Rerata Pendanaan',
+                'title' => 'Total Pendanaan',
                 'link' => url('/admin/mean-jawara')
             ]
         ];
@@ -57,7 +57,7 @@ class MeanDanaJawara extends Component
         return view('livewire.mean-dana-jawara')
             ->extends('layouts.admin', [
                 'nav' => $nav,
-                'title' => 'Rerata Pendanaan'
+                'title' => 'Total Pendanaan'
             ])
             ->slot('slot');
     }

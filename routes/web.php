@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PushMateri;
 use App\Http\Controllers\Admin\PushOjtEvent;
 use App\Http\Controllers\Admin\PushOjtMagang;
 use App\Http\Controllers\Admin\PushPractice;
+use App\Http\Controllers\Admin\PushTest;
 use App\Http\Controllers\Admin\TanyaAdmin;
 use App\Http\Controllers\Admin\UpdateBerita;
 use App\Http\Controllers\Admin\UpdateExchangePendaftar;
@@ -17,12 +18,14 @@ use App\Http\Controllers\Admin\UpdateOjtMagang;
 use App\Http\Controllers\Admin\UpdateOjtMk;
 use App\Http\Controllers\Admin\UpdateOjtPendaftar;
 use App\Http\Controllers\Admin\UpdatePractice;
+use App\Http\Controllers\Admin\UpdateTest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inkubasi;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\User;
 use App\Http\Livewire\Admin\BeritaC;
 use App\Http\Livewire\Admin\Dashboard;
+use App\Http\Livewire\Admin\DokumentasiSistem;
 use App\Http\Livewire\Admin\HomeController;
 use App\Http\Livewire\Admin\KelolaDashBoard;
 use App\Http\Livewire\Admin\KelolaSlide;
@@ -36,6 +39,7 @@ use App\Http\Livewire\Admin\PracticeController;
 use App\Http\Livewire\Admin\SEPendaftar;
 use App\Http\Livewire\Admin\StatistikController;
 use App\Http\Livewire\Admin\Tanya;
+use App\Http\Livewire\Admin\TestController;
 use App\Http\Livewire\Admin\UpdateOjtEvent;
 use App\Http\Livewire\BeritaController;
 use App\Http\Livewire\ExchangeTujuan;
@@ -52,10 +56,14 @@ use App\Http\Livewire\StatistikPengunjung;
 use App\Http\Livewire\StatistikPractice;
 use App\Http\Livewire\StatistikTest;
 use App\Http\Livewire\TestC;
+use App\Models\Acces;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Stevebauman\Location\Facades\Location;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,9 +77,12 @@ use Maatwebsite\Excel\Facades\Excel;
 
 
 visits('App\Models\Berita')->increment();
+$data = Location::get(request()->ip());
+if($data)
+    Acces::visit($data->ip, $data->countryName, $data->countryCode);
 
 Route::get('/try', function(){
-    return view('/login');
+
 });
 
 //access file
@@ -121,6 +132,12 @@ Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(func
     Route::post('/inkubasi/practice/create', [PushPractice::class, 'push']);
     Route::get('/inkubasi/practice/{practice}', [UpdatePractice::class, 'index']);
     Route::post('/inkubasi/practice/{practice}',[UpdatePractice::class, 'update']);
+
+    Route::get('/inkubasi/test', TestController::class);
+    Route::get('/inkubasi/test/create',[PushTest::class, 'index']);
+    Route::post('/inkubasi/test/create',[PushTest::class, 'push']);
+    Route::get('/inkubasi/test/{test}',[UpdateTest::class, 'index']);
+    Route::post('/inkubasi/test/{test}',[UpdateTest::class, 'update']);
 
     //jawaraCenter
     Route::get('/jawara/event', JawaraCenter::class);
@@ -207,6 +224,9 @@ Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(func
     //kelola slideshow
     Route::get('/kelola-deskripsi', KelolaSlide::class);
 
+    //kelola dokumentasi sistem
+    Route::get('/kelola-dokumentasi', DokumentasiSistem::class);
+
     //berita
     Route::get('/berita', BeritaC::class);
 
@@ -231,7 +251,7 @@ Route::name('admin.')->middleware(['auth','admin'])->prefix('admin')->group(func
     Route::get('/jumlah-test',StatistikTest::class);
 
     //rerata dana jawara
-    Route::get('/mean-jawara', MeanDanaJawara::class);
+    Route::get('/total-jawara', MeanDanaJawara::class);
 
     Route::post('/logout', function (Request $request){
         Auth::logout();
@@ -258,14 +278,15 @@ Route::get('/berita/{berita}', BeritaController::class);
 Route::get('/inkubasi', [Inkubasi::class,'index']);
 
 //membuka halaman user
-Route::get('/user', [User::class,'index'])->name('user');
+Route::get('/user', [User::class,'index'])->name('user')
+    ->middleware(['auth', 'user']);
 
 //proses logout
-Route::post('/logout',[User::class,'logout'])->name('logout');
+Route::post('/logout',[User::class,'logout'])->name('logout')
+->middleware(['auth','user']);
 
 //memulai practice
 Route::get('/latihan/{course}',PracticeC::class)
-    ->where('course','[A-Za-z-]+')
     ->middleware(['auth']);
 
 //memulai latihan pada sesi tertentu
@@ -275,47 +296,59 @@ Route::get('/latihan/{course}/{sesi}/{tipe}',PracticeCSec::class)
 
 //memulai test
 Route::get('/test/{course}', TestC::class)
-    ->where('course','[A-Za-z-]+')
     ->middleware(['auth']);
 
 //list riwayat jawara
-Route::get('/user/riwayat-jawara',[User::class, 'riwayatJawara']);
+Route::get('/user/riwayat-jawara',[User::class, 'riwayatJawara'])
+    ->middleware(['auth','user','mahasiswa']);
 
 //info pendaftar
-Route::get('/user/riwayat-jawara/{pendaftar}',[User::class, 'riwayatJawaraPendaftar']);
+Route::get('/user/riwayat-jawara/{pendaftar}',[User::class, 'riwayatJawaraPendaftar'])
+    ->middleware(['auth','user','mahasiswa']);
 
 //delete or upload file
-Route::post('/user/riwayat-jawara/{pendaftar}',[User::class, 'updateRiwayatJawaraPendaftar']);
+Route::post('/user/riwayat-jawara/{pendaftar}',[User::class, 'updateRiwayatJawaraPendaftar'])
+    ->middleware(['auth','user','mahasiswa']);
 
 //list riwayat latihan
-Route::get('/user/riwayat-latihan',[User::class, 'riwayatLatihan']);
+Route::get('/user/riwayat-latihan',[User::class, 'riwayatLatihan'])
+    ->middleware(['auth', 'user']);
 
 //info riwayat latihan
-Route::get('/user/riwayat-latihan/{riwayat}', [User::class,'detailRiwayatLatihan']);
+Route::get('/user/riwayat-latihan/{riwayat}', [User::class,'detailRiwayatLatihan'])
+    ->middleware(['auth', 'user']);
 
 //list riwayat test
-Route::get('/user/riwayat-test', [User::class, 'riwayatTest']);
+Route::get('/user/riwayat-test', [User::class, 'riwayatTest'])
+    ->middleware(['auth', 'user']);
 
 //info riwayat test
-Route::get('/user/riwayat-test/{riwayat}',[User::class, 'detailRiwayatTest']);
+Route::get('/user/riwayat-test/{riwayat}',[User::class, 'detailRiwayatTest'])
+    ->middleware(['auth', 'user']);
 
 //list riwayat se
-Route::get('/user/riwayat-se',[User::class, 'riwayatSE']);
+Route::get('/user/riwayat-se',[User::class, 'riwayatSE'])
+    ->middleware(['auth', 'user','mahasiswa']);
 
 //delete or upload file
-Route::post('/user/riwayat-se/{riwayat}', [User::class, 'updateRiwayatSE']);
+Route::post('/user/riwayat-se/{riwayat}', [User::class, 'updateRiwayatSE'])
+->middleware(['auth', 'user','mahasiswa']);
 
 //info riwayat se
-Route::get('/user/riwayat-se/{riwayat}', [User::class, 'detailRiwayatSE']);
+Route::get('/user/riwayat-se/{riwayat}', [User::class, 'detailRiwayatSE'])
+->middleware(['auth', 'user','mahasiswa']);
 
 //list riwayat magang
-Route::get('/user/riwayat-magang',[User::class, 'riwayatMagang']);
+Route::get('/user/riwayat-magang',[User::class, 'riwayatMagang'])
+->middleware(['auth', 'user','mahasiswa']);
 
 //info riwayat magang
-Route::get('/user/riwayat-magang/{riwayat}', [User::class, 'detailRiwayatMagang']);
+Route::get('/user/riwayat-magang/{riwayat}', [User::class, 'detailRiwayatMagang'])
+->middleware(['auth', 'user','mahasiswa']);
 
 //delete or upload file
-Route::post('/user/riwayat-magang/{riwayat}', [User::class, 'updateRiwayatMagang']);
+Route::post('/user/riwayat-magang/{riwayat}', [User::class, 'updateRiwayatMagang'])
+->middleware(['auth', 'user','mahasiswa']);
 
 Route::get('/jawara', [Jawara::class, 'index']);
 
@@ -323,7 +356,7 @@ Route::get('/jawara/{event}', [Jawara::class, 'showDaftar'])
     ->middleware(['auth']);
 
 Route::post('jawara/{event}',[Jawara::class, 'daftar'])
-    ->middleware(['auth']);
+    ->middleware(['auth','mahasiswa']);
 
 Route::get('/jawara/detail/{event}',[Jawara::class, 'detail'])
     ->middleware('auth');
@@ -336,10 +369,10 @@ Route::get('/exchange/{lokasi}/{tujuan}',[StudentExchange::class, 'showPaket'])
     ->middleware('auth');
 
 Route::post('/exchange/{lokasi}/{tujuan}',[StudentExchange::class, 'showDaftar'])
-    ->middleware('auth');
+    ->middleware(['auth', 'mahasiswa']);
 
 Route::post('/exchange/{lokasi}/{tujuan}/{identity}', [StudentExchange::class, 'daftar'])
-    ->middleware('auth');
+    ->middleware(['auth', 'mahasiswa']);
 
 Route::get('/training', [Ojt::class, 'index'] );
 
@@ -353,10 +386,11 @@ Route::get('/training/{tujuan}/{paket}',[Ojt::class,'showPendaftaran'])
     ->middleware('auth');
 
 Route::post('/training/{tujuan}/{paket}',[Ojt::class,'daftar'])
-    ->middleware('auth');
+    ->middleware(['auth', 'mahasiswa']);
 
 Route::post('/logout', [User::class, 'logout'])
     ->middleware('auth');
+
 
 Route::get('/{course}/{sesi}/{target}',MateriC::class)
     ->where('target','[0-9]+')

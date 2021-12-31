@@ -147,9 +147,9 @@
                     <div class="section-heading mb-5">
                         <h2>Daftar Materi</h2>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div wire:ignore class="col-md-6">
                                 <div class="box">
-                                    <label for="filter" class="mr-3">Filter :</label>
+                                    <label for="filter" class="mr-3">Order :</label>
                                     <select id="filter" wire:model="filter">
                                         <option value="judul" @if ($filter == 'title')
                                             selected

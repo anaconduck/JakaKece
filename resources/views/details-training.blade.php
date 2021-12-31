@@ -55,11 +55,11 @@
                             <ol>
                             @foreach ($dokumentasi as $item)
                                 @php
-                                    $item = json_decode($item);
+                                    $item = json_decode($item->file, true);
                                 @endphp
                                 @foreach ($item as $doc)
                                 <li>
-                                    <a href="{{ $doc }}">{{ $doc }}</a>
+                                    <a target="_blank" href="{{ asset($doc) }}">{{ $doc }}</a>
                                 </li>
                                 @endforeach
                             @endforeach

@@ -79,8 +79,7 @@
                                     <li><a href="{{ url('/admin/pengunjung') }}">Pengunjung</a>
                                     <li><a href="{{ url('/admin/jumlah-practice') }}">Statistik Latihan</a>
                                     <li><a href="{{ url('/admin/jumlah-test') }}">Statistik Test</a>
-                                    <li><a href="{{ url('/admin/mean-jawara') }}">Rerata Dana Jawara</a>
-
+                                    <li><a href="{{ url('/admin/total-jawara') }}">Total Dana Jawara</a>
                                     </li>
                                 </ul>
                             </li>
@@ -90,15 +89,16 @@
                             <span class="opener">Kelola Dashboard</span>
                             <ul>
                                 <li><a href="{{ url('/admin/kelola-dashboard') }}">Kelola Home</a></li>
-                                <li><a href="{{ url('/admin/kelola-deskripsi') }}">Kelola Slideshow Deskripsi</a>
-                                </li>
+                                <li><a href="{{ url('/admin/kelola-deskripsi') }}">Kelola Slideshow Deskripsi</a></li>
+                                <li><a href="{{ url('/admin/kelola-dokumentasi') }}">Kelola Dokumentasi Sistem</a></li>
                             </ul>
                         </li>
                         <li>
                             <span class="opener">Inkubasi Digital Bahasa</span>
                             <ul>
                                 <li><a href="{{ url('/admin/inkubasi/materi') }}">Materi</a></li>
-                                <li><a href="{{ url('/admin/inkubasi/practice') }}">Latihan Soal</a></li>
+                                <li><a href="{{ url('/admin/inkubasi/practice') }}">Daftar Latihan Soal</a></li>
+                                <li><a href="{{ url('/admin/inkubasi/test') }}">Daftar Soal Test</a></li>
                             </ul>
                         </li>
                         <li>

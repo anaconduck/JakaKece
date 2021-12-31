@@ -29,7 +29,6 @@ class User extends Controller
     public $nav;
     public function __construct()
     {
-        $this->middleware(['auth','user']);
         $this->nav = [
             [
                 'title' => 'User',
@@ -133,8 +132,8 @@ class User extends Controller
 
             $path = 'storage/' . $request->file('file')->storeAs("riwayat/jawara", $name, 'public');
 
-            $file = json_decode($pendaftar->file, false);
-            if ($file == null) $file = [];
+            $file = json_decode($pendaftar->file, true);
+            if ($file == null) $file = array();
             array_push($file, $path);
             $pendaftar->file = json_encode($file);
 
@@ -147,6 +146,7 @@ class User extends Controller
 
     public function riwayatLatihan()
     {
+
         $riwayat = HistoryPractice::allWithIdentity(auth()->user()->identity, null, true);
         $this->nav[1] = [
             'title' => 'Riwayat Latihan',
@@ -281,12 +281,15 @@ class User extends Controller
 
         $tujuan = ExchangeTujuan::find($riwayat->id_exchange_tujuan);
         $mk = ExchangeMataKuliah::find(json_decode($riwayat->id_exchange_mata_kuliah, false));
+        $riwayat->dokumentasi = json_decode($riwayat->dokumentasi, true);
         $riwayat->file = json_decode($riwayat->file, true);
         $dokumentasi = [];
-        for ($i = 0; $i < sizeof($riwayat->file); $i++) {
-            if (array_key_exists('_'.$i, $riwayat->file)) {
-                array_push($dokumentasi, $riwayat->file['_'.$i]);
-            } else break;
+        if ($riwayat->dokumentasi) {
+            for ($i = 0; $i < sizeof($riwayat->dokumentasi); $i++) {
+                if (array_key_exists('_' . $i, $riwayat->dokumentasi)) {
+                    array_push($dokumentasi, $riwayat->dokumentasi['_' . $i]);
+                } else break;
+            }
         }
 
         $this->nav[1] = [
@@ -318,21 +321,23 @@ class User extends Controller
             'delete' => 'numeric',
             'file' => 'mimetypes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,video/mp4,video/mpeg,image/png,application/pdf,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.rar, video/webm, application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,	application/zip'
         ]);
-        $riwayat->file = json_decode($riwayat->file, true);
-
+        $riwayat->dokumentasi = json_decode($riwayat->dokumentasi, true);
+        if(!$riwayat->dokumentasi){
+            $riwayat->dokumentasi = array();
+        }
         if ($request->has('delete')) {
             $ind = $request->only('delete')['delete'];
-            if (array_key_exists('_'.$ind, $riwayat->file)) {
-                Storage::delete($riwayat->file['_'.$ind]);
-                $file = $riwayat->file;
-                unset($file['_'.$ind]);
-                $size = sizeof($file) - sizeof(config('app.dokumentasi'));
+            if (array_key_exists('_' . $ind, $riwayat->file)) {
+                Storage::delete($riwayat->file['_' . $ind]);
+                $file = $riwayat->dokumentasi;
+                unset($file['_' . $ind]);
+                $size = sizeof($file);
                 for ($i = $ind; $i < $size; $i++) {
-                    $file['_'.$ind] = $file['_'.($ind + 1)];
+                    $file['_' . $ind] = $file['_' . ($ind + 1)];
                 }
-                unset($file['_'.($size)]);
-                $riwayat->file = json_encode($file);
-                if ($riwayat->save(['file']))
+                unset($file['_' . ($size)]);
+                $riwayat->dokumentasi = json_encode($file);
+                if ($riwayat->save(['dokumentasi']))
                     return redirect()->back();
             }
             abort(500);
@@ -344,11 +349,11 @@ class User extends Controller
 
             $path = 'storage/' . $request->file('file')->storeAs("riwayat/exchange", $name, 'public');
 
-            $ind = sizeof($riwayat->file) - sizeof(config('app.dokumentasi'));
-            $file = $riwayat->file;
-            $file['_'.$ind] = $path;
-            $riwayat->file = json_encode($file);
-            if ($riwayat->save(['file'])) return redirect()->back();
+            $ind = sizeof($riwayat->dokumentasi);
+            $file = $riwayat->dokumentasi;
+            $file['_' . $ind] = $path;
+            $riwayat->dokumentasi = json_encode($file);
+            if ($riwayat->save(['dokumentasi'])) return redirect()->back();
         }
         abort(500);
     }
@@ -391,8 +396,8 @@ class User extends Controller
             $riwayat->file = json_decode($riwayat->file, true);
 
             for ($i = 0; $i < sizeof($riwayat->file); $i++) {
-                if (array_key_exists('_'.$i, $riwayat->file)) {
-                    array_push($dokumentasi, $riwayat->file['_'.$i]);
+                if (array_key_exists('_' . $i, $riwayat->file)) {
+                    array_push($dokumentasi, $riwayat->file['_' . $i]);
                 } else break;
             }
         }
@@ -409,9 +414,10 @@ class User extends Controller
         ]);
     }
 
-    public function updateRiwayatMagang(Request $request, OjtPendaftar $riwayat){
-        if(!$riwayat) abort(404);
-        elseif($riwayat->identity !== auth()->user()->identity) abort(404);
+    public function updateRiwayatMagang(Request $request, OjtPendaftar $riwayat)
+    {
+        if (!$riwayat) abort(404);
+        elseif ($riwayat->identity !== auth()->user()->identity) abort(404);
 
         $request->validate([
             'delete' => 'numeric',
@@ -419,19 +425,19 @@ class User extends Controller
         ]);
         $riwayat->file = json_decode($riwayat->file, true);
 
-        if(!$riwayat->file) $riwayat->file = [];
+        if (!$riwayat->file) $riwayat->file = [];
 
         if ($request->has('delete')) {
             $ind = $request->only('delete')['delete'];
-            if (array_key_exists('_'.$ind, $riwayat->file)) {
-                Storage::delete($riwayat->file['_'.$ind]);
+            if (array_key_exists('_' . $ind, $riwayat->file)) {
+                Storage::delete($riwayat->file['_' . $ind]);
                 $file = $riwayat->file;
-                unset($file['_'.$ind]);
+                unset($file['_' . $ind]);
                 $size = sizeof($file) - sizeof(config('app.dokumentasi_ojt'));
                 for ($i = $ind; $i < $size; $i++) {
-                    $file['_'.$ind] = $file['_'.($ind + 1)];
+                    $file['_' . $ind] = $file['_' . ($ind + 1)];
                 }
-                unset($file['_'.$size]);
+                unset($file['_' . $size]);
                 $riwayat->file = json_encode($file);
                 if ($riwayat->save(['file']))
                     return redirect()->back();
@@ -447,7 +453,7 @@ class User extends Controller
 
             $ind = sizeof($riwayat->file) - sizeof(config('app.dokumentasi_ojt'));
             $file = $riwayat->file;
-            $file['_'.$ind] = $path;
+            $file['_' . $ind] = $path;
             $riwayat->file = json_encode($file);
             if ($riwayat->save(['file'])) return redirect()->back();
         }
@@ -457,18 +463,29 @@ class User extends Controller
     public function index()
     {
         $user = auth()->user();
-        $mahasiswa = Mahasiswa::find($user->identity);
+        $mahasiswa = null;
+        $dosen = null;
+        $jawara = null;
+        $exchange = null;
+        $ojt = null;
+        if ($user->status == 'mahasiswa')
+            $mahasiswa = Mahasiswa::find($user->identity);
+        else if ($user->status == 'dosen')
+            $dosen = Dosen::find($user->identity);
         $report = HistoryPractice::allWithIdentity($user->identity, 3);
         $reportTest = HistoryTest::riwayat($user->identity, 3);
-        $jawara = JawaraPendaftar::riwayat($user->identity, 3);
-        $exchange = ExchangePendaftar::riwayat($user->identity, 3);
-        $ojt = OjtPendaftar::riwayat($user->identity, 3);
+        if ($user->status == 'mahasiswa') {
+            $jawara = JawaraPendaftar::riwayat($user->identity, 3);
+            $exchange = ExchangePendaftar::riwayat($user->identity, 3);
+            $ojt = OjtPendaftar::riwayat($user->identity, 3);
+        }
         array_pop($this->nav);
         return view('user', [
             'title' => 'User',
             'user_s' => 'selected',
             'user' => $user,
             'mahasiswa' => $mahasiswa,
+            'dosen' => $dosen,
             'jawara' => $jawara,
             'data' => $report,
             'nav' => $this->nav,

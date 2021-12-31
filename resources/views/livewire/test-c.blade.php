@@ -34,9 +34,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @for ($indexRow = 0; $indexRow < ceil($allsesi[$sesi]['num'] / 5); $indexRow++)
+                                                @for ($indexRow = 0; $indexRow < ceil(sizeof($daftarSoal) / 5); $indexRow++)
                                                     <tr>
-                                                        @for ($index = $indexRow * 4 + 1; $index <= min($indexRow * 4 + 4, $allsesi[$sesi]['num']); $index++)
+                                                        @for ($index = $indexRow * 4 + 1; $index <= min($indexRow * 4 + 4, sizeof($daftarSoal)); $index++)
                                                             @if ($index == $posisiSoal + 1)
                                                                 <td wire:click="show({{ $index - 1 }})"
                                                                     class="now"><b>{{ $index }}
@@ -71,8 +71,8 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $allsesi[$sesi]['sesi'] }}</h5>
-                                        @if ($soal->file && Session::get('hasListenTest.' . $posisiSoal, 0) == 0)
-                                            <div class='fl' wire:click="hasListenTest({{ $posisiSoal }})">
+                                        @if ($soal['file'] && Session::get('hasListenTest.' . $posisiSoal, 0) == 0)
+                                            <div class='fl'>
                                                 <a href='#' class='playBut'>
 
                                                     <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In  -->
@@ -99,24 +99,28 @@
                                                 </a>
                                             </div>
                                         @endif
-                                        <p class="card-text" style="text-align: justify">{{ $soal->teks ?? '' }}
+                                        <p class="card-text" style="text-align: justify">
+                                            @if ($soal['teks'])
+                                                <?= $soal['teks'] ?>
+                                            @endif
                                         </p>
-                                        <p class="card-text" style="text-align: justify">{{ $soal->soal ?? '' }}
+                                        <p class="card-text" style="text-align: justify">
+                                            {{ $soal['soal'] ?? '' }}
                                         </p>
                                         <div class="ans">
-                                            @if ($soal->tipe == 'm')
+                                            @if ($soal['tipe'] == 'm')
                                                 <div>
-                                                    @if ($soal->opsi1)
+                                                    @if ($soal['opsi1'])
                                                         <label class="rad-label">
                                                             <input wire:click="jawab(0)" type="radio"
                                                                 class="rad-input" name="rad"
                                                                 @if ($isAnswered and $daftarJawaban[$posisiSoal] == 0) checked @endif>
                                                             <div class="rad-design"></div>
-                                                            <div class="rad-text">{{ $soal->opsi1 }}</div>
+                                                            <div class="rad-text">{{ $soal['opsi1'] }}</div>
                                                         </label>
                                                     @endif
 
-                                                    @if ($soal->opsi2)
+                                                    @if ($soal['opsi2'])
                                                         <label class="rad-label">
                                                             <input wire:click="jawab(1)" type="radio"
                                                                 class="rad-input" name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 1)
@@ -124,11 +128,11 @@
                                                     @endif
                                                     >
                                                     <div class="rad-design"></div>
-                                                    <div class="rad-text">{{ $soal->opsi2 }}</div>
+                                                    <div class="rad-text">{{ $soal['opsi2'] }}</div>
                                                     </label>
                                             @endif
 
-                                            @if ($soal->opsi3)
+                                            @if ($soal['opsi3'])
                                                 <label class="rad-label">
                                                     <input wire:click="jawab(2)" type="radio" class="rad-input"
                                                         name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 2)
@@ -136,11 +140,11 @@
                                             @endif
                                             >
                                             <div class="rad-design"></div>
-                                            <div class="rad-text">{{ $soal->opsi3 }}</div>
+                                            <div class="rad-text">{{ $soal['opsi3'] }}</div>
                                             </label>
                                             @endif
 
-                                            @if ($soal->opsi4)
+                                            @if ($soal['opsi4'])
                                                 <label class="rad-label">
                                                     <input wire:click="jawab(3)" type="radio" class="rad-input"
                                                         name="rad" @if ($isAnswered and $daftarJawaban[$posisiSoal] == 3)
@@ -148,12 +152,12 @@
                                             @endif
                                             >
                                             <div class="rad-design"></div>
-                                            <div class="rad-text">{{ $soal->opsi4 }}</div>
+                                            <div class="rad-text">{{ $soal['opsi4'] }}</div>
                                             </label>
                                             @endif
 
                                         </div>
-                                    @elseif($soal->tipe == 'f')
+                                    @elseif($soal['tipe'] == 'f')
                                         <label for="inp" class="inp">
                                             <input wire:model.lazy='ans' type="text" id="inp" placeholder="&nbsp;">
                                             <span class="label">Ans..</span>
@@ -178,13 +182,29 @@
         </div>
     </section>
     @if (!Session::get(" hasListenTest.$posisiSoal", false))
-        <script>
+        <script wire:ignore>
+            let e = new Audio('{{ Storage::url($soal['file']) }}');
+            $('.fl').on('click', function() {
+                e.play()
+            })
+            $('.btn-shine').on('click', function() {
+                e.pause()
+            })
+            $('.nm').on('click', function() {
+                e.pause();
+            })
+            e.onended = function() {
+                Livewire.emit('hasListenTest', {{ $posisiSoal }});
+            }
+            e.onpause = function() {
+                Livewire.emit('hasListenTest', {{ $posisiSoal }});
+            }
             document.addEventListener('DOMContentLoaded', () => {
                 Livewire.hook('message.processed', (el, component) => {
                     var q = @this.soal
                     if (q.file !== null) {
-                        let e = new Audio(q.file);
-
+                        let url = '{{ Storage::url('/') }}'
+                        e.src = url + '/' + q.file
                         $('.fl').on('click', function() {
                             e.play()
                         })
@@ -194,6 +214,12 @@
                         $('.nm').on('click', function() {
                             e.pause();
                         })
+                        e.onended = function() {
+                            Livewire.emit('hasListenTest', @this.posisiSoal);
+                        }
+                        e.onpause = function() {
+                            Livewire.emit('hasListenTest', @this.posisiSoal);
+                        }
                     }
                 })
             })
@@ -269,7 +295,7 @@
 
                 if (timeLeft === 0) {
                     onTimesUp();
-                    window.location = "{{ url('/report/test' . '/' . $idHistoryTest) }}"
+                    window.location = "{{ url('/user/riwayat-test' . '/' . $idHistoryTest) }}"
                 }
             }, 1000);
         }

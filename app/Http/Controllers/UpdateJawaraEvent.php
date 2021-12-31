@@ -101,6 +101,9 @@ class UpdateJawaraEvent extends Controller
             if ($event->save())
                 return redirect(url('/admin/jawara/event'));
         } else if ($request->get('submit') == 'delete') {
+            if($event->file){
+                Storage::delete('public/'.$event->file);
+            }
             $event->delete();
             return redirect(url('/admin/jawara/event'));
         }

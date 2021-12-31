@@ -56,6 +56,11 @@
                                 <dd class="col-sm-8 mb-3">
                                     @foreach ($riwayatFile as $file)
                                         @foreach ($file as $dfile)
+                                            @php
+                                                if(strpos($dfile, 'jawara/pendanaan')!==false or strpos($dfile, 'jawara/bukti')!==false){
+                                                    continue;
+                                                }  
+                                            @endphp
                                             <dl class="row">
                                                 @if (strpos($dfile, 'storage/') !== false)
                                                     <dd class="col-sm-12">

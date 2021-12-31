@@ -31,13 +31,19 @@
                                     <h3>{{ $currentMateri['judul'] }}</h3>
                                 </div>
                                 <div class="content">
+                                    @if ($currentMateri['file'] != null and strpos($currentMateri['file'], '.mp4') == strlen($currentMateri['file']) - 4)
+                                    <iframe width="100%" height="600" src="{{Storage::url($currentMateri['file'])}}" frameborder="0" allowfullscreen></iframe>
+                                    @endif
                                     @php
                                         echo $currentMateri['teks'];
                                     @endphp
+                                    @if($currentMateri['transcript'])
+                                        <a href="{{Storage::url($currentMateri['transcript'])}}">Unduh transcript video</a>
+                                    @endif
                                 </div>
                             </div>
 
-                            @if ($currentMateri['file'])
+                            @if ($currentMateri['file'] != null and strpos($currentMateri['file'], '.mp4') != strlen($currentMateri['file']) - 4)
                                 <div class="col-md-12 dwl">
                                     <span><a href="{{ Storage::url($currentMateri['file']) }}"></a></span>
                                 </div>
@@ -60,7 +66,8 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-12" style="border-left: 5px solid rgba(0, 0, 0, 0.075)">
-                                <h3 style="text-align: center">Belum ada materi untuk kategori {{ config('app.allSesi.'.($sesi-1)) }}</h3>
+                                <h3 style="text-align: center">Belum ada materi untuk kategori
+                                    {{ config('app.allSesi.' . ($sesi - 1)) }}</h3>
                             </div>
                         </div>
                     </div>

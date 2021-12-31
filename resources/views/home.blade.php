@@ -4,19 +4,19 @@
     <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
     <style>
         .untitled__slide:nth-child(1) .untitled__slideBg {
-            background-image: url({{ Storage::url($dashboard->background['inkubasi']) }})
+            background-image: url({{ Storage::url($dashboard->background['inkubasi']??'') }})
         }
 
         .untitled__slide:nth-child(2) .untitled__slideBg {
-            background-image: url({{ Storage::url($dashboard->background['jawara']) }})
+            background-image: url({{ Storage::url($dashboard->background['jawara']?? '') }})
         }
 
         .untitled__slide:nth-child(3) .untitled__slideBg {
-            background-image: url({{ Storage::url($dashboard->background['exchange']) }})
+            background-image: url({{ Storage::url($dashboard->background['exchange']?? '') }})
         }
 
         .untitled__slide:nth-child(4) .untitled__slideBg {
-            background-image: url({{ Storage::url($dashboard->background['training']) }})
+            background-image: url({{ Storage::url($dashboard->background['training']?? '') }})
         }
 
     </style>
@@ -34,8 +34,16 @@
                 <h2><em>Jaka</em> Kece</h2>
                 @if (!auth()->user())
                     <div class="main-button">
-                        <div class="scroll-to-section"><a href="{{ url('/login') }}">Login</a></div>
+                        @if(!auth()->user())
+                            <div class="scroll-to-section"><a href="{{ url('/login') }}">Login</a></div>
+                        @endif
                     </div>
+                @else
+                <div class="main-button">
+                    @if(auth()->user())
+                        <div class="scroll-to-section"><a>Selamat Datang ke Sistem JakaKece</a></div>
+                    @endif
+                </div>
                 @endif
             </div>
         </div>
@@ -144,7 +152,7 @@
                         <h4 style="margin: 0; margin-bottom: 30px;">Tentang <em>Aplikasi</em></h4>
                         <div>
                             <p style="font-weight: bold;font-size: 15px; text-align: justify" color="black">
-                                {{ $dashboard->tentangAplikasi['deskripsi1'] }}
+                                {{ $dashboard->tentangAplikasi['deskripsi1'] ??''}}
                             </p>
                         </div>
                     </div>
@@ -153,7 +161,7 @@
                     <div class="continer centerIt">
                         <div>
                             <p style="font-weight: bold;font-size: 15px; text-align: justify" color="black">
-                                {{ $dashboard->tentangAplikasi['deskripsi2'] }}
+                                {{ $dashboard->tentangAplikasi['deskripsi2'] ??''}}
                             </p>
                         </div>
                     </div>
@@ -165,7 +173,7 @@
         <div class="container">
             <h4 class="jd" style="margin: 0; margin-bottom: 30px;">Statistik Pengguna</h4>
             <div class="row stat-ct">
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-4 col-sm-4">
                     <div class="counter">
                         <span class="counter-value">{{ $pengguna }}</span>
                         <h3>Jumlah Pengguna Sistem</h3>
@@ -174,12 +182,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-4 col-sm-4">
                     <div class="counter magenta">
                         <span class="counter-value">{{ $harian ?? 0 }}</span>
                         <h3>Jumlah Pengunjung Hari Ini</h3>
                         <div class="counter-icon">
                             <i class="fa fa-globe"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 country">
+                    <div class="page-content page-container" id="page-content">
+                        <div class="padding">
+                            <div class="row">
+                                <div class="col-sm-12"><h5>Pengunjung Berdasarkan Negara</h5></div>
+                                <div class="col-sm-12">
+                                    @if($access)
+                                    <div class="list list-row block">
+                                        @foreach($access as $ac)
+                                        <div class="list-item" data-id="19">
+                                            <div><a data-abc="true"><span class="w-48 avatar gd-warning"><img src="https://www.countryflagicons.com/FLAT/64/{{$ac->code}}.png" alt="{{$ac->country}}"></span></a></div>
+                                            <div class="flex"> <a  class="item-author text-color" data-abc="true">{{$ac->country}}</a>
+                                                <div class="item-except text-muted text-sm h-1x">Jumlah Pengunjung : {{$ac->jumlah ?? 0}}</div>
+                                            </div>
+                                            <div class="no-wrap">
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

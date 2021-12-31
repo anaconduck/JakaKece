@@ -75,8 +75,17 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="file">Poster</label>
+                                <p>File yang diterima : jpeg, jpg, gin, png</p>
                                 <fieldset>
                                     <input class="form-control file" type="file" name="file" id="formFileMultiple">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Laman Lomba</label>
+                                <p>-</p>
+                                <fieldset>
+                                    <input placeholder=" Tuliskan laman lomba" class="form-control file" type="text"
+                                        name="laman">
                                 </fieldset>
                             </div>
                             <div class="col-md-12 mt-4">

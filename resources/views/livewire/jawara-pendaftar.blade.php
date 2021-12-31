@@ -122,7 +122,35 @@
             text-overflow: ellipsis;
             height: 100px;
         }
+        .box select {
+            background-color: whitesmoke;
+            color: black;
+            padding: 12px;
+            width: 200px;
+            border: none;
+            font-size: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            -webkit-appearance: button;
+            appearance: button;
+            outline: none;
+        }
 
+        .box select option {
+            padding: 30px;
+        }
+
+        #keyword {
+            text-align: center;
+            margin-top: 10px;
+            margin-right: 20px;
+            display: inline-block;
+        }
+
+        @media only screen and (max-width:634px) {
+            .ri {
+                margin-top: 30px;
+            }
+        }
     </style>
 
 
@@ -148,7 +176,7 @@
                         <h2>Daftar Pendaftar Jawara Event</h2>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="box">
+                                <div wire:ignore class="box">
                                     <label for="filter_" class="mr-3">Order :</label>
                                     <select id="filter_" wire:model="filter">
                                         <option value="users.name" @if ($filter == 'users.name')
@@ -161,7 +189,6 @@
                                             selected
                                             @endif>Waktu Pendaftaran</option>
                                     </select>
-                                    @if($filter){{$filter}}@endif
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -188,14 +215,15 @@
                                     <th>Nama Dosen</th>
                                     <th>Status Pendaftaran</th>
                                     <th>Waktu Pendaftaran</th>
-                                    <th>Pengajuan</th>
                                     <th>Pendanaan</th>
                                 </tr>
                             </thead>
                             <tbody class="table-hover">
                                 @foreach ($pendaftar as $data)
-
-                                    <tr wire:click="show({{$data->id}})" id="{{ $data->id }}">
+                                    @php
+                                        $idd = $data->id_jawara_event . implode('',json_decode($data->id_mahasiswa, true));
+                                    @endphp
+                                    <tr wire:click="show('{{$idd}}')" id="{{ $data->id }}">
                                         <td>{{ $ind++ }}</td>
                                         <td><ol style="list-style-type: lower-roman">
                                             @php
@@ -221,13 +249,6 @@
                                             @endif
                                         </td>
                                         <td>{{date("d/M/y", strtotime($data->created_at))}}</td>
-                                        <td>
-                                            @if($data->file)
-                                            <a href="{{url($data->file)}}">File</a>
-                                            @else
-                                            -
-                                            @endif
-                                        </td>
                                         <td>Rp. {{ number_format($data->pendanaan, 2, ',', '.') }}</td>
                                     </tr>
                                 @endforeach

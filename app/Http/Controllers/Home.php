@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Acces;
 use App\Models\Berita;
 use App\Models\Dashboard;
 use App\Models\Mahasiswa;
@@ -28,6 +29,7 @@ class Home extends Controller
         else $dashboard->tentangAplikasi = [];
         $harian = visits('App\Models\Berita')->period('day')->count();
         $pengguna = User::count();
+        $access = Acces::getCountry();
         return view('home',[
             'title' => 'Home',
             'home' => 'selected',
@@ -35,7 +37,8 @@ class Home extends Controller
             'top' => $top,
             'dashboard' => $dashboard,
             'harian' => $harian,
-            'pengguna' => $pengguna
+            'pengguna' => $pengguna,
+            'access' => $access
         ]);
     }
 

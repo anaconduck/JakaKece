@@ -44,17 +44,24 @@
                             {{ session()->get('nama_course') }}
                         </div>
                     @endif
+                    @if($errors->any())
+                    <div class="alert alert-danger" role="alert">
+                        {{implode(', ', $errors->all())}}
+                    </div>
+                    @endif
 
                     <form id="contact" action="" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
+                                <label>Judul Materi</label>
                                 <fieldset>
                                     <input name="judul" type="text" class="form-control" id="title" placeholder="Title..."
                                         required">
                                 </fieldset>
                             </div>
                             <div class="col-md-6">
+                                <label>Sesi</label>
                                 <fieldset>
                                     <select name="sesi" id="sesi" required>
                                         <option selected>Select Category</option>
@@ -66,21 +73,32 @@
                                     </select>
                                 </fieldset>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label>Jenis Course</label>
                                 <select name="id_course" id="nama_course" required>
-                                    <option selected>Select Category</option>
+                                    <option selected>Select Course</option>
                                     <option value="1">TOEFL ITP</option>
                                     <option value="2">TOEFL IBT</option>
                                     <option value="3">TOEIC</option>
                                     <option value="4">IELTS</option>
                                 </select>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label>File/Video</label>
+                                <p>File yang diterima : jpeg, jpg, png, gif, mp4, docx, doc, pdf</p>
                                 <fieldset>
                                     <input class="form-control file" type="file" name="file" id="formFileMultiple">
                                 </fieldset>
                             </div>
+                            <div class="col-md-6">
+                                <label>Transcript</label>
+                                <p>File yang diterima :docx, pdf</p>
+                                <fieldset>
+                                    <input class="form-control file" type="file" name="transcript" id="formFileMultiple">
+                                </fieldset>
+                            </div>
                             <div class="col-12">
+                                <label>Teks</label>
                                 <textarea name="teks" id="teks" placeholder="Enter your text" rows="6"></textarea>
                             </div>
                             <div class="col-md-12 mt-4">

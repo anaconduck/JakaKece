@@ -67,6 +67,9 @@ class UpdatePractice extends Controller
                 return redirect('/admin/inkubasi/practice');
             }
         } else if ($request->get('submit') == 'delete') {
+            if($practice->file){
+                Storage::delete($practice->file);
+            }
             $practice->delete();
             return redirect(url('/admin/inkubasi/practice'));
         }

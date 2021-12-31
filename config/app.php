@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+       
         /*
          * Package Service Providers...
          */
@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
     ],
 
     /*
@@ -229,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Location' =>  Stevebauman\Location\Facades\Location::class,
     ],
 
     'totalTimeTest' =>[
@@ -239,16 +241,16 @@ return [
 
     'toefl-itp' => [
         [
-            'sesi' => 'listening-comprehension',
+            'sesi' => 'listening',
             'time' => 35,
             'num' => 50
         ],
-         ['sesi' =>'structure-written-expression',
+         ['sesi' =>'structure',
             'time' => 25,
             'num' => 40
         ],
         [
-            'sesi' => 'reading-comprehension',
+            'sesi' => 'reading',
             'time' => 55,
             'num' => 40
         ]
@@ -271,12 +273,12 @@ return [
             'num' => 2
         ],
         [
-            'sesi' => 'writing - integrated task',
+            'sesi' => 'writing',
             'time' => 20,
             'num' => 2
         ],
         [
-            'sesi' => 'writing - independent task',
+            'sesi' => 'writing',
             'time' => 30,
             'num' => 2
         ]
@@ -286,22 +288,45 @@ return [
         [
             'sesi' => 'listening',
             'time' => 30,
-            'num' => 1,
+            'num' => 40,
         ],
         [
             'sesi' => 'reading',
             'time' => 60,
-            'num' => 1
+            'num' => 40
         ],
         [
             'sesi' => 'writing',
             'time' => 60,
-            'num' => 1
+            'num' => 2
         ],
         [
             'sesi' => 'speaking',
-            'time' => 4,
-            'num' => 1
+            'time' => 14,
+            'num' => 3
+        ]
+    ],
+
+    'ielts' => [
+        [
+            'sesi' => 'listening',
+            'time' => 30,
+            'num' => 40,
+        ],
+        [
+            'sesi' => 'reading',
+            'time' => 60,
+            'num' => 40
+        ],
+        [
+            'sesi' => 'writing',
+            'time' => 60,
+            'num' => 2
+        ],
+        [
+            'sesi' => 'speaking',
+            'time' => 14,
+            'num' => 3
         ]
     ],
 
@@ -326,7 +351,7 @@ return [
     ],
 
     'allSesi' => [
-        'introduction', 'listening', 'reading', 'structure', 'writing'
+        'introduction', 'listening', 'reading', 'structure', 'writing', 'speaking'
     ],
 
     'statusPendaftaran' =>[

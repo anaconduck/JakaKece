@@ -162,7 +162,7 @@
         let data = {
             labels: labels,
             datasets: [{
-                label: 'Jumlah Mahasiswa melakukan latihan inkubasi bahasa',
+                label: 'Jumlah Mahasiswa melakukan test inkubasi bahasa',
                 backgroundColor: 'rgb(83,91,160)',
                 borderColor: 'rgb(83,91,160)',
                 data: [

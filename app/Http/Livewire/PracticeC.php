@@ -19,80 +19,96 @@ class PracticeC extends Component
     public $daftarJawaban;
     public $isAnswered;
     public $idCourse;
-    public $sesi=0;
+    public $sesi = 0;
+    public $sesiSoal;
     public $allsesi;
-    public $waktu=0;
+    public $waktu = 0;
     public $waktuSesi = 0;
     public $nav;
     public $course;
-    public $finish= -1;
+    public $finish = -1;
     public $next = -1;
-    public $ans='';
+    public $ans = '';
 
 
     protected $listeners = [
         'checkSesi' => 'checkSesi'
     ];
 
-    public function mount($course){
-        if(!strpos(url()->previous(),'inkubasi') and (!strpos(url()->previous(),"latihan/$course"))){
+    public function mount($course)
+    {
+        if (!strpos(url()->previous(), 'inkubasi') and (!strpos(url()->previous(), "latihan/$course"))) {
             return redirect('/inkubasi');
         }
         $course = strtolower($course);
-        if(array_key_exists($course,config('app.indexCourse')))
+        if (array_key_exists($course, config('app.indexCourse')))
             $this->idCourse = config('app.indexCourse')[$course];
         else abort(404);
-        if(auth()->user()->status == 'mahasiswa'){
-            if($this->idCourse == 4) abort(404);
+        if (auth()->user()->status == 'mahasiswa') {
+            if ($this->idCourse == 4) abort(404);
         }
         $this->course = $course;
-        $this->allsesi = config('app.'.$course);
-        $this->sesi =0;
+        $this->allsesi = config('app.' . $course);
+        $this->sesi = 0;
         $historyPractice = HistoryPractice::getLastPractice($this->idCourse);
         $historyJawaban = false;
 
-        if($historyPractice == null or $historyPractice->status_selesai){
-            $new = HistoryPractice::makeHistoryPractice(auth()->user()->identity,$course);
+        $sesiName = $this->allsesi[$this->sesi]['sesi'];
+        foreach (config('app.allSesi') as $ind => $s) {
+            if ($s == $sesiName) {
+                $this->sesiSoal = $ind;
+                break;
+            }
+        }
+        if ($historyPractice == null or $historyPractice->status_selesai) {
+            $new = HistoryPractice::makeHistoryPractice(auth()->user()->identity, $course, $this->sesiSoal);
             $historyPractice = $new[0];
             $historyJawaban = $new[1];
             $this->sesi = 0;
             $this->waktuSesi = 0;
-        }else{
-            $waktu =(strtotime(now()) - strtotime($historyPractice->created_at))/(60);
-            if($waktu >= config('app.totalTimeTest')[$course]){
+        } else {
+            $waktu = (strtotime(now()) - strtotime($historyPractice->created_at)) / (60);
+            if ($waktu >= config('app.totalTimeTest')[$course]) {
                 $historyPractice->status_selesai = true;
                 $historyPractice->save(['status_selesai']);
-                $new = HistoryPractice::makeHistoryPractice(auth()->user()->identity,$course);
+                $new = HistoryPractice::makeHistoryPractice(auth()->user()->identity, $course, $this->sesiSoal);
                 $historyPractice = $new[0];
                 $historyJawaban = $new[1];
                 $this->sesi = 0;
-            }else{
+            } else {
                 $sesitime = $this->allsesi[0]['time'];
-                for($i=0;$i<sizeof($this->allsesi);$i++){
-                    if($waktu< $sesitime){
+                for ($i = 0; $i < sizeof($this->allsesi); $i++) {
+                    if ($waktu < $sesitime) {
                         $this->sesi = $i;
                         break;
-                    }else if($i < sizeof($this->allsesi)-1){
-                        $sesitime += $this->allsesi[$i+1]['time'];
+                    } else if ($i < sizeof($this->allsesi) - 1) {
+                        $sesitime += $this->allsesi[$i + 1]['time'];
+                    }
+                }
+                $sesiName = $this->allsesi[$this->sesi]['sesi'];
+                foreach (config('app.allSesi') as $ind => $s) {
+                    if ($s == $sesiName) {
+                        $this->sesiSoal = $ind;
+                        break;
                     }
                 }
                 $historyJawaban = HistoryJawabanPractice::getHistoryJawaban($historyPractice->id, $this->sesi);
-                if(!$historyJawaban){
-                    $historyJawaban = HistoryJawabanPractice::makeHistoryJawaban($historyPractice->id,$this->sesi, $this->allsesi[$this->sesi]['num']);
+                if (!$historyJawaban) {
+                    $historyJawaban = HistoryJawabanPractice::makeHistoryJawaban($historyPractice->id, $this->sesi, min($this->allsesi[$this->sesi]['num'], Practice::countQuest($this->idCourse, $this->sesiSoal)));
                 }
-                if($this->sesi == 0){
+                if ($this->sesi == 0) {
                     $this->waktuSesi = $waktu * 60;
-                }else{
+                } else {
                     $this->waktuSesi = $waktu;
-                    for($i = 0; $i < $this->sesi;$i++){
+                    for ($i = 0; $i < $this->sesi; $i++) {
                         $this->waktuSesi -= $this->allsesi[$i]['time'];
                     }
-                    $this->waktuSesi = ($this->waktuSesi)*60;
+                    $this->waktuSesi = ($this->waktuSesi) * 60;
                 }
-                $this->waktu = $waktu*60;
+                $this->waktu = $waktu * 60;
             }
         }
-        if(!$historyJawaban){
+        if (!$historyJawaban) {
             abort(500);
         }
 
@@ -106,33 +122,35 @@ class PracticeC extends Component
                 'link' => url('/inkubasi')
             ],
             [
-                'title' => 'Practice '.$course,
-                'link'  => url('/latihan'.'/'.$course)
+                'title' => 'Practice ' . $course,
+                'link'  => url('/latihan' . '/' . $course)
             ],
             [
-                'title' => ''.$this->allsesi[$this->sesi]['sesi'],
+                'title' => '' . $this->allsesi[$this->sesi]['sesi'],
                 'link' => '#'
             ]
         ];
-        $soal = Practice::show($this->idCourse, $this->sesi, $this->daftarSoal[$this->posisiSoal])->toArray();
-        if(!($soal == null))
+        
+        $soal = Practice::show($this->idCourse, $this->sesiSoal, $this->daftarSoal[$this->posisiSoal]);
+        if($soal) $soal = $soal->toArray();
+        if (!($soal == null))
             $this->soal = $soal;
         else abort(500);
-        if($this->soal['tipe'] == 'f')
+        if ($this->soal['tipe'] == 'f')
             $this->ans = $this->daftarJawaban[$this->posisiSoal];
     }
 
-    public function jawab($jawab){
+    public function jawab($jawab)
+    {
         $up = 0;
-        if(is_numeric($jawab)){
-            if($jawab >=0 and $jawab <=3){
-                if(array_key_exists($this->posisiSoal, $this->daftarJawaban)){
-                    if($this->daftarJawaban[$this->posisiSoal] == $this->soal->jawaban and $this->soal->jawaban != $jawab){
+        if (is_numeric($jawab)) {
+            if ($jawab >= 0 and $jawab <= 3) {
+                if (array_key_exists($this->posisiSoal, $this->daftarJawaban)) {
+                    if ($this->daftarJawaban[$this->posisiSoal] == $this->soal['jawaban'] and $this->soal['jawaban'] != $jawab) {
                         $up = -1;
-                    }
-                    else if($this->daftarJawaban[$this->posisiSoal] != $this->soal->jawaban and $this->soal->jawaban == $jawab)
+                    } else if ($this->daftarJawaban[$this->posisiSoal] != $this->soal['jawaban'] and $this->soal['jawaban'] == $jawab)
                         $up = 1;
-                }else if($this->soal->jawaban == $jawab){
+                } else if ($this->soal['jawaban'] == $jawab) {
                     $up = 1;
                 }
                 $this->daftarJawaban[$this->posisiSoal] = $jawab;
@@ -141,43 +159,45 @@ class PracticeC extends Component
         }
     }
 
-    public function updatingAns($value){
+    public function updatingAns($value)
+    {
         $up = 0;
-        if($this->soal->tipe == 'f'){
-            if(array_key_exists($this->posisiSoal, $this->daftarJawaban)){
-                if($this->daftarJawaban[$this->posisiSoal] == $this->soal->opsi1 and $this->soal->opsi1 != $value){
+        if ($this->soal['tipe'] == 'f') {
+            if (array_key_exists($this->posisiSoal, $this->daftarJawaban)) {
+                if ($this->daftarJawaban[$this->posisiSoal] == $this->soal['opsi1'] and $this->soal['opsi1'] != $value) {
                     $up = -1;
-                }
-                else if($this->daftarJawaban[$this->posisiSoal] != $this->soal->opsi1 and $this->soal->opsi1 == $value){
+                } else if ($this->daftarJawaban[$this->posisiSoal] != $this->soal['opsi1'] and $this->soal['opsi1'] == $value) {
                     $up = 1;
                 }
-            }else if($this->soal->opsi1 == $value){
+            } else if ($this->soal['opsi1'] == $value) {
                 $up = 1;
             }
-            $this->daftarJawaban[$this->posisiSoal] =$value;
-            HistoryJawabanPractice::jawab($this->idHistoryPractice, $this->sesi, json_encode($this->daftarJawaban),$up);
+            $this->daftarJawaban[$this->posisiSoal] = $value;
+            HistoryJawabanPractice::jawab($this->idHistoryPractice, $this->sesi, json_encode($this->daftarJawaban), $up);
         }
     }
 
-    public function show($soal){
-        if($soal >=0 and $soal < $this->allsesi[$this->sesi]['num']){
+    public function show($soal)
+    {
+        if ($soal >= 0 and $soal < $this->allsesi[$this->sesi]['num']) {
             $this->posisiSoal = $soal;
-            $soal = Practice::show($this->idCourse, $this->sesi, $this->daftarSoal[$this->posisiSoal])->toArray();
-            if(!($soal == null))
+            $soal = Practice::show($this->idCourse, $this->sesiSoal, $this->daftarSoal[$this->posisiSoal])->toArray();
+            if (!($soal == null))
                 $this->soal = $soal;
             else abort(500);
-            if($this->soal['tipe'] == 'f')
+            if ($this->soal['tipe'] == 'f')
                 $this->ans = $this->daftarJawaban[$this->posisiSoal] ?? '';
         }
     }
 
-    public function checkSesi(){
+    public function checkSesi()
+    {
         $historyPractice = HistoryPractice::getLastPractice($this->idCourse);
-        $waktu = (strtotime(now()) - strtotime($historyPractice->created_at))/(60);
-        if($waktu >= config('app.totalTimeTest')[$this->course]){
+        $waktu = (strtotime(now()) - strtotime($historyPractice->created_at)) / (60);
+        if ($waktu >= config('app.totalTimeTest')[$this->course]) {
             $this->finish = 1;
             Session::forget('hasListenPractice');
-        }else{
+        } else {
             $this->next = 1;
         }
     }
@@ -186,12 +206,11 @@ class PracticeC extends Component
     {
         $this->isAnswered = array_key_exists($this->posisiSoal, $this->daftarJawaban);
         return view('livewire.practice-c')
-            ->extends('layouts.app',[
+            ->extends('layouts.app', [
                 'nav' => $this->nav,
                 'inkubasi' => 'selected',
                 'title' => 'Practice Inkubasi Bahasa'
             ])
             ->section('slot');
     }
-
 }

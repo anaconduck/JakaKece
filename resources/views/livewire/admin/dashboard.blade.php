@@ -215,8 +215,8 @@
             </span>
         </a>
 
-        <a href="{{ url('/admin/mean-jawara') }}" class="data-card">
-            <h3>{{ $meanDana ?? 0 }}</h3>
+        <a href="{{ url('/admin/total-jawara') }}" class="data-card">
+            <h3>{{ $meanPendanaan ?? 0 }}</h3>
             <h4>Rerata Dana Perlombaan</h4>
             <span class="link-text">
                 Detail

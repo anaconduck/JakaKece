@@ -39,6 +39,7 @@ class JawaraCenter extends Component
 
         return view('livewire.jawara-center',[
             'event' => $data
+            
         ])
             ->extends('layouts.admin',[
                 'title' => 'Jawara Center Event',

@@ -49,6 +49,7 @@ class UpdateMateri extends Controller
                 'sesi' => 'required|numeric|bail',
                 'id_course' => 'required|numeric',
                 'file' => 'mimetypes:jpeg,jpg,png,gif,application/msword,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf',
+                'transcript' => 'mimetypes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf',
                 'teks' => 'required'
             ]);
 
@@ -61,6 +62,14 @@ class UpdateMateri extends Controller
                 $path = $request->file('file')->storeAs('materi', $name, 'public');
                 $materi->file = $path;
             }
+            if($request->hasFile('transcript') and $request->file('transcript')->isValid()){
+                if($materi->transcript){
+                    Storage::delete($materi->transcript);
+                }
+                $name = time().Str::random(3).$request->file('transcript')->getClientOriginalName();
+                $path = $request->file('transcript')->storeAs('materi/transcript',$name,'public');
+                $materi->transcript = $path;
+            }
 
             $materi->judul = $data['judul'];
             $materi->sesi = $data['sesi'];
@@ -71,6 +80,12 @@ class UpdateMateri extends Controller
                 return redirect(url('/admin/inkubasi/materi'));
         }
         else if($request->get('submit') == 'delete'){
+            if($materi->file){
+                Storage::delete($materi->file);
+            }
+            if($materi->transcript){
+                Storage::delete($materi->transcript);
+            }
             $materi->delete();
             return redirect(url('/admin/inkubasi/materi'));
         }

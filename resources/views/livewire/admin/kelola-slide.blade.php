@@ -123,6 +123,7 @@
                         @if ($s['file'])
                             background slide-{{ $ind + 1 }} <a target="_blank" href="{{ Storage::url($s['file']) }}">lihat</a>
                         @endif
+                        <p>File yang diterima : jpeg, jpg, png, gif.</p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Background</span>
@@ -162,6 +163,7 @@
                         @if ($s['file'])
                             background slide-{{ $ind + 1 }} <a target="_blank" href="{{ Storage::url($s['file']) }}">lihat</a>
                         @endif
+                        <p>File yang diterima : jpeg, jpg, png, gif.</p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Background</span>
@@ -201,6 +203,7 @@
                         @if ($s['file'])
                             background slide-{{ $ind + 1 }} <a target="_blank" href="{{ Storage::url($s['file']) }}">lihat</a>
                         @endif
+                        <p>File yang diterima : jpeg, jpg, png, gif.</p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Background</span>
@@ -240,6 +243,7 @@
                         @if ($s['file'])
                             background slide-{{ $ind + 1 }} <a target="_blank" href="{{ Storage::url($s['file']) }}">lihat</a>
                         @endif
+                        <p>File yang diterima : jpeg, jpg, png, gif.</p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Background</span>
@@ -281,7 +285,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Hapus Slide-{{ $delete }}?
+                        Hapus Slide-{{ $delete + 1 }}?
                     </div>
                     <div class="modal-footer">
                         <button wire:click="batal" type="button" class="btn btn-secondary"

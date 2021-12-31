@@ -15,7 +15,6 @@ class HistoryTest extends Model
         'id_course'
     ];
     public $attributes = [
-        'score' => '',
         'status_selesai' => false
     ];
 
@@ -26,7 +25,7 @@ class HistoryTest extends Model
             ->first();
     }
 
-    public static function makeHistoryTest($identity, $course){
+    public static function makeHistoryTest($identity, $course, $sesiSoal){
         $idCourse = config('app.indexCourse')[$course];
         $h = new HistoryTest([
             'identity' => $identity,
@@ -35,7 +34,7 @@ class HistoryTest extends Model
 
         DB::beginTransaction();
         $h->save();
-        $size = config('app.'.$course)[0]['num'];
+        $size = min(config('app.' . $course)[0]['num'], Test::countQuest($idCourse, $sesiSoal));
         $historyJawaban = HistoryJawabanTest::makeHistoryJawaban($h->id, 0, $size);
         DB::commit();
 

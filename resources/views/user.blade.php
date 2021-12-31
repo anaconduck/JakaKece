@@ -38,11 +38,11 @@
                                     <h4>{{ $user->name }}</h4>
                                     <p class="text-secondary mb-1">{{ $user->email }}</p>
                                     <p class="text-muted font-size-sm">{{ $user->identity }}</p>
-                                    <p class="text-muted font-size-sm">{{ $mahasiswa->program_studi }}</p>
-                                    <p class="text-muted font-size-sm">{{ $mahasiswa->tempat_lahir }}</p>
-                                    <p class="text-muted font-size-sm">{{ $mahasiswa->alamat }}</p>
+                                    <p class="text-muted font-size-sm">{{ $mahasiswa->program_studi ?? $dosen->nama_lengkap }}</p>
+                                    <p class="text-muted font-size-sm">{{ $mahasiswa->tempat_lahir ?? $dosen->tempat_lahir }}</p>
+                                    <p class="text-muted font-size-sm">{{ $mahasiswa->alamat ?? $dosen->alamat}}</p>
                                     <p class="text-muted font-size-sm">
-                                        {{ date('d / M / Y', strtotime($mahasiswa->tanggal_lahir)) }}</p>
+                                        {{ date('d / M / Y', strtotime($mahasiswa->tanggal_lahir??$dosen->tanggal_lahir)) }}</p>
                                 </div>
                             </div>
                             <div class="d-flex flex-column align-items-center text-center">
@@ -102,6 +102,7 @@
                                 </div>
                             </div>
                         </div>
+                        @if($mahasiswa)
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
@@ -111,7 +112,7 @@
                                     </a>
                                     @foreach ($jawara as $r)
                                         <div class="link">
-                                            <a href="{{ url("/user/riwayat-jawara/$r->id") }}"
+                                            <a href="{{ url("/user/riwayat-jawara/".$r->id_jawara_event.implode('',json_decode($r->id_mahasiswa,true))) }}"
                                                 <small>{{ $r->nama }}</small>
                                                 <div class="progress mb-3" style="height: 5px">
                                                     <div class="progress-bar bg-primary" role="progressbar"
@@ -174,6 +175,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
 
 

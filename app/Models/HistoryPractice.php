@@ -31,7 +31,7 @@ class HistoryPractice extends Model
             ->first();
     }
 
-    public static function makeHistoryPractice($identity, $course, $fullSesi = true, $pendek = false, $sesi = 0)
+    public static function makeHistoryPractice($identity, $course,$sesiSoal, $fullSesi = true, $pendek = false, $sesi = 0)
     {
         $idCourse = config('app.indexCourse')[$course];
         $h = new HistoryPractice([
@@ -43,7 +43,7 @@ class HistoryPractice extends Model
 
         DB::beginTransaction();
         $h->save();
-        $size = min(config('app.' . $course)[$sesi]['num'], Practice::countQuest($idCourse, $sesi));
+        $size = min(config('app.' . $course)[$sesi]['num'], Practice::countQuest($idCourse, $sesiSoal));
         $historyJawaban = HistoryJawabanPractice::makeHistoryJawaban($h->id, $sesi, $size, $pendek);
         DB::commit();
 

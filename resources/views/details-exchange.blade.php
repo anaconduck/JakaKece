@@ -45,12 +45,12 @@
                                     <ol>
                                         @foreach ($dokumentasi as $d)
                                             @php
-                                                $d = json_decode($d['dokumentasi']);
+                                                $d = json_decode($d->dokumentasi, true);
                                             @endphp
                                             @if ($d)
                                                 @foreach ($d as $item)
                                                     <li>
-                                                        <a href="{{ asset($item) }}"></a>
+                                                        <a target="_blank" href="{{ asset($item) }}">{{$item}}</a>
                                                     </li>
                                                 @endforeach
                                             @endif

@@ -35,7 +35,7 @@ class PushExchangeTujuan extends Controller
         $request->validate([
             'nama_universitas' => 'required',
             'dalam_negeri' => 'required|min:0|max:1',
-            'file_penjelas' => 'bail|required|max:10240|mimetypes:jpeg,jpg,png,gif,application/msword,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf'
+            'file_penjelas' => 'bail|required|max:10240|mimetypes:image/jpeg,image/jpg,image/png,image/gif,application/msword,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf'
         ]);
 
         $data = $request->only(['nama_universitas','dalam_negeri']);

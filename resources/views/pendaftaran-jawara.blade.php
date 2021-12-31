@@ -233,6 +233,9 @@
             @else
             <h3 style="text-align: center; color: #FF8F00;">Tidak ada poster untuk perlombaan ini.</h3>
             @endif
+
+            
+
           <div class="text-center mt-5">
             <div class="button">Daftar</div>
 

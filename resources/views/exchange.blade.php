@@ -2,6 +2,17 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/css/exchange.css') }}" />
+    <style>
+    h1, h2{
+            font-family: 'PT Serif', serif;
+        }
+        h2:not(.skill-card__title){
+            text-align: center;
+            font-weight: 600;
+            color: black;
+            margin: 30px 0;
+        }
+    </style>
 @stop
 
 @section('slot')
@@ -101,55 +112,95 @@
                             </div>
                         </section>
                     </main>
+                    <hr>
                     <div class="body-card mt-5 mb-5">
                         <div class="cont">
+                            <h2>Dokumentasi Kegiatan</h2>
                             <ul class="cards">
                                 <li class="card cards__item">
                                     <div class="card__frame">
                                         <div class="card__picture">
-                                            <img src="https://image.flaticon.com/icons/svg/1496/1496034.svg" alt=""
-                                                width="120">
+                                            @if (strpos($deskripsi[0]['file'], 'dokumentasi') !== false)
+                                                <img src="{{ Storage::url($deskripsi[0]['file']) }}" alt="">
+                                            @else
+                                                <iframe
+                                                    src="https://www.youtube.com/embed/{{ $deskripsi[0]['file'] }}?autoplay=1&controls=0&mute=1&loop=1&playlist={{ $deskripsi[0]['file'] }}"
+                                                    frameborder="0" id="bg-video1" allowfullscreen
+                                                    allow="autoplay"></iframe>
+                                            @endif
                                         </div>
-                                        <h2 class="card__title">Mahasiswa Exchange</h2>
+                                        <h2 class="card__title"></h2>
                                     </div>
+                                    @if (strpos($deskripsi[0]['file'], 'dokumentasi') !== false)
+                                        <a target="_blank" href="{{ Storage::url($deskripsi[0]['file']) }}">
+                                        @else
+                                            <a href="https://www.youtube.com/v={{ $deskripsi[0]['file'] }}"
+                                                target="_blank">
+                                    @endif
                                     <div class="card__overlay"></div>
+                                    </a>
                                     <div class="card__content">
-                                        <h2>Total Mahasiswa Exchange</h2>
-                                        <p>{{ $totalMahasiswaExchange }} Mahasiswa</p>
+                                        <h2></h2>
+                                        <p>{{ $deskripsi[0]['deskripsi'] ?? '' }}</p>
                                     </div>
                                 </li>
                                 <li class="card cards__item">
                                     <div class="card__frame">
                                         <div class="card__picture">
-                                            <img src="https://image.flaticon.com/icons/svg/1336/1336494.svg" alt=""
-                                                width="120">
+                                            @if (strpos($deskripsi[1]['file'], 'dokumentasi') !== false)
+                                                <img src="{{ Storage::url($deskripsi[1]['file']) }}" alt="">
+                                            @else
+                                                <iframe
+                                                    src="https://www.youtube.com/embed/{{ $deskripsi[1]['file'] }}?autoplay=1&controls=0&mute=1&loop=1&playlist={{ $deskripsi[1]['file'] }}"
+                                                    frameborder="0" id="bg-video1" allowfullscreen
+                                                    allow="autoplay"></iframe>
+                                            @endif
                                         </div>
-                                        <h2 class="card__title">Exchange Event</h2>
+                                        <h2 class="card__title"></h2>
                                     </div>
+                                    @if (strpos($deskripsi[1]['file'], 'dokumentasi') !== false)
+                                        <a target="_blank" href="{{ Storage::url($deskripsi[1]['file']) }}">
+                                        @else
+                                            <a href="https://www.youtube.com/v={{ $deskripsi[1]['file'] }}"
+                                                target="_blank">
+                                    @endif
                                     <div class="card__overlay"></div>
+                                    </a>
                                     <div class="card__content">
-                                        <h2>Total Event</h2>
-                                        <p>{{ $totalExchangeEvent }} Event</p>
+                                        <h2></h2>
+                                        <p>{{ $deskripsi[1]['deskripsi'] ?? '' }}</p>
                                     </div>
                                 </li>
                                 <li class="card cards__item">
                                     <div class="card__frame">
                                         <div class="card__picture">
-                                            <img src="https://image.flaticon.com/icons/svg/478/478543.svg" alt=""
-                                                width="120">
+                                            @if (strpos($deskripsi[2]['file'], 'dokumentasi') !== false)
+                                                <img src="{{ Storage::url($deskripsi[2]['file']) }}" alt="">
+                                            @else
+                                                <iframe
+                                                    src="https://www.youtube.com/embed/{{ $deskripsi[2]['file'] }}?autoplay=1&controls=0&mute=1&loop=1&playlist={{ $deskripsi[2]['file'] }}"
+                                                    frameborder="0" id="bg-video1" allowfullscreen
+                                                    allow="autoplay"></iframe>
+                                            @endif
                                         </div>
-                                        <h2 class="card__title">Pendaftar</h2>
+                                        <h2 class="card__title"></h2>
                                     </div>
+                                    @if (strpos($deskripsi[2]['file'], 'dokumentasi') !== false)
+                                        <a target="_blank" href="{{ Storage::url($deskripsi[2]['file']) }}">
+                                        @else
+                                            <a href="https://www.youtube.com/v={{ $deskripsi[2]['file'] }}"
+                                                target="_blank">
+                                    @endif
                                     <div class="card__overlay"></div>
+                                    </a>
                                     <div class="card__content">
-                                        <h2>Total Pendaftar Exchange</h2>
-                                        <p>{{ $totalPendaftar }} Pendaftar</p>
+                                        <h2></h2>
+                                        <p>{{ $deskripsi[2]['deskripsi'] ?? '' }}</p>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <hr>
                     <hr>
                     <section class="">
                         <h2>Informasi Pendaftaran Student Exchange</h2>
@@ -164,7 +215,7 @@
                                                 active
                                             @endif
                                             ">
-                                                <a aria-controls="home" role="tab" data-toggle="tab">Kampus Dalam Negeri</a>
+                                                <a style="font-size: 11px;" aria-controls="home" role="tab" data-toggle="tab">Kampus Dalam Negeri</a>
                                             </li>
                                             <li class="side
                                             @if ($section === 'luar-negeri')

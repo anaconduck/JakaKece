@@ -31,6 +31,8 @@
                                 </select>
                             </div>
                             <div class="col-md-12">
+                                <label>File </label>
+                                <p>File yang diterima : jpeg, jpg, png, gif, pdf, docx</p>
                                 <fieldset>
                                     <input class="form-control file" type="file" name="file_penjelas" id="formFileMultiple">
                                 </fieldset>

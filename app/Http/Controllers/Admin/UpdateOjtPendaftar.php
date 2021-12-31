@@ -103,6 +103,7 @@ class UpdateOjtPendaftar extends Controller
                     if ($time < 0) break;
                 }
                 $data['periode'] = $periode;
+                dd($data);
             }else if($pendaftar->status_pendaftaran==2 and $request->get('status_pendaftaran')!=2){
                 $periode = null;
             }

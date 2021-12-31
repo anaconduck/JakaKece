@@ -41,7 +41,8 @@ class PushJawaraEvent extends Controller
             'akhir_daftar' => 'required|date',
             'mulai' => 'required',
             'mulai_time' => 'required',
-            'finish' => 'required|min:0|max:1'
+            'finish' => 'required|min:0|max:1',
+            'laman' => 'string'
         ]);
         $mulai = strtotime($request->get('mulai'));
         $waktu = date("Y-m-d", strtotime(now("Asia/Jakarta")));
@@ -52,7 +53,8 @@ class PushJawaraEvent extends Controller
             'max_anggota',
             'mulai_daftar',
             'akhir_daftar',
-            'finish'
+            'finish',
+            'laman'
         ]);
         $data['mulai'] = date("Y-m-d H:i", $mulai);
         $periode = 0;

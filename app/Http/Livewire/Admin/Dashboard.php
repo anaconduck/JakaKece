@@ -53,7 +53,7 @@ class Dashboard extends Component
     {
         $nav = [
             [
-                'title' => 'Dashboard',
+                'title' => 'Statistik',
                 'link' => url('/admin/dashboard')
             ]
             ];

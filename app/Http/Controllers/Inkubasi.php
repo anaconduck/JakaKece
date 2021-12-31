@@ -3,16 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeskripsiSistem;
+use App\Models\DokumentasiSistem;
 use Illuminate\Http\Request;
-use App\Models\Practice;
-use App\Models\Examination;
-use App\Models\HistoryExam;
 use App\Models\HistoryPractice;
 use App\Models\HistoryTest;
-use App\Models\InkubasiBahasa;
 use App\Models\Materi;
-use App\Models\Mahasiswa;
-use App\Models\Report;
 
 class Inkubasi extends Controller
 {
@@ -31,7 +26,7 @@ class Inkubasi extends Controller
         ];
         $slides = DeskripsiSistem::getDeskripsiSistem(config('app.fitur.inkubasi'));
         $section = $request->get('s');
-
+        $deskripsi = DokumentasiSistem::getDokumentasi(config('app.fitur.inkubasi'));
         return view('inkubasi',[
             'title' => 'Inkubasi Digital Bahasa',
             'inkubasi' => 'selected',
@@ -43,7 +38,8 @@ class Inkubasi extends Controller
             'status' => $status,
             'nav' => $nav,
             'slides' => $slides,
-            'section' => $section
+            'section' => $section,
+            'deskripsi' => $deskripsi
         ]);
     }
 }

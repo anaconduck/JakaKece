@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
-                        <h2>Penambahan Soal Practice</h2>
+                        <h2>{{$title}}</h2>
                         @if ($errors->any())
                             {{ implode(', ', $errors->all()) }}
                         @endif
@@ -15,8 +15,9 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
+                                <label>Jenis Course</label>
                                 <select name="id_course" id="type" required>
-                                    <option value="-1" selected>Select Type</option>
+                                    <option value="-1" selected>Select Course</option>
                                     <option value="1">TOEFL ITP</option>
                                     <option value="2">TOEFL IBT</option>
                                     <option value="3">TOEIC</option>
@@ -24,8 +25,9 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
+                                <label>Sesi</label>
                                 <select name="sesi" id="kategori" required>
-                                    <option value="-1" selected>Select Category</option>
+                                    <option value="-1" selected>Select Section</option>
                                     @foreach (config('app.allSesi') as $i => $item)
                                         <option value="{{ $i }}">{{ $item }} </option>
                                     @endforeach
@@ -41,12 +43,15 @@
                                     required></textarea>
                             </div>
                             <div class="col-md-6">
+                                <label>Jenis Soal</label>
                                 <select name="tipe" id="tipe" required>
                                     <option value="m" selected>Multiple choice</option>
                                     <option value="f">Fill the blank</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
+                                <label>Audio</label>
+                                <p>File yang diterima : mp3</p>
                                 <fieldset>
                                     <input class="form-control file" type="file" name="file" id="formFileMultiple">
                                 </fieldset>
@@ -83,7 +88,7 @@
                             </div>
                             <div class="col-md-3 col-sm-3 ct">
                                 <div class="circle-item">
-                                    <input class="check" name="jawaban" type="radio" id="opsi4" value="4">
+                                    <input class="check" name="jawaban" type="radio" id="opsi4" value="3">
                                     <label for="opsi4">
                                         <input name="opsi4" type="text" class="form-control jw" id="inopsi4"
                                             placeholder="jawaban..." required="">

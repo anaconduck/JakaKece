@@ -46,6 +46,10 @@
             color: #221807
         }
 
+        h1 {
+            font-family: 'PT Serif', serif;
+        }
+
     </style>
 @stop
 
@@ -86,7 +90,6 @@
                                                     class="image" />
                                             </div>
                                         </div>
-
                                     @endforeach
                                 </div>
                                 <div class="pagination">
@@ -137,43 +140,82 @@
                                 <li class="card cards__item">
                                     <div class="card__frame">
                                         <div class="card__picture">
-                                            <img src="https://image.flaticon.com/icons/svg/1496/1496034.svg" alt=""
-                                                width="120">
+                                            @if (strpos($deskripsi[0]['file'], 'dokumentasi') !== false)
+                                                <img src="{{ Storage::url($deskripsi[0]['file']) }}" alt="">
+                                            @else
+                                                <iframe
+                                                    src="https://www.youtube.com/embed/{{ $deskripsi[0]['file'] }}?autoplay=1&controls=0&mute=1&loop=1&playlist={{ $deskripsi[0]['file'] }}"
+                                                    frameborder="0" id="bg-video1" allowfullscreen
+                                                    allow="autoplay"></iframe>
+                                            @endif
                                         </div>
-                                        <h2 class="card__title">Jumlah Materi</h2>
+                                        <h2 class="card__title"></h2>
                                     </div>
+                                    @if (strpos($deskripsi[0]['file'], 'dokumentasi') !== false)
+                                        <a target="_blank" href="{{ Storage::url($deskripsi[0]['file']) }}">
+                                        @else
+                                            <a href="https://www.youtube.com/v={{ $deskripsi[0]['file'] }}"
+                                                target="_blank">
+                                    @endif
                                     <div class="card__overlay"></div>
+                                    </a>
                                     <div class="card__content">
                                         <h2></h2>
-                                        <p>{{ $numSubject }} Materi <br>TOEFL-ITP , TOEFL-IBT, TOEIC, IELTS</p>
+                                        <p>{{ $deskripsi[0]['deskripsi'] ?? '' }}</p>
                                     </div>
                                 </li>
                                 <li class="card cards__item">
                                     <div class="card__frame">
                                         <div class="card__picture">
-                                            <img src="https://image.flaticon.com/icons/svg/1336/1336494.svg" alt=""
-                                                width="120">
+                                            @if (strpos($deskripsi[1]['file'], 'dokumentasi') !== false)
+                                                <img src="{{ Storage::url($deskripsi[1]['file']) }}" alt="">
+                                            @else
+                                                <iframe
+                                                    src="https://www.youtube.com/embed/{{ $deskripsi[1]['file'] }}?autoplay=1&controls=0&mute=1&loop=1&playlist={{ $deskripsi[1]['file'] }}"
+                                                    frameborder="0" id="bg-video1" allowfullscreen
+                                                    allow="autoplay"></iframe>
+                                            @endif
                                         </div>
-                                        <h2 class="card__title">Jumlah Pengguna Sistem Practice Inkubasi Bahasa</h2>
+                                        <h2 class="card__title"></h2>
                                     </div>
+                                    @if (strpos($deskripsi[1]['file'], 'dokumentasi') !== false)
+                                        <a target="_blank" href="{{ Storage::url($deskripsi[1]['file']) }}">
+                                        @else
+                                            <a href="https://www.youtube.com/v={{ $deskripsi[1]['file'] }}"
+                                                target="_blank">
+                                    @endif
                                     <div class="card__overlay"></div>
+                                    </a>
                                     <div class="card__content">
-                                        <h2>Jumlah Pengguna</h2>
-                                        <p>{{ $numPengguna ?? 0 }} Pengguna</p>
+                                        <h2></h2>
+                                        <p>{{ $deskripsi[1]['deskripsi'] ?? '' }}</p>
                                     </div>
                                 </li>
                                 <li class="card cards__item">
                                     <div class="card__frame">
                                         <div class="card__picture">
-                                            <img src="https://image.flaticon.com/icons/svg/478/478543.svg" alt=""
-                                                width="120">
+                                            @if (strpos($deskripsi[2]['file'], 'dokumentasi') !== false)
+                                                <img src="{{ Storage::url($deskripsi[2]['file']) }}" alt="">
+                                            @else
+                                                <iframe
+                                                    src="https://www.youtube.com/embed/{{ $deskripsi[2]['file'] }}?autoplay=1&controls=0&mute=1&loop=1&playlist={{ $deskripsi[2]['file'] }}"
+                                                    frameborder="0" id="bg-video1" allowfullscreen
+                                                    allow="autoplay"></iframe>
+                                            @endif
                                         </div>
-                                        <h2 class="card__title">Jumlah Pengguna Sistem Test Inkubasi Bahasa</h2>
+                                        <h2 class="card__title"></h2>
                                     </div>
+                                    @if (strpos($deskripsi[2]['file'], 'dokumentasi') !== false)
+                                        <a target="_blank" href="{{ Storage::url($deskripsi[2]['file']) }}">
+                                        @else
+                                            <a href="https://www.youtube.com/v={{ $deskripsi[2]['file'] }}"
+                                                target="_blank">
+                                    @endif
                                     <div class="card__overlay"></div>
+                                    </a>
                                     <div class="card__content">
-                                        <h2>Jumlah Pengguna</h2>
-                                        <p>{{ $numTaker ?? 0 }} Pengguna</p>
+                                        <h2></h2>
+                                        <p>{{ $deskripsi[2]['deskripsi'] ?? '' }}</p>
                                     </div>
                                 </li>
                             </ul>
@@ -707,21 +749,25 @@
                                                                     </div>
                                                                     <div class="items-body">
                                                                         <ol class="att-desc">
-                                                                            <li>Listening Comprehension (50 questions) (35
-                                                                                minutes)</li>
-                                                                            <li>Structure & Written Expression (40
-                                                                                questions) (25 minutes)</li>
-                                                                            <li>Reading Comprehension (50 questions) (55
-                                                                                minutes)</li>
-                                                                            <li>Total (140 questions) (155 minutes)</li>
+                                                                            @foreach (config('app.toeic') as $item)
+                                                                                <li class="tiiii lp"
+                                                                                    id="latihan/ielts/{{ $item['sesi'] }}/pendek">
+                                                                                    Pendek - {{ $item['sesi'] }}
+                                                                                </li>
+                                                                                <li class="tiiii lp"
+                                                                                    id="latihan/ielts/{{ $item['sesi'] }}/penuh">
+                                                                                    Penuh - {{ $item['sesi'] }}
+                                                                                </li>
+                                                                            @endforeach
+                                                                            <li class="tiiii lp" id="latihan/toeic">
+                                                                                Semua sesi
+                                                                            </li>
                                                                         </ol>
                                                                     </div>
-
-
                                                                     <div class="section full-height mdl">
                                                                         <input class="modal-btn" type="checkbox"
                                                                             id="7" name="modal-btn" />
-                                                                        <label id="practice_ielts" for="7">Start Practice <i
+                                                                        <label id="practice_ielts" for="7" class="d-none">Start Practice <i
                                                                                 class="fas fa-expand-arrows-alt"></i></label>
                                                                         <div class="modal">
                                                                             <div class="modal-wrap">
@@ -732,7 +778,7 @@
                                                                                     <a id="cancel_practice_ielts"
                                                                                         type="button"
                                                                                         class="btn btn-danger">Cancel</a>
-                                                                                    <a href="{{ url('/latihan/ielts') }}"
+                                                                                    <a id="ti4"
                                                                                         type="button"
                                                                                         class="btn btn-info">Start</a>
                                                                                 </div>
@@ -761,19 +807,25 @@
                                                                             <li>Total (140 questions) (155 minutes)</li>
                                                                         </ol>
                                                                     </div>
-                                                                    <div class="d-flex justify-content-around">
-                                                                        <a style="
-                                                                                            background-color: rgb(76, 76, 109);
-                                                                                            width: 240px;
-                                                                                            height: 50px;
-                                                                                            line-height: 50px;
-                                                                                            padding:0;
-                                                                                            border:none;
-                                                                                            margin-bottom: 10px;
-                                                                                            color: rgb(255, 225, 148);
-                                                                                            " type="button"
-                                                                            class="btn btn-info">Start
-                                                                            Test</a>
+                                                                    <div class="section full-height mdl">
+                                                                        <input class="modal-btn" type="checkbox" id="8"
+                                                                            name="modal-btn" />
+                                                                        <label id="test_toeic" for="8">Start Test <i
+                                                                                class="fas fa-expand-arrows-alt"></i></label>
+                                                                        <div class="modal">
+                                                                            <div class="modal-wrap">
+                                                                                <img src="https://image.freepik.com/free-vector/grades-concept-illustration_114360-5958.jpg"
+                                                                                    alt="">
+                                                                                <p>Are you sure to start Test?</p>
+                                                                                <div class="d-flex justify-content-around">
+                                                                                    <a id="cancel_test_ielts" type="button"
+                                                                                        class="cancel btn btn-danger">Cancel</a>
+                                                                                    <a href="{{ url('/test/ielts') }}"
+                                                                                        type="button"
+                                                                                        class="btn btn-info">Start</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -847,15 +899,15 @@
                                                                     </div>
                                                                     <div class="d-flex justify-content-around">
                                                                         <a href="https://typeset.io/" style="
-                                                                                        background-color: rgb(76, 76, 109);
-                                                                                        width: 240px;
-                                                                                        height: 50px;
-                                                                                        line-height: 50px;
-                                                                                        padding:0;
-                                                                                        border:none;
-                                                                                        margin: 20px;
-                                                                                        color: rgb(255, 225, 148);
-                                                                                        " type="button"
+                                                                                                background-color: rgb(76, 76, 109);
+                                                                                                width: 240px;
+                                                                                                height: 50px;
+                                                                                                line-height: 50px;
+                                                                                                padding:0;
+                                                                                                border:none;
+                                                                                                margin: 20px;
+                                                                                                color: rgb(255, 225, 148);
+                                                                                                " type="button"
                                                                             class="btn btn-info">Open
                                                                             Typeset</a>
                                                                     </div>
@@ -999,7 +1051,7 @@
         let ti2 = $('.tii')
 
         ti2.on('click', function() {
-            tujuan = url + this.id
+            tujuan = url + '/' + this.id
             practiceIBT.click()
         })
         $('#ti2').on('click', function() {
@@ -1009,10 +1061,20 @@
         let ti3 = $('.tiii')
 
         ti3.on('click', function() {
-            tujuan = url + this.id
+            tujuan = url + '/' + this.id
             practiceToeic.click()
         })
         $('#ti3').on('click', function() {
+            window.location = tujuan
+        })
+
+        let ti4 = $('.tiiii')
+
+        ti4.on('click', function(){
+            tujuan = url + '/'+ this.id
+            practiceIelts.click()
+        })
+        $('#ti4').on('click', function(){
             window.location = tujuan
         })
 

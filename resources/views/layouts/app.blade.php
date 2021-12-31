@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/templatemo-grad-school.css') }}">
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap" rel="stylesheet">
     @yield('css')
     @livewireStyles
 </head>
@@ -53,31 +56,37 @@
                         Bahasa</a>
                     <div class="drop-down">
                         <ol>
-                            <a href="{{ url('/inkubasi?s=toefl-itp') }}">
-                                <li>TOEFL ITP</li>
-                            </a>
-                            <a href="{{ url('/inkubasi?s=toefl-ibt') }}">
-                                <li> TOEFL IBT</li>
-                            </a>
-                            <a href="{{ url('/inkubasi?s=toeic') }}">
-                                <li>TOEIC</li>
-                            </a>
+                            <li>
+                                <a href="{{ url('/inkubasi?s=toefl-itp') }}">TOEFL ITP
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/inkubasi?s=toefl-ibt') }}">TOEFL IBT</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ url('/inkubasi?s=toeic') }}">TOEIC</a>
+                            </li>
+
                             @auth
                                 @if (auth()->user()->status !== 'mahasiswa')
-                                    <a href="{{ url('/inkubasi?s=ielts') }}">
-                                        <li>IELTS</li>
-                                    </a>
-                                    @if (auth()->user()->status === 'dosen')
-                                        <a href="{{ url('/inkubasi?s=typeset') }}">
-                                            <li>TYPESET</li>
+                                    <li>
+                                        <a href="{{ url('/inkubasi?s=ielts') }}">IELTS
                                         </a>
+                                    </li>
+                                    @if (auth()->user()->status === 'dosen')
+                                        <li>
+                                            <a href="{{ url('/inkubasi?s=typeset') }}">TYPESET
+                                            </a>
+                                        </li>
                                     @endif
                                 @endif
                             @endauth
                             @if (!auth()->user())
-                            <a href="{{ url('/inkubasi?s=ielts') }}">
-                                <li>IELTS</li>
-                            </a>
+                                <li>
+                                    <a href="{{ url('/inkubasi?s=ielts') }}">IELTS
+                                    </a>
+                                </li>
                             @endif
                         </ol>
                     </div>
@@ -86,16 +95,19 @@
                     <a href="{{ '/jawara' }}">Jawara Center</a>
                     <div class="drop-down">
                         <ol>
-                            <a href="{{ url('/jawara?s=pendaftaran') }}">
-                                <li>Pendaftaran</li>
-                            </a>
-                            <a href="{{ url('/jawara?s=terlaksana') }}">
-                                <li>Terlaksana</li>
-                            </a>
+                            <li>
+                                <a href="{{ url('/jawara?s=pendaftaran') }}">Pendaftaran
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/jawara?s=terlaksana') }}">Terlaksana
+                                </a>
+                            </li>
                             @auth
-                            <a href="{{ url('/jawara?s=tanya') }}">
-                                <li>Tanya Admin</li>
-                            </a>
+                                <li>
+                                    <a href="{{ url('/jawara?s=tanya') }}">Tanya Admin
+                                    </a>
+                                </li>
                             @endauth
                         </ol>
                     </div>
@@ -104,19 +116,23 @@
                     <a href="{{ url('/exchange') }}">Student Exchange</a>
                     <div class="drop-down">
                         <ol>
-                            <a href="{{ url('/exchange?s=dalam-negeri') }}">
-                                <li>Dalam Negeri</li>
-                            </a>
-                            <a href="{{ url('/exchange?s=luar-negeri') }}">
-                                <li>Luar Negeri</li>
-                            </a>
-                            <a href="{{ url('/exchange?s=riwayat') }}">
-                                <li>Riwayat</li>
-                            </a>
+                            <li>
+                                <a href="{{ url('/exchange?s=dalam-negeri') }}">Dalam Negeri
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/exchange?s=luar-negeri') }}">Luar Negeri
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/exchange?s=riwayat') }}">Riwayat
+                                </a>
+                            </li>
                             @auth
-                            <a href="{{ url('/exchange?s=tanya') }}">
-                                <li>Tanya Admin</li>
-                            </a>
+                                <li>
+                                    <a href="{{ url('/exchange?s=tanya') }}">Tanya Admin
+                                    </a>
+                                </li>
                             @endauth
                         </ol>
                     </div>
@@ -126,16 +142,19 @@
                         Training</a>
                     <div class="drop-down">
                         <ol>
-                            <a href="{{ url('/training?s=pendaftaran') }}">
-                                <li>Pendaftaran</li>
-                            </a>
-                            <a href="{{ url('/training?s=terlaksana') }}">
-                                <li>Magang Terlaksana</li>
-                            </a>
+                            <li>
+                                <a href="{{ url('/training?s=pendaftaran') }}">Pendaftaran
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/training?s=terlaksana') }}">Magang Terlaksana
+                                </a>
+                            </li>
                             @auth
-                            <a href="{{ url('/training?s=tanya') }}">
-                                <li>Tanya Admin</li>
-                            </a>
+                                <li>
+                                    <a href="{{ url('/training?s=tanya') }}">Tanya Admin
+                                    </a>
+                                </li>
                             @endauth
                         </ol>
                     </div>

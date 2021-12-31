@@ -18,14 +18,14 @@ class PushPractice extends Controller
                 'link' => url('/admin/inkubasi/practice')
             ],
             [
-                'title' => 'Tambah Practice',
+                'title' => 'Tambah Soal Practice',
                 'link' => url('/admin/inkubasi/practice/create')
             ]
             ];
     }
     public function index(){
         return view('admin.create-quest',[
-            'title' => "Tambah Practice",
+            'title' => "Tambah Soal Practice",
             'nav' => $this->nav
         ]);
     }
@@ -45,7 +45,7 @@ class PushPractice extends Controller
         if($request->hasFile('file')){
             $name = time().Str::random(10).$request->file("file")->getClientOriginalName();
             $course = config('app.allCourse.'.$request->get('id_course'));
-            $sesi = config('app.allSesi')[$request->get('sesi')-1];
+            $sesi = config('app.allSesi')[$request->get('sesi')];
             $path = $request->file('file')->storeAs("$course/$sesi",$name, 'public');
             $data['file'] = $path;
             Practice::pushPractice($data);

@@ -24,12 +24,14 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
+                                <label>Judul</label>
                                 <fieldset>
                                     <input name="judul" type="text" class="form-control" id="title" placeholder="Title..."
                                         required" value="{{ $materi->judul }}">
                                 </fieldset>
                             </div>
                             <div class="col-md-6">
+                                <label>Sesi</label>
                                 <fieldset>
                                     <select name="sesi" id="sesi" required>
                                         <option value="1" @if ($materi->sesi == 1) selected @endif>Introduction</option>
@@ -41,6 +43,7 @@
                                 </fieldset>
                             </div>
                             <div class="col-md-12">
+                                <label>Kategori Course</label>
                                 <select name="id_course" id="id_course" required>
                                     <option value="-1" @if ($materi->id_course < 1 and $materi->id_course > 4)
                                         selected
@@ -62,6 +65,8 @@
                                 </select>
                             </div>
                             <div class="col-md-12">
+                                <label>File/Video</label>
+                                File yang diterima : jpeg, jpg, png, gif, mp4, docx, doc, pdf
                                 <fieldset>
                                     @if ($materi->file)
                                         current file : {{ $materi->file }}
@@ -69,7 +74,18 @@
                                     <input name="file" class="form-control file" type="file" id="formFileMultiple">
                                 </fieldset>
                             </div>
+                            <div class="col-md-12">
+                                <label>Transcript</label>
+                                <p>File yang diterima :docx, pdf</p>
+                                <fieldset>
+                                    @if ($materi->transcript)
+                                        current file : {{ $materi->transcript }}
+                                    @endif
+                                    <input name="transcript" class="form-control file" type="file" id="formFileMultiple">
+                                </fieldset>
+                            </div>
                             <div class="col-12">
+                                <label>Teks</label>
                                 <textarea name="teks" id="teks" placeholder="Enter your text"
                                     rows="6">{{ $materi->teks ?? '' }}</textarea>
                             </div>

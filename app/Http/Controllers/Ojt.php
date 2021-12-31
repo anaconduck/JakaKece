@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeskripsiSistem;
+use App\Models\DokumentasiSistem;
 use App\Models\OjtEvent;
 use App\Models\OjtMataKuliah;
 use App\Models\OjtPaket;
@@ -25,6 +26,7 @@ class Ojt extends Controller
 
     public function index($message = [-1, null]){
         $slides = DeskripsiSistem::getDeskripsiSistem(config('app.fitur.training'));
+        $deskripsi = DokumentasiSistem::getDokumentasi(config('app.fitur.training'));
         return view('ojt',[
             'title' => 'On The Job Training',
             'nav' => $this->nav,
@@ -34,10 +36,12 @@ class Ojt extends Controller
             'jumlahPendaftarTraining' => OjtPendaftar::count(),
             'jumlahEvent' => OjtEvent::count(),
             'slides' => $slides,
-            'section' => Request('s')
+            'section' => Request('s'),
+            'deskripsi' => $deskripsi
         ]);
     }
     public function showPaket(Request $request, OjtTujuan $tujuan){
+        $this->middleware(['mahasiswa']);
         if( $tujuan == null)
             abort(404);
 
@@ -62,6 +66,7 @@ class Ojt extends Controller
     }
 
     public function showPendaftaran(OjtTujuan $tujuan, OjtPaket $paket){
+        $this->middleware(['mahasiswa']);
         if($tujuan == null or $paket == null)
             abort(404);
 
@@ -100,6 +105,7 @@ class Ojt extends Controller
         ]);
     }
     public function daftar(OjtTujuan $tujuan, OjtPaket $paket){
+        $this->middleware(['mahasiswa']);
         if($tujuan == null or $paket == null)
             abort(404);
 

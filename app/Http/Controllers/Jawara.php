@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeskripsiSistem;
+use App\Models\DokumentasiSistem;
 use App\Models\Dosen;
 use App\Models\JawaraEvent;
 use App\Models\JawaraPendaftar;
@@ -19,7 +20,6 @@ class Jawara extends Controller
 
     public function __construct()
     {
-
         $this->nav = [
             [
                 'title' => 'Jawara Center',
@@ -31,21 +31,23 @@ class Jawara extends Controller
     public function index($message = [-1])
     {
         $slides = DeskripsiSistem::getDeskripsiSistem(config('app.fitur.jawara'));
+        $deskripsi = DokumentasiSistem::getDokumentasi(config('app.fitur.jawara'));
+        $pendaftaran = JawaraEvent::getPendaftaranEvent();
         return view('jawara', [
             'title' => 'Jawara Center',
             'jawara' => 'selected',
             'nav' => $this->nav,
-            'totalPendaftar' => JawaraPendaftar::count(),
-            'totalPendanaan' => (JawaraPendaftar::totalPendanaan()[0]->pendanaan),
-            'totalLomba' => JawaraEvent::count(),
             'message' => $message,
             'slides' => $slides,
-            'section' => Request('s')
+            'section' => Request('s'),
+            'deskripsi' => $deskripsi,
+            'pendaftaran' => $pendaftaran
         ]);
     }
 
     public function showDaftar(JawaraEvent $event)
     {
+        $this->middleware(['mahasiswa']);
         if (!$event)
             abort(404);
         $now = strtotime(now());
@@ -71,6 +73,7 @@ class Jawara extends Controller
 
     public function daftar(Request $request, JawaraEvent $event)
     {
+        $this->middleware(['mahasiswa']);
         if (!$event) abort(404);
 
         $now = strtotime(now());
@@ -159,6 +162,7 @@ class Jawara extends Controller
 
     public function detail(JawaraEvent $event)
     {
+
         if (!$event)
             abort(404);
         $terlaksana = false;

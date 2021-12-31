@@ -122,6 +122,35 @@
             text-overflow: ellipsis;
             height: 100px;
         }
+        .box select {
+            background-color: whitesmoke;
+            color: black;
+            padding: 12px;
+            width: 200px;
+            border: none;
+            font-size: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            -webkit-appearance: button;
+            appearance: button;
+            outline: none;
+        }
+
+        .box select option {
+            padding: 30px;
+        }
+
+        #keyword {
+            text-align: center;
+            margin-top: 10px;
+            margin-right: 20px;
+            display: inline-block;
+        }
+
+        @media only screen and (max-width:634px) {
+            .ri {
+                margin-top: 30px;
+            }
+        }
 
     </style>
 
@@ -142,9 +171,9 @@
                     <div class="section-heading mb-5">
                         <h2>Daftar Soal</h2>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div wire:ignore class="col-md-6">
                                 <div class="box">
-                                    <label for="filter_" class="mr-3">Filter :</label>
+                                    <label for="filter_" class="mr-3">Order by :</label>
                                     <select id="filter_" wire:model="filter">
                                         <option value="tipe" @if ($filter == 'tipe')
                                             selected
@@ -181,7 +210,6 @@
                                     <th>No.</th>
                                     <th>Teks</th>
                                     <th>Soal</th>
-                                    <th>File</th>
                                     <th>Tipe</th>
                                     <th>Course</th>
                                     <th>Sesi</th>
@@ -197,7 +225,6 @@
                                         <td>
                                             <p class="teks">{{ $data->soal }}</p>
                                         </td>
-                                        <td>{{ $data->file ?? '-' }}</td>
                                         <td>{{ $data->tipe == 'm' ? 'Multiple choice' : 'Fill the Blank' }}</td>
                                         <td>{{ config("app.allCourse.$data->id_course") }}</td>
                                         <td>{{ config('app.allSesi')[$data->sesi] }}</td>

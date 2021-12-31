@@ -107,6 +107,35 @@
         text-overflow: ellipsis;
         height:100px;
     }
+    .box select {
+            background-color: whitesmoke;
+            color: black;
+            padding: 12px;
+            width: 200px;
+            border: none;
+            font-size: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            -webkit-appearance: button;
+            appearance: button;
+            outline: none;
+        }
+
+        .box select option {
+            padding: 30px;
+        }
+
+        #keyword {
+            text-align: center;
+            margin-top: 10px;
+            margin-right: 20px;
+            display: inline-block;
+        }
+
+        @media only screen and (max-width:634px) {
+            .ri {
+                margin-top: 30px;
+            }
+        }
 </style>
 @stop
 
@@ -129,7 +158,7 @@
             <h2>Daftar Pendaftar</h2>
             <div class="d-flex flex-row-reverse bd-highlight">
 
-                <div class="search-box">
+                <div wire:ignore class="search-box">
                     <button class="btn-search"><img src="{{ asset('assets/images/search.png') }}"/></button>
                     <input type="text" class="input-search" placeholder="Type to Search...">
                 </div>
